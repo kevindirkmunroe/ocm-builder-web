@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, Image, Pressable, Modal} from 'react-native';
 const MemberItem = ({item}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const {name, house, wand, actor, image} = item;
+  const imageOrig = image.replace(/^http:\/\//, 'https://');
   const roboUrl = 'https://robohash.org/' + encodeURI(name) + '?size=60x60';
   let color = '#000';
   switch (house) {
@@ -52,7 +53,7 @@ const MemberItem = ({item}) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View>
-              <Image source={{uri: image}} style={styles.bigImg} />
+              <Image source={{uri: imageOrig}} style={styles.bigImg} />
             </View>
             <View style={styles.contentContainer}>
               <Text>

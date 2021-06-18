@@ -9,7 +9,7 @@ const HpList = () => {
 
   const onPressGetHpList = () => {
     setStatus({loader: true, err: ''});
-    fetch('http://hp-api.herokuapp.com/api/characters')
+    fetch('https://hp-api.herokuapp.com/api/characters')
       .then(res => res.json())
       .then(data => {
         setStatus({loader: false, err: ''});
