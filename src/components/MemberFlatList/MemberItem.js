@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     flex: 1,
     flexDirection: 'row',
+    maxWidth: 400,
   },
   bigImg: {
     width: 100,
