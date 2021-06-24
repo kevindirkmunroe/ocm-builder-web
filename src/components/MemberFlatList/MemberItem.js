@@ -22,7 +22,7 @@ const MemberItem = ({item}) => {
       break;
   }
   return (
-    <View>
+    <View style={styles.flexOne}>
       <Pressable onPress={() => setModalVisible(true)}>
         <View style={styles.memberContainer}>
           <View style={styles.noPadding}>
@@ -122,7 +122,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
     backgroundColor: '#00000055',
   },
   modalView: {

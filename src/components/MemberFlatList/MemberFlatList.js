@@ -1,8 +1,30 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  useWindowDimensions,
+} from 'react-native';
 import MemberItem from './MemberItem';
 
 const MemberFlatList = ({memberList}) => {
+  const windowWidth = useWindowDimensions().width;
+  const [multiProps, updateMultiProps] = useState({key: 1});
+  const numOfCols = windowWidth > 700 ? (windowWidth > 1100 ? 3 : 2) : 1;
+
+  useEffect(() => {
+    if (numOfCols > 1) {
+      updateMultiProps({
+        numColumns: numOfCols,
+        columnWrapperStyle: styles.justifyContentSpaceBetween,
+        key: numOfCols,
+      });
+    } else {
+      updateMultiProps({key: 1});
+    }
+  }, [numOfCols]);
+
   return (
     <View style={styles.flexOne}>
       <FlatList
@@ -14,6 +36,7 @@ const MemberFlatList = ({memberList}) => {
             No Data: Click above button to fetch data
           </Text>
         }
+        {...multiProps}
       />
     </View>
   );

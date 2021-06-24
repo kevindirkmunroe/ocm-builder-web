@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "web": "webpack serve -d source-map --mode development --config \"./web/webpack.config.js\" --inline --color --hot",
-    "build:web": "webpack --mode production --config \"./web/webpack.config.js\" --hot"
+    "build:web": "webpack --mode production --config \"./web/webpack.config.js\""
   },
   "dependencies": {
     "react": "17.0.1",
