@@ -1,8 +1,44 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, Pressable, Modal} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+  Modal,
+  useWindowDimensions,
+} from 'react-native';
+
+const popupBaseData = {
+  image: {
+    width: 100,
+    height: 150,
+  },
+  modal: {
+    maxWidth: 600,
+    heightPer: 35,
+    heightInvertPer: 50,
+    minHeight: 250,
+    margin: 20,
+    padding: 15,
+  },
+  contentContainer: {
+    flexBasisPer: 65,
+  },
+  imageContainer: {
+    flexBasisPer: 35,
+  },
+};
 
 const MemberItem = ({item}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const windowWidth = useWindowDimensions().width;
+  const windowHeight = useWindowDimensions().height;
+  const [imageDesign, setImageDesign] = useState({...popupBaseData.image});
+  const [modalHeight, setModalHeight] = useState(
+    popupBaseData.modal.heightPer + '%',
+  );
+  // const [bigImage, setBigImage] = useState('');
   const {name, house, wand, actor, image} = item;
   const imageOrig = image.replace(/^http:\/\//, 'https://');
   const roboUrl = 'https://robohash.org/' + encodeURI(name) + '?size=60x60';
@@ -21,6 +57,62 @@ const MemberItem = ({item}) => {
       color = '#1a3956';
       break;
   }
+  // const updateBigImage = layout => {
+  //   if (layout.width > layout.height) {
+  //     if (layout.height > 650) {
+  //       setBigImage('Large');
+  //     } else if (layout.height > 500) {
+  //       setBigImage('Medium');
+  //     } else {
+  //       setBigImage('');
+  //     }
+  //   } else {
+  //     if (layout.width > 550) {
+  //       setBigImage('Large');
+  //     } else if (layout.width > 400) {
+  //       setBigImage('Medium');
+  //     } else {
+  //       setBigImage('');
+  //     }
+  //   }
+  // };
+
+  useEffect(() => {
+    const heightPer =
+      windowWidth < windowHeight
+        ? popupBaseData.modal.heightPer
+        : popupBaseData.modal.heightInvertPer;
+    setModalHeight(heightPer + '%');
+    const width =
+      windowWidth - popupBaseData.modal.margin * 2 <
+      popupBaseData.modal.maxWidth
+        ? windowWidth - popupBaseData.modal.margin * 2
+        : popupBaseData.modal.maxWidth;
+    const height =
+      (windowHeight * heightPer) / 100 > popupBaseData.modal.minHeight
+        ? (windowHeight * heightPer) / 100
+        : popupBaseData.modal.minHeight;
+    let imgWidth =
+      (width - popupBaseData.modal.padding * 2) *
+      (popupBaseData.imageContainer.flexBasisPer / 100);
+    let imgHeight = height - popupBaseData.modal.padding * 2;
+    console.log({
+      width,
+      height,
+      imgWidth,
+      imgHeight,
+      windowWidth,
+      windowHeight,
+    });
+    // if (imgHeight < imgWidth) {
+    //   imgWidth = imgHeight * (2 / 3);
+    // } else {
+    //   imgHeight = imgWidth * (3 / 2);
+    // }
+
+    setImageDesign({width: imgWidth, height: imgHeight});
+  }, [windowWidth, windowHeight]);
+
   return (
     <View style={styles.flexOne}>
       <Pressable onPress={() => setModalVisible(true)}>
@@ -50,24 +142,46 @@ const MemberItem = ({item}) => {
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <View>
-              <Image source={{uri: imageOrig}} style={styles.bigImg} />
+        <View
+          style={styles.centeredView}
+          // onLayout={obj => updateBigImage(obj.nativeEvent.layout)}
+        >
+          <View style={[styles.modalView, {height: modalHeight}]}>
+            <View
+              style={{
+                flexBasis: popupBaseData.imageContainer.flexBasisPer + '%',
+              }}>
+              <Image
+                source={{uri: imageOrig}}
+                // style={!bigImage ? styles.bigImg : styles['bigImg' + bigImage]}
+                resizeMode="cover"
+                style={{
+                  height: imageDesign.height,
+                  width: imageDesign.width,
+                }}
+              />
             </View>
             <View style={styles.contentContainer}>
-              <Text>
-                <Text style={styles.bold}>Name:</Text> {name}
-              </Text>
-              <Text>
-                <Text style={styles.bold}>House:</Text> {house}
-              </Text>
-              <Text>
-                <Text style={styles.bold}>Played By:</Text> {actor}
-              </Text>
-              <Text>
-                <Text style={styles.bold}>Wand:</Text>
-              </Text>
+              <View>
+                <Text>
+                  <Text style={styles.bold}>Name:</Text> {name}
+                </Text>
+              </View>
+              <View>
+                <Text>
+                  <Text style={styles.bold}>House:</Text> {house}
+                </Text>
+              </View>
+              <View>
+                <Text>
+                  <Text style={styles.bold}>Played By:</Text> {actor}
+                </Text>
+              </View>
+              <View>
+                <Text>
+                  <Text style={styles.bold}>Wand:</Text>
+                </Text>
+              </View>
               <View style={styles.leftPadded}>
                 <Text>
                   <Text style={[styles.bold]}>Wood:</Text>{' '}
@@ -82,13 +196,16 @@ const MemberItem = ({item}) => {
                   {wand.length || 'unknown'}
                 </Text>
               </View>
-              <Pressable
-                onPress={() => setModalVisible(!modalVisible)}
-                style={styles.hideModal}>
-                <Text style={[styles.hideModalText, {backgroundColor: color}]}>
-                  Hide
-                </Text>
-              </Pressable>
+              <View>
+                <Pressable
+                  onPress={() => setModalVisible(!modalVisible)}
+                  style={styles.hideModal}>
+                  <Text
+                    style={[styles.hideModalText, {backgroundColor: color}]}>
+                    Hide
+                  </Text>
+                </Pressable>
+              </View>
             </View>
           </View>
         </View>
@@ -125,10 +242,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#00000055',
   },
   modalView: {
-    margin: 20,
+    margin: popupBaseData.modal.margin,
     backgroundColor: 'white',
     borderRadius: 10,
-    padding: 15,
+    padding: popupBaseData.modal.padding,
     alignItems: 'flex-start',
     shadowColor: '#000',
     shadowOffset: {
@@ -141,17 +258,20 @@ const styles = StyleSheet.create({
     elevation: 5,
     flex: 1,
     flexDirection: 'row',
-    maxWidth: 400,
+    maxWidth: popupBaseData.modal.maxWidth,
+    height: popupBaseData.modal.heightPer + '%',
+    minHeight: popupBaseData.modal.minHeight,
   },
-  bigImg: {
-    width: 100,
-    height: 150,
-  },
+  // bigImg: {
+  //   width: 100,
+  //   height: 150,
+  // },
   contentContainer: {
-    flex: 2,
+    flexBasis: popupBaseData.contentContainer.flexBasisPer + '%',
     flexDirection: 'column',
     paddingHorizontal: 10,
-    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    height: '100%',
   },
   hideModalText: {
     paddingVertical: 8,
@@ -160,12 +280,20 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   hideModal: {
-    margin: 10,
+    marginTop: 10,
     alignSelf: 'center',
   },
   leftPadded: {
     marginLeft: 20,
   },
+  // bigImgLarge: {
+  //   width: 200,
+  //   height: 300,
+  // },
+  // bigImgMedium: {
+  //   width: 160,
+  //   height: 240,
+  // },
 });
 
 export default MemberItem;
