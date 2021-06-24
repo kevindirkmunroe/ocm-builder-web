@@ -38,7 +38,6 @@ const MemberItem = ({item}) => {
   const [modalHeight, setModalHeight] = useState(
     popupBaseData.modal.heightPer + '%',
   );
-  // const [bigImage, setBigImage] = useState('');
   const {name, house, wand, actor, image} = item;
   const imageOrig = image.replace(/^http:\/\//, 'https://');
   const roboUrl = 'https://robohash.org/' + encodeURI(name) + '?size=60x60';
@@ -57,25 +56,6 @@ const MemberItem = ({item}) => {
       color = '#1a3956';
       break;
   }
-  // const updateBigImage = layout => {
-  //   if (layout.width > layout.height) {
-  //     if (layout.height > 650) {
-  //       setBigImage('Large');
-  //     } else if (layout.height > 500) {
-  //       setBigImage('Medium');
-  //     } else {
-  //       setBigImage('');
-  //     }
-  //   } else {
-  //     if (layout.width > 550) {
-  //       setBigImage('Large');
-  //     } else if (layout.width > 400) {
-  //       setBigImage('Medium');
-  //     } else {
-  //       setBigImage('');
-  //     }
-  //   }
-  // };
 
   useEffect(() => {
     const heightPer =
@@ -104,11 +84,6 @@ const MemberItem = ({item}) => {
       windowWidth,
       windowHeight,
     });
-    // if (imgHeight < imgWidth) {
-    //   imgWidth = imgHeight * (2 / 3);
-    // } else {
-    //   imgHeight = imgWidth * (3 / 2);
-    // }
 
     setImageDesign({width: imgWidth, height: imgHeight});
   }, [windowWidth, windowHeight]);
@@ -142,10 +117,7 @@ const MemberItem = ({item}) => {
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
-        <View
-          style={styles.centeredView}
-          // onLayout={obj => updateBigImage(obj.nativeEvent.layout)}
-        >
+        <View style={styles.centeredView}>
           <View style={[styles.modalView, {height: modalHeight}]}>
             <View
               style={{
@@ -153,7 +125,6 @@ const MemberItem = ({item}) => {
               }}>
               <Image
                 source={{uri: imageOrig}}
-                // style={!bigImage ? styles.bigImg : styles['bigImg' + bigImage]}
                 resizeMode="cover"
                 style={{
                   height: imageDesign.height,
@@ -262,10 +233,6 @@ const styles = StyleSheet.create({
     height: popupBaseData.modal.heightPer + '%',
     minHeight: popupBaseData.modal.minHeight,
   },
-  // bigImg: {
-  //   width: 100,
-  //   height: 150,
-  // },
   contentContainer: {
     flexBasis: popupBaseData.contentContainer.flexBasisPer + '%',
     flexDirection: 'column',
@@ -286,14 +253,6 @@ const styles = StyleSheet.create({
   leftPadded: {
     marginLeft: 20,
   },
-  // bigImgLarge: {
-  //   width: 200,
-  //   height: 300,
-  // },
-  // bigImgMedium: {
-  //   width: 160,
-  //   height: 240,
-  // },
 });
 
 export default MemberItem;
