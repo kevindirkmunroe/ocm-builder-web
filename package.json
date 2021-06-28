@@ -1,6 +1,6 @@
 {
   "name": "shipdemo",
-  "homepage": "https://shivams136.github.io/hp-dict-web-demo",
+  "homepage": "https://shivams136.github.io/harry-potter-dictionary",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
     "web": "webpack serve -d source-map --mode development --config \"./web/webpack.config.js\" --inline --color --history-api-fallback",
     "build:web": "webpack --mode production --config \"./web/webpack.config.js\"",
     "predeploy": "npm run build:web",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "17.0.1",
