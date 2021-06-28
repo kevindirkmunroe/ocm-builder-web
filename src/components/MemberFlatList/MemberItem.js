@@ -76,14 +76,6 @@ const MemberItem = ({item}) => {
       (width - popupBaseData.modal.padding * 2) *
       (popupBaseData.imageContainer.flexBasisPer / 100);
     let imgHeight = height - popupBaseData.modal.padding * 2;
-    console.log({
-      width,
-      height,
-      imgWidth,
-      imgHeight,
-      windowWidth,
-      windowHeight,
-    });
 
     setImageDesign({width: imgWidth, height: imgHeight});
   }, [windowWidth, windowHeight]);
