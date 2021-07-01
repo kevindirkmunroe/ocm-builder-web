@@ -12,7 +12,7 @@ import HpList from './HpList/HpList';
 const App = () => {
   return (
     <ProvideAuth>
-      <Router>
+      <Router basename="/hp-dict-web-demo">
         <View style={{flex: 1}}>
           <Header />
 
