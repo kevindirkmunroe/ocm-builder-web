@@ -8,7 +8,7 @@ const Header = () => {
   let history = useHistory();
   return (
     <View style={styles.header}>
-      <Text style={styles.headerText}>Harry Potter Dictionary</Text>
+      <Text style={styles.headerText}>Kevin's Harry Potter Dictionary</Text>
       {auth.user ? (
         <TouchableHighlight
           style={styles.btn}
