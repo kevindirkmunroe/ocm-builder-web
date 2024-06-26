@@ -25,7 +25,7 @@ const config = {
   },
   resolver: {
     assetExts: assetExts.filter(ext => ext !== 'svg'),
-    sourceExts: [...sourceExts, 'svg'],
+    sourceExts: [...sourceExts, 'svg', 'js', 'json', 'ts', 'tsx', 'cjs'],
     resolverMainFields: ['sbmodern', 'react-native', 'browser', 'main'],
   },
   watchFolders: [path.resolve(__dirname, '../')],
