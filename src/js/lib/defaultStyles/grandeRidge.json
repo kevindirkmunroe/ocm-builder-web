@@ -1,0 +1,41 @@
+{
+  "styleHistory": {
+    "currSnapshotId": -1,
+    "snapshots": [{
+      "snapshotId": -1,
+      "styleName": "Grande Ridge",
+      "styleLayers": [
+        {
+        "printRollerName": "k5",
+        "layerId": 1,
+        "color": {
+          "name": "#382F2D",
+          "notes": "PANTONE 412 C"
+         }
+        },
+        {
+          "printRollerName": "grande",
+          "layerId": 2,
+          "color": {
+            "name": "#7E4C36",
+            "notes": "PANTONE 7588 C"
+          }
+        }
+      ],
+      "backgroundColor": {
+        "name": "#5E514D",
+        "notes": "PANTONE 411 C"
+      }
+    }]
+  },
+  "colorHistory": [
+    {
+    "name": "#5E514D",
+    "notes": "PANTONE 411 C"
+    },
+    {
+      "name": "#7E4C36",
+      "notes": "PANTONE 7588 C"
+    }
+  ]
+}
