@@ -17,6 +17,8 @@
     "@react-native/metro-config": "^0.74.84",
     "aws-amplify": "^6.3.8",
     "metro": "^0.80.9",
+    "metro-config": "^0.80.9",
+    "metro-react-native-babel-preset": "^0.66.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "^0.74.2",
