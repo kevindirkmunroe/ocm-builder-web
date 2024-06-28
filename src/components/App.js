@@ -1,14 +1,12 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {Router, Switch, Route} from '../router/router';
-import {ProvideAuth} from './Login/authContext';
+import {View, StyleSheet} from 'react-native';
+import { Router, Switch, Route, Navigate, Redirect } from "../router/router";
+import {ProvideAuth} from './Pages/authContext';
 
-import Login, {PrivateRoute} from './Login/Login';
-
-import Header from './Header/Header';
-// import OCMBuilderHeader from './Header/OCMBuilderHeader';
+import Login, {PrivateRoute} from './Pages/Login';
 
 import HpList from './HpList/HpList';
+import OCMBuilderHeader from "./Header/OCMBuilderHeader";
 // import HomeView from '../js/wizardV2/HomeView';
 // import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
@@ -25,28 +23,16 @@ const splashStyles = StyleSheet.create({
 const App = () => {
   return (
     <ProvideAuth>
-      <Router basename="/hp-dict-web-demo">
-  {/* <Router basename="/ocmcoil"> */}
+      <Router basename="/ocmcoil">
         <View style={{flex: 1}}>
-      {/* <OCMBuilderHeader /> */}
-          <Header />
+          <OCMBuilderHeader />
           <Switch>
-            {/*}
-            <Route path="/ocmbuilder">
-              <Text>Hello OCMBuilder!</Text>
-              <GestureHandlerRootView>
-                <View style={splashStyles.container}>
-                  <HomeView />
-                </View>
-              </GestureHandlerRootView>
+            <Route path="/start">
+              <HpList />
             </Route>
-            */}
-            <Route path="/login">
+            <Route path="/">
               <Login />
             </Route>
-            <PrivateRoute path="/">
-              <HpList />
-            </PrivateRoute>
           </Switch>
         </View>
       </Router>

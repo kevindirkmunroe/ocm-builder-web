@@ -27,7 +27,7 @@
     "react-native-splash-screen": "^3.3.0",
     "react-native-svg-transformer": "^1.4.0",
     "react-native-web": "^0.17.1",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^5.3.4",
     "react-router-native": "^5.2.0"
   },
   "devDependencies": {
