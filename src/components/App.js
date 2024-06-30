@@ -7,13 +7,13 @@ import StartProject from "./Pages/StartProject";
 import OCMFinish from "./Pages/OCMFinish";
 import CustomFinish from "./Pages/CustomFinish";
 import Welcome from "./Pages/Welcome";
-import { Routes } from "react-router";
+import { Navigate, Routes } from "react-router";
 
 const App = () => {
 
   return (
     <ProvideAuth>
-      <Router basename="/ocmcoil">
+      <Router basename="/">
         <View style={{flex: 1}}>
           <OCMBuilderHeader />
           <Routes>
