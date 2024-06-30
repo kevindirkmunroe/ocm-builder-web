@@ -7,7 +7,7 @@ import StartProject from "./Pages/StartProject";
 import OCMFinish from "./Pages/OCMFinish";
 import CustomFinish from "./Pages/CustomFinish";
 import Welcome from "./Pages/Welcome";
-import { Navigate, Routes } from "react-router";
+import { Routes } from "react-router";
 
 const App = () => {
 

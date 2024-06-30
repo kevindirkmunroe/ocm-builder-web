@@ -1,8 +1,17 @@
-import React from 'react';
-import { Dimensions, StyleSheet, View, Text, TouchableHighlight, Image } from "react-native";
+import React, { useState } from "react";
+import {
+  Dimensions,
+  StyleSheet,
+  View,
+  Text,
+  TouchableHighlight,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import { useNavigate } from 'react-router-dom';
 
-import { getOCMFinishes, penny, staticImageUrlMap } from "../../utils/AssetManager";
+import { getOCMFinishes, staticImageUrlMap } from "../../utils/AssetManager";
 import { SectionList } from "../list/SectionList";
 
 function OCMFinish(){
@@ -13,18 +22,26 @@ function OCMFinish(){
     navigate('/start');
   }
 
+  const [selectedItem, setSelectedItem ] = useState(null);
+
   return(
     <View style={styles.belowContainer}>
+      <Text style={styles.mainText}>Select OCM Finish</Text>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4, height: height * 0.6}}>
-        <Text style={styles.mainText}>Select OCM Finish</Text>
+        {/* Table of images */}
         <SectionList
           sections={getOCMFinishes()}
           renderItem={({item}) => {
             return (
-              <View style={{ backgroundColor: 'rgba(247, 247, 247, 1.0)', margin: 5, flexDirection: 'row', width: width * 0.5 }}>
-                <Image style={{width: 50, height: 50}} source={staticImageUrlMap[item.key]} />
-                <Text style={styles.item}>{item.name}</Text>
-              </View>
+              <TouchableOpacity onPress={()=> {
+                setSelectedItem(item);
+                }
+              }>
+                <View style={{ backgroundColor: 'rgba(247, 247, 247, 1.0)', margin: 5, flexDirection: 'row', width: width * 0.5 }}>
+                  <Image style={{width: 50, height: 50}} source={staticImageUrlMap[item.key]} />
+                  <Text style={styles.item}>{item.name}</Text>
+                </View>
+              </TouchableOpacity>
             )
           }}
           renderSectionHeader={({section}) => (
@@ -32,6 +49,15 @@ function OCMFinish(){
           )}
           keyExtractor={item => `basicListEntry-${item.name}`}
          initialNumToRender={3}/>
+
+        {/* Preview Image */}
+        <View style={{ backgroundColor: '#d9d9d9', marginTop: 15, flexDirection: 'row', width: width * 0.5, height: height * 0.3}}>
+          <ImageBackground style={{width: width * 0.5, height: height * 0.3}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
+            <View style={{ position: 'absolute', top: 10, left: 10, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
+              <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'white'}}>{selectedItem? selectedItem.name : ''}</Text>
+            </View>
+          </ImageBackground>
+        </View>
         <TouchableHighlight
           style={styles.btn}
           underlayColor="#f0f4f7"
@@ -47,7 +73,7 @@ const styles = StyleSheet.create({
   mainText: {
     color: 'black',
     fontSize: 30,
-    width: '40%',
+    width: '80%',
     padding: 20,
     fontWeight: 'bold',
     textAlign: 'center'

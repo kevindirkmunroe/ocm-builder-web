@@ -84,6 +84,7 @@ export const staticImageUrlMap = {
   'copper': copper,
   'fusion': fusion,
   'galvanized': galvanized,
+  'penny': penny,
   'zinc': zinc,
   'midnightCarbide': midnightCarbide,
   'midnightChrome': midnightChrome,
