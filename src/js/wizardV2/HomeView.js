@@ -88,7 +88,7 @@ export default class HomeView extends Component {
       orientation: _isPortrait() ? 'portrait' : 'landscape',
       settingsModalVisible: false,
     };
-      
+
     let eventListenerSubscription;
 
     // Event Listener for orientation changes
@@ -260,7 +260,7 @@ export default class HomeView extends Component {
             maxHeight: 40,
           }}>
           <Image
-            source={require('../../images/ocm-image-small.png')}
+            source={require('../../assets/ocm-image-small.png')}
             style={{marginTop: isPhone ? 5 : 0}}
           />
           <View

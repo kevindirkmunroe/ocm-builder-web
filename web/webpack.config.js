@@ -38,7 +38,7 @@ const babelLoaderConfiguration = {
   },
 };
 
-// This is needed for webpack to import static images in JavaScript files.
+// This is needed for webpack to import static assets in JavaScript files.
 const imageLoaderConfiguration = {
   test: /\.(gif|jpe?g|png|svg)$/,
   use: {

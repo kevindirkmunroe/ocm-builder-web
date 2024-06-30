@@ -1,5 +1,5 @@
 const OCM = {
-  logo: '../../images/ocm-image-small.png',
+  logo: '../../assets/ocm-image-small.png',
   backgroundColor: '#552583',
   backgroundColorLight: '#D3D3D3',
   mainColor: '#acac84',

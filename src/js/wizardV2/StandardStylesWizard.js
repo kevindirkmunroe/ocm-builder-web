@@ -98,7 +98,7 @@ class StandardStylesWizard extends Component {
       <SafeAreaView>
         <Image
           style={brandIconStyle}
-          source={require('../../images/ocm-image-small.png')}
+          source={require('../../assets/ocm-image-small.png')}
         />
         <View style={{flex: 1, justifyContent: 'space-around'}}>
           <ProgressSteps>

@@ -326,7 +326,7 @@ class CustomStylesWizard extends Component {
             style={{
               marginTop: 5,
             }}>
-            <Image source={require('../../images/ocm-image-small.png')} />
+            <Image source={require('../../assets/ocm-image-small.png')} />
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
             <TouchableOpacity

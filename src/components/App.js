@@ -1,15 +1,16 @@
 import React from 'react';
 import {View} from 'react-native';
-import { Router, Route } from '../router/router';
+import { Router, Route } from '../navigation/router';
 import {ProvideAuth} from './Pages/authContext';
 import OCMBuilderHeader from "./Header/OCMBuilderHeader";
 import StartProject from "./Pages/StartProject";
-import CustomOCMFinish from "./Pages/CustomOCMFinish";
-import NewFinish from "./Pages/NewFinish";
+import OCMFinish from "./Pages/OCMFinish";
+import CustomFinish from "./Pages/CustomFinish";
 import Welcome from "./Pages/Welcome";
 import { Routes } from "react-router";
 
 const App = () => {
+
   return (
     <ProvideAuth>
       <Router basename="/ocmcoil">
@@ -18,8 +19,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/start" element={<StartProject/>} />
-            <Route path="/custom-finish" element={<CustomOCMFinish />} />
-            <Route path="/new-finish" element={<NewFinish />} />
+            <Route path="/ocm-finish" element={<OCMFinish />} />
+            <Route path="/custom-finish" element={<CustomFinish />} />
           </Routes>
         </View>
       </Router>

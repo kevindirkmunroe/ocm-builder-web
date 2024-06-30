@@ -12,7 +12,7 @@ const OCMBuilderHeader = () => {
           borderRadius: 3,
           borderWidth: 0,
         }}
-        source={require('../../images/ocm-splash.png')}
+        source={require('../../assets/ocm-splash.png')}
       />
       <View style={{flex: 1}}>
         <Text style={styles.headerText}>Builder</Text>

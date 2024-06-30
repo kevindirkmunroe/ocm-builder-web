@@ -2,7 +2,7 @@ import React from 'react';
 import { Dimensions, StyleSheet, View, Text, TouchableHighlight } from "react-native";
 import { useNavigate } from 'react-router-dom';
 
-function CustomOCMFinish(){
+function CustomFinish(){
   const navigate = useNavigate();
   const {width} = Dimensions.get('window');
 
@@ -13,7 +13,7 @@ function CustomOCMFinish(){
   return(
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
-        <Text>Select a Custom OCM Finish</Text>
+        <Text>Create Custom Finish</Text>
         <TouchableHighlight
           style={styles.btn}
           underlayColor="#f0f4f7"
@@ -24,6 +24,7 @@ function CustomOCMFinish(){
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   mainText: {
@@ -53,5 +54,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export default CustomOCMFinish;
+export default CustomFinish;

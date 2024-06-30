@@ -14,8 +14,8 @@ function StartProject() {
     });
   };
 
-  let selectNewFinish = () => {
-    navigate('/new-finish');
+  let selectOCMFinish = () => {
+    navigate('/ocm-finish');
   }
 
   const {width} = Dimensions.get('window');
@@ -27,13 +27,13 @@ function StartProject() {
         <TouchableHighlight
           style={styles.btn}
           underlayColor="#f0f4f7"
-          onPress={selectNewFinish}>
+          onPress={selectCustomFinish}>
           <Text style={styles.btnClr}>Design A New Finish</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.btn}
           underlayColor="#f0f4f7"
-          onPress={selectCustomFinish}>
+          onPress={selectOCMFinish}>
           <Text style={styles.btnClr}>Customize Popular OCM Finishes</Text>
         </TouchableHighlight>
       </View>
