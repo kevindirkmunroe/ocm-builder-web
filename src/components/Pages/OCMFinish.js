@@ -2,7 +2,7 @@ import React from 'react';
 import { Dimensions, StyleSheet, View, Text, TouchableHighlight, Image } from "react-native";
 import { useNavigate } from 'react-router-dom';
 
-import { getOCMFinishes } from "../../utils/AssetManager";
+import { getOCMFinishes, penny, staticImageUrlMap } from "../../utils/AssetManager";
 import { SectionList } from "../list/SectionList";
 
 function OCMFinish(){
@@ -22,7 +22,7 @@ function OCMFinish(){
           renderItem={({item}) => {
             return (
               <View style={{ backgroundColor: 'rgba(247, 247, 247, 1.0)', margin: 5, flexDirection: 'row', width: width * 0.5 }}>
-                <Image style={{width: 50, height: 50}} source={require(`../../assets/texture/${item.imgUrl}`)} />
+                <Image style={{width: 50, height: 50}} source={staticImageUrlMap[item.key]} />
                 <Text style={styles.item}>{item.name}</Text>
               </View>
             )
