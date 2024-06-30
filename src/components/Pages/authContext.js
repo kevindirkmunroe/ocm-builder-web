@@ -16,7 +16,9 @@ const authContext = createContext();
 
 export function ProvideAuth({children}) {
   const auth = useProvideAuth();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+  return (<React.Fragment>
+            <authContext.Provider value={auth}>{children}</authContext.Provider>
+          </React.Fragment>);
 }
 
 export const useAuth = () => {

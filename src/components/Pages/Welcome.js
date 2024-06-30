@@ -1,43 +1,15 @@
 import React from 'react';
-import { View, Text, TouchableHighlight, StyleSheet, Dimensions } from "react-native";
-import {Route, Redirect, useHistory, useLocation} from '../../router/router';
-import {useAuth} from './authContext';
+import { Dimensions, StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { useNavigate } from 'react-router-dom';
 
-export function PrivateRoute({children, ...rest}) {
-  let auth = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={({location}) =>
-        auth.user ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/',
-              state: {from: location},
-            }}
-          />
-        )
-      }
-    />
-  );
-}
+function Welcome(){
+  const {width} = Dimensions.get('window');
+  const navigate = useNavigate();
 
-function Login(props) {
-  let history = useHistory();
-  let location = useLocation();
-  let auth = useAuth();
+  let selectStart = () => {
+    navigate('/start');
+  }
 
-  let {from} = location.state || {from: {pathname: '/start'}};
-  console.log(`FROM=${JSON.stringify(from)}`);
-  let login = () => {
-    auth.signin(() => {
-      history.replace(from);
-    });
-  };
-
-  const {width, height} = Dimensions.get('window');
   return (
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
@@ -46,7 +18,7 @@ function Login(props) {
         <TouchableHighlight
           style={styles.btn}
           underlayColor="#f0f4f7"
-          onPress={login}>
+          onPress={selectStart}>
           <Text style={styles.btnClr}>Innovate!</Text>
         </TouchableHighlight>
       </View>
@@ -83,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Welcome;
