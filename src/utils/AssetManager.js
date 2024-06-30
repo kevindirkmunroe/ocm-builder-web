@@ -1,5 +1,44 @@
 import React from "react";
 
+export function getOCMPrintRollers(){
+  return [
+    {key: 'bamboo', name: 'Bamboo'},
+    {key: 'brushed', name: 'Brushed'},
+    {key: 'delta', name: 'Delta'},
+    {key: 'grande', name: 'Grande'},
+    {key: 'hairline', name: 'Hairline'},
+    {key: 'k5_print', name: 'K5'},
+    {key: 'kovabrushed', name: 'Kova Brushed'},
+    {key: 'maple_print', name: 'Maple'},
+    {key: 'metallicPaint', name: 'Metallic Paint'},
+    {key: 'morton', name: 'Morton'},
+    {key: 'oak_print', name: 'Oak'},
+    {key: 'rift', name: 'Rift'},
+    {key: 'sandobi', name: 'Sandobi'},
+    {key: 'spangle', name: 'Spangle'},
+    {key: 'terrazzo_a', name: 'Terrazzo A'},
+    {key: 'terrazzo_b', name: 'Terrazzo B'},
+  ]
+}
+
+export const bamboo = require('../assets/printRollers/bamboo.png');
+export const brushed = require('../assets/printRollers/brushed.png');
+export const delta = require('../assets/printRollers/delta.png');
+export const grande = require('../assets/printRollers/grande.png');
+export const hairline = require('../assets/printRollers/hairline.png');
+export const k5_print = require('../assets/printRollers/k5.png');
+export const kovabrushed = require('../assets/printRollers/kovabrushed.png');
+export const maple_print = require('../assets/printRollers/maple.png');
+export const metallicPaint = require('../assets/printRollers/metallicPaint.png');
+export const morton = require('../assets/printRollers/morton.png');
+export const oak_print = require('../assets/printRollers/oak.jpg');
+export const rift = require('../assets/printRollers/rift.png');
+export const sandobi = require('../assets/printRollers/sandobi.jpg');
+export const spangle = require('../assets/printRollers/spangle.jpg');
+export const terrazzo_a = require('../assets/printRollers/terrazzo_a.png');
+export const terrazzo_b = require('../assets/printRollers/terrazzo_b.jpg');
+
+
 export function getOCMFinishes(){
  return [
    {title: 'Brazen',
@@ -105,4 +144,21 @@ export const staticImageUrlMap = {
   'ore': ore,
   'rustic': rustic,
   'wood': wood,
+
+  'bamboo': bamboo,
+  'brushed': brushed,
+  'delta': delta,
+  'grande': grande,
+  'hairline': hairline,
+  'k5_print': k5_print,
+  'kovabrushed': kovabrushed,
+  'maple_print': maple_print,
+  'metallicPaint': metallicPaint,
+  'morton': morton,
+  'oak_print': oak_print,
+  'rift': rift,
+  'sandobi': sandobi,
+  'spangle': spangle,
+  'terrazzo_a': terrazzo_a,
+  'terrazzo_b': terrazzo_b,
 }

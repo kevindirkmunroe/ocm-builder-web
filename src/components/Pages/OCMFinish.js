@@ -54,7 +54,9 @@ function OCMFinish(){
         <View style={{ backgroundColor: '#d9d9d9', marginTop: 15, flexDirection: 'row', width: width * 0.5, height: height * 0.3}}>
           <ImageBackground style={{width: width * 0.5, height: height * 0.3}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
             <View style={{ position: 'absolute', top: 10, left: 10, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
-              <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'white'}}>{selectedItem? selectedItem.name : ''}</Text>
+              <Text style={{ textShadowColor: 'rgba(0, 0, 0, 0.75)',
+                textShadowOffset: {width: -1, height: 1},
+                textShadowRadius: 10, fontWeight: 'bold', fontSize: 20, color: 'white'}}>{selectedItem? selectedItem.name : 'None'}</Text>
             </View>
           </ImageBackground>
         </View>

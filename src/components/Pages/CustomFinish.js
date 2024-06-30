@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dimensions, StyleSheet, View, Text, TouchableHighlight } from "react-native";
 import { useNavigate } from 'react-router-dom';
+import PrintRollerSelector from "../Widgets/PrintRollerSelector";
 
 function CustomFinish(){
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function CustomFinish(){
   return(
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
-        <Text>Create Custom Finish</Text>
+        <PrintRollerSelector title={'Select Background Pattern'} />
         <TouchableHighlight
           style={styles.btn}
           underlayColor="#f0f4f7"
@@ -24,7 +25,6 @@ function CustomFinish(){
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   mainText: {
