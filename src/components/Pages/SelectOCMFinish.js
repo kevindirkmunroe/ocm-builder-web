@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { getOCMFinishes, staticImageUrlMap } from "../../utils/AssetManager";
 import { SectionList } from "../list/SectionList";
 
-function OCMFinish(){
+function SelectOCMFinish(){
   const navigate = useNavigate();
   const {width, height} = Dimensions.get('window');
 
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OCMFinish;
+export default SelectOCMFinish;

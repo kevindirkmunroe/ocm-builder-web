@@ -1,13 +1,16 @@
 import React from 'react';
 import {View} from 'react-native';
+import { Routes } from "react-router";
+
 import { Router, Route } from '../navigation/router';
 import {ProvideAuth} from './Pages/authContext';
 import OCMBuilderHeader from "./Header/OCMBuilderHeader";
 import StartProject from "./Pages/StartProject";
-import OCMFinish from "./Pages/OCMFinish";
-import CustomFinish from "./Pages/CustomFinish";
+import SelectOCMFinish from "./Pages/SelectOCMFinish";
+import CreateCustomFinish from "./Pages/CreateCustomFinish";
 import Welcome from "./Pages/Welcome";
-import { Routes } from "react-router";
+import EditProject from "./Pages/EditProject";
+
 
 const App = () => {
 
@@ -19,8 +22,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/start" element={<StartProject/>} />
-            <Route path="/ocm-finish" element={<OCMFinish />} />
-            <Route path="/custom-finish" element={<CustomFinish />} />
+            <Route path="/ocm-finish" element={<SelectOCMFinish />} />
+            <Route path="/custom-finish" element={<CreateCustomFinish />} />
+            <Route path="/edit" element={<EditProject />} />
           </Routes>
         </View>
       </Router>

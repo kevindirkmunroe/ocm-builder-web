@@ -1,9 +1,8 @@
 import React from 'react';
 import { Dimensions, StyleSheet, View, Text, TouchableHighlight } from "react-native";
 import { useNavigate } from 'react-router-dom';
-import PrintRollerSelector from "../Widgets/PrintRollerSelector";
 
-function CustomFinish(){
+function EditProject(){
   const navigate = useNavigate();
   const {width} = Dimensions.get('window');
 
@@ -14,7 +13,7 @@ function CustomFinish(){
   return(
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
-        <PrintRollerSelector title={'Select Background Pattern'} />
+        <Text style={styles.mainText}>My Project</Text>
         <TouchableHighlight
           style={styles.btn}
           underlayColor="#f0f4f7"
@@ -54,4 +53,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-export default CustomFinish;
+export default EditProject;
