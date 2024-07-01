@@ -66,6 +66,7 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem}){
 
 const styles = StyleSheet.create({
   mainText: {
+    fontFamily: 'Futura',
     color: 'black',
     fontSize: 24,
     fontWeight: 'bold',
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btnClr: {
+    fontFamily: 'Futura',
     fontSize: 20,
     fontWeight: 'bold',
     color: '#fff',
@@ -105,6 +107,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   sectionHeader: {
+    fontFamily: 'Futura',
     paddingTop: 2,
     paddingLeft: 10,
     paddingRight: 10,

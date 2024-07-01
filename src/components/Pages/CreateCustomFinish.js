@@ -96,12 +96,13 @@ function CreateCustomFinish(){
 }
 
 const styles = StyleSheet.create({
-  mainText: {
+    fontFamily: 'Futura',
+    mainText: {
     color: 'black',
     fontSize: 30,
     width: '40%',
     padding: 10,
-    fontWeight: 'bold',
+    
   },
   tinyBtn: {
     width:  100,
@@ -137,14 +138,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btnClr: {
+    fontFamily: 'Futura',
     fontSize: 20,
-    fontWeight: 'bold',
+    
     color: '#fff',
   },
   btnBlk: {
+    fontFamily: 'Futura',
     marginTop: 20,
     fontSize: 30,
-    fontWeight: 'bold',
+    
     color: 'black',
   },
   belowContainer: {

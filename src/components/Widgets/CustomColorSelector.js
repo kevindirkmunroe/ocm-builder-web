@@ -10,12 +10,10 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor}){
     useState({currentColor: initSelectedColor, swatchesOnly: false, swatchesLast: true, swatchesEnabled: true, disc: false})
 
   const onColorChange = (newColor) => {
-    // console.log(`New Color: ${JSON.stringify(newColor)}`);
     onSelectColor(newColor);
   }
 
   const onColorChangeComplete = (newColor) => {
-    console.log(`New Color Complete: ${JSON.stringify(newColor)}`);
     onSelectColor(newColor);
   }
 

@@ -43,11 +43,12 @@ function StartProject() {
 
 const styles = StyleSheet.create({
   mainText: {
+    fontFamily: 'Futura',
     color: 'black',
     fontSize: 30,
     width: '40%',
     padding: 20,
-    fontWeight: 'bold',
+    
   },
   btn: {
     width:  Dimensions.get('window').width * 0.8,
@@ -59,8 +60,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btnClr: {
+    fontFamily: 'Futura',
     fontSize: 20,
-    fontWeight: 'bold',
+    
     color: '#fff',
   },
   belowContainer: {

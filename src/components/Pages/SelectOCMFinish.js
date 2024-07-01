@@ -56,7 +56,7 @@ function SelectOCMFinish(){
             <View style={{ position: 'absolute', top: 10, left: 10, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
               <Text style={{ textShadowColor: 'rgba(0, 0, 0, 0.75)',
                 textShadowOffset: {width: -1, height: 1},
-                textShadowRadius: 10, fontWeight: 'bold', fontSize: 20, color: 'white'}}>{selectedItem? selectedItem.name : 'None'}</Text>
+                textShadowRadius: 10,  fontSize: 20, color: 'white'}}>{selectedItem? selectedItem.name : 'None'}</Text>
             </View>
           </ImageBackground>
         </View>
@@ -73,11 +73,12 @@ function SelectOCMFinish(){
 
 const styles = StyleSheet.create({
   mainText: {
+    fontFamily: 'Futura',
     color: 'black',
     fontSize: 30,
     width: '80%',
     padding: 20,
-    fontWeight: 'bold',
+    
     textAlign: 'center'
   },
   btn: {
@@ -91,8 +92,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btnClr: {
+    fontFamily: 'Futura',
     fontSize: 20,
-    fontWeight: 'bold',
+    
     color: '#fff',
   },
   belowContainer: {
@@ -105,12 +107,13 @@ const styles = StyleSheet.create({
     paddingTop: 22,
   },
   sectionHeader: {
+    fontFamily: 'Futura',
     paddingTop: 2,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 2,
     fontSize: 18,
-    fontWeight: 'bold',
+    
     backgroundColor: '#dadad0',
   },
   item: {

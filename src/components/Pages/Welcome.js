@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
   mainText: {
     color: 'black',
     fontSize: 30,
+    fontFamily: 'Futura',
     width: '40%',
     padding: 20,
-    fontWeight: 'bold',
   },
   btn: {
     width: 300,
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
   },
   btnClr: {
     fontSize: 20,
-    fontWeight: 'bold',
+    
+    fontFamily: 'Futura',
     color: '#fff',
   },
   belowContainer: {

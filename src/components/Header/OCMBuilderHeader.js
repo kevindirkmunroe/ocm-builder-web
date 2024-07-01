@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: '#fff',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Futura'
   },
 });
 
