@@ -6,8 +6,8 @@ import { Router, Route } from '../navigation/router';
 import {ProvideAuth} from './Pages/authContext';
 import OCMBuilderHeader from "./Header/OCMBuilderHeader";
 import StartProject from "./Pages/StartProject";
-import SelectOCMFinish from "./Pages/SelectOCMFinish";
-import CreateCustomFinish from "./Pages/CreateCustomFinish";
+import StartProjectOCMFinish from "./Pages/StartProjectOCMFinish";
+import StartProjectCustomFinish from "./Pages/StartProjectCustomFinish";
 import Welcome from "./Pages/Welcome";
 import EditProject from "./Pages/EditProject";
 
@@ -22,9 +22,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/start" element={<StartProject/>} />
-            <Route path="/ocm-finish" element={<SelectOCMFinish />} />
-            <Route path="/custom-finish" element={<CreateCustomFinish />} />
-            <Route path="/edit" element={<EditProject />} />
+            <Route path="/ocm-finish" element={<StartProjectOCMFinish />} />
+            <Route path="/custom-finish" element={<StartProjectCustomFinish />} />
+            <Route path="/my-project" element={<EditProject />} />
           </Routes>
         </View>
       </Router>

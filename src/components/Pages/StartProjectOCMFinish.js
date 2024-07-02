@@ -14,15 +14,20 @@ import { useNavigate } from 'react-router-dom';
 import { getOCMFinishes, staticImageUrlMap } from "../../utils/AssetManager";
 import { SectionList } from "../list/SectionList";
 
-function SelectOCMFinish(){
+function StartProjectOCMFinish(){
   const navigate = useNavigate();
   const {width, height} = Dimensions.get('window');
+
+  const [selectedItem, setSelectedItem ] = useState(null);
 
   let onStartOver = () => {
     navigate('/start');
   }
 
-  const [selectedItem, setSelectedItem ] = useState(null);
+  let onContinue = () => {
+    navigate('/my-project', { state: {level: 'X', ocmFinish: selectedItem }});
+  }
+
 
   return(
     <View style={styles.belowContainer}>
@@ -51,21 +56,35 @@ function SelectOCMFinish(){
          initialNumToRender={3}/>
 
         {/* Preview Image */}
-        <View style={{ backgroundColor: '#d9d9d9', marginTop: 15, flexDirection: 'row', width: width * 0.5, height: height * 0.3}}>
-          <ImageBackground style={{width: width * 0.5, height: height * 0.3}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
-            <View style={{ position: 'absolute', top: 10, left: 10, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
-              <Text style={{ textShadowColor: 'rgba(0, 0, 0, 0.75)',
-                textShadowOffset: {width: -1, height: 1},
-                textShadowRadius: 10,  fontSize: 20, color: 'white'}}>{selectedItem? selectedItem.name : 'None'}</Text>
-            </View>
-          </ImageBackground>
+        <View style={{height: height * 0.5}}>
+          <View style={{ flex: 1, flexDirection: 'row', backgroundColor: '#d9d9d9', marginTop: 15, width: width * 0.5, height: height * 0.6}}>
+            <ImageBackground style={{width: width * 0.5, height: height * 0.4}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
+              <View style={{ position: 'absolute', top: 10, left: 10, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
+                <Text style={{ textShadowColor: 'rgba(0, 0, 0, 0.75)',
+                  textShadowOffset: {width: -1, height: 1},
+                  textShadowRadius: 10,  fontSize: 20, color: 'white'}}>{selectedItem? selectedItem.name : 'None'}</Text>
+              </View>
+            </ImageBackground>
+          </View>
+
+          {/* Navigation */}
+
+          <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
+            <TouchableHighlight
+              style={styles.tinyBtn2}
+              underlayColor="#f0f4f7"
+              onPress={onStartOver}>
+              <Text style={styles.btnClr}>Start Over</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              disabled={selectedItem === null}
+              style={styles.tinyBtn2}
+              underlayColor="#f0f4f7"
+              onPress={onContinue}>
+              <Text style={styles.btnClr}>Continue</Text>
+            </TouchableHighlight>
+          </View>
         </View>
-        <TouchableHighlight
-          style={styles.btn}
-          underlayColor="#f0f4f7"
-          onPress={onStartOver}>
-          <Text style={styles.btnClr}>Start Over</Text>
-        </TouchableHighlight>
       </View>
     </View>
   );
@@ -78,7 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     width: '80%',
     padding: 20,
-    
+
     textAlign: 'center'
   },
   btn: {
@@ -91,10 +110,33 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     borderRadius: 10,
   },
+  tinyBtn: {
+    width:  100,
+    height: 50,
+    marginLeft: 10,
+    marginTop: 10,
+    backgroundColor: '#dddddd',
+    justifyContent: 'left',
+    alignItems: 'left',
+    padding: 10,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+  },
+  tinyBtn2: {
+    marginLeft: 10,
+    marginTop: 3,
+    width: 120,
+    height: 45,
+    padding: 10,
+    backgroundColor: '#209bfc',
+    justifyContent: 'left',
+    alignItems: 'left',
+    borderRadius: 5
+  },
   btnClr: {
     fontFamily: 'Futura',
     fontSize: 20,
-    
+
     color: '#fff',
   },
   belowContainer: {
@@ -113,7 +155,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 2,
     fontSize: 18,
-    
+
     backgroundColor: '#dadad0',
   },
   item: {
@@ -123,4 +165,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectOCMFinish;
+export default StartProjectOCMFinish;

@@ -6,7 +6,7 @@ import PrintRollerSelector from "../Widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../Widgets/CustomColorSelector";
 
-function CreateCustomFinish(){
+function StartProjectCustomFinish(){
 
   const ENUM_PATTERN = 'PATTERN';
   const ENUM_COLOR = 'COLOR';
@@ -21,6 +21,10 @@ function CreateCustomFinish(){
     navigate('/start');
   }
 
+  let onContinue = () => {
+    navigate('/my-project', { state: {level: 'X', printRoller: selectedItem, color: selectedColor}});
+  }
+
   let onSelectPatternTab = () => {
     setSelectedView(ENUM_PATTERN);
   }
@@ -33,6 +37,7 @@ function CreateCustomFinish(){
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4 }}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
+          {/* Tab Label */}
           <View style={{flex: 1, width: width * 0.37, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
             <Image style={{ width: 30, height: 30 }} source={require('../../assets/layer-bottom.png')} />
             <Text style={{fontSize: 24, fontWeight: 'bold'}}>Background Layer</Text>
@@ -84,12 +89,21 @@ function CreateCustomFinish(){
                  source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
           </Image>
         </View>
-        <TouchableHighlight
-          style={styles.btn}
-          underlayColor="#f0f4f7"
-          onPress={onStartOver}>
-          <Text style={styles.btnClr}>Start Over</Text>
-        </TouchableHighlight>
+        <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
+          <TouchableHighlight
+            style={styles.tinyBtn2}
+            underlayColor="#f0f4f7"
+            onPress={onStartOver}>
+            <Text style={styles.btnClr}>Start Over</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            disabled={selectedItem === null || selectedColor === null}
+            style={styles.tinyBtn2}
+            underlayColor="#f0f4f7"
+            onPress={onContinue}>
+            <Text style={styles.btnClr}>Continue</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     </View>
   );
@@ -102,7 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     width: '40%',
     padding: 10,
-    
+
   },
   tinyBtn: {
     width:  100,
@@ -115,6 +129,17 @@ const styles = StyleSheet.create({
     padding: 10,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
+  },
+  tinyBtn2: {
+    marginLeft: 10,
+    marginTop: 3,
+    width: 120,
+    height: 45,
+    padding: 10,
+    backgroundColor: '#209bfc',
+    justifyContent: 'left',
+    alignItems: 'left',
+    borderRadius: 5
   },
   tinyBtnSelected: {
     width:  100,
@@ -140,14 +165,14 @@ const styles = StyleSheet.create({
   btnClr: {
     fontFamily: 'Futura',
     fontSize: 20,
-    
+
     color: '#fff',
   },
   btnBlk: {
     fontFamily: 'Futura',
     marginTop: 20,
     fontSize: 30,
-    
+
     color: 'black',
   },
   belowContainer: {
@@ -156,4 +181,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-export default CreateCustomFinish;
+export default StartProjectCustomFinish;

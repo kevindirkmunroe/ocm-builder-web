@@ -24,6 +24,7 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem}){
             <FlatList
               data={getOCMPrintRollers()}
               scrollEnabled={true}
+              showsVerticalScrollIndicator={true}
               initialNumToRender={4}
               renderItem={({item}) => {
                 return (
@@ -52,8 +53,10 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem}){
                 <Text style={{
                   alignSelf: 'flex-start',
                   backgroundColor:'white',
+                  borderWidth: 2,
+                  borderColor: 'black',
                   fontSize: 20,
-                  color: 'black'}}>{selectedItem? selectedItem.name : ''}
+                  color: 'black'}}>{selectedItem? selectedItem.name : '---'}
                 </Text>
               </View>
             </ImageBackground>
