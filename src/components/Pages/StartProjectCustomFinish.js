@@ -22,7 +22,17 @@ function StartProjectCustomFinish(){
   }
 
   let onContinue = () => {
-    navigate('/my-project', { state: {level: 'X', printRoller: selectedItem, color: selectedColor}});
+    navigate('/my-project',
+      { state:
+        { projectLayers:
+            [{level: 'X',
+              patternName: selectedItem.name,
+              patternImageKey: selectedItem.key,
+              backgroundColor: selectedColor,
+              patternOpacity: 0.8}
+            ]
+        }
+    });
   }
 
   let onSelectPatternTab = () => {
@@ -40,7 +50,8 @@ function StartProjectCustomFinish(){
           {/* Tab Label */}
           <View style={{flex: 1, width: width * 0.37, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
             <Image style={{ width: 30, height: 30 }} source={require('../../assets/layer-bottom.png')} />
-            <Text style={{fontSize: 24, fontWeight: 'bold'}}>Background Layer</Text>
+            <Text style={{fontSize: 24, fontWeight: 'bold', marginLeft: 5}}>Background</Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>/ Custom</Text>
           </View>
 
           {/* Tabs */}

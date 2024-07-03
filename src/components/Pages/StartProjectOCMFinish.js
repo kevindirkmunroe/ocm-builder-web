@@ -25,14 +25,27 @@ function StartProjectOCMFinish(){
   }
 
   let onContinue = () => {
-    navigate('/my-project', { state: {level: 'X', ocmFinish: selectedItem }});
+    navigate('/my-project',
+      { state:
+          { projectLayers:
+              [{level: 'X',
+                patternName: selectedItem.name,
+                patternImageKey: selectedItem.key,
+                backgroundColor: null,
+                patternOpacity: 1}
+              ]
+          }
+      });
   }
-
 
   return(
     <View style={styles.belowContainer}>
-      <Text style={styles.mainText}>Select OCM Finish</Text>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4, height: height * 0.6}}>
+      <View style={{flexDirection: 'row'}}>
+        <Image style={{ width: 30, height: 30, marginTop: 15 }} source={require('../../assets/layer-bottom.png')} />
+        <Text style={styles.mainText}>Background</Text>
+        <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>/ OCM Finish</Text>
+      </View>
+     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4, height: height * 0.6}}>
         {/* Table of images */}
         <SectionList
           sections={getOCMFinishes()}
@@ -96,8 +109,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 30,
     width: '80%',
-    padding: 20,
-
+    padding: 10,
     textAlign: 'center'
   },
   btn: {

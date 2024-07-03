@@ -1,24 +1,20 @@
 import React from 'react';
 import { useState } from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
-import { getOCMFinishes, getOCMPrintRollers, staticImageUrlMap } from "./../../utils/AssetManager";
+import { getOCMFinishes, staticImageUrlMap } from "./../../utils/AssetManager";
 
-function Layer({level, pattern, backgroundColor, patternOpacity}){
+function Layer({level, patternName, patternImageKey, backgroundColor, patternOpacity}){
 
   /*
      - level
-     - pattern
+     - patternName
+     - patternImageKey
      - backgroundColor
      - patternOpacity
 
    */
-  const [layerState, setLayerState] = useState({ pattern, backgroundColor, patternOpacity });
-  const prs = getOCMPrintRollers();
+  const [layerState, setLayerState] = useState({ patternName, patternImageKey, backgroundColor, patternOpacity });
   const ocms = getOCMFinishes();
-  let patternName = prs.find(x => x.key === pattern)?.name;
-  if(patternName === null){
-    patternName = pattern;
-  }
 
   return (
     <View style={{flex: 1, flexDirection: 'row', flexGrow: 0.5, alignItems: 'center'}}>
@@ -30,29 +26,29 @@ function Layer({level, pattern, backgroundColor, patternOpacity}){
             flexDirection: 'row',
           },
         ]}>
-        <View style={{flex: 1, backgroundColor: 'red'}}><Text style={{margin: 10}}>{level}</Text></View>
-        <View style={{flex: 2, backgroundColor: 'darkorange'}}>
-            <View style={{margin: 10, flex: 1, flexDirection: 'row'}}>
-            <Image style={{width: 30, height: 30}} source={staticImageUrlMap[pattern]}></Image>
-            <Text> {patternName}</Text>
+          <View style={{flex: 1, margin: 2, backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10}}>{level}</Text>
+          </View>
+          <View style={{flex: 2, margin: 2,flexDirection: 'row' , alignItems: 'center', justifyContent: 'center', backgroundColor: '#f1f1f1'}}>
+            <Image style={{width: 30, height: 30, marginRight: 5, marginTop: 10}} source={staticImageUrlMap[patternImageKey]}></Image>
+            <Text>{patternName}</Text>
+          </View>
+          <View style={{flex: 2, margin: 2,flexDirection: 'row', backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{width: 30, height: 30, marginRight: 5, marginTop: 10, backgroundColor: backgroundColor}}></View>
+            <Text>{backgroundColor}</Text>
+          </View>
+          <View style={{flex: 2, margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
+            <Text>{typeof patternOpacity === 'number'? patternOpacity * 100 : 'Opacity'}%</Text>
           </View>
         </View>
-        <View style={{flex: 1, backgroundColor: 'green', alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={{backgroundColor: backgroundColor}}>{backgroundColor}</Text>
-        </View>
-        <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
-          <Text>{typeof patternOpacity === 'number'? patternOpacity * 100 : 'Opacity'}%</Text>
-        </View>
-      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 3,
-  },
+            container: {
+              flex: 1,
+              padding: 3,
+            },
 });
 
 export default Layer;

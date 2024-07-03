@@ -9,7 +9,9 @@ import StartProject from "./Pages/StartProject";
 import StartProjectOCMFinish from "./Pages/StartProjectOCMFinish";
 import StartProjectCustomFinish from "./Pages/StartProjectCustomFinish";
 import Welcome from "./Pages/Welcome";
-import EditProject from "./Pages/EditProject";
+import MyProject from "./Pages/MyProject";
+import SendProject from "./Pages/SendProject";
+import SavePrintPDF from "./Pages/SavePrintPDF";
 
 
 const App = () => {
@@ -24,7 +26,9 @@ const App = () => {
             <Route path="/start" element={<StartProject/>} />
             <Route path="/ocm-finish" element={<StartProjectOCMFinish />} />
             <Route path="/custom-finish" element={<StartProjectCustomFinish />} />
-            <Route path="/my-project" element={<EditProject />} />
+            <Route path="/my-project" element={<MyProject />} />
+            <Route path="/send" element={<SendProject />} />
+            <Route path="/save-print-pdf" element={<SavePrintPDF />} />
           </Routes>
         </View>
       </Router>
