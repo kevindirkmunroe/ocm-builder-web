@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View, TextInput, TouchableOpacity,TouchableHighlight,
   Text, StyleSheet } from 'react-native';
-import { CheckBox } from "react-native-web";
 import { useNavigate } from "react-router-dom";
+import Checkbox from '../Widgets/Checkbox';
 
 const SendProjectForm = (projectLayers) => {
 
@@ -14,12 +14,11 @@ const SendProjectForm = (projectLayers) => {
     const [projectName, setProjectName] = useState('');
     const [designerName, setDesignerName] = useState('');
     const [email, setEmail ] = useState('');
-    const [requestSamples, setRequestSamples] = useState('');
+    const [requestSamples, setRequestSamples] = useState(false);
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
-
       // Trigger form validation when name,
       // email, or password changes
       validateForm();
@@ -66,6 +65,7 @@ const SendProjectForm = (projectLayers) => {
       }
     };
 
+
     return (
       <View style={styles.container}>
         <TextInput
@@ -92,12 +92,11 @@ const SendProjectForm = (projectLayers) => {
           value={email}
           onChangeText={setEmail}
         />
-        <Text style={styles.label}>Request Samples?</Text>
-        <CheckBox
+        <Checkbox
           value={requestSamples}
-          onValueChange={setRequestSamples}
-          style={styles.checkbox}
-        />
+          label={'Request Samples?'}
+          setValue={setRequestSamples}
+          />
         <TouchableOpacity
           style={[styles.button, { opacity: isFormValid ? 1 : 0.5 }]}
           disabled={!isFormValid}
@@ -147,8 +146,14 @@ const styles = StyleSheet.create({
     },
     error: {
       color: 'red',
-      fontSize: 20,
+      fontSize: 16,
       marginBottom: 12,
+    },
+    checkbox: {
+      alignSelf: 'center',
+    },
+    label: {
+      margin: 8,
     },
   });
 

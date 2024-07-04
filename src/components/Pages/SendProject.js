@@ -21,10 +21,10 @@ function SendProject(){
 
   return (
     <View style={styles.belowContainer}>
+
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
         <Text style={styles.mainText}>Send Project to OCM</Text>
         <SendProjectForm projectLayers={projectLayers}/>
-        {/* Bottom Navigation */}
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
             style={styles.tinyBtn2}

@@ -30,6 +30,7 @@ function MyProject(){
   //
   // Create composite image with all layers in projectLayers
   //
+  // TODO fix and display this
   let currZIndex = 0;
   projectLayers.map((oneLayer) => {
       return (
@@ -56,8 +57,8 @@ function MyProject(){
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4 }}>
         <View style={{flexDirection: 'row'}}>
-          <Image style={{ width: 30, height: 30, marginTop: 15 }} source={require('../../assets/layer-group.png')} />
-          <Text style={{fontSize: 24, fontWeight: 'bold', marginBottom: 10, marginLeft: 5, padding: 10, fontFamily: 'Futura'}}>My Project</Text>
+          <Image style={{ width: 30, height: 30, marginTop: 7 }} source={require('../../assets/layer-group.png')} />
+          <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 10, marginLeft: 5, padding: 10}}>My Finish | All Layers</Text>
         </View>
         <View style={{width: 350, height: 200}}>
 

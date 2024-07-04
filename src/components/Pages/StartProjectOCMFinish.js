@@ -41,9 +41,8 @@ function StartProjectOCMFinish(){
   return(
     <View style={styles.belowContainer}>
       <View style={{flexDirection: 'row'}}>
-        <Image style={{ width: 30, height: 30, marginTop: 15 }} source={require('../../assets/layer-bottom.png')} />
-        <Text style={styles.mainText}>Background</Text>
-        <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>/ OCM Finish</Text>
+        <Image style={{ width: 30, height: 30, marginTop: 5 }} source={require('../../assets/layer-bottom.png')} />
+        <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish | Background | Classic OCM</Text>
       </View>
      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4, height: height * 0.6}}>
         {/* Table of images */}
