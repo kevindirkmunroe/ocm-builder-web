@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions, View, TextInput, TouchableOpacity,TouchableHighlight,
+import { View, TextInput, TouchableOpacity,
   Text, StyleSheet } from 'react-native';
 import { useNavigate } from "react-router-dom";
-import Checkbox from '../Widgets/Checkbox';
 
 const SendProjectForm = (projectLayers) => {
 
@@ -14,7 +13,7 @@ const SendProjectForm = (projectLayers) => {
     const [projectName, setProjectName] = useState('');
     const [designerName, setDesignerName] = useState('');
     const [email, setEmail ] = useState('');
-    const [requestSamples, setRequestSamples] = useState(false);
+    const [requestSamples, setRequestSamples] = useState('');
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 
@@ -35,6 +34,13 @@ const SendProjectForm = (projectLayers) => {
       if (!designerName) {
         errors.designerName = 'Designer Name is required.';
       }
+
+      if (!requestSamples) {
+        errors.email = 'RequestSamples is required (Y|N).';
+      } else if(!/[YN]/.test(requestSamples)){
+        errors.email = 'RequestSamples is required (Y|N).';
+      }
+
       // Validate email field
       if (!email) {
         errors.email = 'Email is required.';
@@ -92,11 +98,12 @@ const SendProjectForm = (projectLayers) => {
           value={email}
           onChangeText={setEmail}
         />
-        <Checkbox
+        <TextInput
+          style={styles.input}
+          placeholder="Request Samples? (Y|N)"
           value={requestSamples}
-          label={'Request Samples?'}
-          setValue={setRequestSamples}
-          />
+          onChangeText={setRequestSamples}
+        />
         <TouchableOpacity
           style={[styles.button, { opacity: isFormValid ? 1 : 0.5 }]}
           disabled={!isFormValid}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
 import SendProjectForm from "../Form/SendProjectForm";
 
@@ -23,7 +23,10 @@ function SendProject(){
     <View style={styles.belowContainer}>
 
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
-        <Text style={styles.mainText}>Send Project to OCM</Text>
+        <View style={{flexDirection: 'row'}}>
+          <Image style={{ width: 30, height: 30, marginTop: 7 }} source={require('../../assets/layer-group.png')} />
+          <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 10, marginLeft: 5, padding: 10}}>My Finish | Send To OCM</Text>
+        </View>
         <SendProjectForm projectLayers={projectLayers}/>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
