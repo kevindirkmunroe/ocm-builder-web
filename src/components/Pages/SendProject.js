@@ -23,9 +23,10 @@ function SendProject(){
     <View style={styles.belowContainer}>
 
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
-        <View style={{flexDirection: 'row'}}>
-          <Image style={{ width: 30, height: 30, marginTop: 7 }} source={require('../../assets/layer-group.png')} />
-          <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 10, marginLeft: 5, padding: 10}}>My Finish | Send To OCM</Text>
+        <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16, marginBottom: 16}}>
+          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish | </Text>
+          <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/mail-black-envelope-symbol_icon-icons.com_56519.png')} />
+          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Send To OCM</Text>
         </View>
         <SendProjectForm projectLayers={projectLayers}/>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>

@@ -45,12 +45,15 @@ function StartProjectCustomFinish(){
 
   return(
     <View style={styles.belowContainer}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4 }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.6 }}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Tab Label */}
           <View style={{flex: 1, width: width * 0.37, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish | </Text>
             <Image style={{ width: 30, height: 30 }} source={require('../../assets/layer-bottom.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish | Background | Custom</Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Background | </Text>
+            <Image style={{ width: 16, height: 16, marginTop: 8}} source={require('../../assets/admin-customizer.256x242.png')} />
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom</Text>
           </View>
 
           {/* Tabs */}

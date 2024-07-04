@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function SavePrintPDF(){
@@ -23,7 +23,11 @@ function SavePrintPDF(){
   return (
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
-        <Text style={styles.mainText}>Save/Print to PDF</Text>
+        <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16, marginBottom: 16}}>
+          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 16}}>My Finish | </Text>
+          <Image style={{ width: 30, height: 40, marginTop: 5, marginLeft: 5 }} source={require('../../assets/pdf_icon.png')} />
+          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 16}}> Save/Print To PDF</Text>
+        </View>
         <View style={{flex: 1, flexDirection: 'column', width: width * 0.6}}>
           <Text style={{fontStyle: 'Futura', fontSize: 20, padding: 10}}>
             Created using OCM Builder

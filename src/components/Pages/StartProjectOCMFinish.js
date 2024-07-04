@@ -40,9 +40,12 @@ function StartProjectOCMFinish(){
 
   return(
     <View style={styles.belowContainer}>
-      <View style={{flexDirection: 'row'}}>
-        <Image style={{ width: 30, height: 30, marginTop: 5 }} source={require('../../assets/layer-bottom.png')} />
-        <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish | Background | Classic OCM</Text>
+      <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16, marginBottom: 16}}>
+        <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish | </Text>
+        <Image style={{ width: 24, height: 24, marginTop: 5 }} source={require('../../assets/layer-bottom.png')} />
+        <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Background | </Text>
+        <Image style={{ width: 20, height: 20, marginTop: 8}} source={require('../../assets/map_library_icon_158312.png')} />
+        <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Classic OCM</Text>
       </View>
      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4, height: height * 0.6}}>
         {/* Table of images */}
