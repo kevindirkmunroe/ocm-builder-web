@@ -12,6 +12,7 @@ import Welcome from "./Pages/Welcome";
 import MyProject from "./Pages/MyProject";
 import SendProject from "./Pages/SendProject";
 import SavePrintPDF from "./Pages/SavePrintPDF";
+import AddALayer from "./Pages/AddALayer";
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/ocm-finish" element={<StartProjectOCMFinish />} />
             <Route path="/custom-finish" element={<StartProjectCustomFinish />} />
             <Route path="/my-project" element={<MyProject />} />
+            <Route path="/add-layer" element={<AddALayer />} />
             <Route path="/send" element={<SendProject />} />
             <Route path="/save-print-pdf" element={<SavePrintPDF />} />
           </Routes>

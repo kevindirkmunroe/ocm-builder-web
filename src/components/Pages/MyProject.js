@@ -24,6 +24,10 @@ function MyProject(){
     navigate('/start');
   }
 
+  let onAddALayer = () => {
+    navigate('/add-layer', { state : {projectLayers: projectLayers }});
+  }
+
   let onContinue = () => {
     navigate('/send', { state : {projectLayers: projectLayers }});
   }
@@ -101,6 +105,13 @@ function MyProject(){
         <View>
           <Text>Composite Snapshot</Text>
         </View>
+        <TouchableHighlight
+          disabled={projectLayers && projectLayers.length >= 4}
+          style={styles.btn}
+          underlayColor="#f0f4f7"
+          onPress={onAddALayer}>
+          <Text style={styles.btnClr}>+ Add A Layer</Text>
+        </TouchableHighlight>
 
         {/* Bottom Navigation */}
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
