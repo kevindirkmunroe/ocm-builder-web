@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState } from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableHighlight } from "react-native";
 import { getOCMFinishes, staticImageUrlMap } from "./../../utils/AssetManager";
 
-function Layer({level, patternName, patternImageKey, backgroundColor, patternOpacity}){
+function Layer({level, patternName, patternImageKey, backgroundColor, patternOpacity, onDeleteLayer} ){
 
   /*
      - level
@@ -14,7 +14,11 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
 
    */
   const [layerState, setLayerState] = useState({ patternName, patternImageKey, backgroundColor, patternOpacity });
-  const ocms = getOCMFinishes();
+
+  const onDelete = () => {
+    console.log(`Layer: delete ${JSON.stringify(level)}`);
+    onDeleteLayer(level);
+  }
 
   return (
     <View style={{flex: 1, flexDirection: 'row', flexGrow: 0.5, alignItems: 'center'}}>
@@ -38,6 +42,13 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
           </View>
           <View style={{flex: 2, margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
             <Text>{typeof patternOpacity === 'number'? patternOpacity * 100 : 'Opacity'}%</Text>
+          </View>
+          <View style={{flex: 2, margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
+            { level !== 'X' && <TouchableHighlight
+              onPress={onDelete}>
+              <Image style={{ width: 20, height: 20, marginTop: 5, marginLeft: 5 }} source={require('../../assets/trash-can-black-symbol_icon-icons.com_72914.png')} />
+            </TouchableHighlight>
+            }
           </View>
         </View>
     </View>

@@ -55,10 +55,10 @@ function AddALayer(){
 
   return(
     <View style={styles.belowContainer}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.6 }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.8 }}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Tab Label */}
-          <View style={{flex: 1, width: width * 0.37, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
+          <View style={{flex: 1, width: width * 0.5, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish | </Text>
             <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> All Layers | </Text>
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 45,
     padding: 10,
-    backgroundColor: '#209bfc',
+    backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'left',
     borderRadius: 5
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     width:  Dimensions.get('window').width * 0.8,
-    backgroundColor: '#209bfc',
+    backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'center',
     padding: 10,

@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   smallBtn: {
-    backgroundColor: '#209bfc',
+    backgroundColor: '#5DA75E',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btn: {
-    backgroundColor: '#209bfc',
+    backgroundColor: '#5DA75E',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,

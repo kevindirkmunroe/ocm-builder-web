@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     width: 300,
-    backgroundColor: '#209bfc',
+    backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'center',
     padding: 10,
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   btnClr: {
     fontSize: 20,
-    
+
     fontFamily: 'Futura',
     color: '#fff',
   },

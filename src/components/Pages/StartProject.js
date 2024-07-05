@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     width: '40%',
     padding: 20,
-    
+
   },
   btn: {
     width:  Dimensions.get('window').width * 0.8,
-    backgroundColor: '#209bfc',
+    backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'center',
     padding: 10,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   btnClr: {
     fontFamily: 'Futura',
     fontSize: 20,
-    
+
     color: '#fff',
   },
   belowContainer: {

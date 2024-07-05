@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     width: 300,
-    backgroundColor: '#209bfc',
+    backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'center',
     padding: 10,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     width: 180,
     height: 45,
     padding: 10,
-    backgroundColor: '#209bfc',
+    backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'left',
     borderRadius: 5

@@ -13,12 +13,26 @@ import Layer from "../../components/ProjectState/Layer";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 
 function MyProject(){
-  const navigate = useNavigate();
+  const MAX_LAYERS = 4;
   const {width, height} = Dimensions.get('window');
 
-  // Get Initial state, which should be background layer only.
+  // Get Initial state, which could be from Background or Edit or Send...
   const { state } = useLocation();
   const [projectLayers, setProjectLayers] = useState(state.projectLayers);
+  const [refresh, setRefresh] = useState(false);
+
+  const onDeleteLayer = (layerToDelete) => {
+    console.log(`MyProject: delete ${JSON.stringify(layerToDelete)}`);
+    projectLayers.splice(layerToDelete, 1);
+    console.log(`new projectLayers=${JSON.stringify(projectLayers)}`);
+    setProjectLayers(projectLayers);
+    setRefresh(!refresh);
+  }
+
+  //
+  // Navigations...
+  //
+  const navigate = useNavigate();
 
   let onStartOver = () => {
     navigate('/start');
@@ -29,8 +43,9 @@ function MyProject(){
   }
 
   let onContinue = () => {
-    navigate('/send', { state : {projectLayers: projectLayers }});
+    navigate('/send', { state: { projectLayers: projectLayers } });
   }
+
   //
   // Create composite image with all layers in projectLayers
   //
@@ -55,7 +70,7 @@ function MyProject(){
     });
 
   //
-  // Main image
+  // Main Project layout: Layers + Composite image
   //
   return(
     <View style={styles.belowContainer}>
@@ -65,7 +80,7 @@ function MyProject(){
           <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
           <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> All Layers</Text>
         </View>
-        <View style={{width: 350, height: 200}}>
+        <View style={{width: 500, height: 200}}>
 
           {/* Layers Header */}
           <View
@@ -82,31 +97,38 @@ function MyProject(){
             <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={{margin: 10, fontWeight: 'bold'}}>Opacity</Text>
             </View>
+            <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{margin: 10, fontWeight: 'bold'}}></Text>
+            </View>
           </View>
 
-          {/* All Layers */}
+          {/* Display All Layers */}
           <FlatList
             data={projectLayers}
             scrollEnabled={false}
-            initialNumToRender={4}
+            initialNumToRender={MAX_LAYERS}
+            extraData={state.refresh}
             renderItem={({item}) => {
               return (
-                  <Layer
-                    level={item.level}
-                    patternName={item.patternName}
-                    patternImageKey={item.patternImageKey}
-                    backgroundColor={item.backgroundColor}
-                    patternOpacity={item.patternOpacity} />
+                <Layer
+                  level={item.level}
+                  patternName={item.patternName}
+                  patternImageKey={item.patternImageKey}
+                  backgroundColor={item.backgroundColor}
+                  patternOpacity={item.patternOpacity}
+                  onDeleteLayer={onDeleteLayer}
+                />
               )
             }}
-            keyExtractor={item => `basicListEntry-${item.patternImageKey}`}/>
+            keyExtractor={item => `${item.patternImageKey}-${item.level}`}
+          />
         </View>
-        {/* Preview Composite image */}
+        {/*  Composite image preview */}
         <View>
           <Text>Composite Snapshot</Text>
         </View>
         <TouchableHighlight
-          disabled={projectLayers && projectLayers.length >= 4}
+          disabled={projectLayers && projectLayers.length >= MAX_LAYERS}
           style={styles.btn}
           underlayColor="#f0f4f7"
           onPress={onAddALayer}>
@@ -148,7 +170,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     width:  Dimensions.get('window').width * 0.8,
-    backgroundColor: '#209bfc',
+    backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'center',
     padding: 10,
@@ -161,7 +183,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 45,
     padding: 10,
-    backgroundColor: '#209bfc',
+    backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'left',
     borderRadius: 5
