@@ -23,7 +23,16 @@ function MyProject(){
 
   const onDeleteLayer = (layerToDelete) => {
     console.log(`MyProject: delete ${JSON.stringify(layerToDelete)}`);
+    // Chop out layer...
     projectLayers.splice(layerToDelete, 1);
+    // Update layer numbers...
+    let currLayer = 1;
+    for(const layer of projectLayers){
+      if(layer.level !== 'BG'){
+        layer.level = currLayer++;
+      }
+    }
+
     console.log(`new projectLayers=${JSON.stringify(projectLayers)}`);
     setProjectLayers(projectLayers);
     setRefresh(!refresh);
@@ -76,9 +85,10 @@ function MyProject(){
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4 }}>
         <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16, marginBottom: 16}}>
-          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish | </Text>
+          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
+          <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
           <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> All Layers</Text>
+          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, color: 'green', marginTop: 7}}> All Layers</Text>
         </View>
         <View style={{width: 500, height: 200}}>
 
@@ -96,6 +106,9 @@ function MyProject(){
             </View>
             <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={{margin: 10, fontWeight: 'bold'}}>Opacity</Text>
+            </View>
+            <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{margin: 10, fontWeight: 'bold'}}>Metallic</Text>
             </View>
             <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={{margin: 10, fontWeight: 'bold'}}></Text>
@@ -116,6 +129,7 @@ function MyProject(){
                   patternImageKey={item.patternImageKey}
                   backgroundColor={item.backgroundColor}
                   patternOpacity={item.patternOpacity}
+                  isColorMetallic={item.isColorMetallic}
                   onDeleteLayer={onDeleteLayer}
                 />
               )

@@ -16,6 +16,7 @@ function AddALayer(){
   const {width, height} = Dimensions.get('window');
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [isColorMetallic, setIsColorMetallic] = useState(false);
 
   // Project Layers is composite layers constructed so far...
   const { state } = useLocation();
@@ -34,11 +35,13 @@ function AddALayer(){
         patternName: selectedItem.name,
         patternImageKey: selectedItem.key,
         backgroundColor: selectedColor,
-        patternOpacity: 1 };
+        patternOpacity: 1,
+        isColorMetallic: isColorMetallic};
     // add new layer...
     setProjectLayers(projectLayers.push(newLayer));
     console.log(`AddALayer: new layer: ${JSON.stringify(newLayer)}`);
-    console.log(`AddALayer: all layers: ${JSON.stringify(projectLayers)}`);
+    console.log(`AddALayer, isColorMetallic=${isColorMetallic}`);
+    // console.log(`AddALayer: all layers: ${JSON.stringify(projectLayers)}`);
     navigate('/my-project',
       { state:
           { projectLayers}
@@ -59,11 +62,13 @@ function AddALayer(){
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Tab Label */}
           <View style={{flex: 1, width: width * 0.5, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish | </Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
+            <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> All Layers | </Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> All Layers</Text>
+            <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 30, height: 30 }} source={require('../../assets/plus_layer_icon_215065.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Add A Layer </Text>
+            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Add A Layer </Text>
           </View>
 
           {/* Tabs */}
@@ -83,7 +88,12 @@ function AddALayer(){
 
         {/* Tab body based on selection */}
         {selectedView === ENUM_PATTERN && <PrintRollerSelector title={''} onSelectPrintRoller={setSelectedItem} initSelectedItem={selectedItem} />}
-        {selectedView === ENUM_COLOR && <CustomColorSelector title={''} onSelectColor={setSelectedColor} initSelectedColor={selectedColor} /> }
+        {selectedView === ENUM_COLOR && <CustomColorSelector title={''}
+                                                             onSelectColor={setSelectedColor}
+                                                             initSelectedColor={selectedColor}
+                                                             onSelectMetallic={setIsColorMetallic}
+                                                             initMetallic={isColorMetallic}
+        /> }
         <View style={{width: 80, height: 20, margin: 2, alignItems: 'center', backgroundColor: selectedColor}}>
           <Text>{selectedColor}</Text>
         </View>

@@ -16,6 +16,7 @@ function StartProjectCustomFinish(){
   const {width, height} = Dimensions.get('window');
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [isColorMetallic, setIsColorMetallic] = useState(false);
 
   let onStartOver = () => {
     navigate('/start');
@@ -25,11 +26,12 @@ function StartProjectCustomFinish(){
     navigate('/my-project',
       { state:
         { projectLayers:
-            [{level: 'X',
+            [{level: 'BG',
               patternName: selectedItem.name,
               patternImageKey: selectedItem.key,
               backgroundColor: selectedColor,
-              patternOpacity: 0.8}
+              patternOpacity: 0.8,
+              isColorMetallic}
             ]
         }
     });
@@ -49,11 +51,13 @@ function StartProjectCustomFinish(){
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Tab Label */}
           <View style={{flex: 1, width: width * 0.37, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish | </Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
+            <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 30, height: 30 }} source={require('../../assets/layer-bottom.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Background | </Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Background</Text>
+            <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 16, height: 16, marginTop: 8}} source={require('../../assets/admin-customizer.256x242.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom</Text>
+            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom</Text>
           </View>
 
           {/* Tabs */}
@@ -73,7 +77,12 @@ function StartProjectCustomFinish(){
 
         {/* Tab body based on selection */}
         {selectedView === ENUM_PATTERN && <PrintRollerSelector title={''} onSelectPrintRoller={setSelectedItem} initSelectedItem={selectedItem} />}
-        {selectedView === ENUM_COLOR && <CustomColorSelector title={''} onSelectColor={setSelectedColor} initSelectedColor={selectedColor} /> }
+        {selectedView === ENUM_COLOR && <CustomColorSelector
+          title={''}
+          onSelectColor={setSelectedColor}
+          initSelectedColor={selectedColor}
+          onSelectMetallic={setIsColorMetallic}
+          initMetallic={isColorMetallic} /> }
         <View style={{width: 80, height: 20, margin: 2, alignItems: 'center', backgroundColor: selectedColor}}>
           <Text>{selectedColor}</Text>
         </View>

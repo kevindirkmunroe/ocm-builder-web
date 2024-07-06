@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { ActivityIndicator, Dimensions, StyleSheet, Text, View } from "react-native";
 import ColorPicker from 'react-native-wheel-color-picker'
+import ToggleButton from "react-native-toggle-button";
 
-function CustomColorSelector({title, onSelectColor, initSelectedColor}){
+
+function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectMetallic, initMetallic}){
 
   const {width, height} = Dimensions.get('window');
 
   const [colorState, setColorState] =
     useState({currentColor: initSelectedColor, swatchesOnly: false, swatchesLast: true, swatchesEnabled: true, disc: false})
-
   const onColorChange = (newColor) => {
     onSelectColor(newColor);
+  }
+
+  const onMetallicChange = (newMetallicSetting) => {
+    onSelectMetallic(newMetallicSetting);
   }
 
   const onColorChangeComplete = (newColor) => {
@@ -18,8 +23,8 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor}){
   }
 
   return(
-    <View style={styles.belowContainer}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', padding: 10, width: width * 0.6, backgroundColor: '#ADAD86', borderTopLeftRadius: 10, borderTopRightRadius: 10}}>
+    <View style={styles.colorContainer}>
+      <View style={styles.colorContainerItem}>
         <ColorPicker
           ref={r => { this.picker = r }}
           color={colorState.currentColor}
@@ -27,7 +32,7 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor}){
           onColorChange={onColorChange}
           onColorChangeComplete={onColorChangeComplete}
           thumbSize={40}
-          sliderSize={40}
+          sliderSize={30}
           noSnap={true}
           row={false}
           swatchesLast={colorState.swatchesLast}
@@ -37,6 +42,18 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor}){
           sliderLodingIndicator={<ActivityIndicator size={20} />}
           useNativeDriver={false}
           useNativeLayout={false}
+        />
+      </View>
+      <View style={styles.colorContainerItem}>
+        <Text style={styles.item}>Metallic</Text>
+        <ToggleButton
+          initial={initMetallic}
+          primaryText="On"
+          secondaryText="Off"
+          onPress={(isToggled: boolean) => {
+            onMetallicChange(isToggled);
+            console.log(isToggled);
+          }}
         />
       </View>
     </View>
@@ -51,6 +68,16 @@ const styles = StyleSheet.create({
     width: '80%',
     padding: 20,
     textAlign: 'center'
+  },
+  colorContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start' // if you want to fill rows left to right
+  },
+  colorContainerItem: {
+    width: '50%', // is 50% of container width
+    alignItems: 'flex-end',
   },
   smallBtn: {
     backgroundColor: '#5DA75E',

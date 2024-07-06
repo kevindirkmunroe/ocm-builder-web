@@ -17,6 +17,7 @@ const babelLoaderConfiguration = {
     path.resolve(appDirectory, 'index.web.js'),
     path.resolve(appDirectory, 'src'),
     path.resolve(appDirectory, 'node_modules/react-native-wheel-color-picker'),
+    path.resolve(appDirectory, 'node_modules/react-native-toggle-button'),
   ],
   use: {
     loader: 'babel-loader',

@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   ImageBackground, FlatList, StyleSheet,
 } from "react-native";
+import { Slider } from '@react-native-assets/slider'
+
 import { getOCMPrintRollers, staticImageUrlMap } from "../../utils/AssetManager";
 
 function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem}){
