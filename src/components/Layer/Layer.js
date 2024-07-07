@@ -29,24 +29,19 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
             flexDirection: 'row',
           },
         ]}>
-          <View style={{flex: 1, margin: 2, backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10}}>{level}</Text>
+          <View style={{flex: 2, margin: 2, backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10}}>{level}</Text>
           </View>
-          <View style={{flex: 2, margin: 2,flexDirection: 'row' , alignItems: 'center', justifyContent: 'center', backgroundColor: '#f1f1f1'}}>
+          <View style={{flex: 4, margin: 2,flexDirection: 'row' , alignItems: 'center', justifyContent: 'center', backgroundColor: '#f1f1f1'}}>
             <Image style={{width: 30, height: 30, marginRight: 5, marginTop: 10}} source={staticImageUrlMap[patternImageKey]}></Image>
             <Text>{patternName}</Text>
+            <Text> / {typeof patternOpacity === 'number'? patternOpacity : ''}%</Text>
           </View>
-          <View style={{flex: 2, margin: 2,flexDirection: 'row', backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
+          <View style={{flex: 4, margin: 2,flexDirection: 'row', backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
             <View style={{width: 30, height: 30, marginRight: 5, marginTop: 10, backgroundColor: backgroundColor}}></View>
-            <Text>{backgroundColor}</Text>
+            <Text>{backgroundColor} {JSON.stringify(isColorMetallic) === 'true' ? 'Metallic': ''}</Text>
           </View>
-          <View style={{flex: 2, margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
-            <Text>{typeof patternOpacity === 'number'? patternOpacity : ''}%</Text>
-          </View>
-        <View style={{flex: 2, margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
-          <Text>{JSON.stringify(isColorMetallic)}</Text>
-        </View>
-          <View style={{flex: 2, margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
-            { level !== 'BG' && <TouchableHighlight
+          <View style={{flex: 1, margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
+            { level !== 'Background' && <TouchableHighlight
               onPress={onDelete}>
               <Image style={{ width: 20, height: 20, marginTop: 5, marginLeft: 5 }} source={require('../../assets/trash-can-black-symbol_icon-icons.com_72914.png')} />
             </TouchableHighlight>

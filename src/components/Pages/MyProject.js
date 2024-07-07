@@ -27,7 +27,7 @@ function MyProject(){
     // Update layer numbers...
     let currLayer = 1;
     for(const layer of projectLayers){
-      if(layer.level !== 'BG'){
+      if(layer.level !== 'Background'){
         layer.level = currLayer++;
       }
     }
@@ -82,6 +82,8 @@ function MyProject(){
   return(
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4 }}>
+
+        {/* Breadcrumb to feature */}
         <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16, marginBottom: 16}}>
           <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
           <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
@@ -97,16 +99,10 @@ function MyProject(){
               { flexDirection: 'row',
               },
             ]}>
-            <View style={{flex: 1, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 2, fontWeight: 'bold'}}>Level</Text></View>
-            <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10, fontWeight: 'bold'}}>Pattern</Text></View>
-            <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 2, fontWeight: 'bold'}}>Level</Text></View>
+            <View style={{flex: 4, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10, fontWeight: 'bold'}}>Pattern / Opacity</Text></View>
+            <View style={{flex: 4, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={{margin: 10, fontWeight: 'bold'}}>Color</Text>
-            </View>
-            <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{margin: 10, fontWeight: 'bold'}}>Opacity</Text>
-            </View>
-            <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{margin: 10, fontWeight: 'bold'}}>Metallic</Text>
             </View>
             <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={{margin: 10, fontWeight: 'bold'}}></Text>

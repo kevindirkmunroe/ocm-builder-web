@@ -27,7 +27,7 @@ function StartMyProjectCustomFinish(){
     navigate('/my-project',
       { state:
         { projectLayers:
-            [{level: 'BG',
+            [{level: 'Background',
               patternName: selectedItem.name,
               patternImageKey: selectedItem.key,
               backgroundColor: selectedColor,
