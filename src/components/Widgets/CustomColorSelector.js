@@ -52,7 +52,6 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
           secondaryText="Off"
           onPress={(isToggled: boolean) => {
             onMetallicChange(isToggled);
-            console.log(isToggled);
           }}
         />
       </View>

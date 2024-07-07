@@ -6,7 +6,7 @@ import PrintRollerSelector from "../Widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../Widgets/CustomColorSelector";
 
-function StartProjectCustomFinish(){
+function StartMyProjectCustomFinish(){
 
   const ENUM_PATTERN = 'PATTERN';
   const ENUM_COLOR = 'COLOR';
@@ -17,6 +17,7 @@ function StartProjectCustomFinish(){
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [isColorMetallic, setIsColorMetallic] = useState(false);
+  const [opacity, setOpacity] = useState(100);
 
   let onStartOver = () => {
     navigate('/start');
@@ -30,7 +31,7 @@ function StartProjectCustomFinish(){
               patternName: selectedItem.name,
               patternImageKey: selectedItem.key,
               backgroundColor: selectedColor,
-              patternOpacity: 0.8,
+              patternOpacity: opacity,
               isColorMetallic}
             ]
         }
@@ -49,7 +50,8 @@ function StartProjectCustomFinish(){
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.6 }}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
-          {/* Tab Label */}
+
+          {/* Breadcrumbs to current state */}
           <View style={{flex: 1, width: width * 0.37, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
@@ -60,7 +62,7 @@ function StartProjectCustomFinish(){
             <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom</Text>
           </View>
 
-          {/* Tabs */}
+          {/* Pattern and Color Tabs */}
          <TouchableHighlight
             style={selectedView === ENUM_PATTERN ? styles.tinyBtnSelected: styles.tinyBtn}
             underlayColor="#676752"
@@ -75,8 +77,13 @@ function StartProjectCustomFinish(){
           </TouchableHighlight>
         </View>
 
-        {/* Tab body based on selection */}
-        {selectedView === ENUM_PATTERN && <PrintRollerSelector title={''} onSelectPrintRoller={setSelectedItem} initSelectedItem={selectedItem} />}
+        {/* Selector to Tab body based on selectedView */}
+        {selectedView === ENUM_PATTERN && <PrintRollerSelector title={''}
+                                                               onSelectPrintRoller={setSelectedItem}
+                                                               initSelectedItem={selectedItem}
+                                                               onSelectOpacity={setOpacity}
+                                                               initSelectedOpacity={opacity}/>}
+
         {selectedView === ENUM_COLOR && <CustomColorSelector
           title={''}
           onSelectColor={setSelectedColor}
@@ -111,6 +118,8 @@ function StartProjectCustomFinish(){
                  source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
           </Image>
         </View>
+
+        {/* Bottom Navigation */}
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
             style={styles.tinyBtn2}
@@ -203,4 +212,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-export default StartProjectCustomFinish;
+export default StartMyProjectCustomFinish;

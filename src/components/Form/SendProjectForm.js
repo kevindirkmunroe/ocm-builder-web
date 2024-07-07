@@ -57,8 +57,6 @@ const SendProjectForm = (projectLayers) => {
       if (isFormValid) {
 
         // Form is valid, perform the submission logic
-        console.log(`Form OK: companyName: ${companyName} projectName: ${projectName} designerName: ${designerName} email: ${email} requestSamples: ${requestSamples}`);
-        console.log(`Content: ${JSON.stringify(projectLayers)}`);
         // TODO: email form + project content...
 
         navigate('/save-print-pdf', {state :

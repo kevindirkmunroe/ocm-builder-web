@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { getOCMFinishes, staticImageUrlMap } from "../../utils/AssetManager";
 import { SectionList } from "../list/SectionList";
 
-function StartProjectOCMFinish(){
+function StartMyProjectClassicOCMFinish(){
   const navigate = useNavigate();
   const {width, height} = Dimensions.get('window');
 
@@ -32,7 +32,7 @@ function StartProjectOCMFinish(){
                 patternName: selectedItem.name,
                 patternImageKey: selectedItem.key,
                 backgroundColor: null,
-                patternOpacity: 1}
+                patternOpacity: 100}
               ]
           }
       });
@@ -85,7 +85,6 @@ function StartProjectOCMFinish(){
           </View>
 
           {/* Navigation */}
-
           <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
             <TouchableHighlight
               style={styles.tinyBtn2}
@@ -181,4 +180,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StartProjectOCMFinish;
+export default StartMyProjectClassicOCMFinish;

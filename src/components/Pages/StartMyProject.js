@@ -4,7 +4,7 @@ import {useAuth} from './authContext';
 import { useNavigate } from 'react-router-dom';
 
 
-function StartProject() {
+function StartMyProject() {
   const navigate = useNavigate();
   let auth = useAuth();
 
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StartProject;
+export default StartMyProject;

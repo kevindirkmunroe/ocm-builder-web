@@ -10,8 +10,6 @@ function SavePrintPDF(){
   const { state } = useLocation();
   const { form, projectLayers } = state;
 
-  console.log(`savePrintPdf, form: ${JSON.stringify(form)}, layers=${JSON.stringify(projectLayers)}`);
-
   let onStartOver = () => {
     navigate('/');
   }

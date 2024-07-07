@@ -3,7 +3,7 @@ import { Dimensions, Image, StyleSheet, Text, TouchableHighlight, View } from "r
 import { useLocation, useNavigate } from "react-router-dom";
 import SendProjectForm from "../Form/SendProjectForm";
 
-function SendProject(){
+function SendMyProject(){
   const {width} = Dimensions.get('window');
   const navigate = useNavigate();
 
@@ -90,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SendProject;
+export default SendMyProject;

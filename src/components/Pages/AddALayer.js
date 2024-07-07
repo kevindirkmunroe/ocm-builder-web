@@ -17,6 +17,7 @@ function AddALayer(){
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [isColorMetallic, setIsColorMetallic] = useState(false);
+  const [opacity, setOpacity] = useState(100);
 
   // Project Layers is composite layers constructed so far...
   const { state } = useLocation();
@@ -35,13 +36,10 @@ function AddALayer(){
         patternName: selectedItem.name,
         patternImageKey: selectedItem.key,
         backgroundColor: selectedColor,
-        patternOpacity: 1,
+        patternOpacity: opacity,
         isColorMetallic: isColorMetallic};
     // add new layer...
     setProjectLayers(projectLayers.push(newLayer));
-    console.log(`AddALayer: new layer: ${JSON.stringify(newLayer)}`);
-    console.log(`AddALayer, isColorMetallic=${isColorMetallic}`);
-    // console.log(`AddALayer: all layers: ${JSON.stringify(projectLayers)}`);
     navigate('/my-project',
       { state:
           { projectLayers}
@@ -87,7 +85,11 @@ function AddALayer(){
         </View>
 
         {/* Tab body based on selection */}
-        {selectedView === ENUM_PATTERN && <PrintRollerSelector title={''} onSelectPrintRoller={setSelectedItem} initSelectedItem={selectedItem} />}
+        {selectedView === ENUM_PATTERN && <PrintRollerSelector title={''}
+                                                               onSelectPrintRoller={setSelectedItem}
+                                                               initSelectedItem={selectedItem}
+                                                               onSelectOpacity={setOpacity}
+                                                               initSelectedOpacity={opacity}/>}
         {selectedView === ENUM_COLOR && <CustomColorSelector title={''}
                                                              onSelectColor={setSelectedColor}
                                                              initSelectedColor={selectedColor}

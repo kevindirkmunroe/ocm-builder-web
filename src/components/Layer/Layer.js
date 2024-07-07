@@ -16,11 +16,8 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
   const [layerState, setLayerState] = useState({ patternName, patternImageKey, backgroundColor, patternOpacity });
 
   const onDelete = () => {
-    console.log(`Layer: delete ${JSON.stringify(level)}`);
     onDeleteLayer(level);
   }
-
-  console.log(`Layer ${level}, isColorMetallic=${JSON.stringify(isColorMetallic)}`);
 
   return (
     <View style={{flex: 1, flexDirection: 'row', flexGrow: 0.5, alignItems: 'center'}}>
@@ -43,7 +40,7 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
             <Text>{backgroundColor}</Text>
           </View>
           <View style={{flex: 2, margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
-            <Text>{typeof patternOpacity === 'number'? patternOpacity * 100 : 'Opacity'}%</Text>
+            <Text>{typeof patternOpacity === 'number'? patternOpacity : ''}%</Text>
           </View>
         <View style={{flex: 2, margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
           <Text>{JSON.stringify(isColorMetallic)}</Text>

@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
-import Layer from "../../components/ProjectState/Layer";
+import Layer from "../../components/Layer/Layer";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 
 function MyProject(){
@@ -22,7 +22,6 @@ function MyProject(){
   const [refresh, setRefresh] = useState(false);
 
   const onDeleteLayer = (layerToDelete) => {
-    console.log(`MyProject: delete ${JSON.stringify(layerToDelete)}`);
     // Chop out layer...
     projectLayers.splice(layerToDelete, 1);
     // Update layer numbers...
@@ -33,7 +32,6 @@ function MyProject(){
       }
     }
 
-    console.log(`new projectLayers=${JSON.stringify(projectLayers)}`);
     setProjectLayers(projectLayers);
     setRefresh(!refresh);
   }
