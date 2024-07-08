@@ -3,7 +3,7 @@ import { useState } from "react";
 import { StyleSheet, View, Image, Text, TouchableHighlight } from "react-native";
 import { getOCMFinishes, staticImageUrlMap } from "./../../utils/AssetManager";
 
-function Layer({level, patternName, patternImageKey, backgroundColor, patternOpacity, isColorMetallic, onDeleteLayer} ){
+function Layer({level, patternName, patternImageKey, backgroundColor, patternOpacity, isColorMetallic, onDeleteLayer, onEditLayer} ){
 
   /*
      - level
@@ -13,18 +13,25 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
      - patternOpacity
      - isColorMetallic
    */
-  const [layerState, setLayerState] = useState({ patternName, patternImageKey, backgroundColor, patternOpacity });
+  const [layerState, setLayerState] =
+    useState({ patternName,
+      patternImageKey,
+      backgroundColor,
+      patternOpacity,
+      isColorMetallic });
 
   const onDelete = () => {
     onDeleteLayer(level);
   }
 
   const onEditPattern = () => {
-    console.log(`Layer: edit PATTERN level: ${level} pattern: ${patternName} opacity: ${patternOpacity}`);
+    //console.log(`Layer: edit PATTERN level: ${level} pattern: ${patternName} opacity: ${patternOpacity}`);
+    onEditLayer(level, "pattern");
   }
 
   const onEditColor = () => {
-    console.log(`Layer: edit COLOR level: ${level} color: ${backgroundColor} metallic: ${isColorMetallic}`);
+    //console.log(`Layer: edit COLOR level: ${level} color: ${backgroundColor} metallic: ${isColorMetallic}`);
+    onEditLayer(level, "color");
   }
 
   return (
@@ -41,6 +48,7 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
           </View>
           <View style={{flex: 4, margin: 2,flexDirection: 'row' , alignItems: 'center', justifyContent: 'center', backgroundColor: '#f1f1f1'}}>
             <TouchableHighlight
+               disabled={level === 'Background'}
                onPress={onEditPattern}>
               <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', marginTop: 7}}>
                 <Image style={{width: 30, height: 30, marginRight: 5, marginTop: 10}} source={staticImageUrlMap[patternImageKey]}></Image>

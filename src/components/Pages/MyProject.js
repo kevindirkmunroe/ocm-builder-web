@@ -54,6 +54,33 @@ function MyProject(){
   }
 
   //
+  // Edit a layer
+  //
+  const editColor = (layer) => {
+    console.log(`MyProject: edit COLOR: ${JSON.stringify(layer)}`);
+    navigate('/edit-color', { state: { projectLayers: projectLayers, layerToEditLevel: layer.level } });
+  }
+
+  const editPattern = (layer) => {
+    console.log(`MyProject: edit PATTERN: ${JSON.stringify(layer)}`);
+    navigate('/edit-pattern', { state: { projectLayers: projectLayers, layerToEditLevel: layer.level } });
+  }
+
+  const editLayer = (layerId, editType ) => {
+    console.log(`MyProject: editLayer layerId ${layerId} editType ${editType}`)
+    let layerIndex = 0;
+    if(layerId !== 'Background'){
+      layerIndex = layerId
+    }
+    const layer = projectLayers[layerIndex];
+    if(editType === "color"){
+      editColor(layer);
+    }else if(editType === "pattern"){
+      editPattern(layer);
+    }
+  }
+
+  //
   // Create composite image with all layers in projectLayers
   //
   // TODO fix and display this
@@ -125,6 +152,7 @@ function MyProject(){
                   patternOpacity={item.patternOpacity}
                   isColorMetallic={item.isColorMetallic}
                   onDeleteLayer={onDeleteLayer}
+                  onEditLayer={editLayer}
                 />
               )
             }}

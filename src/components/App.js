@@ -14,6 +14,8 @@ import SendMyProject from "./Pages/SendMyProject";
 import SavePrintPDF from "./Pages/SavePrintPDF";
 import AddALayer from "./Pages/AddALayer";
 import ErrorBoundary from "./ErrorBoundary";
+import EditPattern from "./Pages/EditPattern";
+import EditColor from "./Pages/EditColor";
 
 
 const App = () => {
@@ -31,6 +33,8 @@ const App = () => {
               <Route path="/custom-finish" element={<StartMyProjectCustomFinish />} />
               <Route path="/my-project" element={<MyProject />} />
               <Route path="/add-layer" element={<AddALayer />} />
+              <Route path="/edit-pattern" element={<EditPattern />} />
+              <Route path="/edit-color" element={<EditColor />} />
               <Route path="/send" element={<SendMyProject />} />
               <Route path="/save-print-pdf" element={<SavePrintPDF />} />
 
