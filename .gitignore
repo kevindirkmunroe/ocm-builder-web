@@ -59,8 +59,4 @@ buck-out/
 /ios/Pods/
 dist/bundle.web.js
 bundle.web.js
-dist/bundle.web.js
-package-lock.json
-dist/bundle.web.js
-dist/bundle.web.js
 package-lock.json
