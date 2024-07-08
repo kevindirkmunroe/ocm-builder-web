@@ -43,7 +43,8 @@
     "react-router": "^6.24.0",
     "react-router-dom": "^6.24.0",
     "react-router-native": "^6.24.0",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "react-to-pdf": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

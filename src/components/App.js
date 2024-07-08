@@ -11,7 +11,7 @@ import StartMyProjectCustomFinish from "./Pages/StartMyProjectCustomFinish";
 import Welcome from "./Pages/Welcome";
 import MyProject from "./Pages/MyProject";
 import SendMyProject from "./Pages/SendMyProject";
-import SavePrintPDF from "./Pages/SavePrintPDF";
+import SaveAsPDF from "./Pages/SaveAsPDF";
 import AddALayer from "./Pages/AddALayer";
 import ErrorBoundary from "./ErrorBoundary";
 import EditPattern from "./Pages/EditPattern";
@@ -36,7 +36,7 @@ const App = () => {
               <Route path="/edit-pattern" element={<EditPattern />} />
               <Route path="/edit-color" element={<EditColor />} />
               <Route path="/send" element={<SendMyProject />} />
-              <Route path="/save-print-pdf" element={<SavePrintPDF />} />
+              <Route path="/save-print-pdf" element={<SaveAsPDF />} />
 
               {/* default redirect to home page */}
               <Route path="*" element={<Navigate to="/" />} />

@@ -1,8 +1,10 @@
-import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import React, { useState } from "react";
+import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
+import generatePDF, { Options } from "react-to-pdf";
 
-function SavePrintPDF(){
+
+function SaveAsPDF(){
   const {width} = Dimensions.get('window');
   const navigate = useNavigate();
 
@@ -14,9 +16,21 @@ function SavePrintPDF(){
     navigate('/');
   }
 
-  let onSavePrintPDF = () => {
-    console.log(`TODO: Save hook`);
+  const [fileName, setFileName] = useState('');
+
+
+  const getTargetElement = () => document.getElementById("pdfContainer");
+
+  let onSaveAsPDF = async () => {
+    const options: Options = {
+      filename: fileName,
+      page: {
+        margin: 20
+      }
+    };
+    await generatePDF(getTargetElement, options);
   }
+
 
   return (
     <View style={styles.belowContainer}>
@@ -25,7 +39,7 @@ function SavePrintPDF(){
           <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 16}}>My Finish</Text>
           <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
           <Image style={{ width: 30, height: 40, marginTop: 5, marginLeft: 5 }} source={require('../../assets/pdf_icon.png')} />
-          <Text style={{fontSize: 16, fontWeight: 'bold', color: 'green', marginLeft: 5, marginTop: 16}}> Save/Print To PDF</Text>
+          <Text style={{fontSize: 16, fontWeight: 'bold', color: 'green', marginLeft: 5, marginTop: 16}}> Save As PDF</Text>
         </View>
         <View style={{flex: 1, flexDirection: 'column', width: width * 0.6}}>
           <Text style={{fontStyle: 'Futura', fontSize: 20, padding: 10}}>
@@ -38,13 +52,25 @@ function SavePrintPDF(){
             Colors may appear differently on screens or print outs.  For design development purposes only.  Production may vary.  This is not a color standard.
           </Text>
         </View>
+
+        {/* File name form */}
+        <View style={{flex:1, flexDirection: 'row'}}>
+          <Text style={{fontSize: 18 , marginTop: 5, padding: 10, fontFamily: 'Futura'}}>File Name</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="File Name"
+            value={fileName}
+            onChangeText={setFileName}
+          />
+        </View>
+
         {/* Bottom Navigation */}
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
             style={styles.tinyBtn2}
             underlayColor="#f0f4f7"
-            onPress={onSavePrintPDF}>
-            <Text style={styles.btnClr}>Save/Print As...</Text>
+            onPress={onSaveAsPDF}>
+            <Text style={styles.btnClr}>Save As PDF</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.tinyBtn2}
@@ -65,6 +91,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Futura',
     width: '40%',
     padding: 20,
+  },
+  input: {
+    height: 60,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    fontSize: 16,
   },
   btn: {
     width: 300,
@@ -99,4 +134,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SavePrintPDF;
+export default SaveAsPDF;
