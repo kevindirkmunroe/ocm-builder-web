@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from "react";
 import { StyleSheet, View, Image, Text, TouchableHighlight } from "react-native";
-import { getOCMFinishes, staticImageUrlMap } from "./../../utils/AssetManager";
+import { staticImageUrlMap } from "./../../utils/AssetManager";
 
 function Layer({level, patternName, patternImageKey, backgroundColor, patternOpacity, isColorMetallic, onDeleteLayer, onEditLayer} ){
 
@@ -77,6 +77,10 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
         </View>
     </View>
   )
+}
+
+export function isBackgroundLayer(){
+  return level === 'Background';
 }
 
 const styles = StyleSheet.create({

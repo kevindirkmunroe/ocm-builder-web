@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../Widgets/CustomColorSelector";
+import layer from "../Layer/Layer";
 
 function EditColor(){
 
@@ -14,7 +15,7 @@ function EditColor(){
   const { state } = useLocation();
   const layerToEditLevel = state.layerToEditLevel;
   const projectLayers = state.projectLayers;
-  const layerToEdit = projectLayers[layerToEditLevel];
+  const layerToEdit = projectLayers[layerToEditLevel === 'Background' ? 0 : layerToEditLevel];
 
   // Update backgroundColor, metallic without changing layer, until OK.
   const [color, setColor] = useState(layerToEdit.backgroundColor);
