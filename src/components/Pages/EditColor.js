@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../Widgets/CustomColorSelector";
-import layer from "../Layer/Layer";
 
 function EditColor(){
 

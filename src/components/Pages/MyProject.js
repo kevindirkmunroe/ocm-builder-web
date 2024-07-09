@@ -11,6 +11,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import Layer from "../../components/Layer/Layer";
 import { staticImageUrlMap } from "../../utils/AssetManager";
+import CompositeLayerViewStack from "../Layer/CompositeLayerViewStack";
 
 function MyProject(){
   const MAX_LAYERS = 4;
@@ -117,7 +118,7 @@ function MyProject(){
           <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
           <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> All Layers</Text>
         </View>
-        <View style={{width: 500, height: 200}}>
+        <View style={{width: 500, height: 280}}>
 
           {/* Layers Header */}
           <View
@@ -160,31 +161,34 @@ function MyProject(){
           />
         </View>
         {/*  Composite image preview */}
-        <View>
-          <Text>Composite Snapshot</Text>
+        <View style={{width: width * 0.5, height: 150}}>
+          <CompositeLayerViewStack layers={projectLayers} />
         </View>
-        <TouchableHighlight
-          disabled={projectLayers && projectLayers.length >= MAX_LAYERS}
-          style={styles.btn}
-          underlayColor="#f0f4f7"
-          onPress={onAddALayer}>
-          <Text style={styles.btnClr}>+ Add A Layer</Text>
-        </TouchableHighlight>
 
-        {/* Bottom Navigation */}
-        <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 120, width: width * 0.8 }}>
           <TouchableHighlight
-            style={styles.tinyBtn2}
+            disabled={projectLayers && projectLayers.length >= MAX_LAYERS}
+            style={styles.btn}
             underlayColor="#f0f4f7"
-            onPress={onStartOver}>
-            <Text style={styles.btnClr}>Start Over</Text>
+            onPress={onAddALayer}>
+            <Text style={styles.btnClr}>+ Add A Layer</Text>
           </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.tinyBtn2}
-            underlayColor="#f0f4f7"
-            onPress={onContinue}>
-            <Text style={styles.btnClr}>Send To OCM</Text>
-          </TouchableHighlight>
+
+          {/* Bottom Navigation */}
+          <View style={{flex: 1, marginTop: 10, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
+            <TouchableHighlight
+              style={styles.tinyBtn2}
+              underlayColor="#f0f4f7"
+              onPress={onStartOver}>
+              <Text style={styles.btnClr}>Start Over</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={styles.tinyBtn2}
+              underlayColor="#f0f4f7"
+              onPress={onContinue}>
+              <Text style={styles.btnClr}>Send To OCM</Text>
+            </TouchableHighlight>
+          </View>
         </View>
       </View>
     </View>
@@ -205,7 +209,7 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   btn: {
-    width:  Dimensions.get('window').width * 0.8,
+    width:  Dimensions.get('window').width * 0.4,
     backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'center',
