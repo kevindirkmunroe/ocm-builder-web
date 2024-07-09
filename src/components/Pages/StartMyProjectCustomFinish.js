@@ -52,18 +52,19 @@ function StartMyProjectCustomFinish(){
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
 
           {/* Breadcrumbs to current state */}
-          <View style={{flex: 1, width: width * 0.37, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
+          <View style={{flex: 1, width: width * 0.6, flexDirection: 'row', alignItems: 'center', marginRight: 18, marginTop: 16}}>
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 30, height: 30 }} source={require('../../assets/layer-bottom.png')} />
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Background</Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 16, height: 16, marginTop: 8}} source={require('../../assets/admin-customizer.256x242.png')} />
-            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom</Text>
+            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom Finish</Text>
           </View>
-
+        </View>
+        <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
           {/* Pattern and Color Tabs */}
-         <TouchableHighlight
+          <TouchableHighlight
             style={selectedView === ENUM_PATTERN ? styles.tinyBtnSelected: styles.tinyBtn}
             underlayColor="#676752"
             onPress={onSelectPatternTab}>
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
 
   },
   tinyBtn: {
-    width:  100,
+    width:  80,
     height: 50,
     marginLeft: 10,
     marginTop: 10,
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   tinyBtnSelected: {
-    width:  100,
+    width:  80,
     height: 50,
     marginLeft: 10,
     marginTop: 10,
@@ -195,7 +196,7 @@ const styles = StyleSheet.create({
   },
   btnClr: {
     fontFamily: 'Futura',
-    fontSize: 20,
+    fontSize: 16,
 
     color: '#fff',
   },

@@ -24,9 +24,9 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem, onSe
 
   return(
     <View style={styles.belowContainer}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 0.6, backgroundColor: '#ADAD86', borderTopLeftRadius: 10, borderTopRightRadius: 10}}>
+      <View style={{flex: 1, marginTop: -10, justifyContent: 'center', alignItems: 'center', width: width * 0.6, backgroundColor: '#ADAD86', borderTopLeftRadius: 10, borderTopRightRadius: 10}}>
         <View style={{flex: 1, marginTop: 10, justifyContent: 'top', alignItems: 'center', width: width * 1.4, height: height * 0.6}}>
-
+          <Text style={{fontFamily: 'Futura', marginBottom: 5}}>{title}</Text>
           {/*
             Table of Print Roller images
           */}

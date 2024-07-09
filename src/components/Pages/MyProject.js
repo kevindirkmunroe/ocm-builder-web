@@ -115,7 +115,7 @@ function MyProject(){
           <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
           <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
           <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, color: 'green', marginTop: 7}}> All Layers</Text>
+          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> All Layers</Text>
         </View>
         <View style={{width: 500, height: 200}}>
 

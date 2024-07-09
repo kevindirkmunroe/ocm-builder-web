@@ -69,6 +69,9 @@ function AddALayer(){
             <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Add A Layer </Text>
           </View>
 
+        </View>
+        <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
+
           {/* Tabs */}
           <TouchableHighlight
             style={selectedView === ENUM_PATTERN ? styles.tinyBtnSelected: styles.tinyBtn}
@@ -96,8 +99,8 @@ function AddALayer(){
                                                              onSelectMetallic={setIsColorMetallic}
                                                              initMetallic={isColorMetallic}
         /> }
-        <View style={{width: 80, height: 20, margin: 2, alignItems: 'center', backgroundColor: selectedColor}}>
-          <Text>{selectedColor}</Text>
+        <View style={{width: 180, height: 20, margin: 2, alignItems: 'center', backgroundColor: selectedColor}}>
+          <Text style={{fontFamily: 'Futura', fontSize: 16}}>Color: {selectedColor}</Text>
         </View>
 
         {/* Preview Composite image */}

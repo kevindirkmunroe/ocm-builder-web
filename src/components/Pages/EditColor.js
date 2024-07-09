@@ -49,19 +49,21 @@ function EditColor(){
             <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> All Layers</Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>Layer "{layerToEdit.level}" </Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>Layer {layerToEdit.level} </Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-            <Image style={{ width: 20, height: 20, marginTop: 8 }} source={require('../../assets/draw_write_pen_edit_icon_221063.png')} />
-            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>Color "{layerToEdit.backgroundColor}"</Text>
+            <Image style={{ width: 20, height: 16, marginTop: 8 }} source={require('../../assets/draw_write_pen_edit_icon_221063.png')} />
+            <Text style={{fontSize: 16, color: 'green', marginLeft: 5, marginTop: 7}}>Edit Color</Text>
           </View>
         </View>
-
+        <View style={{width: 250, height: 20, margin: 6, alignItems: 'center', flexDirection: 'row'}}>
+          <Text style={{fontFamily: 'Futura', fontSize: 16, width: 80}}>"{layerToEdit.patternName}"</Text>
+          <Text style={{fontFamily: 'Futura', fontSize: 16, backgroundColor: color, width: 100}}>{color}</Text>
+        </View>
         <CustomColorSelector title={`"${layerToEdit.backgroundColor}"`}
                              onSelectColor={setColor}
                              initSelectedColor={color}
                              onSelectMetallic={setIsMetallic}
                              initMetallic={isColorMetallic}/>
-
         {/* Preview Composite image TODO FIX */}
         <View>
           <View style={{

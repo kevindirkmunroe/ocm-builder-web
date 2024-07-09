@@ -51,9 +51,9 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
                disabled={level === 'Background'}
                onPress={onEditPattern}>
               <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', marginTop: 7}}>
-                <Image style={{width: 30, height: 30, marginRight: 5, marginTop: 10}} source={staticImageUrlMap[patternImageKey]}></Image>
-                <Text>{patternName}</Text>
-                <Text> / {typeof patternOpacity === 'number'? patternOpacity : ''}%</Text>
+                <Image style={{width: 30, height: 30, marginRight: 5}} source={staticImageUrlMap[patternImageKey]}></Image>
+                <Text style={{marginTop: 5}}>{patternName}</Text>
+                <Text style={{marginTop: 5}}> / {typeof patternOpacity === 'number'? patternOpacity : ''}%</Text>
               </View>
             </TouchableHighlight>
           </View>
@@ -61,9 +61,9 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
             <TouchableHighlight
               disabled={backgroundColor === null}
               onPress={onEditColor}>
-              <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', marginTop: 7}}>
+              <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', marginBottom: 6}}>
                 <View style={{width: 30, height: 30, marginRight: 5, marginTop: 10, backgroundColor: backgroundColor}}></View>
-                <Text>{backgroundColor} {JSON.stringify(isColorMetallic) === 'true' ? 'Metallic': ''}</Text>
+                <Text style={{marginTop: 15}}>{backgroundColor} {JSON.stringify(isColorMetallic) === 'true' ? 'Metallic': ''}</Text>
               </View>
             </TouchableHighlight>
           </View>
