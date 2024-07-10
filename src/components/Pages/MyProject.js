@@ -10,10 +10,7 @@ import {
 } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layer from "../../components/Layer/Layer";
-import { staticImageUrlMap } from "../../utils/AssetManager";
-import CompositeLayerViewStack from "../Layer/CompositeLayerViewStack";
-import { project } from "../../../react-native.config";
-import CompositeLayerViewStackClassic from "../Layer/CompositeLayerViewStackClassic";
+import CompositeLayerViewComponent from "../Layer/CompositeLayerViewComponent";
 
 function MyProject(){
   const MAX_LAYERS = 4;
@@ -148,7 +145,7 @@ function MyProject(){
         </View>
         {/*  Composite image preview */}
         <View style={{width: width * 0.6, height: 100}}>
-          <CompositeLayerViewStackClassic layers={projectLayers} />
+          <CompositeLayerViewComponent layers={projectLayers} />
         </View>
 
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 120, width: width * 0.8 }}>

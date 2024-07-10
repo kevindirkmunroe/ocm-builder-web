@@ -9,7 +9,7 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
   const {width, height} = Dimensions.get('window');
 
   const [colorState, setColorState] =
-    useState({currentColor: initSelectedColor, swatchesOnly: false, swatchesLast: true, swatchesEnabled: true, disc: false})
+    useState({currentColor: initSelectedColor, swatchesOnly: false, swatchesLast: true, swatchesEnabled: false, disc: false})
   const onColorChange = (newColor) => {
     onSelectColor(newColor);
   }
@@ -44,7 +44,7 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
           useNativeLayout={false}
         />
       </View>
-      <View style={{ flex:1 , flexDirection: 'row', marginTop: 18}}>
+      <View style={{ flex:1 , flexDirection: 'row', marginTop: 10}}>
         <Text style={{ fontSize: 18, fontFamily: 'Futura', marginRight: 10}}>Metallic</Text>
         <ToggleButton
           initial={initMetallic}
@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start' // if you want to fill rows left to right
   },
   colorContainerItem: {
-    width: '50%', // is 50% of container width
-    alignItems: 'flex-end',
+    width: '60%', // is 50% of container width
+    alignItems: 'center',
   },
   smallBtn: {
     backgroundColor: '#5DA75E',

@@ -90,10 +90,6 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
   )
 }
 
-export function isBackgroundLayer(){
-  return level === 'Background';
-}
-
 const styles = StyleSheet.create({
             container: {
               flex: 1,

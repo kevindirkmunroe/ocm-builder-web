@@ -1,10 +1,16 @@
-import React from 'react';
+import React from "react";
 import { Dimensions, Image, View } from "react-native";
 
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import convert from "color-convert";
 
-export default function CompositeLayerViewStackClassic({layers}){
+export function deepCloneLayerStack(layers){
+  return layers.map((oneLayer) => {
+    return { ...oneLayer };
+  });
+}
+
+export default function CompositeLayerViewComponent({layers}){
 
   let currZIndex = 0;
   const {width, height} = Dimensions.get('window');

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../Widgets/CustomColorSelector";
-import CompositeLayerViewStackClassic from "../Layer/CompositeLayerViewStackClassic";
+import CompositeLayerViewComponent, { deepCloneLayerStack } from "../Layer/CompositeLayerViewComponent";
 
 function EditColor(){
 
@@ -21,6 +21,17 @@ function EditColor(){
   const [color, setColor] = useState(layerToEdit.backgroundColor);
   const [isColorMetallic, setIsMetallic] = useState(layerToEdit.isColorMetallic);
 
+  // Create clone of layer stack, update on edits, and CompositeLayerView will
+  // show clone contents
+  let clonedProjectLayers = deepCloneLayerStack(projectLayers);
+  const [compositeLayerView, setCompositeLayerView] =
+    useState(new CompositeLayerViewComponent({layers: clonedProjectLayers}));
+
+  const onSetColor = (newValue) => {
+    setColor(newValue);
+    clonedProjectLayers[layerToEditLevel === 'Background' ? 0 : layerToEditLevel].backgroundColor = newValue;
+    setCompositeLayerView(new CompositeLayerViewComponent({layers: clonedProjectLayers}));
+  }
 
   let onCancel = () => {
     navigate('/my-project',
@@ -44,7 +55,7 @@ function EditColor(){
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Tab Label */}
-          <View style={{flex: 1, width: width * 0.6, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
+          <View style={{flex: 1, width: width * 0.7, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
@@ -62,7 +73,7 @@ function EditColor(){
           <Text style={{fontFamily: 'Futura', marginLeft: 3, fontSize: 16, width: 100}}>{color}</Text>
         </View>
         <CustomColorSelector title={`"${layerToEdit.backgroundColor}"`}
-                             onSelectColor={setColor}
+                             onSelectColor={onSetColor}
                              initSelectedColor={color}
                              onSelectMetallic={setIsMetallic}
                              initMetallic={isColorMetallic}/>
@@ -88,7 +99,7 @@ function EditColor(){
                  source={staticImageUrlMap[layerToEdit.patternImageKey]}>
           </Image>
           <View>
-            <CompositeLayerViewStackClassic layers={projectLayers}/>
+            { compositeLayerView }
           </View>
         </View>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>

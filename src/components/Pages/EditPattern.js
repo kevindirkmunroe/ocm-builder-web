@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import PrintRollerSelector from "../Widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
-import CompositeLayerViewStackClassic from "../Layer/CompositeLayerViewStackClassic";
+import CompositeLayerViewComponent, { deepCloneLayerStack } from "../Layer/CompositeLayerViewComponent";
 
 function EditPattern(){
 
@@ -23,10 +23,32 @@ function EditPattern(){
     name: layerToEdit.patternName,
   }
 
-  // Update item, opacity without changing layer, until OK.
+  // Update item, opacity locally without changing layer, until OK button pressed.
   const [selectedItem, setSelectedItem] = useState(patternAsSelectedItem);
   const [opacity, setOpacity] = useState(layerToEdit.patternOpacity);
 
+  // Create clone of layer stack, update on edits, and CompositeLayerView will
+  // show clone contents
+  let clonedProjectLayers = deepCloneLayerStack(projectLayers);
+  const [compositeLayerView, setCompositeLayerView] =
+    useState(new CompositeLayerViewComponent({layers: clonedProjectLayers}));
+
+  const updateSelectedItem = (newValue) => {
+    setSelectedItem(newValue);
+
+    // update clone and rebuild composite view...
+    clonedProjectLayers[layerToEditLevel].patternName = newValue.name;
+    clonedProjectLayers[layerToEditLevel].patternImageKey = newValue.key;
+    setCompositeLayerView(new CompositeLayerViewComponent({layers: clonedProjectLayers}));
+  }
+
+  const updateOpacity = (newValue) => {
+    setOpacity(newValue);
+
+    // update clone and rebuild composite view...
+    clonedProjectLayers[layerToEditLevel].patternOpacity = newValue;
+    setCompositeLayerView(new CompositeLayerViewComponent({layers: clonedProjectLayers}));
+  }
 
   let onCancel = () => {
     navigate('/my-project',
@@ -35,6 +57,7 @@ function EditPattern(){
       });
   }
 
+  // Finalize updates of edited layer, go back to project
   let onOK = () => {
     // Update layer
     layerToEdit.patternImageKey = selectedItem.key;
@@ -44,14 +67,6 @@ function EditPattern(){
       { state:
           { projectLayers}
       });
-  }
-
-  const updateSelectedItem = (newValue) => {
-    setSelectedItem(newValue);
-  }
-
-  const updateOpacity = (newValue) => {
-    setOpacity(newValue);
   }
 
   return(
@@ -100,7 +115,7 @@ function EditPattern(){
                  source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
           </Image>
           <View>
-            <CompositeLayerViewStackClassic layers={projectLayers}/>
+            { compositeLayerView }
           </View>
         </View>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
