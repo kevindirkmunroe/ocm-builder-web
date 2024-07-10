@@ -147,7 +147,7 @@ function MyProject(){
           />
         </View>
         {/*  Composite image preview */}
-        <View style={{width: width * 0.5, height: 150}}>
+        <View style={{width: width * 0.6, height: 100}}>
           <CompositeLayerViewStackClassic layers={projectLayers} />
         </View>
 

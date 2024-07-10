@@ -27,8 +27,7 @@ export default function CompositeLayerViewStackClassic({layers}){
                 }}>
                 <Image
                   style={{
-                    borderBottomLeftRadius: 10,
-                    borderBottomRightRadius: 10,
+                    borderRadius: 10,
                     width: width * 0.6,
                     height: height * 0.2,
                     opacity: oneLayer.patternOpacity / 100,

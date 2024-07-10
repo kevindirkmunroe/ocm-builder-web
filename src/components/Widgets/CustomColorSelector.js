@@ -23,7 +23,7 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
   }
 
   return(
-    <View style={styles.colorContainer}>
+    <View style={{flex: 1, marginTop: 5, justifyContent: 'center', alignItems: 'center', width: width * 0.6, backgroundColor: '#ADAD86', borderTopLeftRadius: 10, borderTopRightRadius: 10}}>
       <View style={styles.colorContainerItem}>
         <ColorPicker
           ref={r => { this.picker = r }}
@@ -44,8 +44,8 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
           useNativeLayout={false}
         />
       </View>
-      <View style={styles.colorContainerItem}>
-        <Text style={styles.item}>Metallic</Text>
+      <View style={{ flex:1 , flexDirection: 'row', marginTop: 18}}>
+        <Text style={{ fontSize: 18, fontFamily: 'Futura', marginRight: 10}}>Metallic</Text>
         <ToggleButton
           initial={initMetallic}
           primaryText="On"

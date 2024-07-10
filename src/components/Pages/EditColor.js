@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../Widgets/CustomColorSelector";
+import CompositeLayerViewStackClassic from "../Layer/CompositeLayerViewStackClassic";
 
 function EditColor(){
 
@@ -40,10 +41,10 @@ function EditColor(){
 
   return(
     <View style={styles.belowContainer}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.9 }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Tab Label */}
-          <View style={{flex: 1, width: width * 0.5, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
+          <View style={{flex: 1, width: width * 0.6, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
@@ -56,24 +57,24 @@ function EditColor(){
           </View>
         </View>
         <View style={{width: 250, height: 20, margin: 6, alignItems: 'center', flexDirection: 'row'}}>
-          <Text style={{fontFamily: 'Futura', fontSize: 16, width: 80}}>"{layerToEdit.patternName}"</Text>
-          <Text style={{fontFamily: 'Futura', fontSize: 16, backgroundColor: color, width: 100}}>{color}</Text>
+          <Text style={{fontFamily: 'Futura', fontSize: 16, width: 90}}>"{layerToEdit.patternName}" </Text>
+          <Text style={{fontFamily: 'Futura', fontSize: 16, backgroundColor: color, width: 20}}>     </Text>
+          <Text style={{fontFamily: 'Futura', marginLeft: 3, fontSize: 16, width: 100}}>{color}</Text>
         </View>
         <CustomColorSelector title={`"${layerToEdit.backgroundColor}"`}
                              onSelectColor={setColor}
                              initSelectedColor={color}
                              onSelectMetallic={setIsMetallic}
                              initMetallic={isColorMetallic}/>
-        {/* Preview Composite image TODO FIX */}
-        <View>
+        {/* Preview Composite image */}
+        <View style={{flex: 1, marginTop: 50}}>
           <View style={{
             backgroundColor: color,
             zIndex: 0,
             width: width * 0.6,
-            height: height * 0.3,
+            height: 100,
             borderWidth: 10,
-            borderBottomLeftRadius: 10,
-            borderBottomRightRadius: 10}} />
+            opacity: 0.3}} />
           <Image style={{
             position: 'absolute',
             zIndex: 1,
@@ -81,12 +82,14 @@ function EditColor(){
             borderWidth: 10,
             borderColor:'#ADAD86',
             width: width * 0.6,
-            height: height * 0.3,
-            opacity: 0.4,
-            borderBottomLeftRadius: 10,
-            borderBottomRightRadius: 10}}
-                 source={staticImageUrlMap[layerToEdit.key]}>
+            height: 100,
+            opacity: layerToEdit.patternOpacity / 100
+          }}
+                 source={staticImageUrlMap[layerToEdit.patternImageKey]}>
           </Image>
+          <View>
+            <CompositeLayerViewStackClassic layers={projectLayers}/>
+          </View>
         </View>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
