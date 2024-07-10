@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import PrintRollerSelector from "../Widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
+import CompositeLayerViewStackClassic from "../Layer/CompositeLayerViewStackClassic";
 
 function EditPattern(){
 
@@ -46,12 +47,10 @@ function EditPattern(){
   }
 
   const updateSelectedItem = (newValue) => {
-    console.log(`EditPattern new selectedItem = ${JSON.stringify(newValue)}`);
     setSelectedItem(newValue);
   }
 
   const updateOpacity = (newValue) => {
-    console.log(`EditPattern new Opacity = ${JSON.stringify(newValue)}`);
     setOpacity(newValue);
   }
 
@@ -74,21 +73,20 @@ function EditPattern(){
         </View>
 
         <PrintRollerSelector title={`"${selectedItem.name}" / Opacity ${opacity}%`}
-           onSelectPrintRoller={updateSelectedItem}
-           initSelectedItem={patternAsSelectedItem}
-           onSelectOpacity={updateOpacity}
-           initSelectedOpacity={opacity}/>
+                             onSelectPrintRoller={updateSelectedItem}
+                             initSelectedItem={patternAsSelectedItem}
+                             onSelectOpacity={updateOpacity}
+                             initSelectedOpacity={opacity}/>
 
-        {/* Preview Composite image TODO FIX */}
-        <View>
+        {/* Preview Composite image */}
+        <View style={{flex: 1, marginTop: 50}}>
           <View style={{
             backgroundColor: layerToEdit.backgroundColor,
             zIndex: 0,
             width: width * 0.6,
-            height: height * 0.3,
+            height: 100,
             borderWidth: 10,
-            borderBottomLeftRadius: 10,
-            borderBottomRightRadius: 10}} />
+            opacity: 0.3}} />
           <Image style={{
             position: 'absolute',
             zIndex: 1,
@@ -96,12 +94,14 @@ function EditPattern(){
             borderWidth: 10,
             borderColor:'#ADAD86',
             width: width * 0.6,
-            height: height * 0.3,
-            opacity: 0.4,
-            borderBottomLeftRadius: 10,
-            borderBottomRightRadius: 10}}
+            height: 100,
+            opacity: opacity / 100
+          }}
                  source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
           </Image>
+          <View>
+            <CompositeLayerViewStackClassic layers={projectLayers}/>
+          </View>
         </View>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight

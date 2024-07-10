@@ -17,7 +17,7 @@ function AddALayer(){
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [isColorMetallic, setIsColorMetallic] = useState(false);
-  const [opacity, setOpacity] = useState(100);
+  const [opacity, setOpacity] = useState(10);
 
   // Project Layers is composite layers constructed so far...
   const { state } = useLocation();

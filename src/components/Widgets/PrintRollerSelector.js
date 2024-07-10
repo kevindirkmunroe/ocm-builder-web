@@ -72,13 +72,13 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem, onSe
             </ImageBackground>
 
             {/* Opacity Slider */}
-            <View style={{margin: 5, flexDirection: 'column'}}>
-              <Text>Opacity {opacity}%</Text>
+            <View style={{marginTop: 30, flexDirection: 'column'}}>
+              <Text style={{fontFamily: 'Futura', fontSize: 16}}>Opacity {opacity}%</Text>
               <Slider
-                value={opacity}                         // set the current slider's value
+                value={opacity}                   // set the current slider's value
                 minimumValue={0}                  // Minimum value
-                maximumValue={100}                  // Maximum value
-                step={1}                          // The step for the slider (0 means that the slider will handle any decimal value within the range [min, max])
+                maximumValue={100}                // Maximum value
+                step={5}                          // The step for the slider (0 means that the slider will handle any decimal value within the range [min, max])
                 minimumTrackTintColor='grey'      // The track color before the current value
                 maximumTrackTintColor='grey'      // The track color after the current value
                 onValueChange={onOpacityChanged}

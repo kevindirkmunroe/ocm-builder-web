@@ -13,6 +13,7 @@ import Layer from "../../components/Layer/Layer";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CompositeLayerViewStack from "../Layer/CompositeLayerViewStack";
 import { project } from "../../../react-native.config";
+import CompositeLayerViewStackClassic from "../Layer/CompositeLayerViewStackClassic";
 
 function MyProject(){
   const MAX_LAYERS = 4;
@@ -62,17 +63,14 @@ function MyProject(){
   // Edit a layer
   //
   const editColor = (layer) => {
-    console.log(`MyProject: edit COLOR: ${JSON.stringify(layer)}`);
     navigate('/edit-color', { state: { projectLayers: projectLayers, layerToEditLevel: layer.level } });
   }
 
   const editPattern = (layer) => {
-    console.log(`MyProject: edit PATTERN: ${JSON.stringify(layer)}`);
     navigate('/edit-pattern', { state: { projectLayers: projectLayers, layerToEditLevel: layer.level } });
   }
 
   const editLayer = (layerId, editType ) => {
-    console.log(`MyProject: editLayer layerId ${layerId} editType ${editType}`)
     let layerIndex = 0;
     if(layerId !== 'Background'){
       layerIndex = layerId
@@ -84,36 +82,11 @@ function MyProject(){
       editPattern(layer);
     }else if(editType === "visible"){
       projectLayers[layer.level].isVisible = !projectLayers[layer.level].isVisible;
-      console.log(`MyProject: editLayer layerId ${layerId} set to ${projectLayers[layer.level].isVisible}`);
-
       setProjectLayers(projectLayers);
       // BS HACK: change a value in FlatList to force it to update UI.
       setRefresh(!refresh);
     }
   }
-
-  //
-  // Create composite image with all layers in projectLayers
-  //
-  // TODO fix and display this
-  let currZIndex = 0;
-  projectLayers.map((oneLayer) => {
-      return (
-        <View style={{ position: 'absolute', zIndex: currZIndex++ }}>
-          <Image
-            style={{
-              width: width * 0.6,
-              height: height * 0.3,
-              marginLeft: 3,
-              borderRadius: 10,
-              borderWidth: 1,
-              tintColor: oneLayer.backgroundColor || undefined,
-            }}
-            source={staticImageUrlMap[oneLayer.patternImageKey]}
-          />
-        </View>
-      );
-    });
 
   //
   // Main Project layout: Layers + Composite image
@@ -175,13 +148,13 @@ function MyProject(){
         </View>
         {/*  Composite image preview */}
         <View style={{width: width * 0.5, height: 150}}>
-          <CompositeLayerViewStack layers={projectLayers} />
+          <CompositeLayerViewStackClassic layers={projectLayers} />
         </View>
 
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 120, width: width * 0.8 }}>
           <TouchableHighlight
             disabled={projectLayers && projectLayers.length >= MAX_LAYERS}
-            style={styles.btn}
+            style={projectLayers && projectLayers.length >= MAX_LAYERS ? styles.btnDisabled : styles.btn}
             underlayColor="#f0f4f7"
             onPress={onAddALayer}>
             <Text style={styles.btnClr}>+ Add A Layer</Text>
@@ -224,6 +197,15 @@ const styles = StyleSheet.create({
   btn: {
     width:  Dimensions.get('window').width * 0.4,
     backgroundColor: '#5DA75E',
+    justifyContent: 'left',
+    alignItems: 'center',
+    padding: 10,
+    marginTop: 30,
+    borderRadius: 10,
+  },
+  btnDisabled: {
+    width:  Dimensions.get('window').width * 0.4,
+    backgroundColor: '#dddddd',
     justifyContent: 'left',
     alignItems: 'center',
     padding: 10,

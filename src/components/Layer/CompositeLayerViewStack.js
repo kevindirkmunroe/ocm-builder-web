@@ -1,5 +1,7 @@
 import React from 'react';
-import { Dimensions, Image, ImageBackground, Text, View } from "react-native";
+import { Dimensions, Image, View } from "react-native";
+import convert from 'color-convert';
+
 import { staticImageUrlMap } from "../../utils/AssetManager";
 
 export default function CompositeLayerViewStack({layers}){
@@ -10,30 +12,34 @@ export default function CompositeLayerViewStack({layers}){
   return (
     <View>
         {layers.map(oneLayer => {
+            //
+            const rgba =  convert.hex.rgb(oneLayer.backgroundColor);
+            const rgbaStr = rgba ? `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${oneLayer.patternOpacity / 100})` : 'rgba(0,0,0,0.0)';
             return (
               (oneLayer.isVisible || oneLayer.level === 'Background') &&
               <View>
                 <View style={{
-                  backgroundColor: oneLayer.backgroundColor,
-                  opacity: 0.4,
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  backgroundColor: rgbaStr,
                   zIndex: currZindex,
-                  width: width * 0.6,
+                  width: width * 0.5,
                   height: 100,
                   borderWidth: 10,
                   borderBottomLeftRadius: 10,
                   borderBottomRightRadius: 10
                 }} />
                 <Image style={{
-                  position: 'absolute',
                   zIndex: ++currZindex,
-                  backgroundColor: '#d9d9d9',
+                  backgroundColor: 'transparent',
                   borderWidth: 10,
                   borderColor: '#ADAD86',
-                  width: width * 0.6,
+                  width: width * 0.5,
                   height: 100,
-                  opacity: oneLayer.patternOpacity,
+                  opacity: oneLayer.level === 'Background' ? 1: 0.3,
                   borderBottomLeftRadius: 10,
-                  borderBottomRightRadius: 10
+                  borderBottomRightRadius: 10,
                 }}
                        source={staticImageUrlMap[oneLayer.patternImageKey]}>
                 </Image>

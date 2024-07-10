@@ -51,14 +51,14 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
         ]}>
           <View style={{flex: 2, margin: 2, backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10}}>{level}</Text>
           </View>
-          <View style={{flex: 5, margin: 2,flexDirection: 'row' , alignItems: 'center', justifyContent: 'center', backgroundColor: '#f1f1f1'}}>
+          <View style={{flex: 5, margin: 2,flexDirection: 'row' , alignItems: 'center', justifyContent: 'left', backgroundColor: '#f1f1f1'}}>
             <TouchableHighlight
                disabled={level === 'Background'}
                onPress={onEditPattern}>
-              <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', marginTop: 7}}>
-                <Image style={{width: 30, height: 30, marginRight: 5}} source={staticImageUrlMap[patternImageKey]}></Image>
-                <Text style={{marginTop: 5}}>{patternName}</Text>
-                <Text style={{marginTop: 5}}> / {typeof patternOpacity === 'number'? patternOpacity : ''}%</Text>
+              <View style={{flex: 1, flexDirection: 'row', marginTop: 7}}>
+                <Image style={{width: 30, height: 30, margin: 5}} source={staticImageUrlMap[patternImageKey]}></Image>
+                <Text style={{marginTop: 10}}>{patternName}</Text>
+                <Text style={{marginTop: 10}}> / {typeof patternOpacity === 'number'? patternOpacity : ''}%</Text>
               </View>
             </TouchableHighlight>
           </View>
