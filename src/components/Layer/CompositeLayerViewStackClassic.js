@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Text, Image, View } from "react-native";
+import { Dimensions, Image, View } from "react-native";
 
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import convert from "color-convert";
