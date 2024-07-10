@@ -10,28 +10,35 @@ export default function CompositeLayerViewStack({layers}){
   return (
     <View>
         {layers.map(oneLayer => {
-          return (
-            <View
-              style={{
-                position: 'absolute',
-                zIndex: currZindex++,
-                backgroundColor: oneLayer.backgroundColor,
-                maxWidth: '60%',
-              }}>
-              <Image style={{
-                position: 'absolute',
-                zIndex: currZindex++,
-                borderWidth: 10,
-                width: width * 0.5,
-                height: height * 0.3,
-                borderColor:'#ADAD86',
-                opacity: oneLayer.patternOpacity,
-                borderBottomLeftRadius: 10,
-                borderBottomRightRadius: 10}}
-                     source={oneLayer? staticImageUrlMap[oneLayer.patternImageKey]: null}>
-              </Image>
-            </View>
-          );
+            return (
+              (oneLayer.isVisible || oneLayer.level === 'Background') &&
+              <View>
+                <View style={{
+                  backgroundColor: oneLayer.backgroundColor,
+                  opacity: 0.4,
+                  zIndex: currZindex,
+                  width: width * 0.6,
+                  height: 100,
+                  borderWidth: 10,
+                  borderBottomLeftRadius: 10,
+                  borderBottomRightRadius: 10
+                }} />
+                <Image style={{
+                  position: 'absolute',
+                  zIndex: ++currZindex,
+                  backgroundColor: '#d9d9d9',
+                  borderWidth: 10,
+                  borderColor: '#ADAD86',
+                  width: width * 0.6,
+                  height: 100,
+                  opacity: oneLayer.patternOpacity,
+                  borderBottomLeftRadius: 10,
+                  borderBottomRightRadius: 10
+                }}
+                       source={staticImageUrlMap[oneLayer.patternImageKey]}>
+                </Image>
+              </View>
+            );
         })}
       </View>
   )

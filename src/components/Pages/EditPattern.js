@@ -19,7 +19,7 @@ function EditPattern(){
   // Make Item object for passing to PrintRoller widget
   const patternAsSelectedItem = {
     key: layerToEdit.patternImageKey,
-    name: layerToEdit.name,
+    name: layerToEdit.patternName,
   }
 
   // Update item, opacity without changing layer, until OK.

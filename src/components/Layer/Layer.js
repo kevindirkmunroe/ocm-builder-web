@@ -3,7 +3,7 @@ import { useState } from "react";
 import { StyleSheet, View, Image, Text, TouchableHighlight } from "react-native";
 import { staticImageUrlMap } from "./../../utils/AssetManager";
 
-function Layer({level, patternName, patternImageKey, backgroundColor, patternOpacity, isColorMetallic, onDeleteLayer, onEditLayer} ){
+function Layer({level, patternName, patternImageKey, backgroundColor, patternOpacity, isColorMetallic, isVisible, onDeleteLayer, onEditLayer} ){
 
   /*
      - level
@@ -12,13 +12,15 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
      - backgroundColor
      - patternOpacity
      - isColorMetallic
+     - isVisible
    */
   const [layerState, setLayerState] =
     useState({ patternName,
       patternImageKey,
       backgroundColor,
       patternOpacity,
-      isColorMetallic });
+      isColorMetallic,
+      isVisible});
 
   const onDelete = () => {
     onDeleteLayer(level);
@@ -34,19 +36,22 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
     onEditLayer(level, "color");
   }
 
+  const onToggleVisible = () => {
+    onEditLayer(level, "visible");
+  }
+
   return (
     <View style={{flex: 1, flexDirection: 'row', flexGrow: 0.5, alignItems: 'center'}}>
       <View
         style={[
           styles.container,
           {
-            // Try setting `flexDirection` to `"row"`.
             flexDirection: 'row',
           },
         ]}>
           <View style={{flex: 2, margin: 2, backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10}}>{level}</Text>
           </View>
-          <View style={{flex: 4, margin: 2,flexDirection: 'row' , alignItems: 'center', justifyContent: 'center', backgroundColor: '#f1f1f1'}}>
+          <View style={{flex: 5, margin: 2,flexDirection: 'row' , alignItems: 'center', justifyContent: 'center', backgroundColor: '#f1f1f1'}}>
             <TouchableHighlight
                disabled={level === 'Background'}
                onPress={onEditPattern}>
@@ -67,7 +72,13 @@ function Layer({level, patternName, patternImageKey, backgroundColor, patternOpa
               </View>
             </TouchableHighlight>
           </View>
-          <View style={{flex: 1, margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
+          <View style={{flex: 2, flexDirection: 'row', margin: 2,backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center'}}>
+            { level !== 'Background' && <TouchableHighlight
+              onPress={onToggleVisible}>
+              <Image style={{ width: 20, height: 20, marginTop: 5, marginLeft: 5 }}
+                     source={!isVisible ? require('../../assets/eye_slash_visible_hide_hidden_show_icon_145987.png') : require('../../assets/eye_visible_hide_hidden_show_icon_145988.png')} />
+            </TouchableHighlight>
+            }
             { level !== 'Background' && <TouchableHighlight
               onPress={onDelete}>
               <Image style={{ width: 20, height: 20, marginTop: 5, marginLeft: 5 }} source={require('../../assets/trash-can-black-symbol_icon-icons.com_72914.png')} />

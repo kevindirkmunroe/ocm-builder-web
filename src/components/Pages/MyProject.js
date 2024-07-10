@@ -12,6 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Layer from "../../components/Layer/Layer";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CompositeLayerViewStack from "../Layer/CompositeLayerViewStack";
+import { project } from "../../../react-native.config";
 
 function MyProject(){
   const MAX_LAYERS = 4;
@@ -35,6 +36,9 @@ function MyProject(){
 
     setProjectLayers(projectLayers);
     setRefresh(!refresh);
+  }
+
+  const onToggleVisible = (newValue) => {
   }
 
   //
@@ -78,6 +82,13 @@ function MyProject(){
       editColor(layer);
     }else if(editType === "pattern"){
       editPattern(layer);
+    }else if(editType === "visible"){
+      projectLayers[layer.level].isVisible = !projectLayers[layer.level].isVisible;
+      console.log(`MyProject: editLayer layerId ${layerId} set to ${projectLayers[layer.level].isVisible}`);
+
+      setProjectLayers(projectLayers);
+      // BS HACK: change a value in FlatList to force it to update UI.
+      setRefresh(!refresh);
     }
   }
 
@@ -128,11 +139,11 @@ function MyProject(){
               },
             ]}>
             <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 2, fontWeight: 'bold'}}>Level</Text></View>
-            <View style={{flex: 4, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10, fontWeight: 'bold'}}>Pattern / Opacity</Text></View>
+            <View style={{flex: 5, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10, fontWeight: 'bold'}}>Pattern / Opacity</Text></View>
             <View style={{flex: 4, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={{margin: 10, fontWeight: 'bold'}}>Color</Text>
             </View>
-            <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{flex: 4, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={{margin: 10, fontWeight: 'bold'}}></Text>
             </View>
           </View>
@@ -152,8 +163,10 @@ function MyProject(){
                   backgroundColor={item.backgroundColor}
                   patternOpacity={item.patternOpacity}
                   isColorMetallic={item.isColorMetallic}
+                  isVisible={item.isVisible}
                   onDeleteLayer={onDeleteLayer}
                   onEditLayer={editLayer}
+                  onToggleVisible={onToggleVisible}
                 />
               )
             }}
