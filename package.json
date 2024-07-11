@@ -9,7 +9,7 @@
     "start": "react-native start --reset-cache",
     "test": "jest",
     "lint": "eslint .",
-    "web": "webpack serve -d source-map --mode development --config \"./web/webpack.config.js\" --inline --color --history-api-fallback",
+    "web": "sh scripts/react-native-patches.sh && webpack serve -d source-map --mode development --config \"./web/webpack.config.js\" --inline --color --history-api-fallback",
     "build:web": "webpack --mode production --config \"./web/webpack.config.js\""
   },
   "dependencies": {
