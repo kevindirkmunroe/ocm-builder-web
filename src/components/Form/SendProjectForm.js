@@ -59,7 +59,7 @@ const SendProjectForm = (projectLayers) => {
         // Form is valid, perform the submission logic
         // TODO: email form + project content...
 
-        navigate('/save-print-pdf', {state :
+        navigate('/save-as-pdf', {state :
             {form: {companyName, projectName, designerName, email, requestSamples }, projectLayers: projectLayers}});
 
       } else {

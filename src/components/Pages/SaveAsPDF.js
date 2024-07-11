@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
 import generatePDF, { Options } from "react-to-pdf";
+import CompositeLayerViewComponent from "../Layer/CompositeLayerViewComponent";
 
+const PDF_CONTAINER_COMPONENT_ID = 'pdf-container';
 
 function SaveAsPDF(){
   const {width} = Dimensions.get('window');
@@ -12,14 +14,22 @@ function SaveAsPDF(){
   const { state } = useLocation();
   const { form, projectLayers } = state;
 
+  // Navigation...
   let onStartOver = () => {
     navigate('/');
   }
 
+  let onBackToProject = () => {
+    navigate('/my-project', {state: { projectLayers: projectLayers.projectLayers }});
+  }
+
+  // Form content...
   const [fileName, setFileName] = useState('');
 
+  // PDF generation...
+  const compositeView = <CompositeLayerViewComponent layers={projectLayers.projectLayers} />;
 
-  const getTargetElement = () => document.getElementById("pdfContainer");
+  const getTargetElement = () => document.getElementById('pdf-container');
 
   let onSaveAsPDF = async () => {
     const options: Options = {
@@ -31,14 +41,13 @@ function SaveAsPDF(){
     await generatePDF(getTargetElement, options);
   }
 
-
   return (
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
         <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16, marginBottom: 16}}>
           <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 16}}>My Finish</Text>
-          <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-          <Image style={{ width: 30, height: 40, marginTop: 5, marginLeft: 5 }} source={require('../../assets/pdf_icon.png')} />
+          <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 16, color: 'gray'}}> > </Text>
+          <Image style={{ width: 20, height: 28, marginTop: 6, marginLeft: 5 }} source={require('../../assets/pdf_icon.png')} />
           <Text style={{fontSize: 16, fontWeight: 'bold', color: 'green', marginLeft: 5, marginTop: 16}}> Save As PDF</Text>
         </View>
         <View style={{flex: 1, flexDirection: 'column', width: width * 0.6}}>
@@ -54,15 +63,21 @@ function SaveAsPDF(){
         </View>
 
         {/* File name form */}
-        <View style={{flex:1, flexDirection: 'row'}}>
-          <Text style={{fontSize: 18 , marginTop: 5, padding: 10, fontFamily: 'Futura'}}>File Name</Text>
+        <View style={{flex:1, flexDirection: 'column'}}>
+          <Text style={{fontSize: 18 , marginTop: 5, padding: 10, fontFamily: 'Futura'}}>File Name:</Text>
           <TextInput
             style={styles.input}
-            placeholder="File Name"
+            placeholder="my-file-name.pdf"
             value={fileName}
             onChangeText={setFileName}
           />
+
+          {/*  Composite image preview */}
+          <View style={{width: width * 0.6, height: 100}}>
+            { compositeView }
+          </View>
         </View>
+
 
         {/* Bottom Navigation */}
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
@@ -71,6 +86,12 @@ function SaveAsPDF(){
             underlayColor="#f0f4f7"
             onPress={onSaveAsPDF}>
             <Text style={styles.btnClr}>Save As PDF</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.tinyBtn2}
+            underlayColor="#f0f4f7"
+            onPress={onBackToProject}>
+            <Text style={styles.btnClr}>Back To Project</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.tinyBtn2}
