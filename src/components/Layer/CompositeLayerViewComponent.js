@@ -1,8 +1,10 @@
 import React from "react";
 import { Dimensions, Image, View } from "react-native";
+import convert from "color-convert";
 
 import { staticImageUrlMap } from "../../utils/AssetManager";
-import convert from "color-convert";
+
+const PDF_CONTAINER_COMPONENT_ID = 'pdf-container';
 
 export function deepCloneLayerStack(layers){
   return layers.map((oneLayer) => {
@@ -16,7 +18,7 @@ export default function CompositeLayerViewComponent({layers}){
   const {width, height} = Dimensions.get('window');
 
   return (
-    <View>
+    <View id={PDF_CONTAINER_COMPONENT_ID}>
         {layers.map(oneLayer => {
             const rgba =  convert.hex.rgb(oneLayer.backgroundColor);
             const rgbaStr = rgba ? `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, 0.2)` : 'rgba(0,0,0,0.0)';

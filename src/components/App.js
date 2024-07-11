@@ -36,7 +36,7 @@ const App = () => {
               <Route path="/edit-pattern" element={<EditPattern />} />
               <Route path="/edit-color" element={<EditColor />} />
               <Route path="/send" element={<SendMyProject />} />
-              <Route path="/save-print-pdf" element={<SaveAsPDF />} />
+              <Route path="/save-as-pdf" element={<SaveAsPDF />} />
 
               {/* default redirect to home page */}
               <Route path="*" element={<Navigate to="/" />} />
