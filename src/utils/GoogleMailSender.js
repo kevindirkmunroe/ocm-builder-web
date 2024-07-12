@@ -1,16 +1,16 @@
-import RNSmtpMailer from 'react-native-smtp-mailer';
 import {Platform} from 'react-native';
+import RNSmtpMailer from "react-native-smtp-mailer";
 
 const _generateImageName = formData => {
   // Company-Project-Timestamp.png
   return `${formData.companyName}-${formData.projectName}-${
-    formData.name
+    formData.designerName
   }-${Date.now()}.png`;
 };
 
 const EMAIL_CREDENTIALS = {
   mailtrap: {
-    mailhost: 'smtp.mailtrap.io',
+    mailhost: 'sandbox.smtp.mailtrap.io',
     port: '465',
     username: '4b2e7cbe827d77',
     password: '66314a44e8e6cf',
@@ -31,7 +31,7 @@ const CRED_SOURCE = 'mailtrap';
 
 const _createOCMSummaryBody = (projectLayers, formData) => {
   let layersTable = '';
-  projectLayers.forEach(layer => {
+  for (const layer of projectLayers) {
     layersTable +=
       '<tr><td>' +
       layer.level +
@@ -43,7 +43,7 @@ const _createOCMSummaryBody = (projectLayers, formData) => {
       layer.patternOpacity +
       '%' +
       '</td></tr>';
-  });
+  };
 
   return (
     '<br>Cory,<br/><br/>Here is a custom material I designed on OCM Custom Builder ' +
@@ -76,18 +76,17 @@ const _createOCMSummaryBody = (projectLayers, formData) => {
 
 const sendOCMSummaryMail = async (projectLayers, snapshotURL, formData) => {
   const imageName = _generateImageName(formData);
-  console.debug(`GoogleMailSender: URL=${JSON.stringify(snapshotURL)}`);
-  console.debug(`GoogleMailSender: TARGET=${CRED_SOURCE}`);
+  console.debug(`GoogleMailSender: RNSmtpMailer.sendMail=${RNSmtpMailer.sendMail}`);
   RNSmtpMailer.sendMail({
     mailhost: EMAIL_CREDENTIALS[CRED_SOURCE].mailhost,
     port: EMAIL_CREDENTIALS[CRED_SOURCE].port,
-    ssl: false, //if ssl: false, TLS is enabled,**note:** in iOS TLS/SSL is determined automatically, so either true or false is the same
+    ssl: true, //if ssl: false, TLS is enabled,**note:** in iOS TLS/SSL is determined automatically, so either true or false is the same
     username: EMAIL_CREDENTIALS[CRED_SOURCE].username,
     password: EMAIL_CREDENTIALS[CRED_SOURCE].password,
     from: EMAIL_CREDENTIALS[CRED_SOURCE].from,
     recipients: `${EMAIL_CREDENTIALS[CRED_SOURCE].recipients},${formData.email}`,
     subject: 'Request quote for Custom Material',
-    htmlBody: _createOCMSummaryBody(projectLayers.projectLayers, formData),
+    htmlBody: _createOCMSummaryBody(projectLayers, formData),
     attachmentPaths: [
       Platform.OS === 'ios' ? snapshotURL : snapshotURL.substring(7),
     ],
@@ -95,7 +94,7 @@ const sendOCMSummaryMail = async (projectLayers, snapshotURL, formData) => {
     attachmentTypes: ['image/png'],
   })
     .then(success => {
-      console.log(
+      alert(
         `GMAIL to host ${
           EMAIL_CREDENTIALS[CRED_SOURCE].mailhost
         } success: ${JSON.stringify(success)}`,
@@ -103,7 +102,7 @@ const sendOCMSummaryMail = async (projectLayers, snapshotURL, formData) => {
       return success;
     })
     .catch(err => {
-      console.log(
+      alert(
         `GMAIL to host ${
           EMAIL_CREDENTIALS[CRED_SOURCE].mailhost
         } WTF: ${JSON.stringify(err)}`,

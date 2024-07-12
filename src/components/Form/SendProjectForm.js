@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity,
   Text, StyleSheet } from 'react-native';
 import { useNavigate } from "react-router-dom";
+import { sendOCMSummaryMail } from "../../utils/GoogleMailSender";
 
 const SendProjectForm = (projectLayers) => {
 
@@ -53,15 +54,26 @@ const SendProjectForm = (projectLayers) => {
       setIsFormValid(Object.keys(errors).length === 0);
     };
 
-    const handleSubmit = () => {
+    const DUMMY_BASE64_IMAGE =
+    'iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC';
+
+    const handleSubmit = async () => {
       if (isFormValid) {
 
         // Form is valid, perform the submission logic
-        // TODO: email form + project content...
-
-        navigate('/save-as-pdf', {state :
-            {form: {companyName, projectName, designerName, email, requestSamples }, projectLayers: projectLayers}});
-
+        try {
+          await sendOCMSummaryMail(projectLayers.projectLayers, DUMMY_BASE64_IMAGE, {
+            companyName,
+            projectName,
+            designerName,
+            email,
+          });
+          alert(`Message sent to OCM from ${email}!`);
+          navigate('/save-as-pdf', {state :
+              {form: {companyName, projectName, designerName, email, requestSamples }, projectLayers: projectLayers}});
+        }catch (error){
+          alert(`ERROR sending message: ${error}`);
+        }
       } else {
 
         // Form is invalid, display error messages
