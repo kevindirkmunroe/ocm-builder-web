@@ -1,15 +1,11 @@
 import RNSmtpMailer from 'react-native-smtp-mailer';
-import _ from 'lodash';
-import {PLATFORM} from './DeviceDimensionManager';
+import {Platform} from 'react-native';
 
-const _generateImageName = (styleName, formData) => {
-  const c = str => {
-    return str.replace(/\W+/g, '_');
-  };
-  // Company-Project-Person-Style-Timestamp.png
-  return `${c(formData.companyName)}-${c(formData.projectName)}-${c(
-    formData.name,
-  )}-${c(styleName)}-${Date.now()}.png`;
+const _generateImageName = formData => {
+  // Company-Project-Timestamp.png
+  return `${formData.companyName}-${formData.projectName}-${
+    formData.name
+  }-${Date.now()}.png`;
 };
 
 const EMAIL_CREDENTIALS = {
@@ -33,24 +29,19 @@ const EMAIL_CREDENTIALS = {
 
 const CRED_SOURCE = 'mailtrap';
 
-const _createOCMSummaryBody = (wizardData, formData) => {
-  const {backgroundColor, styleLayers} = wizardData;
-
+const _createOCMSummaryBody = (projectLayers, formData) => {
   let layersTable = '';
-  styleLayers.forEach(layer => {
+  projectLayers.forEach(layer => {
     layersTable +=
       '<tr><td>' +
-      layer.layerId +
+      layer.level +
       '</td><td>' +
-      layer.printRollerName +
+      layer.patternName +
       '</td><td>' +
-      layer.color.name +
+      layer.backgroundColor +
       '</td><td>' +
-      (layer.printRollerOpacity
-        ? Math.round(layer.printRollerOpacity * 100) + '%'
-        : '100%') +
-      '</td><td>' +
-      (layer.color.notes || '') +
+      layer.patternOpacity +
+      '%' +
       '</td></tr>';
   });
 
@@ -63,39 +54,18 @@ const _createOCMSummaryBody = (wizardData, formData) => {
     (formData.projectName || 'UNNAMED') +
     '"<br/>' +
     '<br/>Regards, <br/>' +
-    (formData.name || 'UNNAMED') +
+    (formData.designerName || 'UNNAMED') +
     '<br/>' +
     formData.email +
     '<br/><br/><br/>' +
-    '<table>\n' +
-    '<tbody>\n' +
-    '<tr>\n' +
-    '<td><span style="font-weight: bold">Style Name:</span></td>\n' +
-    '<td>"' +
-    wizardData.styleName +
-    '"</td>\n' +
-    '</tr>\n' +
-    '<tr>\n' +
-    '<td><span style="font-weight: bold;">Background Color:</span></td>\n' +
-    '<td>' +
-    (backgroundColor.name.startsWith('#')
-      ? backgroundColor.name
-      : _.startCase(backgroundColor.name)) +
-    '  ' +
-    (backgroundColor.notes || '') +
-    '</td>\n' +
-    '</tr>\n' +
-    '</tbody>\n' +
-    '</table>\n' +
-    '<p style="font-weight: bold;">Print Roller Layers:</p>\n' +
+    '<p style="font-weight: bold;">Finish Layers:</p>\n' +
     '<table style="width: 35%; border: 1px solid #ddd">\n' +
     '<tbody>\n' +
     '<tr>\n' +
-    '<td><span style="font-weight: bold;">Layer No.</span></td>\n' +
-    '<td><span style="font-weight: bold;">Print Roller</span></td>\n' +
-    '<td><span style="font-weight: bold;">RGB Color</span></td>\n' +
+    '<td><span style="font-weight: bold;">Layer</span></td>\n' +
+    '<td><span style="font-weight: bold;">Pattern</span></td>\n' +
+    '<td><span style="font-weight: bold;">HEX Color</span></td>\n' +
     '<td><span style="font-weight: bold;">Opacity</span></td>\n' +
-    '<td><span style="font-weight: bold;">Notes</span></td>\n' +
     '</tr>\n' +
     layersTable +
     '</tbody>\n' +
@@ -104,13 +74,8 @@ const _createOCMSummaryBody = (wizardData, formData) => {
   );
 };
 
-const sendOCMSummaryMail = async (
-  wizardData,
-  snapshotName,
-  snapshotURL,
-  formData,
-) => {
-  const imageName = _generateImageName(wizardData.styleName, formData);
+const sendOCMSummaryMail = async (projectLayers, snapshotURL, formData) => {
+  const imageName = _generateImageName(formData);
   console.debug(`GoogleMailSender: URL=${JSON.stringify(snapshotURL)}`);
   console.debug(`GoogleMailSender: TARGET=${CRED_SOURCE}`);
   RNSmtpMailer.sendMail({
@@ -122,9 +87,9 @@ const sendOCMSummaryMail = async (
     from: EMAIL_CREDENTIALS[CRED_SOURCE].from,
     recipients: `${EMAIL_CREDENTIALS[CRED_SOURCE].recipients},${formData.email}`,
     subject: 'Request quote for Custom Material',
-    htmlBody: _createOCMSummaryBody(wizardData, formData),
+    htmlBody: _createOCMSummaryBody(projectLayers.projectLayers, formData),
     attachmentPaths: [
-      PLATFORM === 'iOS' ? snapshotURL : snapshotURL.substring(7),
+      Platform.OS === 'ios' ? snapshotURL : snapshotURL.substring(7),
     ],
     attachmentNames: [imageName],
     attachmentTypes: ['image/png'],

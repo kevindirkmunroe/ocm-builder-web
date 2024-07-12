@@ -1,45 +1,102 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import { useLocation, useNavigate } from "react-router-dom";
-import SendProjectForm from "../Form/SendProjectForm";
-import alert from "../../utils/Alert";
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
+import {useLocation, useNavigate} from 'react-router-dom';
+import SendProjectForm from '../Form/SendProjectForm';
+import alert from '../../utils/Alert';
 
-function SendMyProject(){
+function SendMyProject() {
   const {width} = Dimensions.get('window');
   const navigate = useNavigate();
 
   let onStartOver = () => {
-    alert('Start Over', 'Starting Over clears all your previous changes. Continue?', [
-      {
-        text: 'No, keep my changes',
-        style: 'cancel',
-      },
-      {
-        text: 'Yes, Reset', onPress: () => navigate('/start'),
-      },
-    ]);
-  }
+    alert(
+      'Start Over',
+      'Starting Over clears all your previous changes. Continue?',
+      [
+        {
+          text: 'No, keep my changes',
+          style: 'cancel',
+        },
+        {
+          text: 'Yes, Reset',
+          onPress: () => navigate('/start'),
+        },
+      ],
+    );
+  };
 
   let onBackToProject = () => {
-    navigate('/my-project', {state: { projectLayers }});
-  }
+    navigate('/my-project', {state: {projectLayers}});
+  };
 
   // Get Initial state, which should be complete project
-  const { state } = useLocation();
-  const { projectLayers } = state;
+  const {state} = useLocation();
+  const {projectLayers} = state;
 
   return (
     <View style={styles.belowContainer}>
-
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
-        <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16, marginBottom: 16}}>
-          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
-          <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-          <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/mail-black-envelope-symbol_icon-icons.com_56519.png')} />
-          <Text style={{fontSize: 16, fontWeight: 'bold', color: 'green', marginLeft: 5, marginTop: 7}}> Send To OCM</Text>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: width * 1.4,
+        }}>
+        <View
+          style={{
+            width: width * 0.5,
+            flexDirection: 'row',
+            alignContent: 'center',
+            marginRight: 18,
+            marginTop: 16,
+            marginBottom: 16,
+          }}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: 'bold',
+              marginLeft: 5,
+              marginTop: 7,
+            }}>
+            My Finish
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Futura',
+              marginLeft: 5,
+              marginTop: 7,
+              color: 'gray',
+            }}>
+            {' '}
+            >{' '}
+          </Text>
+          <Image
+            style={{width: 24, height: 24, marginTop: 5, marginLeft: 5}}
+            source={require('../../assets/mail-black-envelope-symbol_icon-icons.com_56519.png')}
+          />
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: 'bold',
+              color: 'green',
+              marginLeft: 5,
+              marginTop: 7,
+            }}>
+            {' '}
+            Send To OCM
+          </Text>
         </View>
-        <SendProjectForm projectLayers={projectLayers}/>
-        <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
+        <SendProjectForm projectLayers={projectLayers} />
+        <View
+          style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
             style={styles.tinyBtn2}
             underlayColor="#f0f4f7"
@@ -84,7 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'left',
-    borderRadius: 5
+    borderRadius: 5,
   },
   btnClr: {
     fontSize: 20,

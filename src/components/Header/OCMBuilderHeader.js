@@ -1,19 +1,21 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, Platform } from "react-native";
+import {Text, View, StyleSheet, Image, Platform} from 'react-native';
 
 const OCMBuilderHeader = () => {
   return (
     <View style={styles.header}>
-      <Image
-        style={{
-          width: 200,
-          height: 60,
-          marginRight: 15,
-          borderRadius: 3,
-          borderWidth: 0,
-        }}
-        source={require('../../assets/ocm-splash.png')}
-      />
+      <a href="https://www.ocmcoil.com" target="_blank">
+        <Image
+          style={{
+            width: 200,
+            height: 60,
+            marginRight: 15,
+            borderRadius: 3,
+            borderWidth: 0,
+          }}
+          source={require('../../assets/ocm-splash.png')}
+        />
+      </a>
       <View style={{flex: 1}}>
         <Text style={styles.headerText}>Builder</Text>
         <Text style={styles.headerText}>App</Text>
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: '#fff',
     fontSize: 20,
-    fontFamily: 'Futura'
+    fontFamily: 'Futura',
   },
 });
 
