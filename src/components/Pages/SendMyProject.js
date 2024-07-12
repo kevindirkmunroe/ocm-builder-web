@@ -2,13 +2,22 @@ import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
 import SendProjectForm from "../Form/SendProjectForm";
+import alert from "../../utils/Alert";
 
 function SendMyProject(){
   const {width} = Dimensions.get('window');
   const navigate = useNavigate();
 
   let onStartOver = () => {
-    navigate('/start');
+    alert('Start Over', 'Starting Over clears all your previous changes. Continue?', [
+      {
+        text: 'No, keep my changes',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes, Reset', onPress: () => navigate('/start'),
+      },
+    ]);
   }
 
   let onBackToProject = () => {

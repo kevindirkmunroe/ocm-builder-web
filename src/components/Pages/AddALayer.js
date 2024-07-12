@@ -130,7 +130,7 @@ function AddALayer(){
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
             disabled={selectedItem === null || selectedColor === null}
-            style={styles.tinyBtn2}
+            style={selectedItem === null || selectedColor === null ? styles.tinyBtn2Disabled : styles.tinyBtn2}
             underlayColor="#f0f4f7"
             onPress={onOK}>
             <Text style={styles.btnClr}>OK</Text>
@@ -175,6 +175,16 @@ const styles = StyleSheet.create({
     height: 45,
     padding: 10,
     backgroundColor: '#5DA75E',
+    justifyContent: 'left',
+    alignItems: 'left',
+    borderRadius: 5
+  },  tinyBtn2Disabled: {
+    marginLeft: 10,
+    marginTop: 3,
+    width: 120,
+    height: 45,
+    padding: 10,
+    backgroundColor: '#dddddd',
     justifyContent: 'left',
     alignItems: 'left',
     borderRadius: 5

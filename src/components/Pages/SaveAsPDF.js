@@ -4,9 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ViewShot from 'react-native-view-shot';
 
 import CompositeLayerViewComponent from "../Layer/CompositeLayerViewComponent";
+import alert from "../../utils/Alert";
 import jsPDF from "jspdf";
-
-const PDF_CONTAINER_COMPONENT_ID = 'pdf-container';
 
 function SaveAsPDF(){
   const {width} = Dimensions.get('window');
@@ -20,7 +19,15 @@ function SaveAsPDF(){
   // Navigation...
   //
   let onStartOver = () => {
-    navigate('/');
+    alert('Start Over', 'Starting Over clears all your previous changes. Continue?', [
+      {
+        text: 'No, keep my changes',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes, Reset', onPress: () => navigate('/'),
+      },
+    ]);
   }
 
   let onBackToProject = () => {
@@ -29,9 +36,6 @@ function SaveAsPDF(){
 
   // Form content...
   const [fileName, setFileName] = useState('');
-
-  // Composite image
-  const compositeView = <CompositeLayerViewComponent layers={projectLayers.projectLayers} />;
 
   //
   // Image -> PDF generation

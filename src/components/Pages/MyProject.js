@@ -11,6 +11,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import Layer from "../../components/Layer/Layer";
 import CompositeLayerViewComponent from "../Layer/CompositeLayerViewComponent";
+import alert from "../../utils/Alert";
 
 function MyProject(){
   const MAX_LAYERS = 4;
@@ -45,7 +46,15 @@ function MyProject(){
   const navigate = useNavigate();
 
   let onStartOver = () => {
-    navigate('/start');
+    alert('Start Over', 'Starting Over clears all your previous changes. Continue?', [
+      {
+        text: 'No, keep my changes',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes, Reset', onPress: () => navigate('/start'),
+      },
+    ]);
   }
 
   let onAddALayer = () => {

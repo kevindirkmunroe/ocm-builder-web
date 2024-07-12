@@ -110,7 +110,7 @@ function StartMyProjectClassicOCMFinish(){
                </TouchableHighlight>
                <TouchableHighlight
                  disabled={selectedItem === null}
-                 style={styles.tinyBtn2}
+                 style={selectedItem ? styles.tinyBtn2 : styles.tinyBtn2Disabled }
                  underlayColor="#f0f4f7"
                  onPress={onContinue}>
                  <Text style={styles.btnClr}>Continue</Text>
@@ -162,6 +162,17 @@ const styles = StyleSheet.create({
     height: 45,
     padding: 10,
     backgroundColor: '#5DA75E',
+    justifyContent: 'left',
+    alignItems: 'left',
+    borderRadius: 5
+  },
+  tinyBtn2Disabled: {
+    marginLeft: 10,
+    marginTop: 3,
+    width: 120,
+    height: 45,
+    padding: 10,
+    backgroundColor: '#dddddd',
     justifyContent: 'left',
     alignItems: 'left',
     borderRadius: 5
