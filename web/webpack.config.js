@@ -17,6 +17,7 @@ const babelLoaderConfiguration = {
     path.resolve(appDirectory, 'index.web.js'),
     path.resolve(appDirectory, 'src'),
     path.resolve(appDirectory, 'node_modules/react-native-wheel-color-picker'),
+    path.resolve(appDirectory, 'node_modules/react-native-view-shot'),
     path.resolve(appDirectory, 'node_modules/react-native-toggle-button'),
   ],
   use: {
@@ -85,4 +86,14 @@ module.exports = {
       // `.web.js`.
       extensions: ['.web.js', '.js', '.jsx'],
     },
+
+    plugins: [
+        // `process.env.NODE_ENV === 'production'` must be `true` for production
+        // builds to eliminate development checks and reduce build size. You may
+        // wish to include additional optimizations.
+        new DefinePlugin({
+          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+          __DEV__: process.env.NODE_ENV !== 'production' || true,
+        }),
+      ]
 };

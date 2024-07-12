@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
-import generatePDF, { Options } from "react-to-pdf";
+import ViewShot from 'react-native-view-shot';
+
 import CompositeLayerViewComponent from "../Layer/CompositeLayerViewComponent";
+import jsPDF from "jspdf";
 
 const PDF_CONTAINER_COMPONENT_ID = 'pdf-container';
 
@@ -14,7 +16,9 @@ function SaveAsPDF(){
   const { state } = useLocation();
   const { form, projectLayers } = state;
 
+  //
   // Navigation...
+  //
   let onStartOver = () => {
     navigate('/');
   }
@@ -26,19 +30,24 @@ function SaveAsPDF(){
   // Form content...
   const [fileName, setFileName] = useState('');
 
-  // PDF generation...
+  // Composite image
   const compositeView = <CompositeLayerViewComponent layers={projectLayers.projectLayers} />;
 
-  const getTargetElement = () => document.getElementById('pdf-container');
+  //
+  // Image -> PDF generation
+  //
+  const viewShot = useRef(null);
+  const [viewShotUri, setViewShotUri] = useState("");
 
   let onSaveAsPDF = async () => {
-    const options: Options = {
-      filename: fileName,
-      page: {
-        margin: 20
-      }
-    };
-    await generatePDF(getTargetElement, options);
+    viewShot.current.capture().then((uri) => {
+
+      const doc = new jsPDF();
+      doc.text("Created by OCMBuilder", 10, 10);
+      doc.addImage(uri, 'PNG', 15, 40, 180, 160);
+      const fileToSave = fileName.endsWith('.pdf') ? fileName : `${fileName}.pdf`;
+      doc.save(fileToSave);
+    });
   }
 
   return (
@@ -74,7 +83,11 @@ function SaveAsPDF(){
 
           {/*  Composite image preview */}
           <View style={{width: width * 0.6, height: 100}}>
-            { compositeView }
+            <ViewShot ref={viewShot} style={styles.viewShot}>
+              <View>
+                <CompositeLayerViewComponent layers={projectLayers.projectLayers}/>
+              </View>
+            </ViewShot>
           </View>
         </View>
 
@@ -105,6 +118,8 @@ function SaveAsPDF(){
   );
 }
 
+const SCREEN_WIDTH = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   mainText: {
     color: 'black',
@@ -112,6 +127,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Futura',
     width: '40%',
     padding: 20,
+  },
+  viewShot: {
+    width: SCREEN_WIDTH * 0.6,
+    height: 100,
   },
   input: {
     height: 60,
@@ -153,6 +172,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
   },
+  previewContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    backgroundColor: "#000",
+  },
+  previewImage: { width: SCREEN_WIDTH * 0.6, height: 400, backgroundColor: "green" },
 });
 
 export default SaveAsPDF;
