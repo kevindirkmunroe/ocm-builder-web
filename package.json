@@ -10,7 +10,7 @@
     "test": "jest",
     "lint": "eslint .",
     "web": "sh scripts/react-native-patches.sh && webpack serve -d source-map --mode development --config \"./web/webpack.config.js\" --inline --color --history-api-fallback",
-    "build:web": "webpack --mode production --config \"./web/webpack.config.js\""
+    "build:web": "sh scripts/react-native-patches.sh && webpack --mode production --config \"./web/webpack.config.js\""
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
