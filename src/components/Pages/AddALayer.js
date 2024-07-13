@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PrintRollerSelector from "../Widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../Widgets/CustomColorSelector";
+import HomeButton from "../../components/Widgets/HomeButton";
 
 function AddALayer(){
 
@@ -60,16 +61,7 @@ function AddALayer(){
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Tab Label */}
           <View style={{flex: 1, width: width * 0.5, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
-            <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/ocm-icon.png')} />
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: 'bold',
-                marginLeft: 5,
-                marginTop: 7,
-              }}>
-              Start
-            </Text>
+            <HomeButton />
             <Text
               style={{
                 fontSize: 16,

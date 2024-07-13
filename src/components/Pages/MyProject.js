@@ -12,6 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Layer from "../../components/Layer/Layer";
 import CompositeLayerViewComponent from "../Layer/CompositeLayerViewComponent";
 import alert from "../../utils/Alert";
+import HomeButton from "../../components/Widgets/HomeButton";
 
 function MyProject(){
   const MAX_LAYERS = 4;
@@ -103,16 +104,7 @@ function MyProject(){
 
         {/* Breadcrumb to feature */}
         <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16, marginBottom: 16}}>
-          <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/ocm-icon.png')} />
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: 'bold',
-              marginLeft: 5,
-              marginTop: 7,
-            }}>
-            Start
-          </Text>
+          <HomeButton />
           <Text
             style={{
               fontSize: 16,

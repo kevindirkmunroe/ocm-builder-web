@@ -13,6 +13,7 @@ import ViewShot from 'react-native-view-shot';
 
 import CompositeLayerViewComponent from '../Layer/CompositeLayerViewComponent';
 import alert from '../../utils/Alert';
+import HomeButton from "../../components/Widgets/HomeButton";
 
 function SaveAsPDF() {
   const {width} = Dimensions.get('window');
@@ -90,16 +91,7 @@ function SaveAsPDF() {
             marginTop: 16,
             marginBottom: 16,
           }}>
-          <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/ocm-icon.png')} />
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: 'bold',
-              marginLeft: 5,
-              marginTop: 7,
-            }}>
-            Start
-          </Text>
+          <HomeButton />
           <Text
             style={{
               fontSize: 16,
