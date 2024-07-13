@@ -8,17 +8,17 @@ import {
   View,
 } from 'react-native';
 import {useLocation, useNavigate} from 'react-router-dom';
-import SendProjectForm from '../Form/SendProjectForm';
+import EmailProjectForm from '../Form/EmailProjectForm';
 import alert from '../../utils/Alert';
 
-function SendMyProject() {
+function EmailMyProject() {
   const {width} = Dimensions.get('window');
   const navigate = useNavigate();
 
   let onStartOver = () => {
     alert(
       'Start Over',
-      'Starting Over clears all your previous changes. Continue?',
+      'Start Over clears all your Project\'s changes, Continue?',
       [
         {
           text: 'No, keep my changes',
@@ -82,6 +82,10 @@ function SendMyProject() {
             style={{width: 24, height: 24, marginTop: 5, marginLeft: 5}}
             source={require('../../assets/mail-black-envelope-symbol_icon-icons.com_56519.png')}
           />
+          <Image
+            style={{width: 24, height: 24, marginTop: 5, marginLeft: 5}}
+            source={require('../../assets/PDF-48_46492.png')}
+          />
           <Text
             style={{
               fontSize: 16,
@@ -91,10 +95,13 @@ function SendMyProject() {
               marginTop: 7,
             }}>
             {' '}
-            Send To OCM
+            Save Project
           </Text>
         </View>
-        <SendProjectForm projectLayers={projectLayers} />
+        {/*
+            Form where email is sent...
+        */}
+        <EmailProjectForm projectLayers={projectLayers} />
         <View
           style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
@@ -156,4 +163,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SendMyProject;
+export default EmailMyProject;

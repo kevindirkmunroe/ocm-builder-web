@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, TouchableOpacity,
-  Text, StyleSheet } from 'react-native';
+import {
+  View, TextInput, TouchableOpacity,
+  Text, StyleSheet, Dimensions,
+} from "react-native";
 import { useNavigate } from "react-router-dom";
 import { sendOCMSummaryMail } from "../../utils/GoogleMailSender";
 
-const SendProjectForm = (projectLayers) => {
+const EmailProjectForm = (projectLayers) => {
 
     const navigate = useNavigate();
 
@@ -57,6 +59,10 @@ const SendProjectForm = (projectLayers) => {
     const DUMMY_BASE64_IMAGE =
     'iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC';
 
+    const handleDownloadPdf = () => {
+      navigate('/save-as-pdf', {state :
+          {form: {companyName, projectName, designerName, email, requestSamples }, projectLayers: projectLayers}});
+    }
     const handleSubmit = async () => {
       if (isFormValid) {
 
@@ -67,12 +73,17 @@ const SendProjectForm = (projectLayers) => {
             projectName,
             designerName,
             email,
-          });
-          alert(`Message sent to OCM from ${email}!`);
+          }, false);
+          alert(`Email sent to OCM from ${email}!`);
           navigate('/save-as-pdf', {state :
               {form: {companyName, projectName, designerName, email, requestSamples }, projectLayers: projectLayers}});
         }catch (error){
-          alert(`ERROR sending message: ${error}`);
+          // Try email again, or skip to save pdf
+          const errAsString = error.message;
+          alert(`ERROR sending email to OCM: ${errAsString.length > 200 ? errAsString.substring(0, 255) + '...': errAsString}`,[
+              {text: 'OK', onPress: () => navigate('/save-as-pdf', {state :
+                    {form: {companyName, projectName, designerName, email, requestSamples }, projectLayers: projectLayers}})},
+            ]);
         }
       } else {
 
@@ -114,13 +125,22 @@ const SendProjectForm = (projectLayers) => {
           value={requestSamples}
           onChangeText={setRequestSamples}
         />
-        <TouchableOpacity
-          style={[styles.button, { opacity: isFormValid ? 1 : 0.5 }]}
-          disabled={!isFormValid}
-          onPress={handleSubmit}
-        >
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
+        <View style={{flexDirection: 'row'}}>
+          <TouchableOpacity
+            style={[styles.button, { opacity: isFormValid ? 1 : 0.5 }]}
+            disabled={!isFormValid}
+            onPress={handleSubmit}
+          >
+            <Text style={styles.buttonText}>Email OCM</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, { opacity: isFormValid ? 1 : 0.5 }]}
+            disabled={!isFormValid}
+            onPress={handleDownloadPdf}
+          >
+            <Text style={styles.buttonText}>Download PDF</Text>
+          </TouchableOpacity>
+        </View>
 
         {/* Display error messages */}
         {Object.values(errors).map((error, index) => (
@@ -131,12 +151,14 @@ const SendProjectForm = (projectLayers) => {
       </View>
     );
 };
+const {width, height} = Dimensions.get('window');
 
 // Styles for the components
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       padding: 16,
+      width: width * 0.6,
       justifyContent: 'center',
     },
     input: {
@@ -174,4 +196,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default SendProjectForm;
+export default EmailProjectForm;

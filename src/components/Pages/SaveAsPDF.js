@@ -1,19 +1,18 @@
 import React, {useRef, useState} from 'react';
 import {
   Dimensions,
-  Image,
+  Image, Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableHighlight,
   View,
-} from 'react-native';
+} from "react-native";
 import {useLocation, useNavigate} from 'react-router-dom';
 import ViewShot from 'react-native-view-shot';
 
 import CompositeLayerViewComponent from '../Layer/CompositeLayerViewComponent';
 import alert from '../../utils/Alert';
-import jsPDF from 'jspdf';
 
 function SaveAsPDF() {
   const {width} = Dimensions.get('window');
@@ -29,7 +28,7 @@ function SaveAsPDF() {
   let onStartOver = () => {
     alert(
       'Start Over',
-      'Starting Over clears all your previous changes. Continue?',
+      'Start Over clears all your Project\'s changes, Continue?',
       [
         {
           text: 'No, keep my changes',
@@ -59,15 +58,19 @@ function SaveAsPDF() {
 
   let onSaveAsPDF = async () => {
     viewShot.current.capture().then(uri => {
-      const doc = new jsPDF();
-      doc.text('Created by OCMBuilder', 10, 10);
-      doc.addImage(uri, 'PNG', 15, 40, 180, 160);
-      const fileToSave = fileName.endsWith('.pdf')
-        ? fileName
-        : `${fileName}.pdf`;
-      doc.save(fileToSave);
+      import("jspdf").then((jspdf) => {
+        const doc = jspdf.jsPDF();
+        doc.text('Created by OCMBuilder', 10, 10);
+        doc.addImage(uri, 'PNG', 15, 40, 180, 160);
+        const fileToSave = fileName.endsWith('.pdf')
+          ? fileName
+          : `${fileName}.pdf`;
+        doc.save(fileToSave);
+      });
     });
   };
+
+  const isSaveAsPdfDisabled = Platform.OS === 'ios';
 
   return (
     <View style={styles.belowContainer}>
@@ -108,19 +111,18 @@ function SaveAsPDF() {
             >{' '}
           </Text>
           <Image
-            style={{width: 20, height: 28, marginTop: 6, marginLeft: 5}}
-            source={require('../../assets/pdf_icon.png')}
+            style={{width: 24, height: 24, marginTop: 12, marginLeft: 5}}
+            source={require('../../assets/PDF-48_46492.png')}
           />
           <Text
             style={{
               fontSize: 16,
               fontWeight: 'bold',
               color: 'green',
-              marginLeft: 5,
               marginTop: 16,
             }}>
             {' '}
-            Save As PDF
+            Download PDF
           </Text>
         </View>
         <View style={{flex: 1, flexDirection: 'column', width: width * 0.6}}>
@@ -173,10 +175,11 @@ function SaveAsPDF() {
         <View
           style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
+            disabled={isSaveAsPdfDisabled}
             style={styles.tinyBtn2}
             underlayColor="#f0f4f7"
             onPress={onSaveAsPDF}>
-            <Text style={styles.btnClr}>Save As PDF</Text>
+            <Text style={styles.btnClr}>Download</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.tinyBtn2}

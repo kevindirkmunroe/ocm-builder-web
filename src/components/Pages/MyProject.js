@@ -46,7 +46,7 @@ function MyProject(){
   const navigate = useNavigate();
 
   let onStartOver = () => {
-    alert('Start Over', 'Starting Over clears all your previous changes. Continue?', [
+    alert('Start Over', 'Start Over clears all your Project\'s changes. Continue?', [
       {
         text: 'No, keep my changes',
         style: 'cancel',
@@ -62,7 +62,7 @@ function MyProject(){
   }
 
   let onContinue = () => {
-    navigate('/send', { state: { projectLayers: projectLayers } });
+    navigate('/email', { state: { projectLayers: projectLayers } });
   }
 
   //
@@ -178,7 +178,7 @@ function MyProject(){
               style={styles.tinyBtn2}
               underlayColor="#f0f4f7"
               onPress={onContinue}>
-              <Text style={styles.btnClr}>Send To OCM</Text>
+              <Text style={styles.btnClr}>Save Project As...</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   tinyBtn2: {
     marginLeft: 10,
     marginTop: 3,
-    width: 150,
+    width: 180,
     height: 45,
     padding: 10,
     backgroundColor: '#5DA75E',

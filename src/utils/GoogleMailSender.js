@@ -1,4 +1,4 @@
-import {Platform} from 'react-native';
+import { Linking, Platform } from "react-native";
 import RNSmtpMailer from "react-native-smtp-mailer";
 
 const _generateImageName = formData => {
@@ -74,41 +74,46 @@ const _createOCMSummaryBody = (projectLayers, formData) => {
   );
 };
 
-const sendOCMSummaryMail = async (projectLayers, snapshotURL, formData) => {
+const sendOCMSummaryMail = async (projectLayers, snapshotURL, formData, useSMTP) => {
   const imageName = _generateImageName(formData);
-  console.debug(`GoogleMailSender: RNSmtpMailer.sendMail=${RNSmtpMailer.sendMail}`);
-  RNSmtpMailer.sendMail({
-    mailhost: EMAIL_CREDENTIALS[CRED_SOURCE].mailhost,
-    port: EMAIL_CREDENTIALS[CRED_SOURCE].port,
-    ssl: true, //if ssl: false, TLS is enabled,**note:** in iOS TLS/SSL is determined automatically, so either true or false is the same
-    username: EMAIL_CREDENTIALS[CRED_SOURCE].username,
-    password: EMAIL_CREDENTIALS[CRED_SOURCE].password,
-    from: EMAIL_CREDENTIALS[CRED_SOURCE].from,
-    recipients: `${EMAIL_CREDENTIALS[CRED_SOURCE].recipients},${formData.email}`,
-    subject: 'Request quote for Custom Material',
-    htmlBody: _createOCMSummaryBody(projectLayers, formData),
-    attachmentPaths: [
-      Platform.OS === 'ios' ? snapshotURL : snapshotURL.substring(7),
-    ],
-    attachmentNames: [imageName],
-    attachmentTypes: ['image/png'],
-  })
-    .then(success => {
-      alert(
-        `GMAIL to host ${
-          EMAIL_CREDENTIALS[CRED_SOURCE].mailhost
-        } success: ${JSON.stringify(success)}`,
-      );
-      return success;
+
+  if(useSMTP){
+    RNSmtpMailer.sendMail({
+      mailhost: EMAIL_CREDENTIALS[CRED_SOURCE].mailhost,
+      port: EMAIL_CREDENTIALS[CRED_SOURCE].port,
+      ssl: true, //if ssl: false, TLS is enabled,**note:** in iOS TLS/SSL is determined automatically, so either true or false is the same
+      username: EMAIL_CREDENTIALS[CRED_SOURCE].username,
+      password: EMAIL_CREDENTIALS[CRED_SOURCE].password,
+      from: EMAIL_CREDENTIALS[CRED_SOURCE].from,
+      recipients: `${EMAIL_CREDENTIALS[CRED_SOURCE].recipients},${formData.email}`,
+      subject: 'Request quote for Custom Material',
+      htmlBody: _createOCMSummaryBody(projectLayers, formData),
+      attachmentPaths: [
+        Platform.OS === 'ios' ? snapshotURL : snapshotURL.substring(7),
+      ],
+      attachmentNames: [imageName],
+      attachmentTypes: ['image/png'],
     })
-    .catch(err => {
-      alert(
-        `GMAIL to host ${
-          EMAIL_CREDENTIALS[CRED_SOURCE].mailhost
-        } WTF: ${JSON.stringify(err)}`,
-      );
-      return err;
-    });
+      .then(success => {
+        alert(
+          `GMAIL to host ${
+            EMAIL_CREDENTIALS[CRED_SOURCE].mailhost
+          } success: ${JSON.stringify(success)}`,
+        );
+        return success;
+      })
+      .catch(err => {
+        alert(
+          `GMAIL to host ${
+            EMAIL_CREDENTIALS[CRED_SOURCE].mailhost
+          } WTF: ${JSON.stringify(err)}`,
+        );
+        return err;
+      });
+  }else {
+    await Linking.openURL(`mailto:${EMAIL_CREDENTIALS[CRED_SOURCE].recipients},${formData.email}?cc=&subject=Request quote for Custom Material&body=${encodeURIComponent(_createOCMSummaryBody(projectLayers, formData))}`)
+  }
+
 };
 
 module.exports = {

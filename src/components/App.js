@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Image, Text} from 'react-native';
 import { Navigate, Routes } from "react-router";
 
 import { Router, Route } from '../navigation/router';
@@ -10,7 +10,7 @@ import StartMyProjectClassicOCMFinish from "./Pages/StartMyProjectClassicOCMFini
 import StartMyProjectCustomFinish from "./Pages/StartMyProjectCustomFinish";
 import Welcome from "./Pages/Welcome";
 import MyProject from "./Pages/MyProject";
-import SendMyProject from "./Pages/SendMyProject";
+import EmailMyProject from "./Pages/EmailMyProject";
 import SaveAsPDF from "./Pages/SaveAsPDF";
 import AddALayer from "./Pages/AddALayer";
 import ErrorBoundary from "./ErrorBoundary";
@@ -21,7 +21,7 @@ import EditColor from "./Pages/EditColor";
 const App = () => {
 
   return (
-    <ErrorBoundary fallback={<div><img alt="OCM Coil" src="ocm-image-small.png"/><h2>&nbsp;&nbsp;An Error has occurred. <a href='/'>Home</a></h2></div>}>
+    <ErrorBoundary fallback={<View><Image alt="OCM Coil" source="ocm-image-small.png"/><Text>An Error has occurred.</Text></View>}>
       <ProvideAuth>
         <Router basename="/">
           <View style={{flex: 1}}>
@@ -35,7 +35,7 @@ const App = () => {
               <Route path="/add-layer" element={<AddALayer />} />
               <Route path="/edit-pattern" element={<EditPattern />} />
               <Route path="/edit-color" element={<EditColor />} />
-              <Route path="/send" element={<SendMyProject />} />
+              <Route path="/email" element={<EmailMyProject />} />
               <Route path="/save-as-pdf" element={<SaveAsPDF />} />
 
               {/* default redirect to home page */}
