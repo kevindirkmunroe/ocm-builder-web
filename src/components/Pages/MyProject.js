@@ -103,10 +103,29 @@ function MyProject(){
 
         {/* Breadcrumb to feature */}
         <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16, marginBottom: 16}}>
-          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Finish</Text>
-          <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-          <Image style={{ width: 24, height: 24, marginTop: 5, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> All Layers</Text>
+          <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/ocm-icon.png')} />
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: 'bold',
+              marginLeft: 5,
+              marginTop: 7,
+            }}>
+            Start
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Futura',
+              marginLeft: 5,
+              marginTop: 7,
+              color: 'gray',
+            }}>
+            {' '}
+            >{' '}
+          </Text>
+          <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
+          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 8, marginTop: 7}}>My Project</Text>
         </View>
         <View style={{width: 500, height: 280}}>
 

@@ -58,6 +58,7 @@ function EmailMyProject() {
             marginTop: 16,
             marginBottom: 16,
           }}>
+          <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/ocm-icon.png')} />
           <Text
             style={{
               fontSize: 16,
@@ -65,7 +66,28 @@ function EmailMyProject() {
               marginLeft: 5,
               marginTop: 7,
             }}>
-            My Finish
+            Start
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Futura',
+              marginLeft: 5,
+              marginTop: 7,
+              color: 'gray',
+            }}>
+            {' '}
+            >{' '}
+          </Text>
+          <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: 'bold',
+              marginLeft: 5,
+              marginTop: 7,
+            }}>
+            My Project
           </Text>
           <Text
             style={{
@@ -95,7 +117,7 @@ function EmailMyProject() {
               marginTop: 7,
             }}>
             {' '}
-            Save Project
+            Save
           </Text>
         </View>
         {/*

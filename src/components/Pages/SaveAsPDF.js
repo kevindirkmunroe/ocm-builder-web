@@ -90,6 +90,28 @@ function SaveAsPDF() {
             marginTop: 16,
             marginBottom: 16,
           }}>
+          <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/ocm-icon.png')} />
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: 'bold',
+              marginLeft: 5,
+              marginTop: 7,
+            }}>
+            Start
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Futura',
+              marginLeft: 5,
+              marginTop: 7,
+              color: 'gray',
+            }}>
+            {' '}
+            >{' '}
+          </Text>
+          <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
           <Text
             style={{
               fontSize: 16,
@@ -97,7 +119,7 @@ function SaveAsPDF() {
               marginLeft: 5,
               marginTop: 16,
             }}>
-            My Finish
+            My Project
           </Text>
           <Text
             style={{
@@ -122,7 +144,7 @@ function SaveAsPDF() {
               marginTop: 16,
             }}>
             {' '}
-            Download PDF
+            Download as PDF
           </Text>
         </View>
         <View style={{flex: 1, flexDirection: 'column', width: width * 0.6}}>
@@ -158,6 +180,13 @@ function SaveAsPDF() {
             value={fileName}
             onChangeText={setFileName}
           />
+          <TouchableHighlight
+            disabled={isSaveAsPdfDisabled}
+            style={styles.tinyBtn2}
+            underlayColor="#f0f4f7"
+            onPress={onSaveAsPDF}>
+            <Text style={styles.btnClr}>Download</Text>
+          </TouchableHighlight>
 
           {/*  Composite image preview */}
           <View style={{width: width * 0.6, height: 100}}>
@@ -174,13 +203,6 @@ function SaveAsPDF() {
         {/* Bottom Navigation */}
         <View
           style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
-          <TouchableHighlight
-            disabled={isSaveAsPdfDisabled}
-            style={styles.tinyBtn2}
-            underlayColor="#f0f4f7"
-            onPress={onSaveAsPDF}>
-            <Text style={styles.btnClr}>Download</Text>
-          </TouchableHighlight>
           <TouchableHighlight
             style={styles.tinyBtn2}
             underlayColor="#f0f4f7"
