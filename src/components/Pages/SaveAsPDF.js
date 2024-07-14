@@ -73,6 +73,9 @@ function SaveAsPDF() {
   };
 
   const isSaveAsPdfDisabled = Platform.OS === 'ios';
+  if(isSaveAsPdfDisabled){
+    alert('Save As PDF is not available for this iOS version.');
+  }
 
   return (
     <View style={styles.belowContainer}>
@@ -169,7 +172,7 @@ function SaveAsPDF() {
             style={styles.tinyBtn2}
             underlayColor="#f0f4f7"
             onPress={onSaveAsPDF}>
-            <Text style={styles.btnClr}>Download</Text>
+            <Text style={[styles.btnClr, { opacity: isSaveAsPdfDisabled ? 0.5: 1 }]}>Download</Text>
           </TouchableHighlight>
 
           {/*  Composite image preview */}
