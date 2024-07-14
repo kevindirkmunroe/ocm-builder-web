@@ -69,11 +69,8 @@ function StartMyProjectCustomFinish(){
             <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Project</Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-            <Image style={{ width: 30, height: 30 }} source={require('../../assets/layer-bottom.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Background</Text>
-            <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 16, height: 16, marginTop: 8}} source={require('../../assets/admin-customizer.256x242.png')} />
-            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom Finish</Text>
+            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom Background</Text>
           </View>
         </View>
         <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
@@ -137,10 +134,10 @@ function StartMyProjectCustomFinish(){
         {/* Bottom Navigation */}
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
-            style={styles.tinyBtn2}
+            style={styles.tinyBtn2Alt}
             underlayColor="#f0f4f7"
             onPress={onStartOver}>
-            <Text style={styles.btnClr}>Start Over</Text>
+            <Text style={styles.btnClrAlt}>Start Over</Text>
           </TouchableHighlight>
           <TouchableHighlight
             disabled={selectedItem === null || selectedColor === null}
@@ -185,6 +182,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'left',
+    borderRadius: 5
+  },
+  tinyBtn2Alt: {
+    marginLeft: 10,
+    marginTop: 3,
+    width: 180,
+    height: 45,
+    padding: 10,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 5
   },
   tinyBtnSelected: {

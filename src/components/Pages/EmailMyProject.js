@@ -11,6 +11,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import EmailProjectForm from '../Form/EmailProjectForm';
 import alert from '../../utils/Alert';
 import HomeButton from "../../components/Widgets/HomeButton";
+import MyProjectButton from "../../components/Widgets/MyProjectButton";
 
 function EmailMyProject() {
   const {width} = Dimensions.get('window');
@@ -71,16 +72,7 @@ function EmailMyProject() {
             {' '}
             >{' '}
           </Text>
-          <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: 'bold',
-              marginLeft: 5,
-              marginTop: 7,
-            }}>
-            My Project
-          </Text>
+          <MyProjectButton isDisabled={false} projectLayers={projectLayers} />
           <Text
             style={{
               fontSize: 16,
@@ -119,16 +111,16 @@ function EmailMyProject() {
         <View
           style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
-            style={styles.tinyBtn2}
-            underlayColor="#f0f4f7"
-            onPress={onBackToProject}>
-            <Text style={styles.btnClr}>Back To Project</Text>
+            style={styles.tinyBtn2Alt}
+            underlayColor="#ffffff"
+            onPress={onStartOver}>
+            <Text style={styles.btnClrAlt}>Start Over</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.tinyBtn2}
             underlayColor="#f0f4f7"
-            onPress={onStartOver}>
-            <Text style={styles.btnClr}>Start Over</Text>
+            onPress={onBackToProject}>
+            <Text style={styles.btnClr}>Back To Project</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -164,11 +156,28 @@ const styles = StyleSheet.create({
     alignItems: 'left',
     borderRadius: 5,
   },
+  tinyBtn2Alt: {
+    marginLeft: 10,
+    marginTop: 3,
+    width: 180,
+    height: 45,
+    padding: 10,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5
+  },
   btnClr: {
     fontSize: 20,
-
     fontFamily: 'Futura',
     color: '#fff',
+  },
+  btnClrAlt: {
+    fontSize: 20,
+    fontFamily: 'Futura',
+    color: 'black',
   },
   belowContainer: {
     justifyContent: 'center',

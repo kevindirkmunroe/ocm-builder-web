@@ -61,13 +61,10 @@ function StartMyProjectClassicOCMFinish(){
                  >{' '}
                </Text>
                <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-               <Text style={{fontSize: 14, fontWeight: 'bold', marginLeft: 10, marginTop: 7}}>My Project</Text>
-               <Text style={{fontSize: 14, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-               <Image style={{ width: 24, height: 24, marginTop: 5 }} source={require('../../assets/layer-bottom.png')} />
-               <Text style={{fontSize: 14, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Background</Text>
+               <Text style={{fontSize: 14, fontWeight: 'bold', marginLeft: 10, marginTop: 7, color: 'gray'}}>My Project</Text>
                <Text style={{fontSize: 14, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
                <Image style={{ width: 20, height: 20, marginTop: 8}} source={require('../../assets/map_library_icon_158312.png')} />
-               <Text style={{fontSize: 14, fontWeight: 'bold', color: 'green', marginLeft: 1, marginTop: 7}}> Classic OCM Finish</Text>
+               <Text style={{fontSize: 14, fontWeight: 'bold', color: 'green', marginLeft: 1, marginTop: 7}}> Classic OCM Background</Text>
              </View>
            </Column>
          </Row>
@@ -117,10 +114,10 @@ function StartMyProjectClassicOCMFinish(){
            <Column numRows={2}>
              <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', height: 60, marginTop: 10}}>
                <TouchableHighlight
-                 style={styles.tinyBtn2}
+                 style={styles.tinyBtn2Alt}
                  underlayColor="#f0f4f7"
                  onPress={onStartOver}>
-                 <Text style={styles.btnClr}>Start Over</Text>
+                 <Text style={styles.btnClrAlt}>Start Over</Text>
                </TouchableHighlight>
                <TouchableHighlight
                  disabled={selectedItem === null}
@@ -178,6 +175,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#5DA75E',
     justifyContent: 'left',
     alignItems: 'left',
+    borderRadius: 5
+  },
+  tinyBtn2Alt: {
+    marginLeft: 10,
+    marginTop: 3,
+    width: 180,
+    height: 45,
+    padding: 10,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 5
   },
   tinyBtn2Disabled: {

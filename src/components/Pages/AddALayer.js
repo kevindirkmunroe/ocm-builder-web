@@ -6,6 +6,7 @@ import PrintRollerSelector from "../Widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../Widgets/CustomColorSelector";
 import HomeButton from "../../components/Widgets/HomeButton";
+import MyProjectButton from "../../components/Widgets/MyProjectButton";
 
 function AddALayer(){
 
@@ -73,8 +74,7 @@ function AddALayer(){
               {' '}
               >{' '}
             </Text>
-            <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Project</Text>
+            <MyProjectButton isDisabled={false} projectLayers={projectLayers} />
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 30, height: 30 }} source={require('../../assets/plus_layer_icon_215065.png')} />
             <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Add A Layer </Text>

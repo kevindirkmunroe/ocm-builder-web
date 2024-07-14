@@ -6,6 +6,7 @@ import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../Widgets/CustomColorSelector";
 import CompositeLayerViewComponent, { deepCloneLayerStack } from "../Layer/CompositeLayerViewComponent";
 import HomeButton from "../../components/Widgets/HomeButton";
+import MyProjectButton from "../../components/Widgets/MyProjectButton";
 
 function EditColor(){
 
@@ -55,7 +56,7 @@ function EditColor(){
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
-          {/* Tab Label */}
+          {/* Breadcrumbs */}
           <View style={{flex: 1, width: width * 0.7, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
             <HomeButton />
             <Text
@@ -69,13 +70,10 @@ function EditColor(){
               {' '}
               >{' '}
             </Text>
-            <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Project</Text>
+            <MyProjectButton isDisabled={false} projectLayers={projectLayers} />
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>Layer {layerToEdit.level} </Text>
-            <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-            <Image style={{ width: 20, height: 16, marginTop: 8 }} source={require('../../assets/draw_write_pen_edit_icon_221063.png')} />
-            <Text style={{fontSize: 16, color: 'green', marginLeft: 5, marginTop: 7}}>Edit Color</Text>
+            <Image style={{ width: 20, height: 16, marginTop: 8 }} source={require('../../assets/edit_icon_128873.png')} />
+            <Text style={{fontSize: 16, color: 'green', marginLeft: 5, marginTop: 7}}>Edit Color - Layer {layerToEdit.level}</Text>
           </View>
         </View>
         <View style={{width: 250, height: 20, margin: 6, alignItems: 'center', flexDirection: 'row'}}>

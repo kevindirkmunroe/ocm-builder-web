@@ -13,6 +13,7 @@ import Layer from "../../components/Layer/Layer";
 import CompositeLayerViewComponent from "../Layer/CompositeLayerViewComponent";
 import alert from "../../utils/Alert";
 import HomeButton from "../../components/Widgets/HomeButton";
+import MyProjectButton from "../../components/Widgets/MyProjectButton";
 
 function MyProject(){
   const MAX_LAYERS = 4;
@@ -116,11 +117,17 @@ function MyProject(){
             {' '}
             >{' '}
           </Text>
-          <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-          <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 8, marginTop: 7}}>My Project</Text>
+          <MyProjectButton isDisabled={true} projectLayers={projectLayers}/>
         </View>
         <View style={{width: 500, height: 280}}>
-
+          <View style={{border: 5, borderTopLeftRadius: 5, borderTopRightRadius: 5}}>
+            <Text style={{backgroundColor: '#5DA75E',
+              alignItems: 'center',
+              fontFamily: 'Futura',
+              fontSize: 16,
+              padding: 5,
+              color: 'white'}}>Print Finish Layers</Text>
+          </View>
           {/* Layers Header */}
           <View
             style={[
@@ -180,10 +187,10 @@ function MyProject(){
           {/* Bottom Navigation */}
           <View style={{flex: 1, marginTop: 10, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
             <TouchableHighlight
-              style={styles.tinyBtn2}
+              style={styles.tinyBtn2Alt}
               underlayColor="#f0f4f7"
               onPress={onStartOver}>
-              <Text style={styles.btnClr}>Start Over</Text>
+              <Text style={styles.btnClrAlt}>Start Over</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.tinyBtn2}
@@ -240,11 +247,28 @@ const styles = StyleSheet.create({
     alignItems: 'left',
     borderRadius: 5
   },
+  tinyBtn2Alt: {
+    marginLeft: 10,
+    marginTop: 3,
+    width: 180,
+    height: 45,
+    padding: 10,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5
+  },
   btnClr: {
     fontFamily: 'Futura',
     fontSize: 20,
-
     color: '#fff',
+  },
+  btnClrAlt: {
+    fontFamily: 'Futura',
+    fontSize: 20,
+    color: 'black',
   },
   belowContainer: {
     justifyContent: 'center',

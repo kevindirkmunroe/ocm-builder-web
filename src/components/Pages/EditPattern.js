@@ -6,6 +6,7 @@ import PrintRollerSelector from "../Widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CompositeLayerViewComponent, { deepCloneLayerStack } from "../Layer/CompositeLayerViewComponent";
 import HomeButton from "../../components/Widgets/HomeButton";
+import MyProjectButton from "../../components/Widgets/MyProjectButton";
 
 function EditPattern(){
 
@@ -74,8 +75,8 @@ function EditPattern(){
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.9 }}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
-          {/* Tab Label */}
-          <View style={{flex: 1, width: width * 0.6, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16}}>
+          {/* Breadcrumbs */}
+          <View style={{flex: 1, width: width * 0.8, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16}}>
             <HomeButton/>
             <Text
               style={{
@@ -88,13 +89,10 @@ function EditPattern(){
               {' '}
               >{' '}
             </Text>
-            <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Project</Text>
+            <MyProjectButton isDisabled={false} projectLayers={projectLayers} />
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>Layer {layerToEdit.level} </Text>
-            <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-            <Image style={{ width: 20, height: 20, marginTop: 8 }} source={require('../../assets/draw_write_pen_edit_icon_221063.png')} />
-            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>Edit Pattern</Text>
+            <Image style={{ width: 20, height: 20, marginTop: 8 }} source={require('../../assets/edit_icon_128873.png')} />
+            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>Edit Pattern - Layer {layerToEdit.level}</Text>
           </View>
         </View>
 

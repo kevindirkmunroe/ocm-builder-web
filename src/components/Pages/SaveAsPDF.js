@@ -14,6 +14,7 @@ import ViewShot from 'react-native-view-shot';
 import CompositeLayerViewComponent from '../Layer/CompositeLayerViewComponent';
 import alert from '../../utils/Alert';
 import HomeButton from "../../components/Widgets/HomeButton";
+import MyProjectButton from "../../components/Widgets/MyProjectButton";
 
 function SaveAsPDF() {
   const {width} = Dimensions.get('window');
@@ -103,16 +104,7 @@ function SaveAsPDF() {
             {' '}
             >{' '}
           </Text>
-          <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: 'bold',
-              marginLeft: 5,
-              marginTop: 16,
-            }}>
-            My Project
-          </Text>
+          <MyProjectButton isDisabled={false} projectLayers={projectLayers.projectLayers} />
           <Text
             style={{
               fontSize: 16,
@@ -202,10 +194,10 @@ function SaveAsPDF() {
             <Text style={styles.btnClr}>Back To Project</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            style={styles.tinyBtn2}
+            style={styles.tinyBtn2Alt}
             underlayColor="#f0f4f7"
             onPress={onStartOver}>
-            <Text style={styles.btnClr}>Start Over</Text>
+            <Text style={styles.btnClrAlt}>Start Over</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -255,6 +247,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+  },
+  tinyBtn2Alt: {
+    marginLeft: 10,
+    marginTop: 3,
+    width: 180,
+    height: 45,
+    padding: 10,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5
   },
   btnClr: {
     fontSize: 20,
