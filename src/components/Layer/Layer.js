@@ -156,8 +156,8 @@ function Layer({
                 style={{width: 20, height: 20, marginTop: 5, marginLeft: 5}}
                 source={
                   !isVisible
-                    ? require('../../assets/eye_slash_visible_hide_hidden_show_icon_145987.png')
-                    : require('../../assets/eye_visible_hide_hidden_show_icon_145988.png')
+                    ? require('../../assets/checkbox_blank_outline_icon_139814.png')
+                    : require('../../assets/checkbox_icon_151467.png')
                 }
               />
             </TouchableHighlight>
