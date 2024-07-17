@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import PrintRollerSelector from "../widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../widgets/CustomColorSelector";
-import HomeButton from "../widgets/HomeButton";
+import HomeNavButton from "../widgets/HomeNavButton";
 
 function StartMyProjectCustomFinish(){
 
@@ -54,7 +54,7 @@ function StartMyProjectCustomFinish(){
 
           {/* Breadcrumbs to current state */}
           <View style={{flex: 1, width: width * 0.6, flexDirection: 'row', alignItems: 'center', marginRight: 18, marginTop: 16}}>
-            <HomeButton />
+            <HomeNavButton />
             <Text
               style={{
                 fontSize: 16,

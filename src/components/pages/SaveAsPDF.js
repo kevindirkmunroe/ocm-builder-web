@@ -13,8 +13,8 @@ import ViewShot from 'react-native-view-shot';
 
 import CompositeLayerViewComponent from '../layer/CompositeLayerViewComponent';
 import alert from '../../utils/Alert';
-import HomeButton from "../widgets/HomeButton";
-import MyProjectButton from "../widgets/MyProjectButton";
+import HomeNavButton from "../widgets/HomeNavButton";
+import MyProjectNavButton from "../widgets/MyProjectNavButton";
 import Layer from "../layer/Layer";
 
 function SaveAsPDF() {
@@ -104,7 +104,7 @@ function SaveAsPDF() {
             marginTop: 16,
             marginBottom: 16,
           }}>
-          <HomeButton />
+          <HomeNavButton />
           <Text
             style={{
               fontSize: 16,
@@ -116,7 +116,7 @@ function SaveAsPDF() {
             {' '}
             >{' '}
           </Text>
-          <MyProjectButton isDisabled={false} projectLayers={projectLayers.projectLayers} />
+          <MyProjectNavButton isDisabled={false} projectLayers={projectLayers.projectLayers} />
           <Text
             style={{
               fontSize: 16,

@@ -12,8 +12,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Layer from "../layer/Layer";
 import CompositeLayerViewComponent from "../layer/CompositeLayerViewComponent";
 import alert from "../../utils/Alert";
-import HomeButton from "../widgets/HomeButton";
-import MyProjectButton from "../widgets/MyProjectButton";
+import HomeNavButton from "../widgets/HomeNavButton";
+import MyProjectNavButton from "../widgets/MyProjectNavButton";
 
 function MyProject(){
   const MAX_LAYERS = 4;
@@ -105,7 +105,7 @@ function MyProject(){
 
         {/* Breadcrumb to feature */}
         <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16, marginBottom: 16}}>
-          <HomeButton />
+          <HomeNavButton />
           <Text
             style={{
               fontSize: 16,
@@ -117,7 +117,7 @@ function MyProject(){
             {' '}
             >{' '}
           </Text>
-          <MyProjectButton isDisabled={true} projectLayers={projectLayers}/>
+          <MyProjectNavButton isDisabled={true} projectLayers={projectLayers}/>
         </View>
         <View style={{width: 500, height: 280}}>
           <View style={{border: 5, borderTopLeftRadius: 5, borderTopRightRadius: 5}}>

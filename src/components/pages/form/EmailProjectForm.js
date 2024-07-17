@@ -4,7 +4,7 @@ import {
   Text, StyleSheet, Dimensions,
 } from "react-native";
 import { useNavigate } from "react-router-dom";
-import { sendOCMSummaryMail } from "../../utils/GoogleMailSender";
+import { sendOCMSummaryMail } from "../../../utils/GoogleMailSender";
 
 const EmailProjectForm = (projectLayers) => {
 

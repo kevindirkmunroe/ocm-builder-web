@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { getOCMFinishes, staticImageUrlMap } from "../../utils/AssetManager";
 import { SectionList } from "../list/SectionList";
 import { Row, Column } from "../GridLayout";
-import HomeButton from "../widgets/HomeButton";
+import HomeNavButton from "../widgets/HomeNavButton";
 
 function StartMyProjectClassicOCMFinish(){
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ function StartMyProjectClassicOCMFinish(){
          <Row>
            <Column numRows={4}>
              <View style={{width: width * 0.7, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16, marginBottom: 16}}>
-              <HomeButton />
+              <HomeNavButton />
                <Text
                  style={{
                    fontSize: 16,

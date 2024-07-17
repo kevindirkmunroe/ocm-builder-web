@@ -4,34 +4,27 @@ import { useNavigate } from "react-router-dom";
 
 import alert from "../../utils/Alert";
 
-export default function HomeButton(){
+export default function MyProjectNavButton({isDisabled, projectLayers}){
 
+  const buttonIsDisabled = isDisabled;
   const navigate = useNavigate();
-
   let onGoHome = () => {
-    alert('Start Over', 'Start Over clears all your Project\'s changes. Continue?', [
-      {
-        text: 'No, keep my changes',
-        style: 'cancel',
-      },
-      {
-        text: 'Yes, Reset', onPress: () => navigate('/start'),
-      },
-    ]);
+    navigate('/my-project', {state: {projectLayers}});
   }
 
   return(
-    <TouchableOpacity onPress={onGoHome}>
+    <TouchableOpacity disabled={buttonIsDisabled} onPress={onGoHome}>
       <View style={{flexDirection: 'row'}}>
-        <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/ocm-icon.png')} />
+        <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/layer-group.png')} />
         <Text
           style={{
             fontSize: 16,
             fontWeight: 'bold',
             marginLeft: 5,
             marginTop: 7,
+            color: buttonIsDisabled ? 'gray' : 'black'
           }}>
-          Start
+          My Project
         </Text>
       </View>
     </TouchableOpacity>

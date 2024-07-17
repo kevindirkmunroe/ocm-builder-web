@@ -8,10 +8,10 @@ import {
   View,
 } from 'react-native';
 import {useLocation, useNavigate} from 'react-router-dom';
-import EmailProjectForm from '../form/EmailProjectForm';
+import EmailProjectForm from '../../components/pages/form/EmailProjectForm';
 import alert from '../../utils/Alert';
-import HomeButton from "../widgets/HomeButton";
-import MyProjectButton from "../widgets/MyProjectButton";
+import HomeNavButton from "../widgets/HomeNavButton";
+import MyProjectNavButton from "../widgets/MyProjectNavButton";
 
 function EmailMyProject() {
   const {width} = Dimensions.get('window');
@@ -60,7 +60,7 @@ function EmailMyProject() {
             marginTop: 16,
             marginBottom: 16,
           }}>
-          <HomeButton />
+          <HomeNavButton />
           <Text
             style={{
               fontSize: 16,
@@ -72,7 +72,7 @@ function EmailMyProject() {
             {' '}
             >{' '}
           </Text>
-          <MyProjectButton isDisabled={false} projectLayers={projectLayers} />
+          <MyProjectNavButton isDisabled={false} projectLayers={projectLayers} />
           <Text
             style={{
               fontSize: 16,

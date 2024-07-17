@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PrintRollerSelector from "../widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CompositeLayerViewComponent, { deepCloneLayerStack } from "../layer/CompositeLayerViewComponent";
-import HomeButton from "../widgets/HomeButton";
-import MyProjectButton from "../widgets/MyProjectButton";
+import HomeNavButton from "../widgets/HomeNavButton";
+import MyProjectNavButton from "../widgets/MyProjectNavButton";
 
 function EditPattern(){
 
@@ -77,7 +77,7 @@ function EditPattern(){
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Breadcrumbs */}
           <View style={{flex: 1, width: width * 0.8, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16}}>
-            <HomeButton/>
+            <HomeNavButton/>
             <Text
               style={{
                 fontSize: 16,
@@ -89,7 +89,7 @@ function EditPattern(){
               {' '}
               >{' '}
             </Text>
-            <MyProjectButton isDisabled={false} projectLayers={projectLayers} />
+            <MyProjectNavButton isDisabled={false} projectLayers={projectLayers} />
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 20, height: 20, marginTop: 8 }} source={require('../../assets/edit_icon_128873.png')} />
             <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>Edit Pattern - Layer {layerToEdit.level}</Text>

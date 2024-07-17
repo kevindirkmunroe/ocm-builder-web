@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../widgets/CustomColorSelector";
 import CompositeLayerViewComponent, { deepCloneLayerStack } from "../layer/CompositeLayerViewComponent";
-import HomeButton from "../widgets/HomeButton";
-import MyProjectButton from "../widgets/MyProjectButton";
+import HomeNavButton from "../widgets/HomeNavButton";
+import MyProjectNavButton from "../widgets/MyProjectNavButton";
 
 function EditColor(){
 
@@ -58,7 +58,7 @@ function EditColor(){
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Breadcrumbs */}
           <View style={{flex: 1, width: width * 0.7, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
-            <HomeButton />
+            <HomeNavButton />
             <Text
               style={{
                 fontSize: 16,
@@ -70,7 +70,7 @@ function EditColor(){
               {' '}
               >{' '}
             </Text>
-            <MyProjectButton isDisabled={false} projectLayers={projectLayers} />
+            <MyProjectNavButton isDisabled={false} projectLayers={projectLayers} />
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 20, height: 16, marginTop: 8 }} source={require('../../assets/edit_icon_128873.png')} />
             <Text style={{fontSize: 16, color: 'green', marginLeft: 5, marginTop: 7}}>Edit Color - Layer {layerToEdit.level}</Text>

@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PrintRollerSelector from "../widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../widgets/CustomColorSelector";
-import HomeButton from "../widgets/HomeButton";
-import MyProjectButton from "../widgets/MyProjectButton";
+import HomeNavButton from "../widgets/HomeNavButton";
+import MyProjectNavButton from "../widgets/MyProjectNavButton";
 
 function AddALayer(){
 
@@ -62,7 +62,7 @@ function AddALayer(){
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Tab Label */}
           <View style={{flex: 1, width: width * 0.5, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
-            <HomeButton />
+            <HomeNavButton />
             <Text
               style={{
                 fontSize: 16,
@@ -74,7 +74,7 @@ function AddALayer(){
               {' '}
               >{' '}
             </Text>
-            <MyProjectButton isDisabled={false} projectLayers={projectLayers} />
+            <MyProjectNavButton isDisabled={false} projectLayers={projectLayers} />
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 30, height: 30 }} source={require('../../assets/plus_layer_icon_215065.png')} />
             <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Add A Layer </Text>
