@@ -2,11 +2,12 @@ import React from 'react';
 import { View, Text, TouchableHighlight, StyleSheet, Dimensions } from "react-native";
 import {useAuth} from './authContext';
 import { useNavigate } from 'react-router-dom';
-
+import { getBaseLayout, isLandscape } from "./layout/BasePageLayout";
 
 function StartMyProject() {
   const navigate = useNavigate();
   let auth = useAuth();
+  const baseLayout = getBaseLayout();
 
   let selectCustomFinish = () => {
     auth.signin(() => {
@@ -21,17 +22,17 @@ function StartMyProject() {
   const {width} = Dimensions.get('window');
   return (
     <View style={styles.belowContainer}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
-        <Text style={styles.mainText}>Let's Get Started!</Text>
-        <Text style={styles.mainText}>What are you creating Today?</Text>
+      <View style={[baseLayout.main, {flex: 1, justifyContent: 'center', alignItems: 'center'}]}>
+        <Text style={baseLayout.mainText}>Let's Get Started!</Text>
+        <Text style={baseLayout.mainText}>What are you creating Today?</Text>
         <TouchableHighlight
-          style={styles.btn}
+          style={baseLayout.btn}
           underlayColor="#f0f4f7"
           onPress={selectCustomFinish}>
           <Text style={styles.btnClr}>Design A New Finish</Text>
         </TouchableHighlight>
         <TouchableHighlight
-          style={styles.btn}
+          style={baseLayout.btn}
           underlayColor="#f0f4f7"
           onPress={selectOCMFinish}>
           <Text style={styles.btnClr}>Customize Popular OCM Finishes</Text>
@@ -42,23 +43,6 @@ function StartMyProject() {
 }
 
 const styles = StyleSheet.create({
-  mainText: {
-    fontFamily: 'Futura',
-    color: 'black',
-    fontSize: 30,
-    width: '40%',
-    padding: 20,
-
-  },
-  btn: {
-    width:  Dimensions.get('window').width * 0.8,
-    backgroundColor: '#5DA75E',
-    justifyContent: 'left',
-    alignItems: 'center',
-    padding: 10,
-    marginTop: 30,
-    borderRadius: 10,
-  },
   btnClr: {
     fontFamily: 'Futura',
     fontSize: 20,

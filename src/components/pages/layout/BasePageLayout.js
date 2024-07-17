@@ -1,4 +1,4 @@
-import { StyleSheet, useWindowDimensions } from "react-native";
+import { Dimensions, Platform, StyleSheet, useWindowDimensions } from "react-native";
 
 export function isLandscape(){
   const {width, height} = useWindowDimensions();
@@ -25,6 +25,23 @@ export function getBaseLayout(){
       backgroundColor: 'purple',
       color: 'white',
       overflow: 'scroll',
-    }
+    },
+    btn: {
+      width:  Dimensions.get('window').width * 0.6,
+      backgroundColor: '#5DA75E',
+      justifyContent: 'left',
+      alignItems: 'center',
+      padding: 10,
+      marginTop: isLandscape() && !(Platform.OS === 'ios') ? 10: 30,
+      borderRadius: 10,
+    },
+    mainText: {
+      fontFamily: 'Futura',
+      color: 'black',
+      fontSize: 30,
+      width: '80%',
+      padding: isLandscape()? 2 : 20,
+      marginTop: isLandscape() ? 5 : 10,
+    },
   });
 }

@@ -1,10 +1,9 @@
 import React from 'react';
-import { Dimensions, ScrollView, StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { useNavigate } from 'react-router-dom';
 import { getBaseLayout } from "./layout/BasePageLayout";
 
 function Welcome(){
-  const {width} = Dimensions.get('window');
   const navigate = useNavigate();
 
   let selectStart = () => {
@@ -16,9 +15,9 @@ function Welcome(){
   return (
     <View style={styles.belowContainer}>
       <View style={baseLayout.main}>
-        <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
-          <Text style={styles.mainText}>Innovate unique paint finishes for metal architecture.</Text>
-          <Text style={styles.mainText}>For roofs, walls, ceilings + more!</Text>
+        <View style={{flex: 1, width: '100%', height: '50%', alignItems: 'center'}}>
+            <Text style={styles.mainText}>Innovate unique paint finishes for metal architecture.</Text>
+            <Text style={styles.mainText}>For roofs, walls, ceilings + more!</Text>
         </View>
       </View>
       <View style={[baseLayout.footer, {flex:1, marginBottom: 30, alignItems: 'center'}]}>

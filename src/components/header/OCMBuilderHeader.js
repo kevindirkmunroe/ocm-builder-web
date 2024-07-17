@@ -28,7 +28,7 @@ function OCMBuilderHeader(){
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#67674F',
-    height: 100,
+    height: 80,
     flexShrink: 1,
     justifyContent: 'left',
     alignItems: 'center',
