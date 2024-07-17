@@ -1,9 +1,10 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, Platform, TouchableOpacity, Linking } from "react-native";
+import { Text, View, StyleSheet, Image, Platform, TouchableOpacity, Linking, Dimensions } from "react-native";
+import { isLandscape } from "../pages/layout/BasePageLayout";
 
-const OCMBuilderHeader = () => {
+function OCMBuilderHeader(){
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, {marginTop: Platform.OS === 'ios' && !isLandscape() === true ? 45 : 0}]}>
       <TouchableOpacity onPress={ () => Linking.openURL("https://www.ocmcoil.com")}>
         <Image
           style={{
@@ -22,12 +23,12 @@ const OCMBuilderHeader = () => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#67674F',
-    height: Platform.OS === 'ios' ? 200 : 100,
+    height: 100,
     flexShrink: 1,
     justifyContent: 'left',
     alignItems: 'center',

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { Dimensions, ScrollView, StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { useNavigate } from 'react-router-dom';
+import { getBaseLayout } from "./layout/BasePageLayout";
 
 function Welcome(){
   const {width} = Dimensions.get('window');
@@ -10,13 +11,19 @@ function Welcome(){
     navigate('/start');
   }
 
+  const baseLayout = getBaseLayout();
+
   return (
     <View style={styles.belowContainer}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4}}>
-        <Text style={styles.mainText}>Innovate unique paint finishes for metal architecture.</Text>
-        <Text style={styles.mainText}>For roofs, walls, ceilings + more!</Text>
+      <View style={baseLayout.main}>
+        <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
+          <Text style={styles.mainText}>Innovate unique paint finishes for metal architecture.</Text>
+          <Text style={styles.mainText}>For roofs, walls, ceilings + more!</Text>
+        </View>
+      </View>
+      <View style={[baseLayout.footer, {flex:1, marginBottom: 30, alignItems: 'center'}]}>
         <TouchableHighlight
-          style={styles.btn}
+          style={styles.bottomButton}
           underlayColor="#f0f4f7"
           onPress={selectStart}>
           <Text style={styles.btnClr}>Innovate!</Text>
@@ -31,13 +38,13 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 30,
     fontFamily: 'Futura',
-    width: '40%',
+    width: '80%',
     padding: 20,
   },
-  btn: {
+  bottomButton: {
     width: 300,
     backgroundColor: '#5DA75E',
-    justifyContent: 'left',
+    justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
     marginTop: 30,
@@ -45,7 +52,6 @@ const styles = StyleSheet.create({
   },
   btnClr: {
     fontSize: 20,
-
     fontFamily: 'Futura',
     color: '#fff',
   },

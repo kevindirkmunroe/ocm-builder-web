@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import {View, Image, Text} from 'react-native';
 import { Navigate, Routes } from "react-router";
 
