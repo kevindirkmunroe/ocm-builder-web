@@ -15,7 +15,7 @@ import { getOCMFinishes, staticImageUrlMap } from "../../utils/AssetManager";
 import { SectionList } from "../list/SectionList";
 import { Row, Column } from "../GridLayout";
 import HomeNavButton from "../widgets/HomeNavButton";
-import { getBaseLayout, isLandscape } from "./layout/BasePageLayout";
+import { getBaseLayout, isAndroidWebBrowser } from "./layout/BasePageLayout";
 
 
 function StartMyProjectClassicOCMFinish(){
@@ -51,7 +51,7 @@ function StartMyProjectClassicOCMFinish(){
              <Row>
                <Column numRows={3}>
                  <View style={{width: width * 0.9, flexDirection: 'row', alignContent: 'center',
-                   marginTop: 16, marginLeft: width * 0.1, marginBottom: 16}}>
+                   marginTop: 16, marginLeft: isAndroidWebBrowser() ? width * 0.1 : width * 0.05, marginBottom: 16}}>
                    <HomeNavButton />
                    <Text
                      style={{
@@ -215,6 +215,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
 
     color: '#fff',
+  },
+  btnClrAlt: {
+    fontSize: 20,
+    fontFamily: 'Futura',
+    color: 'black',
   },
   belowContainer: {
     justifyContent: 'center',

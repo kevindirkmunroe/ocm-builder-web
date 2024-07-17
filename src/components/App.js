@@ -19,7 +19,6 @@ import EditColor from "./pages/EditColor";
 
 
 const App = () => {
-
   return (
     <ErrorBoundary fallback={<View><Image alt="OCM Coil" source="ocm-image-small.png"/><Text>An Error has occurred.</Text></View>}>
       <ProvideAuth>

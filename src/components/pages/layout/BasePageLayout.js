@@ -5,6 +5,11 @@ export function isLandscape(){
   return width > height;
 }
 
+export function isAndroidWebBrowser(){
+  const userAgent = navigator.userAgent;
+  return /Android/i.test(userAgent);
+}
+
 export function getBaseLayout(){
   return StyleSheet.create({
     header : {

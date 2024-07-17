@@ -7,6 +7,26 @@ function Welcome(){
   const navigate = useNavigate();
 
   let selectStart = () => {
+
+    //
+    // TODO: lock app to PORTRAIT, landscape is unsupported.
+    //
+    // Tested on Android emulator, and requestFullscreen worked,
+    // lock request ok, but orientation still changed. revisit.
+    //
+    /*
+    document.documentElement.requestFullscreen().then((args) => {
+      alert(`requestFullScreen OK`);
+    }).catch((err) => {
+      alert(`requestFullScreen ERROR: ${err}`);
+    });
+    const myScreenOrientation = window.screen.orientation;
+    myScreenOrientation.lock('portrait').then((args) => {
+      alert(`app locked to PORTRAIT`);
+    }).catch((err) => {
+      alert(`Orientation lock ERROR: ${err}`);
+    });
+    */
     navigate('/start');
   }
 

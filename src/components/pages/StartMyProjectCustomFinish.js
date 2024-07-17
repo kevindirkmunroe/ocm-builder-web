@@ -224,6 +224,11 @@ const styles = StyleSheet.create({
 
     color: '#fff',
   },
+  btnClrAlt: {
+    fontSize: 20,
+    fontFamily: 'Futura',
+    color: 'black',
+  },
   btnBlk: {
     fontFamily: 'Futura',
     marginTop: 20,

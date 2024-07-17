@@ -317,6 +317,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Futura',
     color: '#fff',
   },
+  btnClrAlt: {
+    fontSize: 20,
+    fontFamily: 'Futura',
+    color: 'black',
+  },
   belowContainer: {
     justifyContent: 'center',
     alignItems: 'center',
