@@ -8,10 +8,10 @@ import {
   View,
 } from 'react-native';
 import {useLocation, useNavigate} from 'react-router-dom';
-import EmailProjectForm from '../Form/EmailProjectForm';
+import EmailProjectForm from '../form/EmailProjectForm';
 import alert from '../../utils/Alert';
-import HomeButton from "../../components/Widgets/HomeButton";
-import MyProjectButton from "../../components/Widgets/MyProjectButton";
+import HomeButton from "../widgets/HomeButton";
+import MyProjectButton from "../widgets/MyProjectButton";
 
 function EmailMyProject() {
   const {width} = Dimensions.get('window');
@@ -105,7 +105,7 @@ function EmailMyProject() {
           </Text>
         </View>
         {/*
-            Form where email is sent...
+            form where email is sent...
         */}
         <EmailProjectForm projectLayers={projectLayers} />
         <View

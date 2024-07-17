@@ -13,6 +13,7 @@ function Layer({
   isVisible,
   onDeleteLayer,
   onEditLayer,
+  isReadOnly = false
 }) {
   /*
      - level
@@ -30,6 +31,7 @@ function Layer({
     patternOpacity,
     isColorMetallic,
     isVisible,
+    isReadOnly
   });
 
   const onDelete = () => {
@@ -37,12 +39,12 @@ function Layer({
   };
 
   const onEditPattern = () => {
-    //console.log(`Layer: edit PATTERN level: ${level} pattern: ${patternName} opacity: ${patternOpacity}`);
+    //console.log(`layer: edit PATTERN level: ${level} pattern: ${patternName} opacity: ${patternOpacity}`);
     onEditLayer(level, 'pattern');
   };
 
   const onEditColor = () => {
-    //console.log(`Layer: edit COLOR level: ${level} color: ${backgroundColor} metallic: ${isColorMetallic}`);
+    //console.log(`layer: edit COLOR level: ${level} color: ${backgroundColor} metallic: ${isColorMetallic}`);
     onEditLayer(level, 'color');
   };
 
@@ -85,7 +87,7 @@ function Layer({
             backgroundColor: '#f1f1f1',
           }}>
           <TouchableHighlight
-            disabled={level === 'Background'}
+            disabled={level === 'Background' || isReadOnly }
             onPress={onEditPattern}>
             <View
               style={{
@@ -116,7 +118,7 @@ function Layer({
             justifyContent: 'left',
           }}>
           <TouchableHighlight
-            disabled={backgroundColor === null}
+            disabled={backgroundColor === null || isReadOnly}
             onPress={onEditColor}>
             <View
               style={{
@@ -150,7 +152,7 @@ function Layer({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          {level !== 'Background' && (
+          {level !== 'Background' && !isReadOnly && (
             <TouchableHighlight onPress={onToggleVisible}>
               <Image
                 style={{width: 20, height: 20, marginTop: 5, marginLeft: 5}}
@@ -162,7 +164,7 @@ function Layer({
               />
             </TouchableHighlight>
           )}
-          {level !== 'Background' && (
+          {level !== 'Background' && !isReadOnly &&  (
             <TouchableHighlight onPress={onDelete}>
               <Image
                 style={{width: 20, height: 20, marginTop: 5, marginLeft: 5}}

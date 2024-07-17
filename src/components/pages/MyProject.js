@@ -9,11 +9,11 @@ import {
   Image,
 } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
-import Layer from "../../components/Layer/Layer";
-import CompositeLayerViewComponent from "../Layer/CompositeLayerViewComponent";
+import Layer from "../layer/Layer";
+import CompositeLayerViewComponent from "../layer/CompositeLayerViewComponent";
 import alert from "../../utils/Alert";
-import HomeButton from "../../components/Widgets/HomeButton";
-import MyProjectButton from "../../components/Widgets/MyProjectButton";
+import HomeButton from "../widgets/HomeButton";
+import MyProjectButton from "../widgets/MyProjectButton";
 
 function MyProject(){
   const MAX_LAYERS = 4;
@@ -126,9 +126,9 @@ function MyProject(){
               fontFamily: 'Futura',
               fontSize: 16,
               padding: 5,
-              color: 'white'}}>Print Finish Layers</Text>
+              color: 'white'}}>My Print Finish Layers</Text>
           </View>
-          {/* Layers Header */}
+          {/* Layers header */}
           <View
             style={[
               styles.container,

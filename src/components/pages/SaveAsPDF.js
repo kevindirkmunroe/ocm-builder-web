@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {
-  Dimensions,
+  Dimensions, FlatList,
   Image, Platform,
   StyleSheet,
   Text,
@@ -11,10 +11,11 @@ import {
 import {useLocation, useNavigate} from 'react-router-dom';
 import ViewShot from 'react-native-view-shot';
 
-import CompositeLayerViewComponent from '../Layer/CompositeLayerViewComponent';
+import CompositeLayerViewComponent from '../layer/CompositeLayerViewComponent';
 import alert from '../../utils/Alert';
-import HomeButton from "../../components/Widgets/HomeButton";
-import MyProjectButton from "../../components/Widgets/MyProjectButton";
+import HomeButton from "../widgets/HomeButton";
+import MyProjectButton from "../widgets/MyProjectButton";
+import Layer from "../layer/Layer";
 
 function SaveAsPDF() {
   const {width} = Dimensions.get('window');
@@ -50,7 +51,7 @@ function SaveAsPDF() {
     });
   };
 
-  // Form content...
+  // form content...
   const [fileName, setFileName] = useState('');
 
   //
@@ -62,8 +63,16 @@ function SaveAsPDF() {
     viewShot.current.capture().then(uri => {
       import("jspdf").then((jspdf) => {
         const doc = jspdf.jsPDF();
-        doc.text('Created by OCMBuilder', 10, 10);
-        doc.addImage(uri, 'PNG', 15, 40, 180, 160);
+        doc.addImage('https://d3ciwvs59ifrt8.cloudfront.net/c7d394eb-9726-454b-bc2c-dd85e04ae7e8/289adc42-8f67-4607-b5f4-df703f9fd939_m.png',
+          'PNG', 0, 0, 40, 12)
+        doc.text(`\n${new Date().toDateString()}\n\nOCM Builder App - Sample Project\n
+        Company Name: ${form.companyName}
+        Email: ${form.email}
+        Project Name: ${form.projectName}
+        Designer Name: ${form.designerName}
+        Request Samples: ${form.requestSamples}`, 10, 20);
+
+        doc.addImage(uri, 'PNG', 15, 90, 180, 160);
         const fileToSave = fileName.endsWith('.pdf')
           ? fileName
           : `${fileName}.pdf`;
@@ -179,6 +188,40 @@ function SaveAsPDF() {
           <View style={{width: width * 0.6, height: 100}}>
             <ViewShot ref={viewShot} style={styles.viewShot}>
               <View>
+                {/* Display All Layers */}
+                <View
+                  style={[
+                    styles.container,
+                    { flexDirection: 'row',
+                    },
+                  ]}>
+                  <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 2, fontWeight: 'bold'}}>Level</Text></View>
+                  <View style={{flex: 5, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10, fontWeight: 'bold'}}>Pattern / Opacity</Text></View>
+                  <View style={{flex: 4, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{margin: 10, fontWeight: 'bold'}}>Color</Text>
+                  </View>
+                </View>
+                <FlatList
+                  data={projectLayers.projectLayers}
+                  scrollEnabled={false}
+                  initialNumToRender={4}
+                  extraData={state.refresh}
+                  renderItem={({item}) => {
+                    return (
+                      <Layer
+                        level={item.level}
+                        patternName={item.patternName}
+                        patternImageKey={item.patternImageKey}
+                        backgroundColor={item.backgroundColor}
+                        patternOpacity={item.patternOpacity}
+                        isColorMetallic={item.isColorMetallic}
+                        isVisible={true}
+                        isReadOnly={true}
+                      />
+                    )
+                  }}
+                  keyExtractor={item => `${item.patternImageKey}-${item.level}`}
+                />
                 <CompositeLayerViewComponent
                   layers={projectLayers.projectLayers}
                 />
@@ -191,16 +234,16 @@ function SaveAsPDF() {
         <View
           style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
-            style={styles.tinyBtn2}
-            underlayColor="#f0f4f7"
-            onPress={onBackToProject}>
-            <Text style={styles.btnClr}>Back To Project</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
             style={styles.tinyBtn2Alt}
             underlayColor="#f0f4f7"
             onPress={onStartOver}>
             <Text style={styles.btnClrAlt}>Start Over</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.tinyBtn2}
+            underlayColor="#f0f4f7"
+            onPress={onBackToProject}>
+            <Text style={styles.btnClr}>Back To Project</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -220,7 +263,7 @@ const styles = StyleSheet.create({
   },
   viewShot: {
     width: SCREEN_WIDTH * 0.6,
-    height: 100,
+    height: 400,
   },
   input: {
     height: 60,
@@ -263,6 +306,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5
+  },
+  container: {
+    flex: 1,
+    padding: 3,
   },
   btnClr: {
     fontSize: 20,

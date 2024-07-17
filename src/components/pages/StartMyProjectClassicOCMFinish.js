@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { getOCMFinishes, staticImageUrlMap } from "../../utils/AssetManager";
 import { SectionList } from "../list/SectionList";
 import { Row, Column } from "../GridLayout";
-import HomeButton from "../../components/Widgets/HomeButton";
+import HomeButton from "../widgets/HomeButton";
 
 function StartMyProjectClassicOCMFinish(){
   const navigate = useNavigate();

@@ -66,7 +66,7 @@ const EmailProjectForm = (projectLayers) => {
     const handleSubmit = async () => {
       if (isFormValid) {
 
-        // Form is valid, perform the submission logic
+        // form is valid, perform the submission logic
         try {
           await sendOCMSummaryMail(projectLayers.projectLayers, DUMMY_BASE64_IMAGE, {
             companyName,
@@ -87,8 +87,8 @@ const EmailProjectForm = (projectLayers) => {
         }
       } else {
 
-        // Form is invalid, display error messages
-        console.log('Form has errors. Please correct them.');
+        // form is invalid, display error messages
+        console.log('form has errors. Please correct them.');
       }
     };
 
@@ -125,16 +125,16 @@ const EmailProjectForm = (projectLayers) => {
           value={requestSamples}
           onChangeText={setRequestSamples}
         />
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'center', width: width * 0.5, padding: 10}}>
           <TouchableOpacity
-            style={[styles.button, { opacity: isFormValid ? 1 : 0.5 }]}
+            style={[styles.button, { width: 150, opacity: isFormValid ? 1 : 0.4 }]}
             disabled={!isFormValid}
             onPress={handleSubmit}
           >
             <Text style={styles.buttonText}>Email OCM</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.button, { opacity: isFormValid ? 1 : 0.5 }]}
+            style={[styles.button, { width: 150, marginLeft: 20, opacity: isFormValid ? 1 : 0.4 }]}
             disabled={!isFormValid}
             onPress={handleDownloadPdf}
           >
@@ -145,7 +145,7 @@ const EmailProjectForm = (projectLayers) => {
         {/* Display error messages */}
         {Object.values(errors).map((error, index) => (
           <Text key={index} style={styles.error}>
-            {error}
+            • {error}
           </Text>
         ))}
       </View>

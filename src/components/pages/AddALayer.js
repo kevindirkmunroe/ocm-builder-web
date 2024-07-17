@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Dimensions, StyleSheet, View, Text, TouchableHighlight, Image } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import PrintRollerSelector from "../Widgets/PrintRollerSelector";
+import PrintRollerSelector from "../widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
-import CustomColorSelector from "../Widgets/CustomColorSelector";
-import HomeButton from "../../components/Widgets/HomeButton";
-import MyProjectButton from "../../components/Widgets/MyProjectButton";
+import CustomColorSelector from "../widgets/CustomColorSelector";
+import HomeButton from "../widgets/HomeButton";
+import MyProjectButton from "../widgets/MyProjectButton";
 
 function AddALayer(){
 

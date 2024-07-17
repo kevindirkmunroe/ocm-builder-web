@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Dimensions, StyleSheet, View, Text, TouchableHighlight, Image } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import PrintRollerSelector from "../Widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
-import CompositeLayerViewComponent, { deepCloneLayerStack } from "../Layer/CompositeLayerViewComponent";
-import HomeButton from "../../components/Widgets/HomeButton";
-import MyProjectButton from "../../components/Widgets/MyProjectButton";
+import CustomColorSelector from "../widgets/CustomColorSelector";
+import CompositeLayerViewComponent, { deepCloneLayerStack } from "../layer/CompositeLayerViewComponent";
+import HomeButton from "../widgets/HomeButton";
+import MyProjectButton from "../widgets/MyProjectButton";
 
-function EditPattern(){
+function EditColor(){
 
   const navigate = useNavigate();
   const {width, height} = Dimensions.get('window');
@@ -17,17 +17,11 @@ function EditPattern(){
   const { state } = useLocation();
   const layerToEditLevel = state.layerToEditLevel;
   const projectLayers = state.projectLayers;
-  const layerToEdit = projectLayers[layerToEditLevel];
+  const layerToEdit = projectLayers[layerToEditLevel === 'Background' ? 0 : layerToEditLevel];
 
-  // Make Item object for passing to PrintRoller widget
-  const patternAsSelectedItem = {
-    key: layerToEdit.patternImageKey,
-    name: layerToEdit.patternName,
-  }
-
-  // Update item, opacity locally without changing layer, until OK button pressed.
-  const [selectedItem, setSelectedItem] = useState(patternAsSelectedItem);
-  const [opacity, setOpacity] = useState(layerToEdit.patternOpacity);
+  // Update backgroundColor, metallic without changing layer, until OK.
+  const [color, setColor] = useState(layerToEdit.backgroundColor);
+  const [isColorMetallic, setIsMetallic] = useState(layerToEdit.isColorMetallic);
 
   // Create clone of layer stack, update on edits, and CompositeLayerView will
   // show clone contents
@@ -35,20 +29,9 @@ function EditPattern(){
   const [compositeLayerView, setCompositeLayerView] =
     useState(new CompositeLayerViewComponent({layers: clonedProjectLayers}));
 
-  const updateSelectedItem = (newValue) => {
-    setSelectedItem(newValue);
-
-    // update clone and rebuild composite view...
-    clonedProjectLayers[layerToEditLevel].patternName = newValue.name;
-    clonedProjectLayers[layerToEditLevel].patternImageKey = newValue.key;
-    setCompositeLayerView(new CompositeLayerViewComponent({layers: clonedProjectLayers}));
-  }
-
-  const updateOpacity = (newValue) => {
-    setOpacity(newValue);
-
-    // update clone and rebuild composite view...
-    clonedProjectLayers[layerToEditLevel].patternOpacity = newValue;
+  const onSetColor = (newValue) => {
+    setColor(newValue);
+    clonedProjectLayers[layerToEditLevel === 'Background' ? 0 : layerToEditLevel].backgroundColor = newValue;
     setCompositeLayerView(new CompositeLayerViewComponent({layers: clonedProjectLayers}));
   }
 
@@ -59,12 +42,10 @@ function EditPattern(){
       });
   }
 
-  // Finalize updates of edited layer, go back to project
   let onOK = () => {
     // Update layer
-    layerToEdit.patternImageKey = selectedItem.key;
-    layerToEdit.patternName = selectedItem.name;
-    layerToEdit.patternOpacity = opacity;
+    layerToEdit.backgroundColor = color;
+    layerToEdit.isColorMetallic = isColorMetallic;
     navigate('/my-project',
       { state:
           { projectLayers}
@@ -73,11 +54,11 @@ function EditPattern(){
 
   return(
     <View style={styles.belowContainer}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.9 }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Breadcrumbs */}
-          <View style={{flex: 1, width: width * 0.8, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16}}>
-            <HomeButton/>
+          <View style={{flex: 1, width: width * 0.7, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
+            <HomeButton />
             <Text
               style={{
                 fontSize: 16,
@@ -91,21 +72,24 @@ function EditPattern(){
             </Text>
             <MyProjectButton isDisabled={false} projectLayers={projectLayers} />
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-            <Image style={{ width: 20, height: 20, marginTop: 8 }} source={require('../../assets/edit_icon_128873.png')} />
-            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>Edit Pattern - Layer {layerToEdit.level}</Text>
+            <Image style={{ width: 20, height: 16, marginTop: 8 }} source={require('../../assets/edit_icon_128873.png')} />
+            <Text style={{fontSize: 16, color: 'green', marginLeft: 5, marginTop: 7}}>Edit Color - Layer {layerToEdit.level}</Text>
           </View>
         </View>
-
-        <PrintRollerSelector title={`"${selectedItem.name}" / Opacity ${opacity}%`}
-                             onSelectPrintRoller={updateSelectedItem}
-                             initSelectedItem={patternAsSelectedItem}
-                             onSelectOpacity={updateOpacity}
-                             initSelectedOpacity={opacity}/>
-
+        <View style={{width: 250, height: 20, margin: 6, alignItems: 'center', flexDirection: 'row'}}>
+          <Text style={{fontFamily: 'Futura', fontSize: 16, width: 90}}>"{layerToEdit.patternName}" </Text>
+          <Text style={{fontFamily: 'Futura', fontSize: 16, backgroundColor: color, width: 20}}>     </Text>
+          <Text style={{fontFamily: 'Futura', marginLeft: 3, fontSize: 16, width: 100}}>{color}</Text>
+        </View>
+        <CustomColorSelector title={`"${layerToEdit.backgroundColor}"`}
+                             onSelectColor={onSetColor}
+                             initSelectedColor={color}
+                             onSelectMetallic={setIsMetallic}
+                             initMetallic={isColorMetallic}/>
         {/* Preview Composite image */}
         <View style={{flex: 1, marginTop: 50}}>
           <View style={{
-            backgroundColor: layerToEdit.backgroundColor,
+            backgroundColor: color,
             zIndex: 0,
             width: width * 0.6,
             height: 100,
@@ -119,9 +103,9 @@ function EditPattern(){
             borderColor:'#ADAD86',
             width: width * 0.6,
             height: 100,
-            opacity: opacity / 100
+            opacity: layerToEdit.patternOpacity / 100
           }}
-                 source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
+                 source={staticImageUrlMap[layerToEdit.patternImageKey]}>
           </Image>
           <View>
             { compositeLayerView }
@@ -218,4 +202,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-export default EditPattern;
+export default EditColor;

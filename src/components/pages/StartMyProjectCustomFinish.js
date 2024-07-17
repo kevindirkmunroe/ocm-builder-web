@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Dimensions, StyleSheet, View, Text, TouchableHighlight, Image } from "react-native";
 import { useNavigate } from 'react-router-dom';
 
-import PrintRollerSelector from "../Widgets/PrintRollerSelector";
+import PrintRollerSelector from "../widgets/PrintRollerSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
-import CustomColorSelector from "../Widgets/CustomColorSelector";
-import HomeButton from "../../components/Widgets/HomeButton";
+import CustomColorSelector from "../widgets/CustomColorSelector";
+import HomeButton from "../widgets/HomeButton";
 
 function StartMyProjectCustomFinish(){
 
@@ -67,9 +67,9 @@ function StartMyProjectCustomFinish(){
               >{' '}
             </Text>
             <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>My Project</Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7 , color: 'gray'}}>My Project</Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-            <Image style={{ width: 16, height: 16, marginTop: 8}} source={require('../../assets/admin-customizer.256x242.png')} />
+            <Image style={{ width: 24, height: 24, marginTop: 4}} source={require('../../assets/customize.png')} />
             <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom Background</Text>
           </View>
         </View>

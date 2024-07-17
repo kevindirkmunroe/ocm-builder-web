@@ -3,19 +3,19 @@ import {View, Image, Text} from 'react-native';
 import { Navigate, Routes } from "react-router";
 
 import { Router, Route } from '../navigation/router';
-import {ProvideAuth} from './Pages/authContext';
-import OCMBuilderHeader from "./Header/OCMBuilderHeader";
-import StartMyProject from "./Pages/StartMyProject";
-import StartMyProjectClassicOCMFinish from "./Pages/StartMyProjectClassicOCMFinish";
-import StartMyProjectCustomFinish from "./Pages/StartMyProjectCustomFinish";
-import Welcome from "./Pages/Welcome";
-import MyProject from "./Pages/MyProject";
-import EmailMyProject from "./Pages/EmailMyProject";
-import SaveAsPDF from "./Pages/SaveAsPDF";
-import AddALayer from "./Pages/AddALayer";
+import {ProvideAuth} from './pages/authContext';
+import OCMBuilderHeader from "./header/OCMBuilderHeader";
+import StartMyProject from "./pages/StartMyProject";
+import StartMyProjectClassicOCMFinish from "./pages/StartMyProjectClassicOCMFinish";
+import StartMyProjectCustomFinish from "./pages/StartMyProjectCustomFinish";
+import Welcome from "./pages/Welcome";
+import MyProject from "./pages/MyProject";
+import EmailMyProject from "./pages/EmailMyProject";
+import SaveAsPDF from "./pages/SaveAsPDF";
+import AddALayer from "./pages/AddALayer";
 import ErrorBoundary from "./ErrorBoundary";
-import EditPattern from "./Pages/EditPattern";
-import EditColor from "./Pages/EditColor";
+import EditPattern from "./pages/EditPattern";
+import EditColor from "./pages/EditColor";
 
 
 const App = () => {
