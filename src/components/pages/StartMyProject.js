@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableHighlight, StyleSheet, Dimensions } from "react-native";
 import {useAuth} from './authContext';
 import { useNavigate } from 'react-router-dom';
-import { getBaseLayout, isLandscape } from "./layout/BasePageLayout";
+import { getBaseLayout } from "./layout/BasePageLayout";
 
 function StartMyProject() {
   const navigate = useNavigate();

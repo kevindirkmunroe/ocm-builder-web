@@ -7,6 +7,15 @@ export function isLandscape(){
 
 export function getBaseLayout(){
   return StyleSheet.create({
+    header : {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      textAlign: 'center',
+      backgroundColor: 'pink',
+      color: 'white',
+    },
     footer: {
       position: 'absolute',
       bottom: 0,
@@ -14,7 +23,8 @@ export function getBaseLayout(){
       width:'100%',
       textAlign: 'center',
       backgroundColor: 'indigo',
-      color: 'white'
+      color: 'white',
+      marginBottom: 20,
     },
     main: {
       position: 'absolute',
