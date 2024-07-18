@@ -23,7 +23,7 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
   }
 
   return(
-    <View style={{flex: 1, marginTop: 5, justifyContent: 'center', alignItems: 'center', width: width * 0.6, backgroundColor: '#ADAD86', borderTopLeftRadius: 10, borderTopRightRadius: 10}}>
+    <View style={{flex: 1, marginTop: 10, justifyContent: 'top', alignItems: 'center'}}>
       <View style={styles.colorContainerItem}>
         <ColorPicker
           ref={r => { this.picker = r }}
@@ -44,7 +44,7 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
           useNativeLayout={false}
         />
       </View>
-      <View style={{ flex:1 , flexDirection: 'row', marginTop: 10}}>
+      <View style={{ flex:1 , flexDirection: 'row', marginTop: 10, backgroundColor: 'orange'}}>
         <Text style={{ fontSize: 18, fontFamily: 'Futura', marginRight: 10}}>Metallic</Text>
         <ToggleButton
           initial={initMetallic}
@@ -77,29 +77,7 @@ const styles = StyleSheet.create({
   colorContainerItem: {
     width: '60%', // is 50% of container width
     alignItems: 'center',
-  },
-  smallBtn: {
-    backgroundColor: '#5DA75E',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    marginTop: 20,
-    marginBottom: 30,
-    borderRadius: 10,
-  },
-  btn: {
-    backgroundColor: '#5DA75E',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    marginTop: 20,
-    marginBottom: 30,
-    borderRadius: 10,
-  },
-  btnClr: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
+    backgroundColor: 'yellow',
   },
   belowContainer: {
     justifyContent: 'center',
