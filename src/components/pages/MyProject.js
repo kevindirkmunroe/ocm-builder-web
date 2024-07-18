@@ -14,6 +14,7 @@ import CompositeLayerViewComponent from "../layer/CompositeLayerViewComponent";
 import alert from "../../utils/Alert";
 import HomeNavButton from "../widgets/HomeNavButton";
 import MyProjectNavButton from "../widgets/MyProjectNavButton";
+import { getBaseLayout, isAndroidWebBrowser as isAndroid } from "./layout/BasePageLayout";
 
 function MyProject(){
   const MAX_LAYERS = 4;
@@ -23,6 +24,7 @@ function MyProject(){
   const { state } = useLocation();
   const [projectLayers, setProjectLayers] = useState(state.projectLayers);
   const [refresh, setRefresh] = useState(false);
+  const baseLayout = getBaseLayout();
 
   const onDeleteLayer = (layerToDelete) => {
     // Chop out layer...
@@ -101,103 +103,113 @@ function MyProject(){
   //
   return(
     <View style={styles.belowContainer}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.4 }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={[baseLayout.header, {position: 'fixed', top: 75}]}>
 
-        {/* Breadcrumb to feature */}
-        <View style={{width: width * 0.5, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16, marginBottom: 16}}>
-          <HomeNavButton />
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: 'Futura',
-              marginLeft: 5,
-              marginTop: 7,
-              color: 'gray',
-            }}>
-            {' '}
-            >{' '}
-          </Text>
-          <MyProjectNavButton isDisabled={true} projectLayers={projectLayers}/>
-        </View>
-        <View style={{width: 500, height: 280}}>
-          <View style={{border: 5, borderTopLeftRadius: 5, borderTopRightRadius: 5}}>
-            <Text style={{backgroundColor: '#5DA75E',
-              alignItems: 'center',
-              fontFamily: 'Futura',
-              fontSize: 16,
-              padding: 5,
-              color: 'white'}}>My Print Finish Layers</Text>
+          {/* Breadcrumb to feature */}
+
+          <View style={{width: width * 0.8, flexDirection: 'row', justifyContent: 'center', marginLeft: width * 0.1, marginTop: isAndroid() ? 2 : 10}}>
+            <HomeNavButton />
+            <Text
+              style={{
+                fontSize: 16,
+                fontFamily: 'Futura',
+                marginLeft: 5,
+                marginTop: 7,
+                color: 'gray',
+              }}>
+              {' '}
+              >{' '}
+            </Text>
+            <MyProjectNavButton isDisabled={true} projectLayers={projectLayers}/>
           </View>
-          {/* Layers header */}
-          <View
-            style={[
-              styles.container,
-              { flexDirection: 'row',
-              },
-            ]}>
-            <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 2, fontWeight: 'bold'}}>Level</Text></View>
-            <View style={{flex: 5, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10, fontWeight: 'bold'}}>Pattern / Opacity</Text></View>
-            <View style={{flex: 4, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{margin: 10, fontWeight: 'bold'}}>Color</Text>
+        </View>
+        <View style={[baseLayout.main, {position: 'fixed', top: isAndroid() ? 112: 150}]}>
+          <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', marginTop: isAndroid() ? 4: 0}}>
+
+            {/* Layers Top Header */}
+            <View style={{border: 5, borderTopLeftRadius: 5, borderTopRightRadius: 5}}>
+              <Text style={{backgroundColor: '#5DA75E',
+                alignItems: 'center',
+                fontFamily: 'Futura',
+                fontSize: 16,
+                padding: 5,
+                color: 'white'}}>My Print Finish Layers</Text>
             </View>
-            <View style={{flex: 4, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{margin: 10, fontWeight: 'bold'}}></Text>
+
+            {/* Layer Headers */}
+            <View
+              style={[
+                styles.container,
+                { flexDirection: 'row',
+                },
+              ]}>
+              <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{marginLeft: 1, fontWeight: 'bold'}}>Level</Text></View>
+              <View style={{flex: 5, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10, fontWeight: 'bold'}}>Pattern / Opacity</Text></View>
+              <View style={{flex: 3, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={{margin: 10, fontWeight: 'bold'}}>Color</Text>
+              </View>
+              <View style={{flex: 4, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={{margin: 10, fontWeight: 'bold'}}></Text>
+              </View>
             </View>
+
+            {/* Layer Rows */}
+            <FlatList
+              data={projectLayers}
+              scrollEnabled={false}
+              initialNumToRender={MAX_LAYERS}
+              extraData={state.refresh}
+              renderItem={({item}) => {
+                return (
+                  <Layer
+                    level={item.level}
+                    patternName={item.patternName}
+                    patternImageKey={item.patternImageKey}
+                    backgroundColor={item.backgroundColor}
+                    patternOpacity={item.patternOpacity}
+                    isColorMetallic={item.isColorMetallic}
+                    isVisible={item.isVisible}
+                    onDeleteLayer={onDeleteLayer}
+                    onEditLayer={editLayer}
+                    onToggleVisible={onToggleVisible}
+                  />
+                )
+              }}
+              keyExtractor={item => `${item.patternImageKey}-${item.level}`}
+            />
           </View>
-
-          {/* Display All Layers */}
-          <FlatList
-            data={projectLayers}
-            scrollEnabled={false}
-            initialNumToRender={MAX_LAYERS}
-            extraData={state.refresh}
-            renderItem={({item}) => {
-              return (
-                <Layer
-                  level={item.level}
-                  patternName={item.patternName}
-                  patternImageKey={item.patternImageKey}
-                  backgroundColor={item.backgroundColor}
-                  patternOpacity={item.patternOpacity}
-                  isColorMetallic={item.isColorMetallic}
-                  isVisible={item.isVisible}
-                  onDeleteLayer={onDeleteLayer}
-                  onEditLayer={editLayer}
-                  onToggleVisible={onToggleVisible}
-                />
-              )
-            }}
-            keyExtractor={item => `${item.patternImageKey}-${item.level}`}
-          />
-        </View>
-        {/*  Composite image preview */}
-        <View style={{width: width * 0.6, height: 100}}>
-          <CompositeLayerViewComponent layers={projectLayers} />
+          {/*  Composite image preview */}
+          <View style={{height: height * 0.4, marginLeft: width * 0.12, width: '100%'}}>
+            <CompositeLayerViewComponent layers={projectLayers} />
+          </View>
         </View>
 
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 120, width: width * 0.8 }}>
-          <TouchableHighlight
-            disabled={projectLayers && projectLayers.length >= MAX_LAYERS}
-            style={projectLayers && projectLayers.length >= MAX_LAYERS ? styles.btnDisabled : styles.btn}
-            underlayColor="#f0f4f7"
-            onPress={onAddALayer}>
-            <Text style={styles.btnClr}>+ Add A Layer</Text>
-          </TouchableHighlight>
+        <View style={[baseLayout.footer, {marginBottom: isAndroid() ? 1 : 14}]}>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 0, marginLeft: width * 0.1, width: width * 0.8 }}>
+            <TouchableHighlight
+              disabled={projectLayers && projectLayers.length >= MAX_LAYERS}
+              style={projectLayers && projectLayers.length >= MAX_LAYERS ? styles.btnDisabled : styles.btn}
+              underlayColor="#f0f4f7"
+              onPress={onAddALayer}>
+              <Text style={styles.btnClr}>+ Add A Layer</Text>
+            </TouchableHighlight>
 
-          {/* Bottom Navigation */}
-          <View style={{flex: 1, marginTop: 10, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
-            <TouchableHighlight
-              style={styles.tinyBtn2Alt}
-              underlayColor="#f0f4f7"
-              onPress={onStartOver}>
-              <Text style={styles.btnClrAlt}>Start Over</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.tinyBtn2}
-              underlayColor="#f0f4f7"
-              onPress={onContinue}>
-              <Text style={styles.btnClr}>Save Project As...</Text>
-            </TouchableHighlight>
+            {/* Bottom Navigation */}
+            <View style={{flex: 1, marginTop: 10, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
+              <TouchableHighlight
+                style={styles.tinyBtn2Alt}
+                underlayColor="#f0f4f7"
+                onPress={onStartOver}>
+                <Text style={styles.btnClrAlt}>Start Over</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.tinyBtn2}
+                underlayColor="#f0f4f7"
+                onPress={onContinue}>
+                <Text style={styles.btnClr}>Save Project As...</Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
       </View>

@@ -2,6 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import {StyleSheet, View, Image, Text, TouchableHighlight} from 'react-native';
 import {staticImageUrlMap} from './../../utils/AssetManager';
+import {isAndroidWebBrowser as isAndroid } from "../pages/layout/BasePageLayout";
 
 function Layer({
   level,
@@ -69,17 +70,17 @@ function Layer({
         ]}>
         <View
           style={{
-            flex: 2,
+            flex: 1,
             margin: 2,
             backgroundColor: '#f1f1f1',
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{margin: 10}}>{level}</Text>
+          <Text style={{margin: 10}}>{level === 'Background'? 'B' : level}</Text>
         </View>
         <View
           style={{
-            flex: 5,
+            flex: 4,
             margin: 2,
             flexDirection: 'row',
             alignItems: 'center',
@@ -110,7 +111,7 @@ function Layer({
         </View>
         <View
           style={{
-            flex: 4,
+            flex: 3,
             margin: 2,
             flexDirection: 'row',
             backgroundColor: '#f1f1f1',
@@ -137,15 +138,15 @@ function Layer({
                 }}
               />
               <Text style={{marginTop: 15}}>
-                {backgroundColor}{' '}
-                {JSON.stringify(isColorMetallic) === 'true' ? 'Metallic' : ''}
+                {backgroundColor? backgroundColor.toUpperCase(): ''}{' '}
+                {JSON.stringify(isColorMetallic) === 'true' ? (isAndroid() ? 'Met...': 'Metallic') : ''}
               </Text>
             </View>
           </TouchableHighlight>
         </View>
         <View
           style={{
-            flex: 2,
+            flex: 1,
             flexDirection: 'row',
             margin: 2,
             backgroundColor: '#f1f1f1',
@@ -167,7 +168,7 @@ function Layer({
           {level !== 'Background' && !isReadOnly &&  (
             <TouchableHighlight onPress={onDelete}>
               <Image
-                style={{width: 20, height: 20, marginTop: 5, marginLeft: 5}}
+                style={{width: 20, height: 20, marginTop: 5, marginLeft: 3}}
                 source={require('../../assets/trash-can-black-symbol_icon-icons.com_72914.png')}
               />
             </TouchableHighlight>

@@ -3,8 +3,7 @@ import { Dimensions, Image, View } from "react-native";
 import convert from "color-convert";
 
 import { staticImageUrlMap } from "../../utils/AssetManager";
-
-const PDF_CONTAINER_COMPONENT_ID = 'pdf-container';
+import {isAndroidWebBrowser as isAndroid } from "../pages/layout/BasePageLayout";
 
 export function deepCloneLayerStack(layers){
   return layers.map((oneLayer) => {
@@ -18,7 +17,7 @@ export default function CompositeLayerViewComponent({layers}){
   const {width, height} = Dimensions.get('window');
 
   return (
-    <View id={PDF_CONTAINER_COMPONENT_ID}>
+    <View>
         {layers.map(oneLayer => {
             const rgba =  convert.hex.rgb(oneLayer.backgroundColor);
             const rgbaStr = rgba ? `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, 0.2)` : 'rgba(0,0,0,0.0)';
@@ -36,8 +35,8 @@ export default function CompositeLayerViewComponent({layers}){
                 <Image
                   style={{
                     borderRadius: 10,
-                    width: width * 0.6,
-                    height: height * 0.2,
+                    width: width * 0.8,
+                    height: isAndroid() ? height * 0.18 : height * 0.25,
                     opacity: oneLayer.patternOpacity / 100,
                     marginLeft: (currZIndex++ - 1.3) * 3,
                   }}
