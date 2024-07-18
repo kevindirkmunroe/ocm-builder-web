@@ -59,7 +59,9 @@ function EditColor(){
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
 
           {/* Breadcrumbs */}
-          <View style={{flex: 1, marginLeft: 10, width: isAndroid() ? width * 0.95 : width * 0.8, flexDirection: 'row', justifyContent: 'center', alignContent: 'center', marginRight: 18, marginTop: 16}}>
+          <View style={{flex: 1, marginLeft: 10, width: isAndroid() ? width * 0.95 : width * 0.8,
+            flexDirection: 'row', justifyContent: 'center', alignContent: 'center',
+            marginRight: 18, marginTop: isAndroid() ? 2 : 16}}>
             <HomeNavButton />
             <Text
               style={{
@@ -78,10 +80,10 @@ function EditColor(){
             <Text style={{fontSize: 16, color: 'green', marginLeft: 5, marginTop: 7}}>Edit Color - Layer {layerToEdit.level}</Text>
           </View>
         </View>
-        <View style={{width: 320, height: 20, margin: 6, alignItems: 'center', flexDirection: 'row'}}>
-          <Text style={{fontFamily: 'Futura', fontSize: 16, width: 150}}>"{layerToEdit.patternName}" </Text>
+        <View style={{height: 20, margin: 6, alignItems: 'center', flexDirection: 'row'}}>
+          <Text style={{fontFamily: 'Futura', fontSize: 16}}>"{layerToEdit.patternName}"</Text>
           <Text style={{fontFamily: 'Futura', fontSize: 16, backgroundColor: color, width: 20}}></Text>
-          <Text style={{fontFamily: 'Futura', marginLeft: 3, fontSize: 16, width: 150}}>{color.toUpperCase()} {isColorMetallic ? 'Metallic' : ''}</Text>
+          <Text style={{fontFamily: 'Futura', marginLeft: 3, fontSize: 16}}>{color.toUpperCase()} {isColorMetallic ? 'Metallic' : ''}</Text>
         </View>
         <CustomColorSelector title={`"${layerToEdit.backgroundColor}"`}
                              onSelectColor={onSetColor}
@@ -89,7 +91,7 @@ function EditColor(){
                              onSelectMetallic={setIsMetallic}
                              initMetallic={isColorMetallic}/>
         {/* Preview Composite image */}
-        <View style={{flex: 1, marginTop: isAndroid() ? 95: 45}}>
+        <View style={{flex: 1, marginTop: isAndroid() ? 98: 45}}>
           <View style={{
             backgroundColor: color,
             zIndex: 0,
@@ -115,13 +117,13 @@ function EditColor(){
         </View>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
-            style={styles.tinyBtn2}
+            style={[styles.tinyBtn2, {height: 32, alignItems: 'center', justifyContent: 'center'}]}
             underlayColor="#f0f4f7"
             onPress={onOK}>
             <Text style={styles.btnClr}>OK</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            style={styles.tinyBtn2}
+            style={[styles.tinyBtn2, {height: 32, alignItems: 'center', justifyContent: 'center'}]}
             underlayColor="#f0f4f7"
             onPress={onCancel}>
             <Text style={styles.btnClr}>Cancel</Text>

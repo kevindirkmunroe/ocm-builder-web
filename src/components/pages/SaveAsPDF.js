@@ -86,6 +86,19 @@ function SaveAsPDF() {
     alert('Save As PDF is not available for this iOS version.');
   }
 
+  const onShowInfo = () => {
+    alert('More Info...', `
+Created using OCM Builder.
+
+Available in PVDF, SMP, or Polyester paints on aluminum or steel.
+For Building product applications including roofing, wall panels,
+ceilings, soffits, and more!
+            
+Colors may appear differently on screens or print outs. For design
+development purposes only. Production may vary. This is not a color standard.
+    `);
+  }
+
   return (
     <View style={styles.belowContainer}>
       <View
@@ -93,13 +106,13 @@ function SaveAsPDF() {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          width: width * 1.4,
         }}>
         <View
           style={{
-            width: width * 0.5,
+            width: '100%',
             flexDirection: 'row',
             alignContent: 'center',
+            justifyContent: 'center',
             marginRight: 18,
             marginTop: 16,
             marginBottom: 16,
@@ -122,14 +135,14 @@ function SaveAsPDF() {
               fontSize: 16,
               fontFamily: 'Futura',
               marginLeft: 5,
-              marginTop: 16,
+              marginTop: 3,
               color: 'gray',
             }}>
             {' '}
             >{' '}
           </Text>
           <Image
-            style={{width: 24, height: 24, marginTop: 12, marginLeft: 5}}
+            style={{width: 24, height: 24, marginTop: 4, marginLeft: 3}}
             source={require('../../assets/PDF-48_46492.png')}
           />
           <Text
@@ -137,39 +150,21 @@ function SaveAsPDF() {
               fontSize: 16,
               fontWeight: 'bold',
               color: 'green',
-              marginTop: 16,
+              marginTop: 8,
             }}>
             {' '}
             Download as PDF
           </Text>
         </View>
-        <View style={{flex: 1, flexDirection: 'column', width: width * 0.6}}>
-          <Text style={{fontStyle: 'Futura', fontSize: 20, padding: 10}}>
-            Created using OCM Builder
-          </Text>
-          <Text style={{fontStyle: 'Futura', fontSize: 20, padding: 10}}>
-            Available in PVDF, SMP, or Polyester paints on aluminum or steel.
-            For Building product applications including roofing, wall panels,
-            ceilings, soffits, and more!
-          </Text>
-          <Text style={{fontStyle: 'Futura', fontSize: 20, padding: 10}}>
-            Colors may appear differently on screens or print outs. For design
-            development purposes only. Production may vary. This is not a color
-            standard.
-          </Text>
-        </View>
+        <TouchableHighlight
+          style={styles.tinyBtn2Alt}
+          underlayColor="#f0f4f7"
+          onPress={onShowInfo}>
+          <Text style={styles.btnClrAlt}>More Info...</Text>
+        </TouchableHighlight>
 
         {/* File name form */}
-        <View style={{flex: 1, flexDirection: 'column'}}>
-          <Text
-            style={{
-              fontSize: 18,
-              marginTop: 5,
-              padding: 10,
-              fontFamily: 'Futura',
-            }}>
-            File Name:
-          </Text>
+        <View style={{flex: 1, flexDirection: 'column', marginTop: 5}}>
           <TextInput
             style={styles.input}
             placeholder="my-file-name.pdf"
@@ -185,7 +180,7 @@ function SaveAsPDF() {
           </TouchableHighlight>
 
           {/*  Composite image preview */}
-          <View style={{width: width * 0.6, height: 100}}>
+          <View style={{width: width * 0.8, height: 100}}>
             <ViewShot ref={viewShot} style={styles.viewShot}>
               <View>
                 {/* Display All Layers */}

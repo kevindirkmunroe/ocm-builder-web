@@ -128,7 +128,7 @@ function EditPattern(){
             { compositeLayerView }
           </View>
         </View>
-        <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
+        <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2, marginBottom: 10}}>
           <TouchableHighlight
             style={styles.tinyBtn2}
             underlayColor="#f0f4f7"

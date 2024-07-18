@@ -77,6 +77,7 @@ function StartMyProjectCustomFinish(){
         </View>
         <View style={baseLayout.main}>
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: isAndroid() ? 4: 0}}>
+
             {/* Pattern and Color Tabs */}
             <TouchableHighlight
               style={selectedView === ENUM_PATTERN ? styles.tinyBtnSelected: styles.tinyBtn}
@@ -106,9 +107,11 @@ function StartMyProjectCustomFinish(){
               initSelectedColor={selectedColor}
               onSelectMetallic={setIsColorMetallic}
               initMetallic={isColorMetallic} /></View> }
-            {/* Selected color */}
           </View>
+
           <View style={{marginTop: 50, flex: 1, backgroundColor: 'green', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+
+            {/* Selected color */}
             <View style={{flexDirection: 'row', margin: 2, justifyContent: 'center'}}>
               <View style={{width: 24, height: 20,backgroundColor: selectedColor, marginTop: 3, marginRight: 5 }}></View>
               <Text style={styles.btnClr}>
@@ -142,6 +145,7 @@ function StartMyProjectCustomFinish(){
             </View>
           </View>
         </View>
+
          {/* Bottom Navigation */}
         <View style={[baseLayout.footer, {marginBottom: isAndroid() ? 1 : 14}]}>
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', height: 60, marginTop: 10}}>

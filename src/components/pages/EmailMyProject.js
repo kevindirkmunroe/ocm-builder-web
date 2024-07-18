@@ -49,13 +49,13 @@ function EmailMyProject() {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          width: width * 1.4,
         }}>
         <View
           style={{
-            width: width * 0.5,
+            width: width * 0.9,
             flexDirection: 'row',
-            alignContent: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
             marginRight: 18,
             marginTop: 16,
             marginBottom: 16,
