@@ -25,7 +25,7 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem, onSe
   return(
     <View>
         <View style={{flex: 1, marginTop: 10, justifyContent: 'top', alignItems: 'center'}}>
-          <Text style={{fontFamily: 'Futura', marginBottom: 5}}>{title}</Text>
+          <Text style={{width: width * 0.6, padding: 2, fontFamily: 'Futura', marginBottom: 5, backgroundColor: 'lightgray'}}>{title}</Text>
           {/*
             Table of Print Roller images
           */}

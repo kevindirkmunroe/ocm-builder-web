@@ -7,6 +7,7 @@ import { staticImageUrlMap } from "../../utils/AssetManager";
 import CompositeLayerViewComponent, { deepCloneLayerStack } from "../layer/CompositeLayerViewComponent";
 import HomeNavButton from "../widgets/HomeNavButton";
 import MyProjectNavButton from "../widgets/MyProjectNavButton";
+import { isAndroidWebBrowser as isAndroid } from "./layout/BasePageLayout";
 
 function EditPattern(){
 
@@ -73,10 +74,10 @@ function EditPattern(){
 
   return(
     <View style={styles.belowContainer}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: width * 1.9 }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Breadcrumbs */}
-          <View style={{flex: 1, width: width * 0.8, flexDirection: 'row', alignContent: 'center', marginRight: 18, marginTop: 16}}>
+          <View style={{flex: 1, width: isAndroid() ? width * 0.95 : width * 0.8, flexDirection: 'row', alignItems: 'center', marginRight: 18, marginTop: 16}}>
             <HomeNavButton/>
             <Text
               style={{
@@ -107,9 +108,9 @@ function EditPattern(){
           <View style={{
             backgroundColor: layerToEdit.backgroundColor,
             zIndex: 0,
-            width: width * 0.6,
-            height: 100,
-            borderWidth: 10,
+            width: width * 0.8,
+            height: 80,
+            borderWidth: 4,
             opacity: 0.3}} />
           <Image style={{
             position: 'absolute',
@@ -117,8 +118,8 @@ function EditPattern(){
             backgroundColor: '#d9d9d9',
             borderWidth: 10,
             borderColor:'#ADAD86',
-            width: width * 0.6,
-            height: 100,
+            width: width * 0.8,
+            height: 80,
             opacity: opacity / 100
           }}
                  source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
