@@ -7,6 +7,7 @@ import CustomColorSelector from "../widgets/CustomColorSelector";
 import CompositeLayerViewComponent, { deepCloneLayerStack } from "../layer/CompositeLayerViewComponent";
 import HomeNavButton from "../widgets/HomeNavButton";
 import MyProjectNavButton from "../widgets/MyProjectNavButton";
+import { isAndroidWebBrowser as isAndroid } from "../pages/layout/BasePageLayout";
 
 function EditColor(){
 
@@ -56,8 +57,9 @@ function EditColor(){
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
+
           {/* Breadcrumbs */}
-          <View style={{flex: 1, width: width * 0.7, flexDirection: 'row', alignContent: 'flex-start', marginRight: 18, marginTop: 16}}>
+          <View style={{flex: 1, marginLeft: 10, width: isAndroid() ? width * 0.95 : width * 0.8, flexDirection: 'row', justifyContent: 'center', alignContent: 'center', marginRight: 18, marginTop: 16}}>
             <HomeNavButton />
             <Text
               style={{
@@ -76,10 +78,10 @@ function EditColor(){
             <Text style={{fontSize: 16, color: 'green', marginLeft: 5, marginTop: 7}}>Edit Color - Layer {layerToEdit.level}</Text>
           </View>
         </View>
-        <View style={{width: 250, height: 20, margin: 6, alignItems: 'center', flexDirection: 'row'}}>
-          <Text style={{fontFamily: 'Futura', fontSize: 16, width: 90}}>"{layerToEdit.patternName}" </Text>
-          <Text style={{fontFamily: 'Futura', fontSize: 16, backgroundColor: color, width: 20}}>     </Text>
-          <Text style={{fontFamily: 'Futura', marginLeft: 3, fontSize: 16, width: 100}}>{color}</Text>
+        <View style={{width: 320, height: 20, margin: 6, alignItems: 'center', flexDirection: 'row'}}>
+          <Text style={{fontFamily: 'Futura', fontSize: 16, width: 150}}>"{layerToEdit.patternName}" </Text>
+          <Text style={{fontFamily: 'Futura', fontSize: 16, backgroundColor: color, width: 20}}></Text>
+          <Text style={{fontFamily: 'Futura', marginLeft: 3, fontSize: 16, width: 150}}>{color.toUpperCase()} {isColorMetallic ? 'Metallic' : ''}</Text>
         </View>
         <CustomColorSelector title={`"${layerToEdit.backgroundColor}"`}
                              onSelectColor={onSetColor}
@@ -87,12 +89,12 @@ function EditColor(){
                              onSelectMetallic={setIsMetallic}
                              initMetallic={isColorMetallic}/>
         {/* Preview Composite image */}
-        <View style={{flex: 1, marginTop: 50}}>
+        <View style={{flex: 1, marginTop: isAndroid() ? 95: 45}}>
           <View style={{
             backgroundColor: color,
             zIndex: 0,
-            width: width * 0.6,
-            height: 100,
+            width: width * 0.8,
+            height: 60,
             borderWidth: 10,
             opacity: 0.3}} />
           <Image style={{
@@ -101,8 +103,8 @@ function EditColor(){
             backgroundColor: '#d9d9d9',
             borderWidth: 10,
             borderColor:'#ADAD86',
-            width: width * 0.6,
-            height: 100,
+            width: width * 0.8,
+            height: 60,
             opacity: layerToEdit.patternOpacity / 100
           }}
                  source={staticImageUrlMap[layerToEdit.patternImageKey]}>
