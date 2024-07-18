@@ -27,18 +27,29 @@ function MyProject(){
   const baseLayout = getBaseLayout();
 
   const onDeleteLayer = (layerToDelete) => {
-    // Chop out layer...
-    projectLayers.splice(layerToDelete, 1);
-    // Update layer numbers...
-    let currLayer = 1;
-    for(const layer of projectLayers){
-      if(layer.level !== 'Background'){
-        layer.level = currLayer++;
-      }
-    }
+    alert('Delete', `Deleting Layer '${layerToDelete}', Continue?`, [
+      {
+        text: 'No',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes, Delete', onPress: () => {
 
-    setProjectLayers(projectLayers);
-    setRefresh(!refresh);
+          // Chop out layer...
+          projectLayers.splice(layerToDelete, 1);
+          // Update layer numbers...
+          let currLayer = 1;
+          for(const layer of projectLayers){
+            if(layer.level !== 'Background'){
+              layer.level = currLayer++;
+            }
+          }
+
+          setProjectLayers(projectLayers);
+          setRefresh(!refresh);
+          },
+      },
+    ]);
   }
 
   const onToggleVisible = (newValue) => {
