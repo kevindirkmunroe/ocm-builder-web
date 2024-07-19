@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
   colorContainerItem: {
     width: '60%', // is 50% of container width
     alignItems: 'center',
-    backgroundColor: 'yellow',
   },
   belowContainer: {
     justifyContent: 'center',

@@ -132,7 +132,7 @@ function StartMyProjectClassicOCMFinish(){
            </TouchableHighlight>
            <TouchableHighlight
              disabled={selectedItem === null}
-             style={selectedItem ? styles.tinyBtn2 : styles.tinyBtn2Disabled }
+             style={[styles.tinyBtn2, {opacity: selectedItem ? 1: 0.4}] }
              underlayColor="#f0f4f7"
              onPress={onContinue}>
              <Text style={styles.btnClr}>Continue</Text>

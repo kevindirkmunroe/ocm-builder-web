@@ -40,6 +40,7 @@ function AddALayer(){
         patternImageKey: selectedItem.key,
         backgroundColor: selectedColor,
         patternOpacity: opacity,
+        isVisible: true,
         isColorMetallic: isColorMetallic};
     // add new layer...
     setProjectLayers(projectLayers.push(newLayer));
@@ -118,7 +119,7 @@ function AddALayer(){
               initMetallic={isColorMetallic} /></View> }
           </View>
 
-          <View style={{marginTop: 50, flex: 1, backgroundColor: 'green', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+          <View style={{marginTop: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
 
             {/* Selected color */}
             <View style={{flexDirection: 'row', margin: 2, justifyContent: 'center'}}>

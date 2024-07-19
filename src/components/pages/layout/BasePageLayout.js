@@ -18,7 +18,6 @@ export function getBaseLayout(){
       left: 0,
       width: '100%',
       textAlign: 'center',
-      backgroundColor: 'pink',
       color: 'white',
     },
     main: {
@@ -27,7 +26,6 @@ export function getBaseLayout(){
       left: 0,
       width:'100%',
       textAlign: 'center',
-      backgroundColor: 'purple',
       color: 'white',
       overflow: 'scroll',
     },
@@ -38,7 +36,6 @@ export function getBaseLayout(){
       inset: 'auto 0 0 0',
       width:'100%',
       textAlign: 'center',
-      backgroundColor: 'indigo',
       color: 'white',
       marginBottom: 20,
     },

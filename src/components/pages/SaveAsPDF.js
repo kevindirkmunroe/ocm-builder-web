@@ -18,7 +18,7 @@ import MyProjectNavButton from "../widgets/MyProjectNavButton";
 import Layer from "../layer/Layer";
 
 function SaveAsPDF() {
-  const {width} = Dimensions.get('window');
+  const {width, height} = Dimensions.get('window');
   const navigate = useNavigate();
 
   // Get Initial state, which should be complete project + form
@@ -164,23 +164,25 @@ development purposes only. Production may vary. This is not a color standard.
         </TouchableHighlight>
 
         {/* File name form */}
-        <View style={{flex: 1, flexDirection: 'column', marginTop: 5}}>
-          <TextInput
-            style={styles.input}
-            placeholder="my-file-name.pdf"
-            value={fileName}
-            onChangeText={setFileName}
-          />
-          <TouchableHighlight
-            disabled={isSaveAsPdfDisabled}
-            style={styles.tinyBtn2}
-            underlayColor="#f0f4f7"
-            onPress={onSaveAsPDF}>
-            <Text style={[styles.btnClr, { opacity: isSaveAsPdfDisabled ? 0.5: 1 }]}>Download</Text>
-          </TouchableHighlight>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: 5}}>
+          <View style={{flex:1, width: width * 0.9, flexDirection: 'row', justifyContent: 'center'}}>
+            <TextInput
+              style={styles.input}
+              placeholder="my-file-name.pdf"
+              value={fileName}
+              onChangeText={setFileName}
+            />
+            <TouchableHighlight
+              disabled={isSaveAsPdfDisabled || fileName === null || fileName.length < 3}
+              style={styles.tinyBtn2}
+              underlayColor="#f0f4f7"
+              onPress={onSaveAsPDF}>
+              <Text style={[styles.btnClr, { opacity: isSaveAsPdfDisabled || fileName === null || fileName.length < 3 ? 0.4: 1 }]}>Download</Text>
+            </TouchableHighlight>
+          </View>
 
           {/*  Composite image preview */}
-          <View style={{width: width * 0.8, height: 100}}>
+          <View style={{width: width * 0.8, height: height * 0.45}}>
             <ViewShot ref={viewShot} style={styles.viewShot}>
               <View>
                 {/* Display All Layers */}
@@ -188,35 +190,38 @@ development purposes only. Production may vary. This is not a color standard.
                   style={[
                     styles.container,
                     { flexDirection: 'row',
+                      marginLeft: width * 0.1,
                     },
                   ]}>
-                  <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 2, fontWeight: 'bold'}}>Level</Text></View>
-                  <View style={{flex: 5, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 10, fontWeight: 'bold'}}>Pattern / Opacity</Text></View>
-                  <View style={{flex: 4, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{margin: 10, fontWeight: 'bold'}}>Color</Text>
+                  <View style={{backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 3, fontWeight: 'bold'}}>Level</Text></View>
+                  <View style={{backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 12, fontWeight: 'bold'}}>Pattern / Opacity</Text></View>
+                  <View style={{backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{marginLeft: 20, fontWeight: 'bold'}}>Color</Text>
                   </View>
                 </View>
-                <FlatList
-                  data={projectLayers.projectLayers}
-                  scrollEnabled={false}
-                  initialNumToRender={4}
-                  extraData={state.refresh}
-                  renderItem={({item}) => {
-                    return (
-                      <Layer
-                        level={item.level}
-                        patternName={item.patternName}
-                        patternImageKey={item.patternImageKey}
-                        backgroundColor={item.backgroundColor}
-                        patternOpacity={item.patternOpacity}
-                        isColorMetallic={item.isColorMetallic}
-                        isVisible={true}
-                        isReadOnly={true}
-                      />
-                    )
-                  }}
-                  keyExtractor={item => `${item.patternImageKey}-${item.level}`}
-                />
+                <View style={{marginLeft: width * 0.1}}>
+                  <FlatList
+                    data={projectLayers.projectLayers}
+                    scrollEnabled={false}
+                    initialNumToRender={4}
+                    extraData={state.refresh}
+                    renderItem={({item}) => {
+                      return (
+                        <Layer
+                          level={item.level}
+                          patternName={item.patternName}
+                          patternImageKey={item.patternImageKey}
+                          backgroundColor={item.backgroundColor}
+                          patternOpacity={item.patternOpacity}
+                          isColorMetallic={item.isColorMetallic}
+                          isVisible={true}
+                          isReadOnly={true}
+                        />
+                      )
+                    }}
+                    keyExtractor={item => `${item.patternImageKey}-${item.level}`}
+                  />
+                </View>
                 <CompositeLayerViewComponent
                   layers={projectLayers.projectLayers}
                 />
@@ -261,7 +266,8 @@ const styles = StyleSheet.create({
     height: 400,
   },
   input: {
-    height: 60,
+    height: 50,
+    width: 160,
     borderColor: '#ccc',
     borderWidth: 1,
     marginBottom: 12,

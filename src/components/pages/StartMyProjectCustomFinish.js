@@ -109,12 +109,12 @@ function StartMyProjectCustomFinish(){
               initMetallic={isColorMetallic} /></View> }
           </View>
 
-          <View style={{marginTop: 50, flex: 1, backgroundColor: 'green', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+          <View style={{marginTop: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
 
             {/* Selected color */}
             <View style={{flexDirection: 'row', margin: 2, justifyContent: 'center'}}>
               <View style={{width: 24, height: 20,backgroundColor: selectedColor, marginTop: 3, marginRight: 5 }}></View>
-              <Text style={styles.btnClr}>
+              <Text style={[styles.btnClr, {color: 'black'}]}>
                 {selectedColor ? selectedColor.toUpperCase() : 'No Color'} {isColorMetallic ? 'Metallic' : ''}
               </Text>
             </View>
@@ -157,7 +157,7 @@ function StartMyProjectCustomFinish(){
             </TouchableHighlight>
             <TouchableHighlight
               disabled={selectedItem === null || selectedColor === null}
-              style={styles.tinyBtn2}
+              style={[styles.tinyBtn2, {opacity: (selectedItem === null || selectedColor === null ? 0.4 : 1)}]}
               underlayColor="#f0f4f7"
               onPress={onContinue}>
               <Text style={styles.btnClr}>Continue</Text>
