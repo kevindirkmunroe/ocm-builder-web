@@ -15,7 +15,7 @@ export default function MyProjectNavButton({isDisabled, projectLayers}){
   return(
     <TouchableOpacity disabled={buttonIsDisabled} onPress={onGoHome}>
       <View style={{flexDirection: 'row'}}>
-        <Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/layer-group.png')} />
+        <Image style={{ width: 14, height: 14, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/layer-group.png')} />
         <Text
           style={{
             fontSize: 16,

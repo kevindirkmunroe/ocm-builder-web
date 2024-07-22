@@ -65,7 +65,7 @@ function StartMyProjectClassicOCMFinish(){
                      >{' '}
                    </Text>
                    <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-                   <Text style={{fontSize: 14, fontWeight: 'bold', marginLeft: 10, marginTop: 7, color: 'gray'}}>My Project</Text>
+                   <Text style={{fontSize: 14, fontWeight: 'bold', marginLeft: 10, marginTop: 7, color: 'gray'}}>Background</Text>
                    <Text style={{fontSize: 14, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
                    <Image style={{ width: 20, height: 20, marginTop: 8}} source={require('../../assets/map_library_icon_158312.png')} />
                    <Text style={{fontSize: 14, fontWeight: 'bold', color: 'green', marginLeft: 1, marginTop: 7}}>Classic</Text>

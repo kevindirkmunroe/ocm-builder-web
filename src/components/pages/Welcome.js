@@ -14,7 +14,7 @@ function Welcome(){
     // Tested on Android emulator, and requestFullscreen worked,
     // lock request ok, but orientation still changed. revisit.
     //
-    /*
+
     document.documentElement.requestFullscreen().then((args) => {
       alert(`requestFullScreen OK`);
     }).catch((err) => {
@@ -26,7 +26,7 @@ function Welcome(){
     }).catch((err) => {
       alert(`Orientation lock ERROR: ${err}`);
     });
-    */
+
     navigate('/start');
   }
 

@@ -192,6 +192,7 @@ function MyProject(){
           </View>
           {/*  Composite image preview */}
           <View style={{height: height * 0.4, marginLeft: width * 0.12, width: '100%'}}>
+            {/* <Text>TODO: 200 is fake. compute margintop based on # layers</Text> */}
             <CompositeLayerViewComponent layers={projectLayers} />
           </View>
         </View>

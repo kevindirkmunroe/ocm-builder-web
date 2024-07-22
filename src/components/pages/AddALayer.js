@@ -130,12 +130,12 @@ function AddALayer(){
             </View>
 
             {/* Preview Composite image */}
-            <View style={{marginTop: 10, justifyContent: 'center'}}>
+            <View style={{marginTop: isAndroid() ? -20 : 6, justifyContent: 'center'}}>
               <View style={{
                 backgroundColor: selectedColor,
                 zIndex: 0,
                 width: width * 0.6,
-                height: height * 0.3,
+                height: height * 0.23,
                 borderWidth: 10,
                 borderBottomLeftRadius: 10,
                 borderBottomRightRadius: 10}} />
@@ -146,7 +146,7 @@ function AddALayer(){
                 borderWidth: 10,
                 borderColor:'#ADAD86',
                 width: width * 0.6,
-                height: height * 0.3,
+                height: height * 0.23,
                 opacity: 0.4,
                 borderBottomLeftRadius: 10,
                 borderBottomRightRadius: 10}}

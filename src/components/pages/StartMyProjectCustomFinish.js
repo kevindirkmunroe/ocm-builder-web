@@ -55,7 +55,9 @@ function StartMyProjectCustomFinish(){
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
         <View style={baseLayout.header}>
           {/* Breadcrumbs to current state */}
-          <View style={{flex: 1, width: width * 0.8, flexDirection: 'row', justifyContent : 'center', marginLeft: width * 0.1, marginTop: 10}}>
+          <View style={{flex: 1, width: isAndroid() ? width * 0.95 : width * 0.8, flexDirection: 'row',
+            justifyContent : 'center', marginLeft: isAndroid() ? 0 : width * 0.1,
+            marginTop: isAndroid() ? 2 : 10}}>
             <HomeNavButton />
             <Text
               style={{
@@ -69,7 +71,7 @@ function StartMyProjectCustomFinish(){
               >{' '}
             </Text>
             <Image style={{ width: 20, height: 20, marginTop: 8, marginLeft: 5 }} source={require('../../assets/layer-group.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7 , color: 'gray'}}>My Project</Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7 , color: 'gray'}}>Background</Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 24, height: 24, marginTop: 4}} source={require('../../assets/customize.png')} />
             <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom</Text>
@@ -125,10 +127,9 @@ function StartMyProjectCustomFinish(){
                 backgroundColor: selectedColor,
                 zIndex: 0,
                 width: width * 0.6,
-                height: height * 0.2,
+                height: isAndroid() ? height * 0.15 : height * 0.2,
                 borderWidth: 10,
-                borderBottomLeftRadius: 10,
-                borderBottomRightRadius: 10}} />
+                borderRadius: 5}} />
               <Image style={{
                 position: 'absolute',
                 zIndex: 1,
@@ -136,7 +137,7 @@ function StartMyProjectCustomFinish(){
                 borderWidth: 10,
                 borderColor:'#ADAD86',
                 width: width * 0.6,
-                height: height * 0.2,
+                height: isAndroid() ? height * 0.15 : height * 0.2,
                 opacity: 0.4,
                 borderBottomLeftRadius: 10,
                 borderBottomRightRadius: 10}}
@@ -147,7 +148,7 @@ function StartMyProjectCustomFinish(){
         </View>
 
          {/* Bottom Navigation */}
-        <View style={[baseLayout.footer, {marginBottom: isAndroid() ? 1 : 14}]}>
+        <View style={[baseLayout.footer, {marginBottom: isAndroid() ? 3 : 14}]}>
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', height: 60, marginTop: 10}}>
             <TouchableHighlight
               style={styles.tinyBtn2Alt}
