@@ -91,7 +91,7 @@ function EditColor(){
                              onSelectMetallic={setIsMetallic}
                              initMetallic={isColorMetallic}/>
         {/* Preview Composite image */}
-        <View style={{flex: 1, marginTop: isAndroid() ? 98: 45}}>
+        <View style={{flex: 1, marginTop: isAndroid() ? 122: 45}}>
           <View style={{
             backgroundColor: color,
             zIndex: 0,

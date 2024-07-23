@@ -6,7 +6,6 @@ import {
   Text,
   TouchableHighlight,
   FlatList,
-  Image,
 } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layer from "../layer/Layer";
@@ -50,9 +49,6 @@ function MyProject(){
           },
       },
     ]);
-  }
-
-  const onToggleVisible = (newValue) => {
   }
 
   //
@@ -183,7 +179,6 @@ function MyProject(){
                     isVisible={item.isVisible}
                     onDeleteLayer={onDeleteLayer}
                     onEditLayer={editLayer}
-                    onToggleVisible={onToggleVisible}
                   />
                 )
               }}
@@ -191,8 +186,7 @@ function MyProject(){
             />
           </View>
           {/*  Composite image preview */}
-          <View style={{height: height * 0.4, marginLeft: width * 0.12, width: '100%'}}>
-            {/* <Text>TODO: 200 is fake. compute margintop based on # layers</Text> */}
+           <View style={{alignContent: 'flex-end', height: (0.45 * height) - ( projectLayers.length * 40), marginLeft: width * 0.12, width: '100%'}}>
             <CompositeLayerViewComponent layers={projectLayers} />
           </View>
         </View>

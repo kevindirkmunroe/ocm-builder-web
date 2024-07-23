@@ -16,6 +16,10 @@ export default function CompositeLayerViewComponent({layers}){
   let currZIndex = 0;
   const {width, height} = Dimensions.get('window');
 
+  const layerHeight = isAndroid() ? 0.12 : 0.25;
+  const layerGap =  (0.45 * height) - ( layers.length * 40);
+  console.log(`layerLength=${layers.length} layerGap=${layerGap}`);
+
   return (
     <View>
         {layers.map(oneLayer => {
@@ -36,7 +40,7 @@ export default function CompositeLayerViewComponent({layers}){
                   style={{
                     borderRadius: 10,
                     width: width * 0.8,
-                    height: isAndroid() ? height * 0.18 : height * 0.25,
+                    height: isAndroid() ? height * 0.12 : layerGap,
                     opacity: oneLayer.patternOpacity / 100,
                     marginLeft: (currZIndex++ - 1.3) * 3,
                   }}

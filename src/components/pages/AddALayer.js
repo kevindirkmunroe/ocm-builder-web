@@ -122,20 +122,20 @@ function AddALayer(){
           <View style={{marginTop: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
 
             {/* Selected color */}
-            <View style={{flexDirection: 'row', margin: 2, justifyContent: 'center'}}>
-              <View style={{width: 24, height: 20,backgroundColor: selectedColor, marginTop: 3, marginRight: 5 }}></View>
-              <Text style={styles.btnClr}>
+            <View style={{flexDirection: 'row', margin: 2, marginTop: 6, justifyContent: 'center'}}>
+              <View style={{borderWidth: 2, borderColor: 'black', width: 24, height: 20,backgroundColor: selectedColor, marginTop: 3, marginRight: 5 }}></View>
+              <Text style={[styles.btnClr, {fontSize: 18, color: 'black'}]}>
                 {selectedColor ? selectedColor.toUpperCase() : 'No Color'} {isColorMetallic ? 'Metallic' : ''}
               </Text>
             </View>
 
             {/* Preview Composite image */}
-            <View style={{marginTop: isAndroid() ? -20 : 6, justifyContent: 'center'}}>
+            <View style={{marginTop: isAndroid() ? 0 : 6, justifyContent: 'center'}}>
               <View style={{
                 backgroundColor: selectedColor,
                 zIndex: 0,
                 width: width * 0.6,
-                height: height * 0.23,
+                height: height * 0.15,
                 borderWidth: 10,
                 borderBottomLeftRadius: 10,
                 borderBottomRightRadius: 10}} />
@@ -146,7 +146,7 @@ function AddALayer(){
                 borderWidth: 10,
                 borderColor:'#ADAD86',
                 width: width * 0.6,
-                height: height * 0.23,
+                height: height * 0.15,
                 opacity: 0.4,
                 borderBottomLeftRadius: 10,
                 borderBottomRightRadius: 10}}
@@ -242,14 +242,12 @@ const styles = StyleSheet.create({
   btnClr: {
     fontFamily: 'Futura',
     fontSize: 20,
-
     color: '#fff',
   },
   btnBlk: {
     fontFamily: 'Futura',
     marginTop: 20,
     fontSize: 30,
-
     color: 'black',
   },
   belowContainer: {

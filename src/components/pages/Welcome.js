@@ -16,15 +16,13 @@ function Welcome(){
     //
 
     document.documentElement.requestFullscreen().then((args) => {
-      alert(`requestFullScreen OK`);
+      const myScreenOrientation = window.screen.orientation;
+      myScreenOrientation.lock('portrait').then((args) => {
+      }).catch((err) => {
+        alert(`Orientation lock ERROR: ${err}`);
+      });
     }).catch((err) => {
       alert(`requestFullScreen ERROR: ${err}`);
-    });
-    const myScreenOrientation = window.screen.orientation;
-    myScreenOrientation.lock('portrait').then((args) => {
-      alert(`app locked to PORTRAIT`);
-    }).catch((err) => {
-      alert(`Orientation lock ERROR: ${err}`);
     });
 
     navigate('/start');

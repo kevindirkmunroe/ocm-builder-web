@@ -27,6 +27,7 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
       <View style={styles.colorContainerItem}>
         <ColorPicker
           ref={r => { this.picker = r }}
+          gapSize={0}
           color={colorState.currentColor}
           swatchesOnly={colorState.swatchesOnly}
           onColorChange={onColorChange}
@@ -41,10 +42,10 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
           wheelLodingIndicator={<ActivityIndicator size={40} />}
           sliderLodingIndicator={<ActivityIndicator size={20} />}
           useNativeDriver={false}
-          useNativeLayout={false}
+          useNativeLayout={true}
         />
       </View>
-      <View style={{ flex:1 , flexDirection: 'row', marginTop: 10, backgroundColor: 'orange'}}>
+      <View style={{ flex:1 , flexDirection: 'row', marginTop: 10, height: 20}}>
         <Text style={{ fontSize: 18, fontFamily: 'Futura', marginRight: 10}}>Metallic</Text>
         <ToggleButton
           initial={initMetallic}
