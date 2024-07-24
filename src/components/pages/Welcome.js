@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { useNavigate } from 'react-router-dom';
-import { getBaseLayout } from "./layout/BasePageLayout";
+import { getBaseLayout, isAndroidWebBrowser } from "./layout/BasePageLayout";
 
 function Welcome(){
   const navigate = useNavigate();
@@ -15,16 +15,17 @@ function Welcome(){
     // lock request ok, but orientation still changed. revisit.
     //
 
-    document.documentElement.requestFullscreen().then((args) => {
-      const myScreenOrientation = window.screen.orientation;
-      myScreenOrientation.lock('portrait').then((args) => {
+    if(isAndroidWebBrowser()){
+      document.documentElement.requestFullscreen().then((args) => {
+        const myScreenOrientation = window.screen.orientation;
+        myScreenOrientation.lock('portrait').then((args) => {
+        }).catch((err) => {
+          alert(`Orientation lock ERROR: ${err}`);
+        });
       }).catch((err) => {
-        alert(`Orientation lock ERROR: ${err}`);
+        alert(`requestFullScreen ERROR: ${err}`);
       });
-    }).catch((err) => {
-      alert(`requestFullScreen ERROR: ${err}`);
-    });
-
+    }
     navigate('/start');
   }
 

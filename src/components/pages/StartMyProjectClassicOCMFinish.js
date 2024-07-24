@@ -72,73 +72,71 @@ function StartMyProjectClassicOCMFinish(){
                  </View>
                </Column>
              </Row>
-
-           {/* Table of images */}
-           <Row>
-             <Column numRows={3}>
-               <View style={{height: height * 0.3, alignItems: 'center', }}>
-                 <SectionList
-                   sections={getOCMFinishes()}
-                   renderItem={({item}) => {
-                     return (
-                       <TouchableOpacity onPress={()=> {
-                         setSelectedItem(item);
+             {/* Table of images */}
+             <Row>
+               <Column numRows={3}>
+                 <View style={{height: height * 0.3, alignItems: 'center', }}>
+                   <SectionList
+                     sections={getOCMFinishes()}
+                     renderItem={({item}) => {
+                       return (
+                         <TouchableOpacity onPress={()=> {
+                           setSelectedItem(item);
+                         }
+                         }>
+                           <View style={{ backgroundColor: 'rgba(247, 247, 247, 1.0)', margin: 5, flexDirection: 'row',
+                             width: width * 0.75 }}>
+                             <Image style={{width: 50, height: 50}} source={staticImageUrlMap[item.key]} />
+                             <Text style={styles.item}>{item.name}</Text>
+                           </View>
+                         </TouchableOpacity>
+                       )
+                     }}
+                     renderSectionHeader={({section}) => (
+                       <Text style={styles.sectionHeader}>{section.title}</Text>
+                     )}
+                     keyExtractor={item => `basicListEntry-${item.name}`}
+                     initialNumToRender={3}/>
+                 </View>
+               </Column>
+             </Row>
+             {/* Preview */}
+             <Row>
+               <Column numRows={3}>
+                 <View style={{ alignItems: 'center', marginTop: 10, height: height * 0.25}}>
+                   <ImageBackground style={{width: width * 0.75, height: height * 0.25}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
+                     <View style={{ position: 'absolute', top: 10, left: 10, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
+                       { selectedItem &&
+                         <Text style={{ textShadowColor: 'rgba(0, 0, 0, 0.75)',
+                           textShadowOffset: {width: -1, height: 1},
+                           textShadowRadius: 10,  fontSize: 20, color: 'white'}}>{selectedItem.name}</Text>
                        }
-                       }>
-                         <View style={{ backgroundColor: 'rgba(247, 247, 247, 1.0)', margin: 5, flexDirection: 'row',
-                           width: width * 0.75 }}>
-                           <Image style={{width: 50, height: 50}} source={staticImageUrlMap[item.key]} />
-                           <Text style={styles.item}>{item.name}</Text>
-                         </View>
-                       </TouchableOpacity>
-                     )
-                   }}
-                   renderSectionHeader={({section}) => (
-                     <Text style={styles.sectionHeader}>{section.title}</Text>
-                   )}
-                   keyExtractor={item => `basicListEntry-${item.name}`}
-                   initialNumToRender={3}/>
-               </View>
-             </Column>
-           </Row>
-           {/* Preview */}
-           <Row>
-             <Column numRows={3}>
-               <View style={{ alignItems: 'center', marginTop: 10, height: height * 0.25}}>
-                 <ImageBackground style={{width: width * 0.75, height: height * 0.25}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
-                   <View style={{ position: 'absolute', top: 10, left: 10, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
-                     { selectedItem &&
-                       <Text style={{ textShadowColor: 'rgba(0, 0, 0, 0.75)',
-                         textShadowOffset: {width: -1, height: 1},
-                         textShadowRadius: 10,  fontSize: 20, color: 'white'}}>{selectedItem.name}</Text>
-                     }
-                     { !selectedItem &&
-                       <Text style={{ fontSize: 20, color: 'gray'}}>No Pattern Selected</Text>
-                     }
-                   </View>
-                 </ImageBackground>
-               </View>
-             </Column>
-           </Row>
+                       { !selectedItem &&
+                         <Text style={{ fontSize: 20, color: 'gray'}}>No Pattern Selected</Text>
+                       }
+                     </View>
+                   </ImageBackground>
+                 </View>
+               </Column>
+             </Row>
+          </View>
          </View>
-       </View>
-       <View style={baseLayout.footer}>
-         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', height: 60, marginTop: 10}}>
-           <TouchableHighlight
-             style={styles.tinyBtn2Alt}
-             underlayColor="#f0f4f7"
-             onPress={onStartOver}>
-             <Text style={styles.btnClrAlt}>Start Over</Text>
-           </TouchableHighlight>
-           <TouchableHighlight
-             disabled={selectedItem === null}
-             style={[styles.tinyBtn2, {opacity: selectedItem ? 1: 0.4}] }
-             underlayColor="#f0f4f7"
-             onPress={onContinue}>
-             <Text style={styles.btnClr}>Continue</Text>
-           </TouchableHighlight>
+         <View style={baseLayout.footer}>
+           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', height: 60, marginTop: 10}}>
+             <TouchableHighlight
+               style={styles.tinyBtn2Alt}
+               underlayColor="#f0f4f7"
+               onPress={onStartOver}>
+               <Text style={styles.btnClrAlt}>Start Over</Text>
+             </TouchableHighlight>
+             <TouchableHighlight
+               disabled={selectedItem === null}
+               style={[styles.tinyBtn2, {opacity: selectedItem ? 1: 0.4}] }
+               underlayColor="#f0f4f7"
+               onPress={onContinue}>
+               <Text style={styles.btnClr}>Continue</Text>
+             </TouchableHighlight>
          </View>
-
        </View>
     </View>
   );
