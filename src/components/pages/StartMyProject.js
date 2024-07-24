@@ -3,7 +3,7 @@ import { View, Text, TouchableHighlight, StyleSheet, Dimensions } from "react-na
 import {useAuth} from './authContext';
 import { useNavigate } from 'react-router-dom';
 import { getBaseLayout } from "./layout/BasePageLayout";
-import pingService from '../../utils/OCMBuilderServiceClient';
+import { pingService } from "../../utils/OCMBuilderServiceClient";
 
 function StartMyProject() {
   const navigate = useNavigate();
