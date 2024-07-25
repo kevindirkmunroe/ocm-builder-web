@@ -24,14 +24,18 @@ export async function pingService(params){
   }
 };
 
-export async function sendEmail(params){
+export async function sendEmail(form, projectLayers, snapshot){
   const req = `${OCM_BUILDER_SERVICE_ENDPOINT}:${OCM_BUILDER_SERVICE_PORT}/post`;
   console.log(`OCMBuilderServiceClient: POST ${req}`);
-  const response = await axios.get(req, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods' :    'GET'
+  const response = await axios.post(req, {
+      form, projectLayers, snapshot
+    },
+    {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET'
+      }
     }
-  });
+  );
   return response.data;
 }

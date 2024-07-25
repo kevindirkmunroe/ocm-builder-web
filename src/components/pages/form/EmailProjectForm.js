@@ -4,19 +4,20 @@ import {
   Text, StyleSheet, Dimensions,
 } from "react-native";
 import { useNavigate } from "react-router-dom";
-import { sendOCMSummaryMail } from "../../../utils/GoogleMailSender";
+import { sendEmail } from '../../../utils/OCMBuilderServiceClient';
 
 const EmailProjectForm = (projectLayers) => {
 
+    const snapshot = projectLayers.snapshot;
     const navigate = useNavigate();
 
     // State variables to store form inputs,
     // errors, and form validity
-    const [companyName, setCompanyName] = useState('');
-    const [projectName, setProjectName] = useState('');
-    const [designerName, setDesignerName] = useState('');
-    const [email, setEmail ] = useState('');
-    const [requestSamples, setRequestSamples] = useState('');
+    const [companyName, setCompanyName] = useState('TEST-company');
+    const [projectName, setProjectName] = useState('TEST-project');
+    const [designerName, setDesignerName] = useState('TEST-designer-name');
+    const [email, setEmail ] = useState('TEST-email@gmail.com');
+    const [requestSamples, setRequestSamples] = useState('Y');
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 
@@ -56,27 +57,28 @@ const EmailProjectForm = (projectLayers) => {
       setIsFormValid(Object.keys(errors).length === 0);
     };
 
-    const DUMMY_BASE64_IMAGE =
-    'iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC';
-
     const handleDownloadPdf = () => {
       navigate('/save-as-pdf', {state :
-          {form: {companyName, projectName, designerName, email, requestSamples }, projectLayers: projectLayers}});
+          {form: {companyName, projectName, designerName, email, requestSamples }, snapshot}});
     }
+
     const handleSubmit = async () => {
       if (isFormValid) {
 
         // form is valid, perform the submission logic
         try {
-          await sendOCMSummaryMail(projectLayers.projectLayers, DUMMY_BASE64_IMAGE, {
-            companyName,
-            projectName,
-            designerName,
-            email,
-          }, false);
+          await sendEmail({
+              companyName,
+              projectName,
+              designerName,
+              email,
+            },
+            projectLayers.projectLayers,
+            snapshot);
+
           alert(`Email sent to OCM from ${email}!`);
           navigate('/save-as-pdf', {state :
-              {form: {companyName, projectName, designerName, email, requestSamples }, projectLayers: projectLayers}});
+              {form: {companyName, projectName, designerName, email, requestSamples }, snapshot}});
         }catch (error){
           // Try email again, or skip to save pdf
           const errAsString = error.message;

@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Dimensions,
   StyleSheet,
   View,
   Text,
   TouchableHighlight,
-  FlatList,
+  FlatList, Modal, Pressable, Image,
 } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
+import ViewShot from "react-native-view-shot";
+
+
 import Layer from "../layer/Layer";
 import CompositeLayerViewComponent from "../layer/CompositeLayerViewComponent";
 import alert from "../../utils/Alert";
@@ -23,7 +26,14 @@ function MyProject(){
   const { state } = useLocation();
   const [projectLayers, setProjectLayers] = useState(state.projectLayers);
   const [refresh, setRefresh] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+
   const baseLayout = getBaseLayout();
+
+  //
+  // Capture 'MyProject' view as a base64 image
+  //
+  const viewShot = useRef(null);
 
   const onDeleteLayer = (layerToDelete) => {
     alert('Delete', `Deleting Layer '${layerToDelete}', Continue?`, [
@@ -72,8 +82,19 @@ function MyProject(){
     navigate('/add-layer', { state : {projectLayers: projectLayers }});
   }
 
-  let onContinue = () => {
-    navigate('/email', { state: { projectLayers: projectLayers } });
+  let onVerifyImageForSave = () => {
+    setModalVisible(true);
+  }
+
+  let onContinue = async () => {
+    let snapshot = null;
+    viewShot.current.capture().then(uri => {
+      snapshot = uri;
+      console.log(`SNAPSHOT OK, length: ${uri.length}`);
+      navigate('/email', { state: { projectLayers: projectLayers, snapshot } });
+    }).catch(err =>{
+      console.log(`ERROR screencap: ${err}`);
+    });
   }
 
   //
@@ -110,6 +131,84 @@ function MyProject(){
   //
   return(
     <View style={styles.belowContainer}>
+      {/*
+         Modal for showing image that will be saved in PDF, email
+      */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={{ width: width, height: height }}>
+          <View style={styles.modalView}>
+            <Text style={{fontSize: 20, padding: 10, fontFamily: 'Futura'}}><Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/photo-icon.png')} />&nbsp;Image Preview</Text>
+            <Text style={{fontSize: 16, padding: 14, marginBottom: 20, fontFamily: 'Futura'}}>Capture and Save Image:</Text>
+            <ViewShot ref={viewShot} style={styles.viewShot}>
+              <View>
+                {/* Display All Layers */}
+                <View
+                  style={[
+                    styles.container,
+                    { flexDirection: 'row',
+                    },
+                  ]}>
+                  <View style={{backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 3, fontWeight: 'bold'}}>Level</Text></View>
+                  <View style={{backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 12, fontWeight: 'bold'}}>Pattern / Opacity</Text></View>
+                  <View style={{backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{marginLeft: 20, fontWeight: 'bold'}}>Color</Text>
+                  </View>
+                </View>
+                <View>
+                  <FlatList
+                    data={projectLayers}
+                    scrollEnabled={false}
+                    initialNumToRender={4}
+                    extraData={state.refresh}
+                    renderItem={({item}) => {
+                      return (
+                        <Layer
+                          level={item.level}
+                          patternName={item.patternName}
+                          patternImageKey={item.patternImageKey}
+                          backgroundColor={item.backgroundColor}
+                          patternOpacity={item.patternOpacity}
+                          isColorMetallic={item.isColorMetallic}
+                          isVisible={true}
+                          isReadOnly={true}
+                        />
+                      )
+                    }}
+                    keyExtractor={item => `${item.patternImageKey}-${item.level}`}
+                  />
+                </View>
+                <CompositeLayerViewComponent
+                  layers={projectLayers}
+                />
+              </View>
+            </ViewShot>
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={styles.btnClr}>Cancel</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, {marginLeft: 8}, styles.buttonClose]}
+                onPress={
+                          () => {
+                            setModalVisible(!modalVisible)
+                            onContinue();
+                          }
+                        }>
+                <Text style={styles.btnClr}>Save</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <View style={[baseLayout.header, {position: 'fixed', top: 75}]}>
 
@@ -212,7 +311,7 @@ function MyProject(){
               <TouchableHighlight
                 style={styles.tinyBtn2}
                 underlayColor="#f0f4f7"
-                onPress={onContinue}>
+                onPress={onVerifyImageForSave}>
                 <Text style={styles.btnClr}>Save Project As...</Text>
               </TouchableHighlight>
             </View>
@@ -291,6 +390,47 @@ const styles = StyleSheet.create({
   belowContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonClose: {
+    backgroundColor: '#5DA75E',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  viewShot: {
+    height: 500,
   },
 });
 export default MyProject;

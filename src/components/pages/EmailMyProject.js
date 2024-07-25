@@ -40,8 +40,7 @@ function EmailMyProject() {
 
   // Get Initial state, which should be complete project
   const {state} = useLocation();
-  const {projectLayers} = state;
-
+  const {projectLayers, snapshot } = state;
   return (
     <View style={styles.belowContainer}>
       <View
@@ -107,7 +106,7 @@ function EmailMyProject() {
         {/*
             form where email is sent...
         */}
-        <EmailProjectForm projectLayers={projectLayers} />
+        <EmailProjectForm projectLayers={projectLayers} snapshot={snapshot} />
         <View
           style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           <TouchableHighlight
