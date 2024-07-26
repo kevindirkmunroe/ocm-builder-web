@@ -9,13 +9,10 @@ import {
   View,
 } from "react-native";
 import {useLocation, useNavigate} from 'react-router-dom';
-import ViewShot from 'react-native-view-shot';
 
-import CompositeLayerViewComponent from '../layer/CompositeLayerViewComponent';
 import alert from '../../utils/Alert';
 import HomeNavButton from "../widgets/HomeNavButton";
 import MyProjectNavButton from "../widgets/MyProjectNavButton";
-import Layer from "../layer/Layer";
 
 function SaveAsPDF() {
   const {width, height} = Dimensions.get('window');
@@ -23,7 +20,7 @@ function SaveAsPDF() {
 
   // Get Initial state, which should be complete project + form
   const {state} = useLocation();
-  const {form, projectLayers} = state;
+  const {form, projectLayers, snapshot} = state;
 
   //
   // Navigation...
@@ -46,6 +43,7 @@ function SaveAsPDF() {
   };
 
   let onBackToProject = () => {
+    console.log(`SaveAsPDF: back to project, projectLayers=${JSON.stringify(projectLayers)}`);
     navigate('/my-project', {
       state: {projectLayers: projectLayers.projectLayers},
     });
@@ -60,11 +58,8 @@ function SaveAsPDF() {
   const viewShot = useRef(null);
 
   let onSaveAsPDF = async () => {
-    viewShot.current.capture().then(uri => {
       import("jspdf").then((jspdf) => {
         const doc = jspdf.jsPDF();
-        doc.addImage('https://d3ciwvs59ifrt8.cloudfront.net/c7d394eb-9726-454b-bc2c-dd85e04ae7e8/289adc42-8f67-4607-b5f4-df703f9fd939_m.png',
-          'PNG', 0, 0, 40, 12)
         doc.text(`\n${new Date().toDateString()}\n\nOCM Builder App - Sample Project\n
         Company Name: ${form.companyName}
         Email: ${form.email}
@@ -72,12 +67,11 @@ function SaveAsPDF() {
         Designer Name: ${form.designerName}
         Request Samples: ${form.requestSamples}`, 10, 20);
 
-        doc.addImage(uri, 'PNG', 15, 90, 180, 160);
+        doc.addImage(snapshot, 'PNG', 15, 90, 180, 160);
         const fileToSave = fileName.endsWith('.pdf')
           ? fileName
           : `${fileName}.pdf`;
         doc.save(fileToSave);
-      });
     });
   };
 
@@ -129,7 +123,7 @@ development purposes only. Production may vary. This is not a color standard.
             {' '}
             >{' '}
           </Text>
-          <MyProjectNavButton isDisabled={false} projectLayers={projectLayers.projectLayers} />
+          <MyProjectNavButton isDisabled={false} projectLayers={projectLayers} />
           <Text
             style={{
               fontSize: 16,
@@ -153,7 +147,7 @@ development purposes only. Production may vary. This is not a color standard.
               marginTop: 8,
             }}>
             {' '}
-            Download as PDF
+            Download PDF
           </Text>
         </View>
         <TouchableHighlight
@@ -179,54 +173,6 @@ development purposes only. Production may vary. This is not a color standard.
               onPress={onSaveAsPDF}>
               <Text style={[styles.btnClr, { opacity: isSaveAsPdfDisabled || fileName === null || fileName.length < 3 ? 0.4: 1 }]}>Download</Text>
             </TouchableHighlight>
-          </View>
-
-          {/*  Composite image preview */}
-          <View style={{width: width * 0.8, height: height * 0.45}}>
-            <ViewShot ref={viewShot} style={styles.viewShot}>
-              <View>
-                {/* Display All Layers */}
-                <View
-                  style={[
-                    styles.container,
-                    { flexDirection: 'row',
-                      marginLeft: width * 0.1,
-                    },
-                  ]}>
-                  <View style={{backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 3, fontWeight: 'bold'}}>Level</Text></View>
-                  <View style={{backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{margin: 12, fontWeight: 'bold'}}>Pattern / Opacity</Text></View>
-                  <View style={{backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{marginLeft: 20, fontWeight: 'bold'}}>Color</Text>
-                  </View>
-                </View>
-                <View style={{marginLeft: width * 0.1}}>
-                  <FlatList
-                    data={projectLayers.projectLayers}
-                    scrollEnabled={false}
-                    initialNumToRender={4}
-                    extraData={state.refresh}
-                    renderItem={({item}) => {
-                      return (
-                        <Layer
-                          level={item.level}
-                          patternName={item.patternName}
-                          patternImageKey={item.patternImageKey}
-                          backgroundColor={item.backgroundColor}
-                          patternOpacity={item.patternOpacity}
-                          isColorMetallic={item.isColorMetallic}
-                          isVisible={true}
-                          isReadOnly={true}
-                        />
-                      )
-                    }}
-                    keyExtractor={item => `${item.patternImageKey}-${item.level}`}
-                  />
-                </View>
-                <CompositeLayerViewComponent
-                  layers={projectLayers.projectLayers}
-                />
-              </View>
-            </ViewShot>
           </View>
         </View>
 

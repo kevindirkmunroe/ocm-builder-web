@@ -91,7 +91,7 @@ function MyProject(){
     viewShot.current.capture().then(uri => {
       snapshot = uri;
       console.log(`SNAPSHOT OK, length: ${uri.length}`);
-      navigate('/email', { state: { projectLayers: projectLayers, snapshot } });
+      navigate('/email', { state: { projectLayers, snapshot } });
     }).catch(err =>{
       console.log(`ERROR screencap: ${err}`);
     });
@@ -141,10 +141,10 @@ function MyProject(){
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
-        <View style={{ width: width, height: height }}>
+        <View style={{ width: width, height: height * 0.4 }}>
           <View style={styles.modalView}>
             <Text style={{fontSize: 20, padding: 10, fontFamily: 'Futura'}}><Image style={{ width: 16, height: 16, marginTop: 8, marginLeft: 5, borderRadius: 5}} source={require('../../assets/photo-icon.png')} />&nbsp;Image Preview</Text>
-            <Text style={{fontSize: 16, padding: 14, marginBottom: 20, fontFamily: 'Futura'}}>Capture and Save Image:</Text>
+            <Text style={{fontSize: 16, padding: 14, marginBottom: 5, fontFamily: 'Futura'}}>Capture and Save Image:</Text>
             <ViewShot ref={viewShot} style={styles.viewShot}>
               <View>
                 {/* Display All Layers */}
@@ -430,7 +430,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   viewShot: {
-    height: 500,
+    height: 400,
   },
 });
 export default MyProject;

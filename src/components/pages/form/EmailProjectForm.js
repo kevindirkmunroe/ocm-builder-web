@@ -13,13 +13,15 @@ const EmailProjectForm = (projectLayers) => {
 
     // State variables to store form inputs,
     // errors, and form validity
-    const [companyName, setCompanyName] = useState('TEST-company');
-    const [projectName, setProjectName] = useState('TEST-project');
-    const [designerName, setDesignerName] = useState('TEST-designer-name');
-    const [email, setEmail ] = useState('TEST-email@gmail.com');
+    const [companyName, setCompanyName] = useState('TEST-company-12');
+    const [projectName, setProjectName] = useState('TEST-project-12');
+    const [designerName, setDesignerName] = useState('TEST-designer-name-12');
+    const [email, setEmail ] = useState('TEST-email-12@gmail.com');
     const [requestSamples, setRequestSamples] = useState('Y');
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
+
+    const referenceNumber = `OBA4${Math.floor(100000 + Math.random() * 900000)}`;
 
     useEffect(() => {
       // Trigger form validation when name,
@@ -59,7 +61,10 @@ const EmailProjectForm = (projectLayers) => {
 
     const handleDownloadPdf = () => {
       navigate('/save-as-pdf', {state :
-          {form: {companyName, projectName, designerName, email, requestSamples }, snapshot}});
+          {projectLayers: projectLayers,
+            form:
+              {companyName, projectName, designerName, referenceNumber, email, requestSamples },
+            snapshot}});
     }
 
     const handleSubmit = async () => {
@@ -71,14 +76,18 @@ const EmailProjectForm = (projectLayers) => {
               companyName,
               projectName,
               designerName,
+              referenceNumber,
               email,
             },
             projectLayers.projectLayers,
             snapshot);
 
           alert(`Email sent to OCM from ${email}!`);
-          navigate('/save-as-pdf', {state :
-              {form: {companyName, projectName, designerName, email, requestSamples }, snapshot}});
+          //
+          // No more auto-navigate after email, check w/OCM about change
+          //
+          // navigate('/save-as-pdf', {state :
+          //     {form: {companyName, projectName, designerName, email, requestSamples }, projectLayers: projectLayers.projectLayers, snapshot}});
         }catch (error){
           // Try email again, or skip to save pdf
           const errAsString = error.message;

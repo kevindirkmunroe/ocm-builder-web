@@ -15,17 +15,17 @@ function Welcome(){
     // lock request ok, but orientation still changed. revisit.
     //
 
-    if(isAndroidWebBrowser()){
-      document.documentElement.requestFullscreen().then((args) => {
-        const myScreenOrientation = window.screen.orientation;
-        myScreenOrientation.lock('portrait').then((args) => {
-        }).catch((err) => {
-          alert(`Orientation lock ERROR: ${err}`);
-        });
-      }).catch((err) => {
-        alert(`requestFullScreen ERROR: ${err}`);
-      });
-    }
+    // if(isAndroidWebBrowser()){
+    //   document.documentElement.requestFullscreen().then((args) => {
+    //     const myScreenOrientation = window.screen.orientation;
+    //     myScreenOrientation.lock('portrait').then((args) => {
+    //     }).catch((err) => {
+    //       alert(`Orientation lock ERROR: ${err}`);
+    //     });
+    //   }).catch((err) => {
+    //     alert(`requestFullScreen ERROR: ${err}`);
+    //   });
+    // }
     navigate('/start');
   }
 
