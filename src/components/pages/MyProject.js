@@ -209,7 +209,7 @@ function MyProject(){
         </View>
       </Modal>
 
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={[baseLayout.header, {position: 'fixed', top: 75}]}>
 
           {/* Breadcrumb to feature */}
@@ -247,7 +247,7 @@ function MyProject(){
             <View
               style={[
                 styles.container,
-                { flexDirection: 'row',
+                { flexDirection: 'row'
                 },
               ]}>
               <View style={{flex: 2, backgroundColor: 'lightgray', alignItems: 'center', justifyContent: 'center'}}><Text style={{marginLeft: 1, fontWeight: 'bold'}}>Level</Text></View>
@@ -285,7 +285,7 @@ function MyProject(){
             />
           </View>
           {/*  Composite image preview */}
-           <View style={{alignContent: 'flex-end', height: (0.45 * height) - ( projectLayers.length * 40), marginLeft: width * 0.12, width: '100%'}}>
+           <View style={{alignContent: 'flex-end', height: (0.45 * height) - ( projectLayers.length * 40), marginLeft: width * 0.12}}>
             <CompositeLayerViewComponent layers={projectLayers} />
           </View>
         </View>

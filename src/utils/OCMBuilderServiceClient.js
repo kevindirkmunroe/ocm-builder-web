@@ -1,9 +1,10 @@
 import React from "react";
 import axios from 'axios';
 
-
-const OCM_BUILDER_SERVICE_ENDPOINT = 'http://localhost'; //https://master.dvzbj2bf60zbt.amplifyapp.com';
-const OCM_BUILDER_SERVICE_PORT = 4443; // 80;
+// const OCM_BUILDER_SERVICE_ENDPOINT = 'http://localhost'; //https://master.dvzbj2bf60zbt.amplifyapp.com';
+// const OCM_BUILDER_SERVICE_PORT = 4443; // 80;
+const OCM_BUILDER_SERVICE_ENDPOINT = 'https://master.dvzbj2bf60zbt.amplifyapp.com';
+const OCM_BUILDER_SERVICE_PORT = 80;
 
 export async function pingService(params){
 
@@ -14,7 +15,7 @@ export async function pingService(params){
     const response = await axios.get(req, {
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods' :    'GET'
+        'Access-Control-Allow-Methods' : 'GET'
       }
     });
     return response.data;

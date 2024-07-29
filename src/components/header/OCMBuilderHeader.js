@@ -19,7 +19,7 @@ function OCMBuilderHeader(){
       </TouchableOpacity>
       <View style={{flex: 1}}>
         <Text style={styles.headerText}>Builder</Text>
-        <Text style={styles.headerText}>App (12)</Text>
+        <Text style={styles.headerText}>App (13)</Text>
       </View>
     </View>
   );

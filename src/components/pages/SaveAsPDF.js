@@ -43,7 +43,6 @@ function SaveAsPDF() {
   };
 
   let onBackToProject = () => {
-    console.log(`SaveAsPDF: back to project, projectLayers=${JSON.stringify(projectLayers)}`);
     navigate('/my-project', {
       state: {projectLayers: projectLayers.projectLayers},
     });

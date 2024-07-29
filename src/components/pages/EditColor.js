@@ -77,11 +77,10 @@ function EditColor(){
             <MyProjectNavButton isDisabled={false} projectLayers={projectLayers} />
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 20, height: 16, marginTop: 8 }} source={require('../../assets/edit_icon_128873.png')} />
-            <Text style={{fontSize: 16, color: 'green', marginLeft: 5, marginTop: 7}}>Edit Color - Layer {layerToEdit.level}</Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold', color: 'green', marginLeft: 5, marginTop: 7}}>&nbsp;Layer {layerToEdit.level}</Text>
           </View>
         </View>
         <View style={{height: 20, margin: 6, alignItems: 'center', flexDirection: 'row'}}>
-          <Text style={{fontFamily: 'Futura', fontSize: 16}}>"{layerToEdit.patternName}"</Text>
           <Text style={{fontFamily: 'Futura', fontSize: 16, backgroundColor: color, width: 20}}></Text>
           <Text style={{fontFamily: 'Futura', marginLeft: 3, fontSize: 16}}>{color.toUpperCase()} {isColorMetallic ? 'Metallic' : ''}</Text>
         </View>
@@ -120,7 +119,7 @@ function EditColor(){
             style={[styles.tinyBtn2, {height: 32, alignItems: 'center', justifyContent: 'center'}]}
             underlayColor="#f0f4f7"
             onPress={onOK}>
-            <Text style={styles.btnClr}>OK</Text>
+            <Text style={styles.btnClr}>Save</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={[styles.tinyBtn2, {height: 32, alignItems: 'center', justifyContent: 'center'}]}

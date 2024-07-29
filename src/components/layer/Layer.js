@@ -76,7 +76,7 @@ function Layer({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{margin: 10}}>{level === 'Background'? 'B' : level}</Text>
+          <Text style={{margin: 5}}>{level === 'Background'? 'B' : level}</Text>
         </View>
         <View
           style={{
@@ -139,7 +139,7 @@ function Layer({
               />
               <Text style={{marginTop: 15}}>
                 {backgroundColor? backgroundColor.toUpperCase(): ''}{' '}
-                {JSON.stringify(isColorMetallic) === 'true' ? (isAndroid() ? 'Met...': 'Metallic') : ''}
+                {JSON.stringify(isColorMetallic) === 'true' ? 'M' : ''}
               </Text>
             </View>
           </TouchableHighlight>

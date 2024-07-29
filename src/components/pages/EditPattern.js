@@ -77,7 +77,7 @@ function EditPattern(){
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
           {/* Breadcrumbs */}
-          <View style={{flex: 1, width: isAndroid() ? width * 0.95 : width * 0.8, flexDirection: 'row', alignItems: 'center', marginRight: 18, marginTop: 16}}>
+          <View style={{flex: 1, width: width * 0.8, flexDirection: 'row', alignItems: 'center', marginLeft: 18, marginRight: 18, marginTop: 16}}>
             <HomeNavButton/>
             <Text
               style={{
@@ -93,11 +93,11 @@ function EditPattern(){
             <MyProjectNavButton isDisabled={false} projectLayers={projectLayers} />
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 20, height: 20, marginTop: 8 }} source={require('../../assets/edit_icon_128873.png')} />
-            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>Edit Pattern - Layer {layerToEdit.level}</Text>
+            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}>&nbsp;Layer {layerToEdit.level}</Text>
           </View>
         </View>
 
-        <PrintRollerSelector title={`"${selectedItem.name}" / Opacity ${opacity}%`}
+        <PrintRollerSelector title={`"${selectedItem.name}" - Opacity ${opacity}%`}
                              onSelectPrintRoller={updateSelectedItem}
                              initSelectedItem={patternAsSelectedItem}
                              onSelectOpacity={updateOpacity}
@@ -133,7 +133,7 @@ function EditPattern(){
             style={styles.tinyBtn2}
             underlayColor="#f0f4f7"
             onPress={onOK}>
-            <Text style={styles.btnClr}>OK</Text>
+            <Text style={styles.btnClr}>Save</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.tinyBtn2}

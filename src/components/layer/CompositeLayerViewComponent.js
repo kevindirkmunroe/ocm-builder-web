@@ -24,13 +24,14 @@ export default function CompositeLayerViewComponent({layers}){
     <View>
         {layers.map(oneLayer => {
             const rgba =  convert.hex.rgb(oneLayer.backgroundColor);
-            const rgbaStr = rgba ? `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, 0.2)` : 'rgba(0,0,0,0.0)';
+            const rgbaStr = rgba ? `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${oneLayer.patternOpacity / 100})` : 'rgba(0,0,0,0.0)';
             return (
               (oneLayer.isVisible || oneLayer.level === 'Background') &&
               <View
                 style={{
                   marginTop: 5,
                   backgroundColor: rgbaStr,
+                  borderRadius: 10,
                   top: 0,
                   left: 0,
                   position: 'absolute',
