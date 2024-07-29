@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { ActivityIndicator, Dimensions, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Dimensions, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import ColorPicker from 'react-native-wheel-color-picker'
 import ToggleButton from "react-native-toggle-button";
 
 
 function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectMetallic, initMetallic}){
 
-  const {width, height} = Dimensions.get('window');
-
   const [colorState, setColorState] =
     useState({currentColor: initSelectedColor, swatchesOnly: false, swatchesLast: true, swatchesEnabled: false, disc: false})
+
+  const [typedColor, setTypedColor] = useState('');
+
   const onColorChange = (newColor) => {
     onSelectColor(newColor);
   }
@@ -19,32 +20,55 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
   }
 
   const onColorChangeComplete = (newColor) => {
+    console.log(`CustomColorSelector: new color=${JSON.stringify(newColor)}`);
     onSelectColor(newColor);
+  }
+
+  const onTypedColorChangeComplete = () => {
+    changeColorIfHex(typedColor);
+  }
+
+  const changeColorIfHex = (newColor) => {
+    if(newColor.search(/^[0-9a-f]{6}/i) >= 0){
+      console.log(`CustomColorSelector: new typed color=${JSON.stringify(typedColor)}`);
+      onSelectColor('#' + newColor);
+    }else{
+      alert(`"${newColor}" is not a hexidecimal number.`);
+    }
   }
 
   return(
     <View style={{flex: 1, marginTop: 10, justifyContent: 'top', alignItems: 'center'}}>
-      <View style={styles.colorContainerItem}>
-        <ColorPicker
-          ref={r => { this.picker = r }}
-          gapSize={0}
-          color={colorState.currentColor}
-          swatchesOnly={colorState.swatchesOnly}
-          onColorChange={onColorChange}
-          onColorChangeComplete={onColorChangeComplete}
-          thumbSize={40}
-          sliderSize={30}
-          noSnap={true}
-          row={false}
-          swatchesLast={colorState.swatchesLast}
-          swatches={colorState.swatchesEnabled}
-          discrete={colorState.disc}
-          wheelLodingIndicator={<ActivityIndicator size={40} />}
-          sliderLodingIndicator={<ActivityIndicator size={20} />}
-          useNativeDriver={false}
-          useNativeLayout={true}
-        />
-      </View>
+        <View style={styles.colorContainerItem}>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <Text style={[styles.btnClrAlt, {fontSize: 20}]}>#&nbsp;</Text>
+            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, marginRight: 6}} onChangeText={setTypedColor} value={typedColor}/>
+            <TouchableHighlight
+              style={{borderColor: 'black', borderWidth: 2, borderRadius: 4, paddingLeft: 5, paddingRight: 5}}
+              onPress={onTypedColorChangeComplete}>
+              <Text style={styles.btnClrAlt}>Set</Text>
+            </TouchableHighlight>
+          </View>
+          <ColorPicker
+            ref={r => { this.picker = r }}
+            gapSize={0}
+            color={colorState.currentColor}
+            swatchesOnly={colorState.swatchesOnly}
+            onColorChange={onColorChange}
+            onColorChangeComplete={onColorChangeComplete}
+            thumbSize={40}
+            sliderSize={30}
+            noSnap={true}
+            row={false}
+            swatchesLast={colorState.swatchesLast}
+            swatches={colorState.swatchesEnabled}
+            discrete={colorState.disc}
+            wheelLodingIndicator={<ActivityIndicator size={40} />}
+            sliderLodingIndicator={<ActivityIndicator size={20} />}
+            useNativeDriver={false}
+            useNativeLayout={true}
+          />
+        </View>
       <View style={{ flex:1 , flexDirection: 'row', marginTop: 10, height: 20}}>
         <Text style={{ fontSize: 18, fontFamily: 'Futura', marginRight: 10}}>Metallic</Text>
         <ToggleButton
@@ -68,6 +92,11 @@ const styles = StyleSheet.create({
     width: '80%',
     padding: 20,
     textAlign: 'center'
+  },
+  btnClrAlt: {
+    fontFamily: 'Futura',
+    fontSize: 16,
+    color: 'black',
   },
   colorContainer: {
     flex: 1,

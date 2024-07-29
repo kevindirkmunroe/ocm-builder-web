@@ -2,6 +2,7 @@ import React from "react";
 
 export function getOCMPrintRollers(){
   return [
+    {key: 'blank_print', name: 'BLANK'},
     {key: 'bamboo', name: 'Bamboo'},
     {key: 'brushed', name: 'Brushed'},
     {key: 'delta', name: 'Delta'},
@@ -37,6 +38,8 @@ export const sandobi = require('../assets/printRollers/sandobi.jpg');
 export const spangle = require('../assets/printRollers/spangle.jpg');
 export const terrazzo_a = require('../assets/printRollers/terrazzo_a.png');
 export const terrazzo_b = require('../assets/printRollers/terrazzo_b.jpg');
+export const blank_print = require('../assets/printRollers/blank.png');
+
 
 
 export function getOCMFinishes(){
@@ -145,6 +148,7 @@ export const staticImageUrlMap = {
   'rustic': rustic,
   'wood': wood,
 
+  'BLANK': blank_print,
   'bamboo': bamboo,
   'brushed': brushed,
   'delta': delta,

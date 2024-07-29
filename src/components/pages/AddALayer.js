@@ -65,7 +65,7 @@ function AddALayer(){
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
         {/* Breadcrumb section */}
-        <View style={{flex: 1, width: width * 0.8, flexDirection: 'row', justifyContent : 'center', marginLeft: width * 0.1, marginTop: 10}}>
+        <View style={{flex: 1, width: width * 0.9, flexDirection: 'row', justifyContent : 'center', marginLeft: width * 0.1, marginTop: 10}}>
           <HomeNavButton />
           <Text
             style={{
@@ -123,9 +123,9 @@ function AddALayer(){
 
             {/* Selected color */}
             <View style={{flexDirection: 'row', margin: 2, marginTop: 6, justifyContent: 'center'}}>
-              <View style={{borderWidth: 2, borderColor: 'black', width: 24, height: 20,backgroundColor: selectedColor, marginTop: 3, marginRight: 5 }}></View>
-              <Text style={[styles.btnClr, {fontSize: 18, color: 'black'}]}>
-                {selectedColor ? selectedColor.toUpperCase() : 'No Color'} {isColorMetallic ? 'Metallic' : ''}
+              <View style={{width: 24, height: 20,backgroundColor: selectedColor, marginTop: 3, marginRight: 5 }}></View>
+              <Text style={[styles.btnClr, {fontSize: 16, color: 'black'}]}>
+                {selectedColor ? selectedColor.toUpperCase() : 'No Color Selected'} {isColorMetallic ? 'Metallic' : ''}
               </Text>
             </View>
 
