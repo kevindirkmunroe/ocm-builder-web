@@ -13,11 +13,11 @@ const EmailProjectForm = (projectLayers) => {
 
     // State variables to store form inputs,
     // errors, and form validity
-    const [companyName, setCompanyName] = useState('TEST-company-12');
-    const [projectName, setProjectName] = useState('TEST-project-12');
-    const [designerName, setDesignerName] = useState('TEST-designer-name-12');
-    const [email, setEmail ] = useState('TEST-email-12@gmail.com');
-    const [requestSamples, setRequestSamples] = useState('Y');
+    const [companyName, setCompanyName] = useState('');
+    const [projectName, setProjectName] = useState('');
+    const [designerName, setDesignerName] = useState('');
+    const [email, setEmail ] = useState('');
+    const [requestSamples, setRequestSamples] = useState('N');
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 

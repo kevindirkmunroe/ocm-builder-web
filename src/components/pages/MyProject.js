@@ -5,7 +5,7 @@ import {
   View,
   Text,
   TouchableHighlight,
-  FlatList, Modal, Pressable, Image,
+  FlatList, Modal, Pressable, Image, TouchableOpacity,
 } from "react-native";
 import { useLocation, useNavigate } from "react-router-dom";
 import ViewShot from "react-native-view-shot";
@@ -27,6 +27,7 @@ function MyProject(){
   const [projectLayers, setProjectLayers] = useState(state.projectLayers);
   const [refresh, setRefresh] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [fullscreenModalVisible, setFullscreenModalVisible] = useState(false);
 
   const baseLayout = getBaseLayout();
 
@@ -209,6 +210,33 @@ function MyProject(){
         </View>
       </Modal>
 
+      {/*
+         Fullscreen composite layer view
+      */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={fullscreenModalVisible}
+        onRequestClose={() => {
+          setFullscreenModalVisible(!fullscreenModalVisible);
+        }}>
+        <View style={[styles.modalView, {height: height * 0.95}]}>
+          <View style={{ flexDirection: 'column', padding: 5, width: width * 0.8, height: '100%' }}>
+            <View style={{marginBottom: 5}}>
+              <Pressable
+                style={[styles.button, styles.buttonClose, {alignItems: 'center'}]}
+                onPress={() => setFullscreenModalVisible(false)}>
+                <Text style={styles.btnClr}>Close</Text>
+              </Pressable>
+            </View>
+            <CompositeLayerViewComponent
+              layers={projectLayers}
+              setHeight={height * 0.75}
+            />
+          </View>
+        </View>
+      </Modal>
+
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={[baseLayout.header, {position: 'fixed', top: 75}]}>
 
@@ -285,9 +313,11 @@ function MyProject(){
             />
           </View>
           {/*  Composite image preview */}
-           <View style={{alignContent: 'flex-end', height: (0.45 * height) - ( projectLayers.length * 40), marginLeft: width * 0.12}}>
-            <CompositeLayerViewComponent layers={projectLayers} />
-          </View>
+          <TouchableOpacity onPress={() => setFullscreenModalVisible(!fullscreenModalVisible)}>
+            <View style={{alignContent: 'flex-end', height: (0.45 * height) - ( projectLayers.length * 40), marginLeft: width * 0.12}}>
+              <CompositeLayerViewComponent layers={projectLayers} />
+            </View>
+          </TouchableOpacity>
         </View>
 
         <View style={[baseLayout.footer, {marginBottom: isAndroid() ? 1 : 14}]}>

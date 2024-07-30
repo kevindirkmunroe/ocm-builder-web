@@ -11,14 +11,13 @@ export function deepCloneLayerStack(layers){
   });
 }
 
-export default function CompositeLayerViewComponent({layers}){
+export default function CompositeLayerViewComponent({layers, setHeight}){
 
   let currZIndex = 0;
   const {width, height} = Dimensions.get('window');
 
   const layerHeight = isAndroid() ? 0.12 : 0.25;
   const layerGap =  (0.45 * height) - ( layers.length * 40);
-  console.log(`layerLength=${layers.length} layerGap=${layerGap}`);
 
   return (
     <View>
@@ -30,7 +29,8 @@ export default function CompositeLayerViewComponent({layers}){
               <View
                 style={{
                   marginTop: 5,
-                  backgroundColor: rgbaStr,
+                  backgroundColor: oneLayer.backgroundColor,
+                  opacity: 1 - (0.2 * (currZIndex + 1)),
                   borderRadius: 10,
                   top: 0,
                   left: 0,
@@ -41,9 +41,9 @@ export default function CompositeLayerViewComponent({layers}){
                   style={{
                     borderRadius: 10,
                     width: width * 0.8,
-                    height: isAndroid() ? height * 0.12 : layerGap,
+                    height: setHeight? setHeight : isAndroid() ? height * 0.12 : layerGap,
                     opacity: oneLayer.patternOpacity / 100,
-                    marginLeft: (currZIndex++ - 1.3) * 3,
+                    marginLeft: (currZIndex++ - 1) * 3,
                   }}
                   source={staticImageUrlMap[oneLayer.patternImageKey]}
                 >
