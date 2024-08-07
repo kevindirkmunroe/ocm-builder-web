@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions, StyleSheet, View, Text, TouchableHighlight, Image } from "react-native";
+import { Dimensions, StyleSheet, View, Text, TouchableHighlight, Image, ImageBackground } from "react-native";
 import { useNavigate } from 'react-router-dom';
 
 import PrintRollerSelector from "../widgets/PrintRollerSelector";
@@ -12,11 +12,11 @@ function StartMyProjectCustomFinish(){
 
   const ENUM_PATTERN = 'PATTERN';
   const ENUM_COLOR = 'COLOR';
-  const [selectedView, setSelectedView] = useState(ENUM_PATTERN);
+  const [selectedView, setSelectedView] = useState(ENUM_COLOR);
 
   const navigate = useNavigate();
   const {width, height} = Dimensions.get('window');
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState({key: 'blank_print', name: 'BLANK'});
   const [selectedColor, setSelectedColor] = useState(null);
   const [isColorMetallic, setIsColorMetallic] = useState(false);
   const [opacity, setOpacity] = useState(100);
@@ -43,7 +43,7 @@ function StartMyProjectCustomFinish(){
   }
 
   let onSelectPatternTab = () => {
-    setSelectedView(ENUM_PATTERN);
+    setSelectedView(ENUM_COLOR);
   }
 
   let onSelectColorTab = () => {
@@ -81,12 +81,14 @@ function StartMyProjectCustomFinish(){
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: isAndroid() ? 4: 0}}>
 
             {/* Pattern and Color Tabs */}
+            {/* Background has no print pattern. TODO: remove code once confirmed
             <TouchableHighlight
               style={selectedView === ENUM_PATTERN ? styles.tinyBtnSelected: styles.tinyBtn}
               underlayColor="#676752"
               onPress={onSelectPatternTab}>
               <Text style={styles.btnClr}>Pattern</Text>
             </TouchableHighlight>
+            */}
             <TouchableHighlight
               style={selectedView === ENUM_COLOR ? styles.tinyBtnSelected: styles.tinyBtn}
               underlayColor="#676752"
@@ -122,28 +124,34 @@ function StartMyProjectCustomFinish(){
             </View>
 
             {/* Preview Composite image */}
-            <View style={{marginTop: 10, justifyContent: 'center'}}>
-              <View style={{
-                backgroundColor: selectedColor,
-                zIndex: 0,
-                width: width * 0.6,
-                height: isAndroid() ? height * 0.15 : height * 0.2,
-                borderWidth: 10,
-                borderRadius: 5}} />
-              <Image style={{
-                position: 'absolute',
-                zIndex: 1,
-                backgroundColor: '#d9d9d9',
-                borderWidth: 10,
-                borderColor:'#ADAD86',
-                width: width * 0.6,
-                height: isAndroid() ? height * 0.15 : height * 0.2,
-                opacity: 0.4,
-                borderBottomLeftRadius: 10,
-                borderBottomRightRadius: 10}}
-                     source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
-              </Image>
-            </View>
+            <ImageBackground source={isColorMetallic ? staticImageUrlMap['metallicPaint'] :staticImageUrlMap['BLANK']}
+               style={{width: width * 0.6,
+                 height: isAndroid() ? height * 0.15 : height * 0.2,
+                 borderWidth: 10,
+                 borderRadius: 5}}>
+              <View style={{marginTop: 10, justifyContent: 'center'}}>
+                <View style={{
+                  backgroundColor: selectedColor,
+                  zIndex: 0,
+                  width: width * 0.6,
+                  height: isAndroid() ? height * 0.15 : height * 0.2,
+                  borderWidth: 10,
+                  borderRadius: 5}} />
+                <Image style={{
+                  position: 'absolute',
+                  zIndex: 1,
+                  backgroundColor: '#d9d9d9',
+                  borderWidth: 10,
+                  borderColor:'#ADAD86',
+                  width: width * 0.6,
+                  height: isAndroid() ? height * 0.15 : height * 0.2,
+                  opacity: 0.4,
+                  borderBottomLeftRadius: 10,
+                  borderBottomRightRadius: 10}}
+                       source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
+                </Image>
+              </View>
+            </ImageBackground>
           </View>
         </View>
 

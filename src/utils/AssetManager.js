@@ -11,7 +11,6 @@ export function getOCMPrintRollers(){
     {key: 'k5_print', name: 'K5'},
     {key: 'kovabrushed', name: 'Kova Brushed'},
     {key: 'maple_print', name: 'Maple'},
-    {key: 'metallicPaint', name: 'Metallic Paint'},
     {key: 'morton', name: 'Morton'},
     {key: 'oak_print', name: 'Oak'},
     {key: 'rift', name: 'Rift'},
@@ -32,9 +31,9 @@ export const kovabrushed = require('../assets/printRollers/kovabrushed.png');
 export const maple_print = require('../assets/printRollers/maple.png');
 export const metallicPaint = require('../assets/printRollers/metallicPaint.png');
 export const morton = require('../assets/printRollers/morton.png');
-export const oak_print = require('../assets/printRollers/oak.jpg');
+export const oak_print = require('../assets/printRollers/oak-transparent.png');
 export const rift = require('../assets/printRollers/rift.png');
-export const sandobi = require('../assets/printRollers/sandobi-transparent-bg.jpg');
+export const sandobi = require('../assets/printRollers/sandobi.jpg');
 export const spangle = require('../assets/printRollers/spangle.jpg');
 export const terrazzo_a = require('../assets/printRollers/terrazzo_a.png');
 export const terrazzo_b = require('../assets/printRollers/terrazzo_b.jpg');

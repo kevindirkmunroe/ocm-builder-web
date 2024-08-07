@@ -4,7 +4,7 @@ import {
   Text, StyleSheet, Dimensions,
 } from "react-native";
 import { useNavigate } from "react-router-dom";
-import { sendEmail } from '../../../utils/OCMBuilderServiceClient';
+import { pingService, sendEmail } from '../../../utils/OCMBuilderServiceClient';
 
 const EmailProjectForm = (projectLayers) => {
 
@@ -13,10 +13,10 @@ const EmailProjectForm = (projectLayers) => {
 
     // State variables to store form inputs,
     // errors, and form validity
-    const [companyName, setCompanyName] = useState('');
-    const [projectName, setProjectName] = useState('');
-    const [designerName, setDesignerName] = useState('');
-    const [email, setEmail ] = useState('');
+    const [companyName, setCompanyName] = useState('TEST-13-cname');
+    const [projectName, setProjectName] = useState('TEST-13-project');
+    const [designerName, setDesignerName] = useState('TEST-13-designer');
+    const [email, setEmail ] = useState('kevin.munroe@gmail.com');
     const [requestSamples, setRequestSamples] = useState('N');
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
@@ -72,6 +72,8 @@ const EmailProjectForm = (projectLayers) => {
 
         // form is valid, perform the submission logic
         try {
+          await pingService();
+
           await sendEmail({
               companyName,
               projectName,

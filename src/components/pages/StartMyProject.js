@@ -20,26 +20,25 @@ function StartMyProject() {
     navigate('/ocm-finish');
   }
 
-  pingService().then(d => console.log(d)).
-  catch(error => console.log(error));
+  // pingService().then(d => console.log(d)).
+  // catch(error => console.log(error));
 
   const {width} = Dimensions.get('window');
   return (
     <View style={styles.belowContainer}>
       <View style={[baseLayout.main, {flex: 1, justifyContent: 'center', alignItems: 'center'}]}>
         <Text style={baseLayout.mainText}>Let's Get Started!</Text>
-        <Text style={baseLayout.mainText}>What are you creating Today?</Text>
+        <Text style={[baseLayout.mainText, {width: '90%', textAlign: 'left', fontSize:20}]}>
+          {`\n\tDesign a Finish with the following steps:\n
+            1. Select a Background Color\n
+            2. Layer up to 3 Color Prints on top of Background Color\n
+            The final Print can be sent to OCM and/or downloaded as a PDF document.`}
+        </Text>
         <TouchableHighlight
           style={baseLayout.btn}
           underlayColor="#f0f4f7"
           onPress={selectCustomFinish}>
           <Text style={styles.btnClr}>Design A New Finish</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={baseLayout.btn}
-          underlayColor="#f0f4f7"
-          onPress={selectOCMFinish}>
-          <Text style={styles.btnClr}>Customize Popular OCM Finishes</Text>
         </TouchableHighlight>
       </View>
     </View>

@@ -1,32 +1,30 @@
 import React from "react";
 import axios from 'axios';
 
-// const OCM_BUILDER_SERVICE_ENDPOINT = 'http://localhost'; //https://master.dvzbj2bf60zbt.amplifyapp.com';
-// const OCM_BUILDER_SERVICE_PORT = 4443; // 80;
+//const OCM_BUILDER_SERVICE_ENDPOINT = 'https://pxlsg2dhpl.execute-api.us-west-1.amazonaws.com/production';
 const OCM_BUILDER_SERVICE_ENDPOINT = 'https://master.dvzbj2bf60zbt.amplifyapp.com';
-const OCM_BUILDER_SERVICE_PORT = 80;
 
-export async function pingService(params){
-
+export async function pingService(){
   // Function to fetch data using Axios
   try {
-    const req = `${OCM_BUILDER_SERVICE_ENDPOINT}:${OCM_BUILDER_SERVICE_PORT}`;
+    const req = `${OCM_BUILDER_SERVICE_ENDPOINT}`;
     console.log(`OCMBuilderServiceClient: GET ${req}`);
     const response = await axios.get(req, {
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods' : 'GET'
+        'Access-Control-Allow-Methods' : '*',
+        'Access-Control-Allow-Headers' : 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
       }
     });
     return response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
-    return `OCM Builder Server ERROR: ${error}`;
+    console.error("Error PINGing service:", error);
+    throw error;
   }
-};
+}
 
 export async function sendEmail(form, projectLayers, snapshot){
-  const req = `${OCM_BUILDER_SERVICE_ENDPOINT}:${OCM_BUILDER_SERVICE_PORT}/sendEmail`;
+  const req = `${OCM_BUILDER_SERVICE_ENDPOINT}/sendEmail`;
   const body = {
     form, projectLayers, snapshot
   };
@@ -34,8 +32,7 @@ export async function sendEmail(form, projectLayers, snapshot){
     {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST'
+        'Access-Control-Allow-Origin': '*'
       }
     }
   );
