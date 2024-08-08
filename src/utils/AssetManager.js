@@ -21,22 +21,22 @@ export function getOCMPrintRollers(){
   ]
 }
 
-export const bamboo = require('../assets/printRollers/bamboo.png');
-export const brushed = require('../assets/printRollers/brushed.png');
-export const delta = require('../assets/printRollers/delta.png');
-export const grande = require('../assets/printRollers/grande.png');
-export const hairline = require('../assets/printRollers/hairline.png');
-export const k5_print = require('../assets/printRollers/k5.png');
-export const kovabrushed = require('../assets/printRollers/kovabrushed.png');
-export const maple_print = require('../assets/printRollers/maple.png');
+export const bamboo = require('../assets/printRollers/bamboo_1_w_trans.png');
+export const brushed = require('../assets/printRollers/brushed_1_w_trans.png');
+export const delta = require('../assets/printRollers/delta_1_w_trans.png');
+export const grande = require('../assets/printRollers/grande_1_w_trans.png');
+export const hairline = require('../assets/printRollers/hairline_1_90_w_trans.png');
+export const k5_print = require('../assets/printRollers/k5_1_w_trans.png');
+export const kovabrushed = require('../assets/printRollers/kovabrushed_1_90_w_trans.png');
+export const maple_print = require('../assets/printRollers/maple_1_90_w_trans.png');
 export const metallicPaint = require('../assets/printRollers/metallicPaint.png');
-export const morton = require('../assets/printRollers/morton.png');
-export const oak_print = require('../assets/printRollers/oak-transparent.png');
-export const rift = require('../assets/printRollers/rift.png');
-export const sandobi = require('../assets/printRollers/sandobi.jpg');
-export const spangle = require('../assets/printRollers/spangle.jpg');
-export const terrazzo_a = require('../assets/printRollers/terrazzo_a.png');
-export const terrazzo_b = require('../assets/printRollers/terrazzo_b.jpg');
+export const morton = require('../assets/printRollers/morton_1_w_trans.png');
+export const oak_print = require('../assets/printRollers/oak_1_90_w_trans.png');
+export const rift = require('../assets/printRollers/rift_1_90_w_trans.png');
+export const sandobi = require('../assets/printRollers/sandobi_full_1_w_trans.png');
+export const spangle = require('../assets/printRollers/spangle_1_w_trans.png');
+export const terrazzo_a = require('../assets/printRollers/terrazzo_a_1_w_trans.png');
+export const terrazzo_b = require('../assets/printRollers/terrazzo_b_1_w_trans.png');
 export const blank_print = require('../assets/printRollers/blank.png');
 
 

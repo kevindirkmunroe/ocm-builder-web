@@ -37,12 +37,12 @@ export default function CompositeLayerViewComponent({layers, setHeight}){
                       left: 0,
                       maxWidth: width * 0.8,
                       position: 'absolute',
+                      opacity: oneLayer.patternOpacity / 100,
                       zIndex: currZIndex + 1,
                     }}>
                     <ReactImageTint
-                      src={oneLayer.level === 'Background' ? require('../../assets/printRollers/blank-tiny.png') :
-                        (oneLayer.level === 1 ? require('../../assets/printRollers/sandobi_1_w_trans.png') :
-                          require('../../assets/printRollers/sandobi_2_w_trans.png'))}
+                      src={oneLayer.level === 'Background' ? require('../../assets/printRollers/blank.png') :
+                        staticImageUrlMap[oneLayer.patternImageKey]}
                       color={oneLayer.backgroundColor}
                     >
                     </ReactImageTint>
