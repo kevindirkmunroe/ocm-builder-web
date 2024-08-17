@@ -145,8 +145,8 @@ function StartMyProjectCustomFinish(){
                   width: width * 0.6,
                   height: isAndroid() ? height * 0.15 : height * 0.2,
                   opacity: 0.4,
-                  borderBottomLeftRadius: 10,
-                  borderBottomRightRadius: 10}}
+                  borderBottomLeftRadius: 5,
+                  borderBottomRightRadius: 5}}
                        source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
                 </Image>
               </View>
@@ -155,7 +155,7 @@ function StartMyProjectCustomFinish(){
         </View>
 
          {/* Bottom Navigation */}
-        <View style={[baseLayout.footer, {marginBottom: isAndroid() ? 3 : 14}]}>
+        <View style={[baseLayout.footer, {marginBottom: isAndroid() ? 6 : 14}]}>
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', height: 60, marginTop: 10}}>
             <TouchableHighlight
               style={styles.tinyBtn2Alt}

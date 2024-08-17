@@ -72,6 +72,7 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
             useNativeLayout={true}
           />
         </View>
+      {/*
       <View style={{ flex:1 , flexDirection: 'row', marginTop: 10, height: 20}}>
         <Text style={{ fontSize: 18, fontFamily: 'Futura', marginRight: 10}}>Metallic</Text>
         <ToggleButton
@@ -82,7 +83,7 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
             onMetallicChange(isToggled);
           }}
         />
-      </View>
+      </View>*/}
     </View>
   )
 }

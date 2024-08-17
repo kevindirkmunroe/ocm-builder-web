@@ -119,16 +119,7 @@ function AddALayer(){
               initMetallic={isColorMetallic} /></View> }
           </View>
 
-          <View style={{marginTop: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
-
-            {/* Selected color */}
-            <View style={{flexDirection: 'row', margin: 2, marginTop: 6, justifyContent: 'center'}}>
-              <View style={{width: 24, height: 20,backgroundColor: selectedColor, marginTop: 3, marginRight: 5 }}></View>
-              <Text style={[styles.btnClr, {fontSize: 16, color: 'black'}]}>
-                {selectedColor ? selectedColor.toUpperCase() : 'No Color Selected'} {isColorMetallic ? 'Metallic' : ''}
-              </Text>
-            </View>
-
+          <View style={{marginTop: selectedView === ENUM_PATTERN ? 100 : (isAndroid() ? 38 : 93), flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
             {/* Preview Composite image */}
             <View style={{marginTop: isAndroid() ? 0 : 6, justifyContent: 'center'}}>
               <View style={{
