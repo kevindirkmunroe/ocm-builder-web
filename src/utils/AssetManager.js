@@ -14,7 +14,8 @@ export function getOCMPrintRollers(){
     {key: 'morton', name: 'Morton'},
     {key: 'oak_print', name: 'Oak'},
     {key: 'rift', name: 'Rift'},
-    {key: 'sandobi', name: 'Sandobi'},
+    {key: 'sandobi1', name: 'Sandobi 1'},
+    {key: 'sandobi2', name: 'Sandobi 2'},
     {key: 'spangle', name: 'Spangle'},
     {key: 'terrazzo_a', name: 'Terrazzo A'},
     {key: 'terrazzo_b', name: 'Terrazzo B'},
@@ -33,7 +34,8 @@ export const metallicPaint = require('../assets/printRollers/metallicPaint.png')
 export const morton = require('../assets/printRollers/morton_1_w_trans.png');
 export const oak_print = require('../assets/printRollers/oak_1_90_w_trans.png');
 export const rift = require('../assets/printRollers/rift_1_90_w_trans.png');
-export const sandobi = require('../assets/printRollers/sandobi_full_1_w_trans.png');
+export const sandobi1 = require('../assets/printRollers/sandobi_full_1_w_trans.png');
+export const sandobi2 = require('../assets/printRollers/sandobi_full_2_w_trans.png');
 export const spangle = require('../assets/printRollers/spangle_1_w_trans.png');
 export const terrazzo_a = require('../assets/printRollers/terrazzo_a_1_w_trans.png');
 export const terrazzo_b = require('../assets/printRollers/terrazzo_b_1_w_trans.png');
@@ -160,7 +162,8 @@ export const staticImageUrlMap = {
   'morton': morton,
   'oak_print': oak_print,
   'rift': rift,
-  'sandobi': sandobi,
+  'sandobi1': sandobi1,
+  'sandobi2': sandobi2,
   'spangle': spangle,
   'terrazzo_a': terrazzo_a,
   'terrazzo_b': terrazzo_b,

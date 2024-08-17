@@ -9,10 +9,11 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
   const [colorState, setColorState] =
     useState({currentColor: initSelectedColor, swatchesOnly: false, swatchesLast: true, swatchesEnabled: false, disc: false})
 
-  const [typedColor, setTypedColor] = useState('');
+  const [typedColor, setTypedColor] = useState(initSelectedColor);
 
   const onColorChange = (newColor) => {
     onSelectColor(newColor);
+    setTypedColor(newColor.substring(1).toUpperCase());
   }
 
   const onMetallicChange = (newMetallicSetting) => {
@@ -32,6 +33,7 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
     if(newColor.search(/^[0-9a-f]{6}/i) >= 0){
       console.log(`CustomColorSelector: new typed color=${JSON.stringify(typedColor)}`);
       onSelectColor('#' + newColor);
+      colorState.currentColor = '#' + newColor;
     }else{
       alert(`"${newColor}" is not a hexidecimal number.`);
     }
@@ -41,8 +43,9 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
     <View style={{flex: 1, marginTop: 10, justifyContent: 'top', alignItems: 'center'}}>
         <View style={styles.colorContainerItem}>
           <View style={{flex: 1, flexDirection: 'row'}}>
+            <View style={{width: 24, height: 20,backgroundColor: initSelectedColor, marginTop: 3, marginRight: 5, borderWidth: 2 }}></View>
             <Text style={[styles.btnClrAlt, {fontSize: 20}]}>#&nbsp;</Text>
-            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, marginRight: 6}} onChangeText={setTypedColor} value={typedColor}/>
+            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, marginRight: 6}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
             <TouchableHighlight
               style={{borderColor: 'black', borderWidth: 2, borderRadius: 4, paddingLeft: 5, paddingRight: 5}}
               onPress={onTypedColorChangeComplete}>

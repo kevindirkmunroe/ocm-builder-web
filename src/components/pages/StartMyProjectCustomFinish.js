@@ -113,23 +113,22 @@ function StartMyProjectCustomFinish(){
               initMetallic={isColorMetallic} /></View> }
           </View>
 
-          <View style={{marginTop: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+          <View style={{marginTop: 10, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
 
-            {/* Selected color */}
+            {/* Selected color
             <View style={{flexDirection: 'row', margin: 2, justifyContent: 'center'}}>
-              <View style={{width: 24, height: 20,backgroundColor: selectedColor, marginTop: 3, marginRight: 5 }}></View>
+              <View style={{width: 24, height: 20,backgroundColor: selectedColor, marginTop: 3, marginRight: 5, borderWidth: 2 }}></View>
               <Text style={[styles.btnClr, {color: 'black'}]}>
                 {selectedColor ? selectedColor.toUpperCase() : 'No Color'} {isColorMetallic ? 'Metallic' : ''}
               </Text>
             </View>
+            */}
 
             {/* Preview Composite image */}
             <ImageBackground source={isColorMetallic ? staticImageUrlMap['metallicPaint'] :staticImageUrlMap['BLANK']}
                style={{width: width * 0.6,
-                 height: isAndroid() ? height * 0.15 : height * 0.2,
-                 borderWidth: 10,
-                 borderRadius: 5}}>
-              <View style={{marginTop: 10, justifyContent: 'center'}}>
+                 height: isAndroid() ? height * 0.15 : height * 0.25}}>
+              <View style={{marginTop: isAndroid()? 5 : 40, justifyContent: 'center'}}>
                 <View style={{
                   backgroundColor: selectedColor,
                   zIndex: 0,
