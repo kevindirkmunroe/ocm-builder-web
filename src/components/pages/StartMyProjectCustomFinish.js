@@ -56,7 +56,7 @@ function StartMyProjectCustomFinish(){
         <View style={baseLayout.header}>
           {/* Breadcrumbs to current state */}
           <View style={{flex: 1, width: isAndroid() ? width * 0.95 : width * 0.8, flexDirection: 'row',
-            justifyContent : 'center', marginLeft: isAndroid() ? 0 : width * 0.1,
+            justifyContent : 'left', marginLeft: isAndroid() ? 0 : width * 0.1,
             marginTop: isAndroid() ? 2 : 10}}>
             <HomeNavButton />
             <Text

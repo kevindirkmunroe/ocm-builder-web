@@ -50,8 +50,8 @@ function StartMyProjectClassicOCMFinish(){
            {/* Breadcrumb */}
              <Row>
                <Column numRows={3}>
-                 <View style={{width: width * 0.9, flexDirection: 'row', alignContent: 'center',
-                   marginTop: 16, marginLeft: isAndroidWebBrowser() ? width * 0.1 : width * 0.05, marginBottom: 16}}>
+                 <View style={{width: width * 0.9, flexDirection: 'row', alignContent: 'left',
+                   marginTop: 16, marginLeft: 14, marginBottom: 16}}>
                    <HomeNavButton />
                    <Text
                      style={{

@@ -32,6 +32,22 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem, onSe
             Table of Print Roller images
           */}
           <View style={{width: width * 0.6, height: height * 0.25, backgroundColor: 'lightgray'}}>
+            {/* Preview Image */}
+            <ImageBackground style={{width: width * 0.6, height: 40}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
+              <View style={{ position: 'absolute', top: 8, left: 8, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
+                <Text style={{
+                  alignSelf: 'flex-start',
+                  backgroundColor:'white',
+                  borderWidth: 1,
+                  borderColor: 'black',
+                  padding: 2,
+                  fontSize: 16,
+                  color: selectedItem? 'black': 'darkgray'}}>{selectedItem? selectedItem.name : 'No Pattern Selected'}
+                </Text>
+              </View>
+            </ImageBackground>
+
+            {/* Print Roller list */}
             <FlatList
               data={getOCMPrintRollers()}
               scrollEnabled={true}
@@ -57,25 +73,10 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem, onSe
               keyExtractor={item => `basicListEntry-${item.name}`}/>
           </View>
 
-          {/* Preview Image */}
-          <View style={{ backgroundColor: '#d9d9d9', marginTop: 0, flexDirection: 'column', width: width * 0.6, height: 40}}>
-            <ImageBackground style={{width: width * 0.6, height: 40}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
-              <View style={{ position: 'absolute', top: 8, left: 8, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
-                <Text style={{
-                  alignSelf: 'flex-start',
-                  backgroundColor:'white',
-                  borderWidth: 1,
-                  borderColor: 'black',
-                  padding: 2,
-                  fontSize: 16,
-                  color: selectedItem? 'black': 'darkgray'}}>{selectedItem? selectedItem.name : 'No Pattern Selected'}
-                </Text>
-              </View>
-            </ImageBackground>
-
+          <View style={{ backgroundColor: '#d9d9d9', marginTop: 10, flexDirection: 'column', width: width * 0.6, height: 40}}>
             {/* Opacity Slider */}
             <View style={{marginTop: 6, width: width * 0.6, flexDirection: 'column'}}>
-              <Text style={{fontFamily: 'Futura', fontSize: 16}}>Opacity {opacity}%</Text>
+              <Text style={{fontFamily: 'Futura', fontSize: 16, paddingLeft: 5}}>Opacity {opacity}%</Text>
               <Slider
                 value={opacity}                   // set the current slider's value
                 minimumValue={0}                  // Minimum value
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
   },
   item: {
     padding: 10,
-    fontSize: 18,
+    fontSize: 16,
     height: 44,
   },
 });

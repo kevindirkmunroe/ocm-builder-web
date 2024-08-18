@@ -221,7 +221,7 @@ function MyProject(){
           setFullscreenModalVisible(!fullscreenModalVisible);
         }}>
         <View style={[styles.modalView, {height: height * 0.95}]}>
-          <View style={{ flexDirection: 'column', padding: 5, width: width * 0.8, height: '100%' }}>
+          <View style={{ flexDirection: 'column', padding: 5, width: width * 0.8}}>
             <View style={{marginBottom: 5}}>
               <Pressable
                 style={[styles.button, styles.buttonClose, {alignItems: 'center'}]}
@@ -231,7 +231,7 @@ function MyProject(){
             </View>
             <CompositeLayerViewComponent
               layers={projectLayers}
-              setHeight={height * 0.75}
+              isModal={true}
             />
           </View>
         </View>
@@ -242,7 +242,7 @@ function MyProject(){
 
           {/* Breadcrumb to feature */}
 
-          <View style={{width: width * 0.8, flexDirection: 'row', justifyContent: 'center', marginLeft: width * 0.1, marginTop: isAndroid() ? 2 : 10}}>
+          <View style={{width: width * 0.8, flexDirection: 'row', justifyContent: 'left', marginLeft: 14, marginTop: isAndroid() ? 5 : 10}}>
             <HomeNavButton />
             <Text
               style={{
@@ -314,7 +314,7 @@ function MyProject(){
           </View>
           {/*  Composite image preview */}
           <TouchableOpacity onPress={() => setFullscreenModalVisible(!fullscreenModalVisible)}>
-            <View style={{alignContent: 'flex-end', height: (0.45 * height) - ( projectLayers.length * 40), marginLeft: width * 0.12}}>
+            <View style={{alignContent: 'flex-end', height: (0.45 * height) - ( projectLayers.length * 48), marginLeft: width * 0.12}}>
               <CompositeLayerViewComponent layers={projectLayers} />
             </View>
           </TouchableOpacity>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   View, TextInput, TouchableOpacity,
-  Text, StyleSheet, Dimensions,
+  Text, StyleSheet, Dimensions, Image,
 } from "react-native";
 import { useNavigate } from "react-router-dom";
 import { pingService, sendEmail } from '../../../utils/OCMBuilderServiceClient';
@@ -140,18 +140,24 @@ const EmailProjectForm = (projectLayers) => {
         />
         <View style={{flexDirection: 'row', justifyContent: 'center', width: width * 0.5, padding: 10}}>
           <TouchableOpacity
-            style={[styles.button, { width: 150, opacity: isFormValid ? 1 : 0.4 }]}
+            style={[styles.button, { flexDirection: 'row', width: 150, opacity: isFormValid ? 1 : 0.4 }]}
             disabled={!isFormValid}
             onPress={handleSubmit}
-          >
-            <Text style={styles.buttonText}>Email OCM</Text>
+          ><Image
+            style={{width: 24, height: 24, marginTop: 5, marginLeft: 5}}
+            source={require('../../../assets/mail-black-envelope-symbol_icon-icons.com_56519.png')}
+          />
+            <Text style={styles.buttonText}>&nbsp;Email OCM</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.button, { width: 150, marginLeft: 20, opacity: isFormValid ? 1 : 0.4 }]}
+            style={[styles.button, { flexDirection: 'row', width: 150, marginLeft: 20, opacity: isFormValid ? 1 : 0.4 }]}
             disabled={!isFormValid}
             onPress={handleDownloadPdf}
-          >
-            <Text style={styles.buttonText}>Download PDF</Text>
+          >          <Image
+            style={{width: 24, height: 24, marginTop: 5, marginLeft: 5}}
+            source={require('../../../assets/PDF-48_46492.png')}
+          />
+            <Text style={styles.buttonText}>&nbsp;Download PDF</Text>
           </TouchableOpacity>
         </View>
 

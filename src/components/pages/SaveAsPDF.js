@@ -105,7 +105,7 @@ development purposes only. Production may vary. This is not a color standard.
             width: '100%',
             flexDirection: 'row',
             alignContent: 'center',
-            justifyContent: 'center',
+            justifyContent: 'left',
             marginRight: 18,
             marginTop: 16,
             marginBottom: 16,
@@ -134,6 +134,31 @@ development purposes only. Production may vary. This is not a color standard.
             {' '}
             >{' '}
           </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: 'bold',
+              color: 'black',
+              marginLeft: 5,
+              marginTop: 4,
+            }}><Image
+            style={{width: 20, height: 20}}
+            source={require('../../assets/complete_task.png')}
+          />
+            {' '}
+            Finish
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Futura',
+              marginLeft: 5,
+              marginTop: 7,
+              color: 'gray',
+            }}>
+            {' '}
+            >{' '}
+          </Text>
           <Image
             style={{width: 24, height: 24, marginTop: 4, marginLeft: 3}}
             source={require('../../assets/PDF-48_46492.png')}
@@ -142,7 +167,7 @@ development purposes only. Production may vary. This is not a color standard.
             style={{
               fontSize: 16,
               fontWeight: 'bold',
-              color: 'green',
+              color: 'black',
               marginTop: 8,
             }}>
             {' '}

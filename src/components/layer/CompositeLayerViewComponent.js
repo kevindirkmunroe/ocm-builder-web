@@ -1,6 +1,5 @@
 import React from "react";
-import { Dimensions, Image, ImageBackground, View } from "react-native";
-import convert from "color-convert";
+import { Dimensions, View } from "react-native";
 import { ReactImageTint } from "react-image-tint";
 
 import { staticImageUrlMap } from "../../utils/AssetManager";
@@ -12,30 +11,26 @@ export function deepCloneLayerStack(layers){
   });
 }
 
-export default function CompositeLayerViewComponent({layers, setHeight}){
+export default function CompositeLayerViewComponent({layers, isModal}){
 
   let currZIndex = 0;
   const {width, height} = Dimensions.get('window');
-
-  const layerHeight = isAndroid() ? 0.12 : 0.25;
-  const layerGap =  (0.45 * height) - ( layers.length * 40);
 
   // TODO: Metallic should overlay metallic print
   return (
     <View>
         {layers.map(oneLayer => {
-            const rgba =  convert.hex.rgb(oneLayer.backgroundColor);
-            const rgbaStr = rgba ? `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${oneLayer.patternOpacity / 100})` : 'rgba(0,0,0,0.0)';
-            const rotate = oneLayer.level === 'Background' ? 0 : 90;
             return (
               (oneLayer.isVisible || oneLayer.level === 'Background') &&
                   <View
                     style={{
+                      flex: 1,
                       marginTop: 5,
                       borderRadius: 10,
                       top: 0,
                       left: 0,
-                      maxWidth: width * 0.8,
+                      marginLeft: isAndroid() ? 0 : 4,
+                      maxWidth: width * (isModal? 0.77 : 0.8),
                       position: 'absolute',
                       opacity: oneLayer.patternOpacity / 100,
                       zIndex: currZIndex + 1,

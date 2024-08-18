@@ -51,11 +51,10 @@ function EmailMyProject() {
         }}>
         <View
           style={{
-            width: width * 0.9,
+            width: width * 0.98,
             flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginRight: 18,
+            alignItems: 'left',
+            justifyContent: 'left',
             marginTop: 16,
             marginBottom: 16,
           }}>
@@ -83,24 +82,19 @@ function EmailMyProject() {
             {' '}
             >{' '}
           </Text>
-          <Image
-            style={{width: 24, height: 24, marginTop: 5, marginLeft: 5}}
-            source={require('../../assets/mail-black-envelope-symbol_icon-icons.com_56519.png')}
-          />
-          <Image
-            style={{width: 24, height: 24, marginTop: 5, marginLeft: 5}}
-            source={require('../../assets/PDF-48_46492.png')}
-          />
           <Text
             style={{
               fontSize: 16,
               fontWeight: 'bold',
-              color: 'green',
+              color: 'black',
               marginLeft: 5,
-              marginTop: 7,
-            }}>
+              marginTop: 4,
+            }}><Image
+            style={{width: 20, height: 20}}
+            source={require('../../assets/complete_task.png')}
+          />
             {' '}
-            Save
+            Finish
           </Text>
         </View>
         {/*

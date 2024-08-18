@@ -65,7 +65,7 @@ function AddALayer(){
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
         {/* Breadcrumb section */}
-        <View style={{flex: 1, width: width * 0.9, flexDirection: 'row', justifyContent : 'center', marginLeft: width * 0.1, marginTop: 10}}>
+        <View style={{flex: 1, width: width * 0.98, flexDirection: 'row', alignItems: 'left', justifyContent : 'left', marginLeft: 14, marginTop: 5}}>
           <HomeNavButton />
           <Text
             style={{
@@ -80,8 +80,8 @@ function AddALayer(){
           </Text>
           <MyProjectNavButton isDisabled={false} projectLayers={projectLayers} />
           <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-          <Image style={{ width: 30, height: 30 }} source={require('../../assets/plus_layer_icon_215065.png')} />
-          <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 5, marginTop: 7}}> Add Layer </Text>
+          <Image style={{ width: 22, height: 22, marginTop: 4 }} source={require('../../assets/plus_layer_icon_215065.png')} />
+          <Text style={{fontSize: 16, fontStyle: 'italic', color: 'black', marginLeft: 5, marginTop: 7}}> Add Layer {projectLayers.length - 1} </Text>
         </View>
         <View style={baseLayout.main}>
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: isAndroid() ? 4: 0}}>

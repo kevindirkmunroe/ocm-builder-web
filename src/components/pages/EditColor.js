@@ -57,11 +57,10 @@ function EditColor(){
     <View style={styles.belowContainer}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={{flex: 1, flexDirection: 'row', height: 60, flexGrow: 0.2}}>
-
           {/* Breadcrumbs */}
-          <View style={{flex: 1, marginLeft: 10, width: isAndroid() ? width * 0.95 : width * 0.8,
-            flexDirection: 'row', justifyContent: 'center', alignContent: 'center',
-            marginRight: 18, marginTop: isAndroid() ? 2 : 16}}>
+          <View style={{flex: 1, marginLeft: 10, width: width * 0.98,
+            flexDirection: 'row', justifyContent: 'left', alignContent: 'left',
+            marginTop: isAndroid() ? 2 : 16}}>
             <HomeNavButton />
             <Text
               style={{
@@ -76,19 +75,17 @@ function EditColor(){
             </Text>
             <MyProjectNavButton isDisabled={false} projectLayers={projectLayers} />
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
-            <Image style={{ width: 20, height: 16, marginTop: 8 }} source={require('../../assets/edit_icon_128873.png')} />
-            <Text style={{fontSize: 16, fontWeight: 'bold', color: 'green', marginLeft: 5, marginTop: 7}}>&nbsp;Layer {layerToEdit.level}</Text>
+            <Image style={{ width: 20, height: 18, marginTop: 8 }} source={require('../../assets/edit_icon_128873.png')} />
+            <Text style={{fontSize: 16, color: 'black', marginLeft: 5, fontStyle: 'italic', marginTop: 7}}>&nbsp;Edit Layer {layerToEdit.level} - Color</Text>
           </View>
         </View>
-        <View style={{height: 20, margin: 6, alignItems: 'center', flexDirection: 'row'}}>
-          <Text style={{fontFamily: 'Futura', fontSize: 16, backgroundColor: color, width: 20}}></Text>
-          <Text style={{fontFamily: 'Futura', marginLeft: 3, fontSize: 16}}>{color.toUpperCase()} {isColorMetallic ? 'Metallic' : ''}</Text>
+        <View style={{flex: 2}}>
+          <CustomColorSelector title={`"${layerToEdit.backgroundColor}"`}
+                               onSelectColor={onSetColor}
+                               initSelectedColor={color}
+                               onSelectMetallic={setIsMetallic}
+                               initMetallic={isColorMetallic}/>
         </View>
-        <CustomColorSelector title={`"${layerToEdit.backgroundColor}"`}
-                             onSelectColor={onSetColor}
-                             initSelectedColor={color}
-                             onSelectMetallic={setIsMetallic}
-                             initMetallic={isColorMetallic}/>
         {/* Preview Composite image */}
         <View style={{flex: 1, marginTop: isAndroid() ? 122: 45}}>
           <View style={{

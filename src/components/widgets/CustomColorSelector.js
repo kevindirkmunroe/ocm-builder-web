@@ -45,9 +45,9 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
           <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{width: 24, height: 20,backgroundColor: initSelectedColor, marginTop: 3, marginRight: 5, borderWidth: 2 }}></View>
             <Text style={[styles.btnClrAlt, {fontSize: 20}]}>#&nbsp;</Text>
-            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, marginRight: 6}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
+            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, height: 30,  marginRight: 6}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
             <TouchableHighlight
-              style={{borderColor: 'black', borderWidth: 2, borderRadius: 4, paddingLeft: 5, paddingRight: 5}}
+              style={{borderColor: 'black', borderWidth: 2, borderRadius: 4, paddingLeft: 5, paddingRight: 5, height: 30}}
               onPress={onTypedColorChangeComplete}>
               <Text style={styles.btnClrAlt}>Set</Text>
             </TouchableHighlight>
