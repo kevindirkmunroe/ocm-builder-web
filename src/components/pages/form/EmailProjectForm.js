@@ -17,7 +17,7 @@ const EmailProjectForm = (projectLayers) => {
     const [projectName, setProjectName] = useState('TEST-13-project');
     const [designerName, setDesignerName] = useState('TEST-13-designer');
     const [email, setEmail ] = useState('kevin.munroe@gmail.com');
-    const [requestSamples, setRequestSamples] = useState('N');
+    const [requestSamples, setRequestSamples] = useState(true);
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 
@@ -29,6 +29,10 @@ const EmailProjectForm = (projectLayers) => {
       validateForm();
     }, [companyName, email, projectName, designerName, requestSamples ]);
 
+    const onRequestSamplesChange = () => {
+      setRequestSamples(!requestSamples);
+    }
+
     const validateForm = () => {
       let errors = {};
       if (!companyName) {
@@ -39,12 +43,6 @@ const EmailProjectForm = (projectLayers) => {
       }
       if (!designerName) {
         errors.designerName = 'Designer Name is required.';
-      }
-
-      if (!requestSamples) {
-        errors.email = 'RequestSamples is required (Y|N).';
-      } else if(!/[YN]/.test(requestSamples)){
-        errors.email = 'RequestSamples is required (Y|N).';
       }
 
       // Validate email field
@@ -132,12 +130,19 @@ const EmailProjectForm = (projectLayers) => {
           value={email}
           onChangeText={setEmail}
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Request Samples? (Y|N)"
-          value={requestSamples}
-          onChangeText={setRequestSamples}
-        />
+        <TouchableOpacity onPress={onRequestSamplesChange}>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{fontSize: 18, padding: 3, fontStyle: 'bold'}}>Request Samples</Text>
+            <Image
+              style={{width: 20, height: 20, marginTop: 4, marginLeft: 3}}
+              source={
+                !requestSamples
+                  ? require('../../../assets/checkbox_blank_outline_icon_139814.png')
+                  : require('../../../assets/checkbox_icon_151467.png')
+              }
+            />
+          </View>
+        </TouchableOpacity>
         <View style={{flexDirection: 'row', justifyContent: 'center', width: width * 0.5, padding: 10}}>
           <TouchableOpacity
             style={[styles.button, { flexDirection: 'row', width: 150, opacity: isFormValid ? 1 : 0.4 }]}

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { ActivityIndicator, Dimensions, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableHighlight, TouchableOpacity,
+  View,
+} from "react-native";
 import ColorPicker from 'react-native-wheel-color-picker'
-import ToggleButton from "react-native-toggle-button";
 
 
 function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectMetallic, initMetallic}){
@@ -16,8 +23,8 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
     setTypedColor(newColor.substring(1).toUpperCase());
   }
 
-  const onMetallicChange = (newMetallicSetting) => {
-    onSelectMetallic(newMetallicSetting);
+  const onMetallicChange = () => {
+    onSelectMetallic(!initMetallic);
   }
 
   const onColorChangeComplete = (newColor) => {
@@ -51,6 +58,17 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
               onPress={onTypedColorChangeComplete}>
               <Text style={styles.btnClrAlt}>Set</Text>
             </TouchableHighlight>
+              <Text style={[styles.btnClrAlt, {fontSize: 18}]}>&nbsp;&nbsp;&nbsp;Metallic</Text>
+            <TouchableOpacity onPress={onMetallicChange}>
+              <Image
+                style={{width: 20, height: 20, marginTop: 4, marginLeft: 3}}
+                source={
+                  !initMetallic
+                    ? require('../../assets/checkbox_blank_outline_icon_139814.png')
+                    : require('../../assets/checkbox_icon_151467.png')
+                }
+              />
+            </TouchableOpacity>
           </View>
           <ColorPicker
             ref={r => { this.picker = r }}
