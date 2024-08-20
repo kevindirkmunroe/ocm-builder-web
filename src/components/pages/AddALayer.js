@@ -112,7 +112,6 @@ function AddALayer(){
                                                                          initSelectedOpacity={opacity}/></View>}
 
             {selectedView === ENUM_COLOR && <View><CustomColorSelector
-              title={''}
               onSelectColor={setSelectedColor}
               initSelectedColor={selectedColor}
               onSelectMetallic={setIsColorMetallic}

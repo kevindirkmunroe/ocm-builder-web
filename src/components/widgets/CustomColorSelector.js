@@ -11,7 +11,7 @@ import {
 import ColorPicker from 'react-native-wheel-color-picker'
 
 
-function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectMetallic, initMetallic}){
+function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic, initMetallic, layerLevel}){
 
   const [colorState, setColorState] =
     useState({currentColor: initSelectedColor, swatchesOnly: false, swatchesLast: true, swatchesEnabled: false, disc: false})
@@ -56,17 +56,21 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
               onPress={onTypedColorChangeComplete}>
               <Text style={styles.btnClrAlt}>Set</Text>
             </TouchableHighlight>
+            { layerLevel === 'Background' &&
+              (<>
               <Text style={[styles.btnClrAlt, {fontSize: 18}]}>&nbsp;&nbsp;&nbsp;Metallic</Text>
-            <TouchableOpacity onPress={onMetallicChange}>
-              <Image
-                style={{width: 20, height: 20, marginTop: 4, marginLeft: 3}}
-                source={
-                  !initMetallic
-                    ? require('../../assets/checkbox_blank_outline_icon_139814.png')
-                    : require('../../assets/checkbox_icon_151467.png')
-                }
-              />
-            </TouchableOpacity>
+              <TouchableOpacity onPress={onMetallicChange}>
+                <Image
+                  style={{width: 20, height: 20, marginTop: 4, marginLeft: 3}}
+                  source={
+                    !initMetallic
+                      ? require('../../assets/checkbox_blank_outline_icon_139814.png')
+                      : require('../../assets/checkbox_icon_151467.png')
+                  }
+                />
+              </TouchableOpacity>
+              </>)
+            }
           </View>
           <ColorPicker
             ref={r => { this.picker = r }}

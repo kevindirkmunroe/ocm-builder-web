@@ -80,11 +80,11 @@ function EditColor(){
           </View>
         </View>
         <View style={{flex: 2}}>
-          <CustomColorSelector title={`"${layerToEdit.backgroundColor}"`}
-                               onSelectColor={onSetColor}
+          <CustomColorSelector onSelectColor={onSetColor}
                                initSelectedColor={color}
                                onSelectMetallic={setIsMetallic}
-                               initMetallic={isColorMetallic}/>
+                               initMetallic={isColorMetallic}
+                               layerLevel={layerToEditLevel}/>
         </View>
         {/* Preview Composite image */}
         <View style={{flex: 1, marginTop: isAndroid() ? 122: 45}}>

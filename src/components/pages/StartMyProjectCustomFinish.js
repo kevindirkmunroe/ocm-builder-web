@@ -106,12 +106,13 @@ function StartMyProjectCustomFinish(){
                                                                    onSelectOpacity={setOpacity}
                                                                          initSelectedOpacity={opacity}/></View>}
 
-            {selectedView === ENUM_COLOR && <View><CustomColorSelector
-              title={''}
+            {selectedView === ENUM_COLOR && <View>
+              <CustomColorSelector
               onSelectColor={setSelectedColor}
               initSelectedColor={selectedColor}
               onSelectMetallic={setIsColorMetallic}
-              initMetallic={isColorMetallic} /></View> }
+              initMetallic={isColorMetallic}
+              layerLevel={'Background'}/></View> }
           </View>
 
           <View style={{marginTop: 10, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>

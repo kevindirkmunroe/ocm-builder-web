@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions, Image, ImageBackground, View } from "react-native";
 import { ReactImageTint } from "react-image-tint";
 
 import { staticImageUrlMap } from "../../utils/AssetManager";
@@ -22,6 +22,28 @@ export default function CompositeLayerViewComponent({layers, isModal}){
         {layers.map(oneLayer => {
             return (
               (oneLayer.isVisible || oneLayer.level === 'Background') &&
+              ( oneLayer.level === ' Background' ?
+                  <ImageBackground source={staticImageUrlMap['BLANK']}
+                                   style={{width: width * 0.6,
+                                     height: isAndroid() ? height * 0.15 : height * 0.25}}>
+                    <View style={{marginTop: isAndroid()? 5 : 40, justifyContent: 'center'}}>
+                      <View style={{
+                        backgroundColor: oneLayer.backgroundColor,
+                        zIndex: 0,
+                        maxWidth: width * (isModal? 0.77 : 0.8)
+                      }} />
+                      <Image style={{
+                        backgroundColor: '#d9d9d9',
+                        position: 'absolute',
+                        zIndex: 1,
+                        maxWidth: width * (isModal? 0.77 : 0.8),
+                        opacity: 0.4
+                      }}
+                             source={oneLayer.isColorMetallic ? staticImageUrlMap['metallicPaint'] :staticImageUrlMap['BLANK']}>
+                      </Image>
+                  </View>
+                  </ImageBackground>
+                  :
                   <View
                     style={{
                       flex: 1,
@@ -37,14 +59,15 @@ export default function CompositeLayerViewComponent({layers, isModal}){
                     }}>
                     <ReactImageTint
                       src={oneLayer.level === 'Background' ?
-                        (oneLayer.isMetallic ? require('../../assets/printRollers/metallicPaint.png') :
-                            require('../../assets/printRollers/blank.png')
+                        (oneLayer.isColorMetallic ? staticImageUrlMap['metallicPaint'] :
+                            staticImageUrlMap['BLANK']
                         ):
                         staticImageUrlMap[oneLayer.patternImageKey]}
                       color={oneLayer.backgroundColor}
                     >
                     </ReactImageTint>
                   </View>
+              )
             );
         })}
       </View>
