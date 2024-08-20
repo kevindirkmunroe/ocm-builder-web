@@ -36,7 +36,10 @@ export default function CompositeLayerViewComponent({layers, isModal}){
                       zIndex: currZIndex + 1,
                     }}>
                     <ReactImageTint
-                      src={oneLayer.level === 'Background' ? require('../../assets/printRollers/blank.png') :
+                      src={oneLayer.level === 'Background' ?
+                        (oneLayer.isMetallic ? require('../../assets/printRollers/metallicPaint.png') :
+                            require('../../assets/printRollers/blank.png')
+                        ):
                         staticImageUrlMap[oneLayer.patternImageKey]}
                       color={oneLayer.backgroundColor}
                     >

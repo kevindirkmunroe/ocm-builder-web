@@ -28,7 +28,6 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
   }
 
   const onColorChangeComplete = (newColor) => {
-    console.log(`CustomColorSelector: new color=${JSON.stringify(newColor)}`);
     onSelectColor(newColor);
   }
 
@@ -38,7 +37,6 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
 
   const changeColorIfHex = (newColor) => {
     if(newColor.search(/^[0-9a-f]{6}/i) >= 0){
-      console.log(`CustomColorSelector: new typed color=${JSON.stringify(typedColor)}`);
       onSelectColor('#' + newColor);
       colorState.currentColor = '#' + newColor;
     }else{
@@ -90,18 +88,6 @@ function CustomColorSelector({title, onSelectColor, initSelectedColor, onSelectM
             useNativeLayout={true}
           />
         </View>
-      {/*
-      <View style={{ flex:1 , flexDirection: 'row', marginTop: 10, height: 20}}>
-        <Text style={{ fontSize: 18, fontFamily: 'Futura', marginRight: 10}}>Metallic</Text>
-        <ToggleButton
-          initial={initMetallic}
-          primaryText="On"
-          secondaryText="Off"
-          onPress={(isToggled: boolean) => {
-            onMetallicChange(isToggled);
-          }}
-        />
-      </View>*/}
     </View>
   )
 }

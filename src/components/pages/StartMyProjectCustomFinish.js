@@ -7,6 +7,7 @@ import { staticImageUrlMap } from "../../utils/AssetManager";
 import CustomColorSelector from "../widgets/CustomColorSelector";
 import HomeNavButton from "../widgets/HomeNavButton";
 import { getBaseLayout, isAndroidWebBrowser as isAndroid } from "./layout/BasePageLayout";
+import { ReactImageTint } from "react-image-tint";
 
 function StartMyProjectCustomFinish(){
 
@@ -74,7 +75,7 @@ function StartMyProjectCustomFinish(){
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5, marginTop: 7 , color: 'gray'}}>Background</Text>
             <Text style={{fontSize: 16, fontFamily: 'Futura', marginLeft: 5, marginTop: 7, color: 'gray'}}> > </Text>
             <Image style={{ width: 24, height: 24, marginTop: 4}} source={require('../../assets/customize.png')} />
-            <Text style={{fontSize: 16, color: 'green', fontWeight: 'bold', marginLeft: 1, marginTop: 7}}> Custom</Text>
+            <Text style={{fontSize: 16, color: 'black', fontStyle: 'italic', marginLeft: 1, marginTop: 7}}> Edit Background - Color</Text>
           </View>
         </View>
         <View style={baseLayout.main}>
@@ -125,7 +126,28 @@ function StartMyProjectCustomFinish(){
             */}
 
             {/* Preview Composite image */}
-            <ImageBackground source={isColorMetallic ? staticImageUrlMap['metallicPaint'] :staticImageUrlMap['BLANK']}
+            {/*
+            <View
+              style={{
+                flex: 1,
+                marginTop: 5,
+                borderRadius: 10,
+                top: 0,
+                left: 0,
+                marginLeft: isAndroid() ? 0 : 4,
+                maxWidth: width * 0.8,
+                position: 'absolute',
+                opacity: opacity / 100
+              }}>
+              <ReactImageTint
+                src={isColorMetallic ? require('../../assets/printRollers/metallicPaint.png') :
+                      require('../../assets/printRollers/blank.png')}
+                color={selectedColor}
+              >
+              </ReactImageTint>
+            </View>
+            */}
+            <ImageBackground source={staticImageUrlMap['BLANK']}
                style={{width: width * 0.6,
                  height: isAndroid() ? height * 0.15 : height * 0.25}}>
               <View style={{marginTop: isAndroid()? 5 : 40, justifyContent: 'center'}}>
@@ -147,7 +169,7 @@ function StartMyProjectCustomFinish(){
                   opacity: 0.4,
                   borderBottomLeftRadius: 5,
                   borderBottomRightRadius: 5}}
-                       source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
+                       source={isColorMetallic ? staticImageUrlMap['metallicPaint'] :staticImageUrlMap['BLANK']}>
                 </Image>
               </View>
             </ImageBackground>

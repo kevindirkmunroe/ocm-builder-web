@@ -342,7 +342,7 @@ function MyProject(){
                 style={styles.tinyBtn2}
                 underlayColor="#f0f4f7"
                 onPress={onVerifyImageForSave}>
-                <Text style={styles.btnClr}>Save Project As...</Text>
+                <Text style={styles.btnClr}>Finish</Text>
               </TouchableHighlight>
             </View>
           </View>

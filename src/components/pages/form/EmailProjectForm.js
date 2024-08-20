@@ -152,17 +152,17 @@ const EmailProjectForm = (projectLayers) => {
             style={{width: 24, height: 24, marginTop: 5, marginLeft: 5}}
             source={require('../../../assets/mail-black-envelope-symbol_icon-icons.com_56519.png')}
           />
-            <Text style={styles.buttonText}>&nbsp;Email OCM</Text>
+            <Text style={styles.buttonText}>&nbsp;Send To OCM</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.button, { flexDirection: 'row', width: 150, marginLeft: 20, opacity: isFormValid ? 1 : 0.4 }]}
+            style={[styles.button, { flexDirection: 'row', width: 170, marginLeft: 20, opacity: isFormValid ? 1 : 0.4 }]}
             disabled={!isFormValid}
             onPress={handleDownloadPdf}
           >          <Image
             style={{width: 24, height: 24, marginTop: 5, marginLeft: 5}}
             source={require('../../../assets/PDF-48_46492.png')}
           />
-            <Text style={styles.buttonText}>&nbsp;Download PDF</Text>
+            <Text style={styles.buttonText}>&nbsp;Download as PDF</Text>
           </TouchableOpacity>
         </View>
 
