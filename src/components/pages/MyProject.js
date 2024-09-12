@@ -229,10 +229,12 @@ function MyProject(){
                 <Text style={styles.btnClr}>Close</Text>
               </Pressable>
             </View>
-            <CompositeLayerViewComponent
-              layers={projectLayers}
-              isModal={true}
-            />
+            <View style={{maxHeight: 200}}>
+              <CompositeLayerViewComponent
+                layers={projectLayers}
+                isModal={true}
+              />
+            </View>
           </View>
         </View>
       </Modal>

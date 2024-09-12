@@ -10,6 +10,7 @@ import StartMyProjectClassicOCMFinish from "./pages/StartMyProjectClassicOCMFini
 import StartMyProjectCustomFinish from "./pages/StartMyProjectCustomFinish";
 import Welcome from "./pages/Welcome";
 import MyProject from "./pages/MyProject";
+import MyProjectDesktop from "./pages/MyProjectDesktop";
 import EmailMyProject from "./pages/EmailMyProject";
 import SaveAsPDF from "./pages/SaveAsPDF";
 import AddALayer from "./pages/AddALayer";
@@ -31,6 +32,7 @@ const App = () => {
               <Route path="/ocm-finish" element={<StartMyProjectClassicOCMFinish />} />
               <Route path="/custom-finish" element={<StartMyProjectCustomFinish />} />
               <Route path="/my-project" element={<MyProject />} />
+              <Route path="/my-project-desktop" element={<MyProjectDesktop />} />
               <Route path="/add-layer" element={<AddALayer />} />
               <Route path="/edit-pattern" element={<EditPattern />} />
               <Route path="/edit-color" element={<EditColor />} />

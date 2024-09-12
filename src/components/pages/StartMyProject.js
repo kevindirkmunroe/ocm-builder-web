@@ -3,7 +3,8 @@ import { View, Text, TouchableHighlight, StyleSheet, Dimensions } from "react-na
 import {useAuth} from './authContext';
 import { useNavigate } from 'react-router-dom';
 import { getBaseLayout } from "./layout/BasePageLayout";
-import { pingService } from "../../utils/OCMBuilderServiceClient";
+
+const PLATFORM_DESKTOP = true;
 
 function StartMyProject() {
   const navigate = useNavigate();
@@ -16,9 +17,11 @@ function StartMyProject() {
     });
   };
 
-  let selectOCMFinish = () => {
-    navigate('/ocm-finish');
+  let selectDesktopView = () => {
+    navigate('/my-project-desktop');
   }
+
+  let enterIntoProject = () => PLATFORM_DESKTOP ? selectDesktopView() : selectCustomFinish();
 
   // pingService().then(d => console.log(d)).
   // catch(error => console.log(error));
@@ -37,7 +40,7 @@ function StartMyProject() {
         <TouchableHighlight
           style={baseLayout.btn}
           underlayColor="#f0f4f7"
-          onPress={selectCustomFinish}>
+          onPress={enterIntoProject}>
           <Text style={styles.btnClr}>Design A New Finish</Text>
         </TouchableHighlight>
       </View>
