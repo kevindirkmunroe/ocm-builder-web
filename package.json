@@ -29,6 +29,7 @@
     "metro-config": "^0.80.9",
     "metro-react-native-babel-preset": "^0.66.0",
     "react": "17.0.1",
+    "react-device-detect": "^2.2.3",
     "react-dom": "18.3.1",
     "react-hook-form": "^7.52.1",
     "react-image-tint": "^1.0.2",

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, StyleSheet, Dimensions } from "react-native";
-import {useAuth} from './authContext';
 import { useNavigate } from 'react-router-dom';
-import { getBaseLayout } from "./layout/BasePageLayout";
+import {isMobile} from 'react-device-detect';
 
-const PLATFORM_DESKTOP = true;
+import {useAuth} from './authContext';
+import { getBaseLayout } from "./layout/BasePageLayout";
 
 function StartMyProject() {
   const navigate = useNavigate();
@@ -18,10 +18,21 @@ function StartMyProject() {
   };
 
   let selectDesktopView = () => {
-    navigate('/my-project-desktop');
+    navigate('/my-project-desktop',
+      { state:
+          { projectLayers:
+              [{level: 'Background',
+                patternName: 'BLANK',
+                patternImageKey: 'BLANK',
+                backgroundColor: '#d3d3d3',
+                patternOpacity: 100,
+                isColorMetallic: false}
+              ]
+          }
+      });
   }
 
-  let enterIntoProject = () => PLATFORM_DESKTOP ? selectDesktopView() : selectCustomFinish();
+  let enterIntoProject = () => isMobile ? selectCustomFinish() : selectDesktopView();
 
   // pingService().then(d => console.log(d)).
   // catch(error => console.log(error));

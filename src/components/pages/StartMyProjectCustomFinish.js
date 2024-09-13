@@ -82,14 +82,6 @@ function StartMyProjectCustomFinish(){
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: isAndroid() ? 4: 0}}>
 
             {/* Pattern and Color Tabs */}
-            {/* Background has no print pattern. TODO: remove code once confirmed
-            <TouchableHighlight
-              style={selectedView === ENUM_PATTERN ? styles.tinyBtnSelected: styles.tinyBtn}
-              underlayColor="#676752"
-              onPress={onSelectPatternTab}>
-              <Text style={styles.btnClr}>Pattern</Text>
-            </TouchableHighlight>
-            */}
             <TouchableHighlight
               style={selectedView === ENUM_COLOR ? styles.tinyBtnSelected: styles.tinyBtn}
               underlayColor="#676752"

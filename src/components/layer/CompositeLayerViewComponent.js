@@ -22,9 +22,9 @@ export default function CompositeLayerViewComponent({layers, isModal}){
         {layers.map(oneLayer => {
             return (
               (oneLayer.isVisible || oneLayer.level === 'Background') &&
-              ( oneLayer.level === ' Background' ?
+              ( oneLayer.level === 'Background' ?
                   <ImageBackground source={staticImageUrlMap['BLANK']}
-                                   style={{width: width * 0.6,
+                                   style={{width: width * 0.4,
                                      height: isAndroid() ? height * 0.15 : height * 0.25}}>
                     <View style={{marginTop: isAndroid()? 5 : 40, justifyContent: 'center'}}>
                       <View style={{

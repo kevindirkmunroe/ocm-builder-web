@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {isMobile} from 'react-device-detect';
+
 import {
   ActivityIndicator,
   Image,
@@ -45,20 +47,21 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
   }
 
   return(
-    <View style={{flex: 1, marginTop: 10, justifyContent: 'top', alignItems: 'center'}}>
+    <View style={{flex: 1, marginTop: 10, marginLeft: 5, justifyContent: 'top', alignItems: isMobile? 'center': 'left'}}>
         <View style={styles.colorContainerItem}>
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={{width: 24, height: 20,backgroundColor: initSelectedColor, marginTop: 3, marginRight: 5, borderWidth: 2 }}></View>
+          <View style={{flex: 1, flexDirection: 'row', maxHeight: 20}}>
+            <View style={{width: 24, height: 30,backgroundColor: initSelectedColor, marginRight: 5, borderWidth: 2 }}></View>
             <Text style={[styles.btnClrAlt, {fontSize: 20}]}>#&nbsp;</Text>
-            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, height: 30,  marginRight: 6}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
+            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, height: 30, width: 70, padding: 2,  marginRight: 6}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
             <TouchableHighlight
               style={{borderColor: 'black', borderWidth: 2, borderRadius: 4, paddingLeft: 5, paddingRight: 5, height: 30}}
               onPress={onTypedColorChangeComplete}>
               <Text style={styles.btnClrAlt}>Set</Text>
             </TouchableHighlight>
+            {/*
             { layerLevel === 'Background' &&
               (<>
-              <Text style={[styles.btnClrAlt, {fontSize: 18}]}>&nbsp;&nbsp;&nbsp;Metallic</Text>
+              <Text style={[styles.btnClrAlt, {fontSize: 18}]}>&nbsp;&nbsp;Metallic</Text>
               <TouchableOpacity onPress={onMetallicChange}>
                 <Image
                   style={{width: 20, height: 20, marginTop: 4, marginLeft: 3}}
@@ -71,6 +74,7 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
               </TouchableOpacity>
               </>)
             }
+            */}
           </View>
           <ColorPicker
             ref={r => { this.picker = r }}
@@ -91,6 +95,19 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
             useNativeDriver={false}
             useNativeLayout={true}
           />
+          <View style={{marginTop: 5, flexDirection: 'row-reverse'}}>
+            <Text style={[styles.btnClrAlt, {fontSize: 18, marginTop: 3}]}>&nbsp;&nbsp;Metallic</Text>
+            <TouchableOpacity onPress={onMetallicChange}>
+              <Image
+                style={{width: 20, height: 20, marginTop: 4, marginLeft: 3}}
+                source={
+                  !initMetallic
+                    ? require('../../assets/checkbox_blank_outline_icon_139814.png')
+                    : require('../../assets/checkbox_icon_151467.png')
+                }
+              />
+            </TouchableOpacity>
+          </View>
         </View>
     </View>
   )
@@ -114,11 +131,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'flex-start' // if you want to fill rows left to right
+    alignItems: 'flex-start'
   },
   colorContainerItem: {
-    width: '60%', // is 50% of container width
-    alignItems: 'center',
+    width: '60%',
+    alignItems: 'flex-start',
   },
   belowContainer: {
     justifyContent: 'center',

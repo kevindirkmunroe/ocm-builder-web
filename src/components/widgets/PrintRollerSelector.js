@@ -8,6 +8,8 @@ import {
   ImageBackground, FlatList, StyleSheet,
 } from "react-native";
 import { Slider } from '@react-native-assets/slider'
+import {isMobile} from 'react-device-detect';
+
 
 import { getOCMPrintRollers, staticImageUrlMap } from "../../utils/AssetManager";
 
@@ -24,16 +26,13 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem, onSe
 
   return(
     <View>
-        <View style={{flex: 1, marginTop: 10, justifyContent: 'top', alignItems: 'center'}}>
-          { title &&
-            <Text style={{width: width * 0.6, padding: 2, fontFamily: 'Futura', marginBottom: 5, backgroundColor: 'lightgray'}}>{title}</Text>
-          }
+        <View style={{flex: 1, marginTop: 10, justifyContent: 'top', alignItems: isMobile? 'center': 'left'}}>
           {/*
             Table of Print Roller images
           */}
-          <View style={{width: width * 0.6, height: height * 0.25, backgroundColor: 'lightgray'}}>
+          <View style={{width: isMobile? width * 0.6 : width * 0.2, height: height * 0.25, backgroundColor: 'lightgray'}}>
             {/* Preview Image */}
-            <ImageBackground style={{width: width * 0.6, height: 40}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
+            <ImageBackground style={{width: isMobile? width * 0.6 : width * 0.2, height: 40}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
               <View style={{ position: 'absolute', top: 8, left: 8, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
                 <Text style={{
                   alignSelf: 'flex-start',
@@ -73,9 +72,9 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem, onSe
               keyExtractor={item => `basicListEntry-${item.name}`}/>
           </View>
 
-          <View style={{ backgroundColor: '#d9d9d9', marginTop: 10, flexDirection: 'column', width: width * 0.6, height: 40}}>
+          <View style={{ backgroundColor: '#d9d9d9', marginTop: 10, flexDirection: 'column', width: isMobile? width * 0.6 : width * 0.2, height: 40}}>
             {/* Opacity Slider */}
-            <View style={{marginTop: 6, width: width * 0.6, flexDirection: 'column'}}>
+            <View style={{marginTop: 6, width: isMobile? width * 0.6 : width * 0.2, flexDirection: 'column'}}>
               <Text style={{fontFamily: 'Futura', fontSize: 16, paddingLeft: 5}}>Opacity {opacity}%</Text>
               <Slider
                 value={opacity}                   // set the current slider's value
