@@ -58,23 +58,6 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
               onPress={onTypedColorChangeComplete}>
               <Text style={styles.btnClrAlt}>Set</Text>
             </TouchableHighlight>
-            {/*
-            { layerLevel === 'Background' &&
-              (<>
-              <Text style={[styles.btnClrAlt, {fontSize: 18}]}>&nbsp;&nbsp;Metallic</Text>
-              <TouchableOpacity onPress={onMetallicChange}>
-                <Image
-                  style={{width: 20, height: 20, marginTop: 4, marginLeft: 3}}
-                  source={
-                    !initMetallic
-                      ? require('../../assets/checkbox_blank_outline_icon_139814.png')
-                      : require('../../assets/checkbox_icon_151467.png')
-                  }
-                />
-              </TouchableOpacity>
-              </>)
-            }
-            */}
           </View>
           <ColorPicker
             ref={r => { this.picker = r }}

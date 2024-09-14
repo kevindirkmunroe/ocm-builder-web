@@ -1,11 +1,14 @@
 import React, { useRef, useState } from "react";
-import { View, Text, StyleSheet, FlatList, Image, TouchableHighlight } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, TouchableHighlight, ScrollView, Dimensions } from "react-native";
 import { useLocation } from "react-router-dom";
 import Layer from "../layer/Layer";
 import CustomColorSelector from "../widgets/CustomColorSelector";
 import { staticImageUrlMap } from "../../utils/AssetManager";
 import PrintRollerSelector from "../widgets/PrintRollerSelector";
-import { getBaseLayout } from "./layout/BasePageLayout";
+import { getBaseLayout, isAndroidWebBrowser as isAndroid } from "./layout/BasePageLayout";
+import CompositeLayerViewComponent, { deepCloneLayerStack } from "../layer/CompositeLayerViewComponent";
+import { isMobile } from "react-device-detect";
+import { ReactImageTint } from "react-image-tint";
 
 function MyProjectDesktop(){
 
@@ -13,27 +16,53 @@ function MyProjectDesktop(){
   const [projectLayers, setProjectLayers] = useState(state.projectLayers);
   const [selectedColor, setSelectedColor] = useState(null);
   const [isColorMetallic, setIsColorMetallic] = useState(false);
-  const [layerToEdit, setLayerToEdit] = useState('Background');
+
+  const {width, height} = Dimensions.get('window');
+
+  // Create clone of layer stack, update on edits, and CompositeLayerView will
+  // show clone contents
+  let clonedProjectLayers = deepCloneLayerStack(projectLayers);
+  const [compositeLayerPreview, setCompositeLayerPreview] =
+    useState(new CompositeLayerViewComponent({layers: clonedProjectLayers, isPreview: true}));
+  const [layerToEdit, setLayerToEdit] = useState(clonedProjectLayers[0]);
+
+  console.log(`default edit layer: ${JSON.stringify(layerToEdit)}`);
   const baseLayout = getBaseLayout();
 
-  const updateSelectedItem = (newValue) => {
+  const updatePatternSelectedItem = (newValue) => {
+    // console.log(`updatePatternSelectedItem ${JSON.stringify(newValue)}`);
+    // update clone and rebuild composite view...
+    setLayerToEdit({
+      patternName: newValue.name,
+      patternImageKey: newValue.key,
+    })
+    setCompositeLayerPreview(new CompositeLayerViewComponent({layers: clonedProjectLayers, isPreview: true}));
   }
+
+  const makeImage = null;
+  const [previewLayerImage, setPreviewLayerImage] = useState(makeImage);
+
+  console.log(`ReactImageTint obj: ${JSON.stringify(previewLayerImage)}`);
+
   const updateOpacity = (newValue) => {
   }
 
   const doNothing = () => {}
 
   const patternAsSelectedItem = {
-    key: projectLayers[0].patternImageKey, // TODO replace [0] with real selected layer
-    name: projectLayers[0].patternName,
+    key: layerToEdit.patternImageKey, // TODO replace [0] with real selected layer
+    name: layerToEdit.patternName,
   }
 
     return (
     <View style={{flex: 1, justifyContent: 'flex-start', padding: 10, flexWrap: 'wrap', alignItems: 'center'}}>
-      <View style={styles.blockHalf}>
+      <View style={[styles.blockHalf, {paddingBottom: 10}]}>
         {/* Full Composite View */}
-        <Text>*</Text>
-
+        <ScrollView style={{width:'100%', height: '70%'}}>
+          <CompositeLayerViewComponent
+            layers={projectLayers}
+          />
+        </ScrollView>
         {/* Project Action Buttons */}
         <View style={{flex: 1, flexDirection: 'row',justifyContent: 'center', alignItems: 'flex-end'}}>
           <TouchableHighlight
@@ -43,19 +72,19 @@ function MyProjectDesktop(){
             <Text style={styles.btnClr}>Reset</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            style={[baseLayout.btn, {width: 120, marginLeft: 2}]}
+            style={[baseLayout.btn, {width: 120, marginLeft: 8}]}
             underlayColor="#f0f4f7"
             onPress={doNothing}>
             <Text style={styles.btnClr}>Save as PDF</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            style={[baseLayout.btn, {width: 130, marginLeft: 2}]}
+            style={[baseLayout.btn, {width: 130, marginLeft: 8}]}
             underlayColor="#f0f4f7"
             onPress={doNothing}>
             <Text style={styles.btnClr}>Send to OCM</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            style={[baseLayout.btn, {width: 160, marginLeft: 2}]}
+            style={[baseLayout.btn, {width: 160, marginLeft: 8}]}
             underlayColor="#f0f4f7"
             onPress={doNothing}>
             <Text style={styles.btnClr}>Project Settings...</Text>
@@ -79,6 +108,8 @@ function MyProjectDesktop(){
                   backgroundColor={item.backgroundColor}
                   patternOpacity={item.patternOpacity}
                   isColorMetallic={item.isColorMetallic}
+                  onEditLayer={doNothing}
+                  onDeleteLayer={doNothing}
                   isVisible={true}
                   isReadOnly={true}
                 />
@@ -89,49 +120,59 @@ function MyProjectDesktop(){
         </View>
       </View>
       <View style={styles.blockEighth}>
-
-        {/* Layer Preview */}
-        <View style={[styles.borderStyle, {flex: 1, alignContent:'left', marginLeft: 4}]}>
+        {/* Preview */}
+        <View style={{flex: 1, alignContent:'left', marginLeft: 4}}>
+          {/* Layer Preview */}
           <View style={{
             backgroundColor: selectedColor,
             zIndex: 0,
             height: 60,
-            borderWidth: 10,
-            opacity: 0.3}} />
+            borderWidth: 4,
+            opacity: 1}} />
+          <ReactImageTint
+            src={staticImageUrlMap['morton']}
+            color={'#FF0000'}
+          >
+          </ReactImageTint>
+          {/*
           <Image style={{
             position: 'absolute',
             zIndex: 1,
             backgroundColor: '#d9d9d9',
-            borderWidth: 10,
+            borderWidth: 2,
             borderColor:'#ADAD86',
             height: 60,
+            width: '100%',
             opacity: layerToEdit.patternOpacity / 100
           }}
                  source={staticImageUrlMap[layerToEdit.patternImageKey]}>
           </Image>
+          */}
+          {/* Composite Preview */}
+          <ScrollView style={{alignContent: 'center'}}>
+            { compositeLayerPreview }
+          </ScrollView>
         </View>
-        {/* Composite Preview */}
-
       </View>
       <View style={[styles.blockQtr, {flexDirection: 'row'}]}>
         {/* Layer Editors */}
         <View style={{flex: 1, flexDirection: 'row'}}>
           <View style={[styles.borderStyle, {height: '84%', width: '50%', alignItems: 'center'}]}>
             <PrintRollerSelector
-              onSelectPrintRoller={updateSelectedItem}
+              onSelectPrintRoller={updatePatternSelectedItem}
               initSelectedItem={patternAsSelectedItem}
               onSelectOpacity={updateOpacity}
               initSelectedOpacity={10}/>
           </View>
           <View style={{flex: 1, marginBottom: 4,flexDirection: 'row',justifyContent: 'center', alignItems: 'flex-end'}}>
             <TouchableHighlight
-              style={[baseLayout.btn, {width: 100}]}
+              style={[baseLayout.btn, {width: 140}]}
               underlayColor="#f0f4f7"
               onPress={doNothing}>
-              <Text style={styles.btnClr}>Set Layer</Text>
+              <Text style={styles.btnClr}>Apply Changes</Text>
             </TouchableHighlight>
             <TouchableHighlight
-              style={[baseLayout.btn, {width: 100, marginLeft: 4, marginRight: 10}]}
+              style={[baseLayout.btn, {width: 100, marginLeft: 8, marginRight: 10}]}
               underlayColor="#f0f4f7"
               onPress={doNothing}>
               <Text style={styles.btnClr}>Clear</Text>
@@ -153,16 +194,16 @@ function MyProjectDesktop(){
 
 const styles = StyleSheet.create({
   borderStyle: {
-    borderWidth: 2, borderColor: 'gray', borderRadius: 5
+    borderWidth: 2, borderColor: 'lightgray', borderRadius: 5
   },
   blockHalf: {
-    width: '50%', height: '99%', padding: 10, borderWidth: 2, borderColor: 'gray', borderRadius: 5
+    width: '50%', height: '100%', padding: 10, borderWidth: 2, borderColor: 'lightgray', borderRadius: 5
   },
   blockQtr: {
-    width: '48%', marginLeft: 10, padding: 10, height:'50%', borderWidth: 2, borderColor: 'gray', borderRadius: 5
+    width: '48%', marginLeft: 10, padding: 10, height:'50%', borderWidth: 2, borderColor: 'lightgray', borderRadius: 5
   },
   blockEighth: {
-    width: '48%', marginLeft: 10, padding: 10, marginBottom: 10, height:'23%', borderWidth: 2, borderColor: 'gray', borderRadius: 5
+    width: '48%', marginLeft: 10, padding: 10, marginBottom: 10, height:'23%', borderWidth: 2, borderColor: 'lightgray', borderRadius: 5
   },
   btnClr: {
     fontFamily: 'Futura',

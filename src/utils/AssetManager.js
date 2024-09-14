@@ -2,7 +2,6 @@ import React from "react";
 
 export function getOCMPrintRollers(){
   return [
-    {key: 'blank_print', name: 'BLANK'},
     {key: 'bamboo', name: 'Bamboo'},
     {key: 'brushed', name: 'Brushed'},
     {key: 'delta', name: 'Delta'},
@@ -19,6 +18,7 @@ export function getOCMPrintRollers(){
     {key: 'spangle', name: 'Spangle'},
     {key: 'terrazzo_a', name: 'Terrazzo A'},
     {key: 'terrazzo_b', name: 'Terrazzo B'},
+    {key: 'blank_print', name: 'BLANK'},
   ]
 }
 
