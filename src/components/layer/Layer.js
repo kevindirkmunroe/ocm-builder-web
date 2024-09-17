@@ -98,7 +98,7 @@ function Layer({
                 marginTop: 7,
               }}>
               <Image
-                style={{width: 30, height: 30, margin: 5}}
+                style={{width: 30, height: 20, margin: 5}}
                 source={staticImageUrlMap[patternImageKey]}
               />
               <Text style={{marginTop: 10}}>{patternName}</Text>
@@ -131,7 +131,7 @@ function Layer({
               <View
                 style={{
                   width: 30,
-                  height: 30,
+                  height: 20,
                   marginRight: 5,
                   marginTop: 10,
                   backgroundColor: backgroundColor,

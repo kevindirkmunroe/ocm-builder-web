@@ -7,51 +7,81 @@ import { staticImageUrlMap } from "../../utils/AssetManager";
 import PrintRollerSelector from "../widgets/PrintRollerSelector";
 import { getBaseLayout, isAndroidWebBrowser as isAndroid } from "./layout/BasePageLayout";
 import CompositeLayerViewComponent, { deepCloneLayerStack } from "../layer/CompositeLayerViewComponent";
-import { isMobile } from "react-device-detect";
-import { ReactImageTint } from "react-image-tint";
+import { CompositePlusSingleLayerViewer } from "../widgets/CompositePlusSingleLayerViewer";
 
 function MyProjectDesktop(){
-
   const { state } = useLocation();
   const [projectLayers, setProjectLayers] = useState(state.projectLayers);
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [isColorMetallic, setIsColorMetallic] = useState(false);
+  const [layerIdx, setLayerIdx] = useState(0);
 
   const {width, height} = Dimensions.get('window');
 
   // Create clone of layer stack, update on edits, and CompositeLayerView will
   // show clone contents
-  let clonedProjectLayers = deepCloneLayerStack(projectLayers);
-  const [compositeLayerPreview, setCompositeLayerPreview] =
-    useState(new CompositeLayerViewComponent({layers: clonedProjectLayers, isPreview: true}));
-  const [layerToEdit, setLayerToEdit] = useState(clonedProjectLayers[0]);
+  const [clonedProjectLayers, setClonedProjectLayers] = useState(deepCloneLayerStack(projectLayers));
 
-  console.log(`default edit layer: ${JSON.stringify(layerToEdit)}`);
+  let preview = new CompositePlusSingleLayerViewer({ layerIdx, compositeLayers: clonedProjectLayers});
   const baseLayout = getBaseLayout();
 
-  const updatePatternSelectedItem = (newValue) => {
-    // console.log(`updatePatternSelectedItem ${JSON.stringify(newValue)}`);
-    // update clone and rebuild composite view...
-    setLayerToEdit({
-      patternName: newValue.name,
-      patternImageKey: newValue.key,
-    })
-    setCompositeLayerPreview(new CompositeLayerViewComponent({layers: clonedProjectLayers, isPreview: true}));
+  const updatePreview = (clonedProjectLayers) => {
+    setClonedProjectLayers(deepCloneLayerStack(clonedProjectLayers));
+    preview = new CompositePlusSingleLayerViewer({ layerIdx, compositeLayers: clonedProjectLayers});
   }
 
-  const makeImage = null;
-  const [previewLayerImage, setPreviewLayerImage] = useState(makeImage);
+  const updatePatternSelectedItem = (newValue) => {
+    // update clone and rebuild composite view...
+    clonedProjectLayers[layerIdx] = {...clonedProjectLayers[layerIdx],
+      patternName: newValue.name,
+      patternImageKey: newValue.key,
+    };
+    updatePreview(clonedProjectLayers);
+  }
 
-  console.log(`ReactImageTint obj: ${JSON.stringify(previewLayerImage)}`);
+  const updateColor = (newValue) => {
+    clonedProjectLayers[layerIdx] = {...clonedProjectLayers[layerIdx],
+      backgroundColor: newValue,
+    };
+    updatePreview(clonedProjectLayers);
+   }
+
+  const updateColorMetallic = (newValue) => {
+    clonedProjectLayers[layerIdx] = {...clonedProjectLayers[layerIdx],
+      isColorMetallic: newValue,
+    };
+    updatePreview(clonedProjectLayers);
+  }
 
   const updateOpacity = (newValue) => {
+    clonedProjectLayers[layerIdx] = {...clonedProjectLayers[layerIdx],
+      patternOpacity: newValue,
+    };
+    updatePreview(clonedProjectLayers);
   }
 
   const doNothing = () => {}
+  const onAddLayer = () => {
+    const newLayer =
+      {level: clonedProjectLayers.length,
+        patternName: 'BLANK',
+        patternImageKey: 'BLANK',
+        backgroundColor: '#d3d3d3',
+        patternOpacity: 100,
+        isVisible: true,
+        isColorMetallic: false};
+    // add new layer...
+    setLayerIdx(newLayer.level);
+    clonedProjectLayers.push(newLayer);
+    updatePreview(clonedProjectLayers);
+  }
+
+  const onEditLayer = (layerToEdit) => {
+    setLayerIdx(layerToEdit.level);
+
+  }
 
   const patternAsSelectedItem = {
-    key: layerToEdit.patternImageKey, // TODO replace [0] with real selected layer
-    name: layerToEdit.patternName,
+    key: clonedProjectLayers[layerIdx].patternImageKey, // TODO replace [0] with real selected layer
+    name: clonedProjectLayers[layerIdx].patternName,
   }
 
     return (
@@ -59,6 +89,7 @@ function MyProjectDesktop(){
       <View style={[styles.blockHalf, {paddingBottom: 10}]}>
         {/* Full Composite View */}
         <ScrollView style={{width:'100%', height: '70%'}}>
+          <Text>Composite: {JSON.stringify(projectLayers)}</Text>
           <CompositeLayerViewComponent
             layers={projectLayers}
           />
@@ -94,8 +125,9 @@ function MyProjectDesktop(){
       <View style={styles.blockEighth}>
         {/* Display All Layers */}
         <View>
+          {/* Existing Layers */}
           <FlatList
-            data={projectLayers}
+            data={clonedProjectLayers}
             scrollEnabled={false}
             initialNumToRender={4}
             extraData={state.refresh}
@@ -111,47 +143,27 @@ function MyProjectDesktop(){
                   onEditLayer={doNothing}
                   onDeleteLayer={doNothing}
                   isVisible={true}
-                  isReadOnly={true}
+                  isReadOnly={false}
                 />
               )
             }}
             keyExtractor={item => `${item.patternImageKey}-${item.level}`}
           />
+          {/* Add A Layer */}
+          { clonedProjectLayers.length < 4 &&
+            <TouchableHighlight
+              style={[baseLayout.btn, {backgroundColor: '#d3d3d3', borderRadius: 2, marginTop: 0, padding: 2, width: '99%'}]}
+              underlayColor="#d3d3d3"
+              onPress={onAddLayer}>
+              <Text style={styles.btnClr}>+Add A Layer</Text>
+            </TouchableHighlight>
+          }
         </View>
       </View>
-      <View style={styles.blockEighth}>
+      <View style={[styles.blockEighth, {padding: 4}]}>
         {/* Preview */}
         <View style={{flex: 1, alignContent:'left', marginLeft: 4}}>
-          {/* Layer Preview */}
-          <View style={{
-            backgroundColor: selectedColor,
-            zIndex: 0,
-            height: 60,
-            borderWidth: 4,
-            opacity: 1}} />
-          <ReactImageTint
-            src={staticImageUrlMap['morton']}
-            color={'#FF0000'}
-          >
-          </ReactImageTint>
-          {/*
-          <Image style={{
-            position: 'absolute',
-            zIndex: 1,
-            backgroundColor: '#d9d9d9',
-            borderWidth: 2,
-            borderColor:'#ADAD86',
-            height: 60,
-            width: '100%',
-            opacity: layerToEdit.patternOpacity / 100
-          }}
-                 source={staticImageUrlMap[layerToEdit.patternImageKey]}>
-          </Image>
-          */}
-          {/* Composite Preview */}
-          <ScrollView style={{alignContent: 'center'}}>
-            { compositeLayerPreview }
-          </ScrollView>
+          { preview }
         </View>
       </View>
       <View style={[styles.blockQtr, {flexDirection: 'row'}]}>
@@ -162,7 +174,7 @@ function MyProjectDesktop(){
               onSelectPrintRoller={updatePatternSelectedItem}
               initSelectedItem={patternAsSelectedItem}
               onSelectOpacity={updateOpacity}
-              initSelectedOpacity={10}/>
+              initSelectedOpacity={clonedProjectLayers[layerIdx].patternOpacity}/>
           </View>
           <View style={{flex: 1, marginBottom: 4,flexDirection: 'row',justifyContent: 'center', alignItems: 'flex-end'}}>
             <TouchableHighlight
@@ -180,10 +192,10 @@ function MyProjectDesktop(){
           </View>
           <View style={[styles.borderStyle, {width: '44%', height: '84%', alignItems: 'center'}]}>
             <CustomColorSelector
-              onSelectColor={setSelectedColor}
-              initSelectedColor={selectedColor}
-              onSelectMetallic={setIsColorMetallic}
-              initMetallic={isColorMetallic}
+              onSelectColor={updateColor}
+              initSelectedColor={clonedProjectLayers[layerIdx].backgroundColor}
+              onSelectMetallic={updateColorMetallic}
+              initMetallic={clonedProjectLayers[layerIdx].isColorMetallic}
               layerLevel={'Background'}/>
           </View>
         </View>
@@ -203,7 +215,7 @@ const styles = StyleSheet.create({
     width: '48%', marginLeft: 10, padding: 10, height:'50%', borderWidth: 2, borderColor: 'lightgray', borderRadius: 5
   },
   blockEighth: {
-    width: '48%', marginLeft: 10, padding: 10, marginBottom: 10, height:'23%', borderWidth: 2, borderColor: 'lightgray', borderRadius: 5
+    width: '48%', marginLeft: 10, padding: 2, marginBottom: 10, height:'23%', borderWidth: 2, borderColor: 'lightgray', borderRadius: 5
   },
   btnClr: {
     fontFamily: 'Futura',

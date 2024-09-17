@@ -16,8 +16,6 @@ export default function CompositeLayerViewComponent({layers, isModal, isPreview}
 
   let currZIndex = 0;
   const {width, height} = Dimensions.get('window');
-
-  // TODO: Metallic should overlay metallic print
   return (
     <View>
         {layers.map(oneLayer => {
@@ -37,14 +35,9 @@ export default function CompositeLayerViewComponent({layers, isModal, isPreview}
                       zIndex: currZIndex + 1,
                     }}>
                     <ReactImageTint
-                      src={oneLayer.level === 'Background' ?
-                        (oneLayer.isColorMetallic ? staticImageUrlMap['metallicPaint'] :
-                            staticImageUrlMap['BLANK']
-                        ):
-                        staticImageUrlMap[oneLayer.patternImageKey]}
+                      src={staticImageUrlMap[oneLayer.patternImageKey]}
                       color={oneLayer.backgroundColor}
-                    >
-                    </ReactImageTint>
+                    />
                   </View>
             );
         })}
