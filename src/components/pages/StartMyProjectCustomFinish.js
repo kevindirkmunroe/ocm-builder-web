@@ -17,7 +17,7 @@ function StartMyProjectCustomFinish(){
 
   const navigate = useNavigate();
   const {width, height} = Dimensions.get('window');
-  const [selectedItem, setSelectedItem] = useState({key: 'blank_print', name: 'BLANK'});
+  const [selectedItem, setSelectedItem] = useState({key: 'BLANK', name: 'BLANK'});
   const [selectedColor, setSelectedColor] = useState(null);
   const [isColorMetallic, setIsColorMetallic] = useState(false);
   const [opacity, setOpacity] = useState(100);

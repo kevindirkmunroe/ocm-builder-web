@@ -26,7 +26,7 @@ export function CompositePlusSingleLayerViewer({layerIdx, compositeLayers}){
         <Text style={{flex: 1, padding: 4, width: 100, fontStyle: 'italic', fontSize: 12, marginTop: 10}}>Composite Preview:</Text>
         <View style={{marginTop: 5, flex: 7}}>
           {compositeLayers.map(oneLayer => {
-            return (
+            return (oneLayer.isVisible || oneLayer.level === 'Background') && (
               <View style={{
                 position: 'absolute',
                 zIndex: zIdx++,
@@ -39,7 +39,7 @@ export function CompositePlusSingleLayerViewer({layerIdx, compositeLayers}){
                   width: '100%',
                   height: 94,
                   borderRadius: 3,
-                  opacity: compositeLayers[layerIdx].patternOpacity / 100,
+                  opacity: oneLayer.patternOpacity / 100,
                   tintColor: oneLayer.backgroundColor,
                 }} source={staticImageUrlMap[oneLayer.patternImageKey]}/>
               </View>)

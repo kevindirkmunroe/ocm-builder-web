@@ -101,8 +101,8 @@ function Layer({
                 style={{width: 30, height: 20, margin: 5}}
                 source={staticImageUrlMap[patternImageKey]}
               />
-              <Text style={{marginTop: 10}}>{patternName}</Text>
-              <Text style={{marginTop: 10}}>
+              <Text style={{marginTop: 6}}>{patternName}</Text>
+              <Text style={{marginTop: 6}}>
                 {' '}
                 / {typeof patternOpacity === 'number' ? patternOpacity : ''}%
               </Text>
@@ -137,7 +137,7 @@ function Layer({
                   backgroundColor: backgroundColor,
                 }}
               />
-              <Text style={{marginTop: 15}}>
+              <Text style={{marginTop: 12}}>
                 {backgroundColor? backgroundColor.toUpperCase(): ''}{' '}
                 {JSON.stringify(isColorMetallic) === 'true' ? 'M' : ''}
               </Text>
@@ -168,7 +168,7 @@ function Layer({
           {level !== 'Background' && !isReadOnly &&  (
             <TouchableHighlight onPress={onDelete}>
               <Image
-                style={{width: 20, height: 20, marginTop: 5, marginLeft: 3}}
+                style={{width: 17, height: 16, marginTop: 5, marginLeft: 3}}
                 source={require('../../assets/trash-can-black-symbol_icon-icons.com_72914.png')}
               />
             </TouchableHighlight>

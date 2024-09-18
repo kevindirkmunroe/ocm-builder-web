@@ -18,7 +18,7 @@ export function getOCMPrintRollers(){
     {key: 'spangle', name: 'Spangle'},
     {key: 'terrazzo_a', name: 'Terrazzo A'},
     {key: 'terrazzo_b', name: 'Terrazzo B'},
-    {key: 'blank_print', name: 'BLANK'},
+    {key: 'BLANK', name: 'BLANK'},
   ]
 }
 
@@ -39,7 +39,7 @@ export const sandobi2 = require('../assets/printRollers/sandobi_full_2_w_trans.p
 export const spangle = require('../assets/printRollers/spangle_1_w_trans.png');
 export const terrazzo_a = require('../assets/printRollers/terrazzo_a_1_w_trans.png');
 export const terrazzo_b = require('../assets/printRollers/terrazzo_b_1_w_trans.png');
-export const blank_print = require('../assets/printRollers/blank.png');
+export const BLANK = require('../assets/printRollers/blank.png');
 
 
 
@@ -149,7 +149,7 @@ export const staticImageUrlMap = {
   'rustic': rustic,
   'wood': wood,
 
-  'BLANK': blank_print,
+  'BLANK': BLANK,
   'bamboo': bamboo,
   'brushed': brushed,
   'delta': delta,
