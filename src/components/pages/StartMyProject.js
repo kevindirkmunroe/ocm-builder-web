@@ -18,18 +18,7 @@ function StartMyProject() {
   };
 
   let selectDesktopView = () => {
-    navigate('/my-project-desktop',
-      { state:
-          { projectLayers:
-              [{level: 'Background',
-                patternName: 'BLANK',
-                patternImageKey: 'BLANK',
-                backgroundColor: '#d3d3d3',
-                patternOpacity: 100,
-                isColorMetallic: false}
-              ]
-          }
-      });
+    navigate('/my-project-desktop');
   }
 
   let enterIntoProject = () => isMobile ? selectCustomFinish() : selectDesktopView();

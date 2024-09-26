@@ -12,7 +12,7 @@ export function CompositePlusSingleLayerViewer({layerIdx, compositeLayers}){
   return(
     <ScrollView style={{height: 100}}>
       <View style={{flex:1, flexDirection: 'row'}}>
-        <Text style={{flex: 2, padding: 4, width: 100, fontStyle: 'italic', fontSize: 12}}>Layer {layerIdx}:</Text>
+        <Text style={{flex: 2, padding: 4, width: 100, fontStyle: 'italic', fontSize: 12}}>Layer {layerIdx === 0 ? 'B' : layerIdx}:</Text>
         <Image style={{
           flex: 14,
           width: '100%',

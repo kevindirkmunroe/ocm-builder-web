@@ -30,7 +30,7 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem, onSe
           {/*
             Table of Print Roller images
           */}
-          <View style={{width: isMobile? width * 0.6 : width * 0.2, height: height * 0.25, backgroundColor: 'lightgray'}}>
+          <View style={{width: isMobile? width * 0.6 : width * 0.2, height: isMobile ? height * 0.25 : height * 0.33, backgroundColor: 'lightgray'}}>
             {/* Preview Image */}
             <ImageBackground style={{width: isMobile? width * 0.6 : width * 0.2, height: 40}} source={selectedItem? staticImageUrlMap[selectedItem.key]: null}>
               <View style={{ position: 'absolute', top: 8, left: 8, right: 0, bottom: 0, justifyContent: 'left', alignItems: 'left'}}>
@@ -72,22 +72,24 @@ function PrintRollerSelector({title, onSelectPrintRoller, initSelectedItem, onSe
               keyExtractor={item => `basicListEntry-${item.name}`}/>
           </View>
 
-          <View style={{ backgroundColor: '#d9d9d9', marginTop: 10, flexDirection: 'column', width: isMobile? width * 0.6 : width * 0.2, height: 40}}>
-            {/* Opacity Slider */}
-            <View style={{marginTop: 6, width: isMobile? width * 0.6 : width * 0.2, flexDirection: 'column'}}>
-              <Text style={{fontFamily: 'Futura', fontSize: 16, paddingLeft: 5}}>Opacity {opacity}%</Text>
-              <Slider
-                value={opacity}                   // set the current slider's value
-                minimumValue={0}                  // Minimum value
-                maximumValue={100}                // Maximum value
-                step={5}                          // The step for the slider (0 means that the slider will handle any decimal value within the range [min, max])
-                minimumTrackTintColor='grey'      // The track color before the current value
-                maximumTrackTintColor='grey'      // The track color after the current value
-                onValueChange={onOpacityChanged}
-                thumbSize={20}
-                thumbTintColor='darkcyan'/>
+          { isMobile &&
+            <View style={{ backgroundColor: '#d9d9d9', marginTop: 10, flexDirection: 'column', width: isMobile? width * 0.6 : width * 0.2, height: 40}}>
+              {/* Opacity Slider */}
+              <View style={{marginTop: 6, width: isMobile? width * 0.6 : width * 0.2, flexDirection: 'column'}}>
+                <Text style={{fontFamily: 'Futura', fontSize: 16, paddingLeft: 5}}>Opacity {opacity}%</Text>
+                <Slider
+                  value={opacity}                   // set the current slider's value
+                  minimumValue={0}                  // Minimum value
+                  maximumValue={100}                // Maximum value
+                  step={5}                          // The step for the slider (0 means that the slider will handle any decimal value within the range [min, max])
+                  minimumTrackTintColor='grey'      // The track color before the current value
+                  maximumTrackTintColor='grey'      // The track color after the current value
+                  onValueChange={onOpacityChanged}
+                  thumbSize={20}
+                  thumbTintColor='darkcyan'/>
+              </View>
             </View>
-          </View>
+          }
         </View>
     </View>
   );

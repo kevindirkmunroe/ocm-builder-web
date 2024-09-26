@@ -18,11 +18,13 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
   const [colorState, setColorState] =
     useState({currentColor: initSelectedColor, swatchesOnly: false, swatchesLast: true, swatchesEnabled: false, disc: false})
 
+  // console.log(`CustomColorSelector- setting typedColor to ${initSelectedColor}`);
   const [typedColor, setTypedColor] = useState(initSelectedColor);
 
   const onColorChange = (newColor) => {
     onSelectColor(newColor);
     setTypedColor(newColor.substring(1).toUpperCase());
+    setColorState({...colorState, currentColor: newColor});
   }
 
   const onMetallicChange = () => {
@@ -52,11 +54,11 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
           <View style={{flex: 1, flexDirection: 'row', maxHeight: 20}}>
             <View style={{width: 24, height: 30,backgroundColor: initSelectedColor, marginRight: 5, borderWidth: 2 }}></View>
             <Text style={[styles.btnClrAlt, {fontSize: 20}]}>#&nbsp;</Text>
-            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, height: 30, width: 70, padding: 2,  marginRight: 6}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
+            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, height: 30, width: 80, padding: 2,  marginRight: 6}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
             <TouchableHighlight
               style={{borderColor: 'black', borderWidth: 2, borderRadius: 4, paddingLeft: 5, paddingRight: 5, height: 30}}
               onPress={onTypedColorChangeComplete}>
-              <Text style={styles.btnClrAlt}>Set</Text>
+              <Text style={[styles.btnClrAlt, {marginTop: 2}]}>Set</Text>
             </TouchableHighlight>
           </View>
           <ColorPicker
