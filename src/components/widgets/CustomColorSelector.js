@@ -54,7 +54,7 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
           <View style={{flex: 1, flexDirection: 'row', maxHeight: 20}}>
             <View style={{width: 24, height: 30,backgroundColor: initSelectedColor, marginRight: 5, borderWidth: 2 }}></View>
             <Text style={[styles.btnClrAlt, {fontSize: 20}]}>#&nbsp;</Text>
-            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, height: 30, width: 80, padding: 2,  marginRight: 6}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
+            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, height: 30, width: 80, padding: 2,  marginRight: 6, backgroundColor: '#f8f8f8'}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
             <TouchableHighlight
               style={{borderColor: 'black', borderWidth: 2, borderRadius: 4, paddingLeft: 5, paddingRight: 5, height: 30}}
               onPress={onTypedColorChangeComplete}>
@@ -81,10 +81,10 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
             useNativeLayout={true}
           />
           <View style={{marginTop: 5, flexDirection: 'row-reverse'}}>
-            <Text style={[styles.btnClrAlt, {fontSize: 18, marginTop: 3}]}>&nbsp;&nbsp;Metallic</Text>
-            <TouchableOpacity onPress={onMetallicChange}>
+            <Text style={[styles.btnClrAlt, {fontSize: 18, marginTop: 3, color: layerLevel === 0 ? 'black' : 'lightgray'}]}>&nbsp;&nbsp;Metallic</Text>
+            <TouchableOpacity onPress={onMetallicChange} disabled={layerLevel !== 0}>
               <Image
-                style={{width: 20, height: 20, marginTop: 4, marginLeft: 3}}
+                style={{width: 20, height: 20, marginTop: 4, marginLeft: 3, tintColor: layerLevel === 0 ? 'black' : 'lightgray'}}
                 source={
                   !initMetallic
                     ? require('../../assets/checkbox_blank_outline_icon_139814.png')

@@ -26,6 +26,7 @@ import downloadPdf from "../../utils/PDFDownloader";
 import ButtonMailTo from "../widgets/ButtonMailTo";
 import { isMobile } from "react-device-detect";
 import { Slider } from "@react-native-assets/slider";
+import { settings } from "@react-native-community/eslint-config";
 
 function MyProjectDesktop(){
 
@@ -89,6 +90,8 @@ function MyProjectDesktop(){
   const updateColorMetallic = (newValue) => {
     clonedProjectLayers[layerIdx] = {...clonedProjectLayers[layerIdx],
       isColorMetallic: newValue,
+      patternName: newValue ? 'metallicPaint' : 'BLANK',
+      patternImageKey: newValue ? 'metallicPaint' : 'BLANK',
     };
     updatePreview(clonedProjectLayers);
   }
@@ -175,6 +178,24 @@ function MyProjectDesktop(){
     ]);
   }
 
+  const onSaveAsPdf = () => {
+    if(!settingsValid){
+      alert('Save as PDF', `Enter valid Project Settings before Saving.`, [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK', onPress: () => {
+            setModalVisible(!modalVisible);
+          },
+        },
+      ]);
+    }else{
+      setPdfModalVisible(!pdfModalVisible);
+    }
+  }
+
   const onApplyChanges = () => {
     updateProject(clonedProjectLayers);
   }
@@ -186,18 +207,15 @@ function MyProjectDesktop(){
 
   const onSetPdfFileName = (fileName) => {
     setFileName(fileName);
-    console.log(`Set PDF file: ${fileName}`);
   }
 
   const onDownloadPdfFile = async() => {
-    console.log(`Download PDF file: ${fileName}`);
     try{
       const snapshot = await captureRef(viewShot, {
         fileName: 'entryFilename',
         format: "png",
         quality: 0.9,
       });// await viewShot.current.capture();
-      console.log(`SNAPSHOT OK, length: ${snapshot.length}`);
       await downloadPdf(fileName, projectSettings, projectLayers, snapshot)
     }catch(err){
       console.log(`ERROR screencap: ${err}`);
@@ -322,7 +340,7 @@ function MyProjectDesktop(){
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.btnClr}>Cancel</Text>
+                <Text style={[styles.btnClr, {backgroundColor: '#ffffff'}]}>Cancel</Text>
               </Pressable>
               <Pressable
                 style={[styles.button, styles.buttonClose, {marginLeft: 8}, ]}
@@ -332,7 +350,7 @@ function MyProjectDesktop(){
                     onSaveProjectSettings();
                   }
                 }>
-                <Text style={styles.btnClr}>Save</Text>
+                <Text style={[styles.btnClr, {backgroundColor: '#ffffff'}]}>Save</Text>
               </Pressable>
             </View>
           </View>
@@ -347,18 +365,56 @@ function MyProjectDesktop(){
             <View style={{flexDirection: 'row'}}>
               <Text style={{padding: 2, fontSize: 18, marginTop: 4, fontWeight: 'bold'}}>Project</Text>
               <Text style={{padding: 2, fontSize: 18, marginTop: 4, fontWeight: 'bold', color: 'gray'}}>></Text>
-              <Text style={{padding: 4, fontSize: 20, color:'green'}}>{projectSettings.projectName || 'Untitled'}</Text>
+              <Text style={{padding: 4, fontSize: 20, color:'black', fontStyle: projectSettings.projectName ? 'normal' : 'italic'}}>{projectSettings.projectName || 'Untitled'}</Text>
               <TouchableHighlight
                 style={{width: 20, height: 40, marginLeft: 'auto'}}
                 underlayColor="#f0f4f7"
                 onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={{fontSize: 26, marginLeft: 4, color: 'green'}}>⚙</Text>
+                <Text style={{fontSize: 32, marginLeft: -4, color: 'black'}}>⚙</Text>
               </TouchableHighlight>
             </View>
             <TouchableHighlight onPress={sendProjectToPreview}>
               <ViewShot ref={viewShot} style={styles.viewShot}>
                 <View style={{marginTop: '4%', flex: 7}}>
                   {projectLayers.map(oneLayer => {
+                    if(oneLayer.isColorMetallic){
+                      return (
+                        <>
+                          <View style={{
+                            position: 'absolute',
+                            zIndex: zIdx++,
+                            top: 6,
+                            width: '100%',
+                            height: height * 0.6,
+                            borderRadius: 3
+                          }}>
+                            <Image style={{
+                              width: '100%',
+                              height: height * 0.6,
+                              borderRadius: 3,
+                              opacity: oneLayer.patternOpacity / 100,
+                            }} source={staticImageUrlMap["metallicPaint"]}/>
+                          </View>
+                          <View style={{
+                            position: 'absolute',
+                            zIndex: zIdx++,
+                            top: 6,
+                            width: '100%',
+                            height: height * 0.6,
+                            borderRadius: 3
+                          }}>
+                            <Image style={{
+                              width: '100%',
+                              height: height * 0.6,
+                              borderRadius: 3,
+                              opacity: 0.3,
+                              tintColor: oneLayer.backgroundColor,
+                            }} source={staticImageUrlMap['BLANK']}/>
+                          </View>
+                        </>
+                      )
+                    }
+
                     return (oneLayer.isVisible || oneLayer.level === 'Background') && (
                       <View style={{
                         position: 'absolute',
@@ -390,13 +446,12 @@ function MyProjectDesktop(){
             <Text style={styles.btnClr}>Reset</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            disabled={!settingsValid}
-            style={[baseLayout.btn, {width: 160, marginLeft: 40, backgroundColor: settingsValid ? '#5DA75E': '#dddddd'}]}
+            style={[baseLayout.btn, {width: 160, marginLeft: 40, backgroundColor: '#ffffff'}]}
             underlayColor="#f0f4f7"
-            onPress={() => setPdfModalVisible(!pdfModalVisible)}>
+            onPress={onSaveAsPdf}>
             <View style={{flexDirection: 'row'}}>
               <Image
-                style={{width: 24, height: 20, marginRight: 4, marginLeft: 3, tintColor: '#ffffff'}}
+                style={{width: 24, height: 20, marginRight: 4, marginLeft: 3, tintColor: '#000000'}}
                 source={require('../../assets/PDF-48_46492.png')}
               />
               <Text style={styles.btnClr}>Save as PDF</Text>
@@ -412,7 +467,7 @@ function MyProjectDesktop(){
                 style={{width: 24, height: 20, marginRight: 4, marginLeft: 3, tintColor: '#ffffff'}}
                 source={require('../../assets/mail-black-envelope-symbol_icon-icons.com_56519.png')}
               />
-              <Text style={styles.btnClr}>Send to OCM</Text>
+              <Text style={[styles.btnClr, {color: '#ffffff'}]}>Send to OCM</Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -454,10 +509,10 @@ function MyProjectDesktop(){
           {/* Add A Layer */}
           { clonedProjectLayers.length < 4 &&
             <TouchableHighlight
-              style={[baseLayout.btn, {backgroundColor: '#d3d3d3', borderRadius: 2, marginTop: 0, padding: 2, width: '99%'}]}
+              style={[baseLayout.btn, {backgroundColor: '#ffffff', borderRadius: 2, marginTop: 0, padding: 2, width: '99%'}]}
               underlayColor="#d3d3d3"
               onPress={onAddLayer}>
-              <Text style={styles.btnClr}>+Add A Layer</Text>
+              <Text style={styles.btnClr}>+Add Layer</Text>
             </TouchableHighlight>
           }
         </View>
@@ -504,14 +559,14 @@ function MyProjectDesktop(){
               underlayColor="#f0f4f7"
               onPress={onApplyChanges}>
               <Text style={[styles.btnClr, {width: 100}]}>
-                <Image style={{ width: 16, height: 16, marginLeft: 10, borderRadius: 5, tintColor: 'white'}} source={require('../../assets/start-button_icon-icons.com_53873.png')} />&nbsp;
+                <Image style={{ width: 16, height: 16, marginLeft: 10, borderRadius: 5, tintColor: 'black'}} source={require('../../assets/start-button_icon-icons.com_53873.png')} />&nbsp;
                 Set</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={[baseLayout.btn, {width: 100, height: 40, marginLeft: 10, alignItems: 'center'}]}
               underlayColor="#f0f4f7"
               onPress={onClearPreview}>
-              <Text style={[styles.btnClr, {width: 100, padding: 2, marginLeft: 20}]}>Clear</Text>
+              <Text style={[styles.btnClr, {width: 100, padding: 2, marginTop: -2, marginLeft: 50}]}>Clear</Text>
             </TouchableHighlight>
           </View>
           <View style={[styles.borderStyle, {width: '44%', height: '84%', alignItems: 'center'}]}>
@@ -545,7 +600,7 @@ const styles = StyleSheet.create({
   btnClr: {
     fontFamily: 'Futura',
     fontSize: 16,
-    color: '#fff',
+    color: '#000000',
     alignItems: 'center'
   },
   modalView: {
@@ -571,7 +626,9 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonClose: {
-    backgroundColor: '#5DA75E',
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: 'black'
   },
   viewShot: {
     height: 400,

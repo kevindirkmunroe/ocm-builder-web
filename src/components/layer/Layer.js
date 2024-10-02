@@ -101,7 +101,7 @@ function Layer({
                 style={{width: 30, height: 20, margin: 5}}
                 source={staticImageUrlMap[patternImageKey]}
               />
-              <Text style={{marginTop: 6}}>{patternName}</Text>
+              <Text style={{marginTop: 6}}>{patternName === 'metallicPaint' ? 'METALLIC' : patternName}</Text>
               <Text style={{marginTop: 6}}>
                 {' '}
                 / {typeof patternOpacity === 'number' ? patternOpacity : ''}%
@@ -138,8 +138,7 @@ function Layer({
                 }}
               />
               <Text style={{marginTop: 12}}>
-                {backgroundColor? backgroundColor.toUpperCase(): ''}{' '}
-                {JSON.stringify(isColorMetallic) === 'true' ? 'M' : ''}
+                {backgroundColor? backgroundColor.toUpperCase(): ''}
               </Text>
             </View>
           </TouchableHighlight>

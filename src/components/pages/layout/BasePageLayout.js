@@ -41,11 +41,13 @@ export function getBaseLayout(){
     },
     btn: {
       width:  Dimensions.get('window').width * 0.6,
-      backgroundColor: '#5DA75E',
+      color: '#000000',
       justifyContent: 'left',
       alignItems: 'center',
       padding: 10,
       marginTop: 30,
+      borderWidth: 1,
+      borderColor: 'black',
       borderRadius: 10,
     },
     mainText: {
