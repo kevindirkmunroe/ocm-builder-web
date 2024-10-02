@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, Platform, TouchableOpacity, Linking, Dimensions } from "react-native";
+import { Text, View, StyleSheet, Image, Platform, TouchableOpacity, Linking } from "react-native";
 import { isLandscape } from "../pages/layout/BasePageLayout";
 
 function OCMBuilderHeader(){
@@ -19,7 +19,7 @@ function OCMBuilderHeader(){
       </TouchableOpacity>
       <View style={{flex: 1}}>
         <Text style={styles.headerText}>Builder</Text>
-        <Text style={styles.headerText}>App (18)</Text>
+        <Text style={styles.headerText}>App (19)</Text>
       </View>
     </View>
   );
@@ -27,7 +27,7 @@ function OCMBuilderHeader(){
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#67674F',
+    backgroundColor: '#000000',
     height: 80,
     flexShrink: 1,
     justifyContent: 'left',

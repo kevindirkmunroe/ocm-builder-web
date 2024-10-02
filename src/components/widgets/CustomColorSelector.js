@@ -64,7 +64,7 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
           <ColorPicker
             ref={r => { this.picker = r }}
             gapSize={0}
-            color={colorState.currentColor}
+            color={initSelectedColor}
             swatchesOnly={colorState.swatchesOnly}
             onColorChange={onColorChange}
             onColorChangeComplete={onColorChangeComplete}
