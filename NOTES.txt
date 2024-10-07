@@ -15,3 +15,9 @@ Base/Background: pure black
 Print 1 (Sandobi1): Pantone 5803C #C3C6A8
 
 Print 2 (Sandobi2): Pantone 2179C #527A8A
+
+For making transparent images:
+1. Screenshot print to approx 840 x 840px. The screenshot is a PNG image that is < 1MB, compared to
+   3+MB of original image
+2. Save image, then upload to : https://tech-lagoon.com/imagechef/en/white-to-transparent.html
+3. Transform white pixels to transparent, then save image in src/assets.

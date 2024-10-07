@@ -12,6 +12,7 @@ export function getOCMPrintRollers(){
     {key: 'maple_print', name: 'Maple'},
     {key: 'morton', name: 'Morton'},
     {key: 'oak_print', name: 'Oak'},
+    {key: 'quarter_sawn', name: 'Quarter Sawn'},
     {key: 'rift', name: 'Rift'},
     {key: 'sandobi1', name: 'Sandobi 1'},
     {key: 'sandobi2', name: 'Sandobi 2'},
@@ -30,9 +31,11 @@ export const hairline = require('../assets/printRollers/hairline_1_90_w_trans.pn
 export const k5_print = require('../assets/printRollers/k5_1_w_trans.png');
 export const kovabrushed = require('../assets/printRollers/kovabrushed_1_90_w_trans.png');
 export const maple_print = require('../assets/printRollers/maple_1_90_w_trans.png');
-export const metallicPaint = require('../assets/metallic-base.jpg');
+export const metallicPaint = require('../assets/printRollers/metallic-base.png');
+export const metallicLayer = require('../assets/printRollers/metallicPaint_lightest_max_w_trans.png');
 export const morton = require('../assets/printRollers/morton_1_w_trans.png');
 export const oak_print = require('../assets/printRollers/oak_1_90_w_trans.png');
+export const quarter_sawn = require('../assets/printRollers/quarter_sawn_w_trans.png');
 export const rift = require('../assets/printRollers/rift_1_90_w_trans.png');
 export const sandobi1 = require('../assets/printRollers/sandobi_full_1_w_trans.png');
 export const sandobi2 = require('../assets/printRollers/sandobi_full_2_w_trans.png');
@@ -159,8 +162,10 @@ export const staticImageUrlMap = {
   'kovabrushed': kovabrushed,
   'maple_print': maple_print,
   'metallicPaint': metallicPaint,
+  'metallicLayer': metallicLayer,
   'morton': morton,
   'oak_print': oak_print,
+  'quarter_sawn': quarter_sawn,
   'rift': rift,
   'sandobi1': sandobi1,
   'sandobi2': sandobi2,
