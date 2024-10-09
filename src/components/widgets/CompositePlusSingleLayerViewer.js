@@ -42,8 +42,8 @@ export function CompositePlusSingleLayerViewer({layerIdx, compositeLayers}){
                       width: '100%',
                       height: 94,
                       borderRadius: 3,
-                      opacity: oneLayer.patternOpacity / 100,
-                    }} source={staticImageUrlMap["metallicPaint"]}/>
+                      opacity: 0.3,
+                    }} source={staticImageUrlMap["metallicLayer"]}/>
                   </View>
                   <View style={{
                     position: 'absolute',
@@ -57,9 +57,9 @@ export function CompositePlusSingleLayerViewer({layerIdx, compositeLayers}){
                       width: '100%',
                       height: 94,
                       borderRadius: 3,
-                      opacity: 0.3,
+                      opacity: oneLayer.patternOpacity / 100,
                       tintColor: oneLayer.backgroundColor,
-                    }} source={staticImageUrlMap['BLANK']}/>
+                    }} source={staticImageUrlMap[oneLayer.patternImageKey]}/>
                   </View>
                 </>
               )

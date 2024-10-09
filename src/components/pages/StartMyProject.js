@@ -52,8 +52,7 @@ const styles = StyleSheet.create({
   btnClr: {
     fontFamily: 'Futura',
     fontSize: 20,
-
-    color: '#fff',
+    color: '#000000',
   },
   belowContainer: {
     justifyContent: 'center',

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, Platform, TouchableOpacity, Linking } from "react-native";
 import { isLandscape } from "../pages/layout/BasePageLayout";
+import { BUILD_NUMBER, OCM_URL } from "../../utils/AssetManager";
 
 function OCMBuilderHeader(){
   return (
     <View style={[styles.header, {marginTop: Platform.OS === 'ios' && !isLandscape() === true ? 45 : 0}]}>
-      <TouchableOpacity onPress={ () => Linking.openURL("https://www.ocmcoil.com")}>
+      <TouchableOpacity onPress={ () => Linking.openURL(OCM_URL)}>
         <Image
           style={{
             width: 200,
@@ -19,7 +20,7 @@ function OCMBuilderHeader(){
       </TouchableOpacity>
       <View style={{flex: 1}}>
         <Text style={styles.headerText}>Builder</Text>
-        <Text style={styles.headerText}>App (19)</Text>
+        <Text style={styles.headerText}>App ({BUILD_NUMBER})</Text>
       </View>
     </View>
   );

@@ -67,6 +67,7 @@ function SaveAsPDF() {
         Request Samples: ${form.requestSamples}`, 10, 20);
 
         doc.addImage(snapshot, 'PNG', 15, 90, 180, 160);
+        doc.output('datauri');
         const fileToSave = fileName.endsWith('.pdf')
           ? fileName
           : `${fileName}.pdf`;

@@ -41,10 +41,10 @@ function Welcome(){
       </View>
       <View style={[baseLayout.footer, {flex:1, marginBottom: 30, alignItems: 'center'}]}>
         <TouchableHighlight
-          style={styles.bottomButton}
-          underlayColor="#f0f4f7"
+          style={baseLayout.btn}
+          underlayColor="#ffffff"
           onPress={selectStart}>
-          <Text style={styles.btnClr}>Innovate!</Text>
+          <Text style={[styles.btnClr, {color: '#000000'}]}>Innovate!</Text>
         </TouchableHighlight>
       </View>
     </View>

@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
   ScrollView,
   Dimensions,
-  Modal, Pressable,
+  Modal, Pressable, TextInput,
 } from "react-native";
 const {width, height} = Dimensions.get('window');
 import ViewShot, { captureRef } from "react-native-view-shot";
@@ -23,14 +23,10 @@ import { staticImageUrlMap } from "../../utils/AssetManager";
 import ProjectSettingsForm from "./form/ProjectSettingsForm";
 import DownloadPDFForm from "./form/DownloadPDFForm";
 import downloadPdf from "../../utils/PDFDownloader";
-import ButtonMailTo from "../widgets/ButtonMailTo";
-import { isMobile } from "react-device-detect";
 import { Slider } from "@react-native-assets/slider";
-import { settings } from "@react-native-community/eslint-config";
+import sendEmail from "../../utils/EmailJSClient";
 
 function MyProjectDesktop(){
-
-  const referenceNumber = `OCMB2024${Math.floor(100000 + Math.random() * 900000)}`;
 
   const NEW_LAYER =
     {level: 'Background',
@@ -58,6 +54,8 @@ function MyProjectDesktop(){
   const [tempProjectSettings, setTempProjectSettings] = useState({});
   const [fileName, setFileName] = useState('');
   const [opacity, setOpacity] = useState(100);
+  const [emailMessage, setEmailMessage] = useState('Custom message here');
+
 
   let preview = new CompositePlusSingleLayerViewer({ layerIdx, compositeLayers: clonedProjectLayers});
   const baseLayout = getBaseLayout();
@@ -215,30 +213,28 @@ function MyProjectDesktop(){
         fileName: 'entryFilename',
         format: "png",
         quality: 0.9,
-      });// await viewShot.current.capture();
+      });
       await downloadPdf(fileName, projectSettings, projectLayers, snapshot)
     }catch(err){
       console.log(`ERROR screencap: ${err}`);
     }
   }
   const onSendToOCM = async () => {
-    console.log(`Email Project to: ${fileName}`);
-    try{
-      const email = 'kevin.munroe@gmail.com'
-;      const snapshot = await captureRef(viewShot, {
-        fileName: 'entryFilename',
-        format: "png",
-        quality: 0.9,
-      });// await viewShot.current.capture();
-      console.log(`SNAPSHOT OK, length: ${snapshot.length}`);
-      setEmailModalVisible(true);
-    }catch(err){
-      console.log(`ERROR screencap: ${err}`);
+    if(!settingsValid){
+      alert('Send to OCM', `Enter valid Project Settings before Sending.`, [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK', onPress: () => {
+            setModalVisible(!modalVisible);
+          },
+        },
+      ]);
+    }else {
+      setEmailModalVisible(!emailModalVisible);
     }
-  }
-
-  const doNothing = () => {
-
   }
 
   const sendProjectToPreview = () => {
@@ -271,12 +267,35 @@ function MyProjectDesktop(){
               />
               Send Project to OCM
             </Text>
-            <a href="mailto:kevin.munroe@gmail.com,ocmcoil18@gmail.com?subject=OCM Builder Project&body=My custom mail body"><Text style={{fontSize: 20, fontStyle: 'bold'}}>➤ Click Here</Text></a>
+            <View style={styles.container}>
+              <TextInput
+                style={styles.textArea}
+                multiline={true}
+                numberOfLines={4}
+                onChangeText={setEmailMessage}
+                value={emailMessage}
+                placeholder="Enter text here"
+              />
+            </View>
             <View style={{flex: 1, flexDirection: 'row', marginTop: 20}}>
               <Pressable
                 style={[styles.button, styles.buttonClose, {width: 100}]}
-                onPress={() => setEmailModalVisible(!emailModalVisible)}>
-                <Text style={[styles.btnClr, {marginLeft: 16}]}>Done</Text>
+                onPress={ async () => {
+                    setEmailModalVisible(!emailModalVisible)
+                    try {
+                      const snapshot = await captureRef(viewShot, {
+                        fileName: 'entryFilename',
+                        format: "png",
+                        quality: 0.9,
+                      });
+                      console.log(`SNAPSHOT OK, length: ${snapshot.length}`);
+                      await sendEmail(emailMessage, projectSettings, projectLayers, snapshot);
+                    } catch (err) {
+                      console.log(`ERROR screencap: ${err}`);
+                    }
+                  }
+                }>
+                <Text style={[styles.btnClr, {marginLeft: 16}]}>Send</Text>
               </Pressable>
             </View>
           </View>
@@ -372,6 +391,7 @@ function MyProjectDesktop(){
                 onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={{fontSize: 32, marginLeft: -4, color: 'black'}}>⚙</Text>
               </TouchableHighlight>
+              <Text style={{fontSize: 20, marginTop: 8, marginLeft: -4, color: 'black'}}>{settingsValid ? '': '!'}</Text>
             </View>
             <TouchableHighlight onPress={sendProjectToPreview}>
               <ViewShot ref={viewShot} style={styles.viewShot}>
@@ -458,16 +478,15 @@ function MyProjectDesktop(){
             </View>
           </TouchableHighlight>
           <TouchableHighlight
-            disabled={true}
-            style={[baseLayout.btn, {width: 160, marginLeft: 8, backgroundColor: '#dddddd'}]}
+            style={[baseLayout.btn, {width: 160, marginLeft: 8, backgroundColor: '#ffffff'}]}
             underlayColor="#f0f4f7"
             onPress={onSendToOCM}>
             <View style={{flexDirection: 'row'}}>
               <Image
-                style={{width: 24, height: 20, marginRight: 4, marginLeft: 3, tintColor: '#ffffff'}}
+                style={{width: 24, height: 20, marginRight: 4, marginLeft: 3, tintColor: '#000000'}}
                 source={require('../../assets/mail-black-envelope-symbol_icon-icons.com_56519.png')}
               />
-              <Text style={[styles.btnClr, {color: '#ffffff'}]}>Send to OCM</Text>
+              <Text style={styles.btnClr}>Send to OCM</Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -632,6 +651,18 @@ const styles = StyleSheet.create({
   },
   viewShot: {
     height: 400,
+  },
+  container: {
+    flex: 1,
+    padding: 20,
+    width: 600
+  },
+  textArea: {
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: 'gray',
+    padding: 10,
+    textAlignVertical: 'top',
   },
 });
 export default MyProjectDesktop;

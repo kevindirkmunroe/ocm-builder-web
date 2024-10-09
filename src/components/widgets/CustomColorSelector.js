@@ -81,10 +81,10 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
             useNativeLayout={true}
           />
           <View style={{marginTop: 5, flexDirection: 'row-reverse'}}>
-            <Text style={[styles.btnClrAlt, {fontSize: 18, marginTop: 3, color: layerLevel === 0 ? 'black' : 'lightgray'}]}>&nbsp;&nbsp;Metallic</Text>
-            <TouchableOpacity onPress={onMetallicChange} disabled={layerLevel !== 0}>
+            <Text style={[styles.btnClrAlt, {fontSize: 18, marginTop: 3, color: 'black'}]}>&nbsp;&nbsp;Metallic</Text>
+            <TouchableOpacity onPress={onMetallicChange}>
               <Image
-                style={{width: 20, height: 20, marginTop: 4, marginLeft: 3, tintColor: layerLevel === 0 ? 'black' : 'lightgray'}}
+                style={{width: 20, height: 20, marginTop: 4, marginLeft: 3, tintColor: 'black'}}
                 source={
                   !initMetallic
                     ? require('../../assets/checkbox_blank_outline_icon_139814.png')

@@ -173,3 +173,6 @@ export const staticImageUrlMap = {
   'terrazzo_a': terrazzo_a,
   'terrazzo_b': terrazzo_b,
 }
+
+export const OCM_URL = 'https://www.ocmcoil.com';
+export const BUILD_NUMBER = 20;
