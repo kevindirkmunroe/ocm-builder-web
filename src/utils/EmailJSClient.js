@@ -1,6 +1,5 @@
 import { BUILD_NUMBER, EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID } from "./AssetManager";
 import alert from "../utils/Alert";
-import { useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { uploadFileToS3 } from "../utils/AmazonS3Service";
 

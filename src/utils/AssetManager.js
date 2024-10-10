@@ -181,8 +181,8 @@ export const EMAILJS_PUBLIC_KEY = 'OQGleLRmplLt_BmdN';
 export const EMAILJS_SERVICE_ID = 'service_kk1zaif';
 export const EMAILJS_TEMPLATE_ID = 'template_lwuegxf';
 
-export const AWS_S3_ACCESS_KEY_ID = 'AKIAY5GD5R2EBGEVDY7G';
-export const AWS_S3_SECRET_ACCESS_KEY = '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';
+export const AWS_S3_ACCESS_KEY_ID = '';
+export const AWS_S3_SECRET_ACCESS_KEY = '';
 export const AWS_S3_BUCKET = 'ocmbuilder.cloud';
 export const AWS_S3_REGION = 'us-west-1';
 
