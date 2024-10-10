@@ -54,7 +54,7 @@ function MyProjectDesktop(){
   const [tempProjectSettings, setTempProjectSettings] = useState({});
   const [fileName, setFileName] = useState('');
   const [opacity, setOpacity] = useState(100);
-  const [emailMessage, setEmailMessage] = useState('Custom message here');
+  const [emailMessage, setEmailMessage] = useState('Your custom message here.');
 
 
   let preview = new CompositePlusSingleLayerViewer({ layerIdx, compositeLayers: clonedProjectLayers});
@@ -219,6 +219,7 @@ function MyProjectDesktop(){
       console.log(`ERROR screencap: ${err}`);
     }
   }
+
   const onSendToOCM = async () => {
     if(!settingsValid){
       alert('Send to OCM', `Enter valid Project Settings before Sending.`, [
