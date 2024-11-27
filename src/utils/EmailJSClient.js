@@ -1,6 +1,8 @@
+import emailjs from "@emailjs/browser";
+import { decode } from 'base64-arraybuffer';
+
 import { BUILD_NUMBER, EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID } from "./AssetManager";
 import alert from "../utils/Alert";
-import emailjs from "@emailjs/browser";
 import { uploadFileToS3 } from "../utils/AmazonS3Service";
 
 export default async function sendEmail(emailMessage, projectSettings, projectLayers, snapshot){
@@ -33,17 +35,20 @@ export default async function sendEmail(emailMessage, projectSettings, projectLa
 
     let layers = {};
     for(i = 1; i < projectLayers.length; i++){
-      console.log(`==> LAYER ${i} level=${JSON.stringify(projectLayers[i])}`);
       layers[`layer${i}_color`] = projectLayers[i].backgroundColor;
       layers[`layer${i}_print_roller`] = projectLayers[i].patternName;
       layers[`layer${i}_opacity`] = projectLayers[i].patternOpacity;
     }
 
-    await uploadFileToS3(projectSettings.companyName, projectSettings.projectName, referenceNumber, snapshot)
+    const s3FileKey = `${projectSettings.companyName}/${projectSettings.projectName}_${referenceNumber}.png`;
+
+    const data = snapshot.replace(/^data:image\/\w+;base64,/, "");
+    await uploadFileToS3(s3FileKey, decode(data));
 
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
         ...baseTemplateParams,
-        ...layers
+        ...layers,
+        s3FileKey
     });
     alert('Send to OCM', `Project '${projectSettings.projectName}' sent to OCM, check mail inbox for copy.\n\nReference number ${referenceNumber}`);
 

@@ -2,7 +2,7 @@ import AWS from 'aws-sdk';
 
 import { AWS_S3_ACCESS_KEY_ID, AWS_S3_BUCKET, AWS_S3_REGION, AWS_S3_SECRET_ACCESS_KEY } from "../utils/AssetManager";
 
-export const uploadFileToS3 = async (companyName, projectName, referenceNumber, snapshot) => {
+export const uploadFileToS3 = async (s3FileKey, snapshot) => {
   const S3_BUCKET = AWS_S3_BUCKET;
   const REGION = AWS_S3_REGION;
 
@@ -17,7 +17,7 @@ export const uploadFileToS3 = async (companyName, projectName, referenceNumber, 
 
   const params = {
     Bucket: S3_BUCKET,
-    Key: `${companyName}/${projectName}_${referenceNumber}.png`,
+    Key: s3FileKey,
     Body: snapshot,
   };
 
@@ -32,6 +32,6 @@ export const uploadFileToS3 = async (companyName, projectName, referenceNumber, 
 
   await upload.then((err, data) => {
     console.log(err);
-    alert("File uploaded successfully.");
+    alert(`File ${s3FileKey} uploaded successfully.`);
   });
 };

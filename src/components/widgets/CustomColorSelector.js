@@ -52,13 +52,13 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
     <View style={{flex: 1, marginTop: 10, marginLeft: 5, justifyContent: 'top', alignItems: isMobile? 'center': 'left'}}>
         <View style={styles.colorContainerItem}>
           <View style={{flex: 1, flexDirection: 'row', maxHeight: 20}}>
-            <View style={{width: 24, height: 30,backgroundColor: initSelectedColor, marginRight: 5, borderWidth: 2 }}></View>
             <Text style={[styles.btnClrAlt, {fontSize: 20}]}>#&nbsp;</Text>
-            <TextInput style={{flex: 1, borderWidth: 2, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, height: 30, width: 80, padding: 2,  marginRight: 6, backgroundColor: '#f8f8f8'}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
+            <TextInput style={{flex: 1, borderWidth: 1, borderColor: 'black', fontFamily: 'Futura', fontSize: 16, height: 30, width: 80, padding: 2,  marginRight: 6, backgroundColor: '#f8f8f8'}} onChangeText={setTypedColor} value={typedColor ? typedColor.toUpperCase():''}/>
+            <View style={{width: 30, height: 30,backgroundColor: initSelectedColor, marginRight: 5, borderWidth: 1 }}></View>
             <TouchableHighlight
-              style={{borderColor: 'black', borderWidth: 2, borderRadius: 4, paddingLeft: 5, paddingRight: 5, height: 30}}
+              style={{borderColor: 'black', borderWidth: 1, marginLeft: 10, borderRadius: 4, paddingLeft: 5, paddingRight: 5, height: 30}}
               onPress={onTypedColorChangeComplete}>
-              <Text style={[styles.btnClrAlt, {marginTop: 2}]}>Set</Text>
+              <Text style={[styles.btnClrAlt, {marginTop: 2}]}>Apply</Text>
             </TouchableHighlight>
           </View>
           <ColorPicker
@@ -81,10 +81,10 @@ function CustomColorSelector({onSelectColor, initSelectedColor, onSelectMetallic
             useNativeLayout={true}
           />
           <View style={{marginTop: 5, flexDirection: 'row-reverse'}}>
-            <Text style={[styles.btnClrAlt, {fontSize: 18, marginTop: 3, color: layerLevel === 0 ? 'black' : 'lightgray'}]}>&nbsp;&nbsp;Metallic</Text>
-            <TouchableOpacity onPress={onMetallicChange} disabled={layerLevel !== 0}>
+            <Text style={[styles.btnClrAlt, {fontSize: 18, marginTop: 3, color: 'black'}]}>&nbsp;&nbsp;Metallic</Text>
+            <TouchableOpacity onPress={onMetallicChange}>
               <Image
-                style={{width: 20, height: 20, marginTop: 4, marginLeft: 3, tintColor: layerLevel === 0 ? 'black' : 'lightgray'}}
+                style={{width: 20, height: 20, marginTop: 4, marginLeft: 3, tintColor: 'black'}}
                 source={
                   !initMetallic
                     ? require('../../assets/checkbox_blank_outline_icon_139814.png')

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+
 import {
   View,
   Text,
@@ -10,8 +11,11 @@ import {
   Dimensions,
   Modal, Pressable, TextInput,
 } from "react-native";
+import { Slider } from "@react-native-assets/slider";
 const {width, height} = Dimensions.get('window');
 import ViewShot, { captureRef } from "react-native-view-shot";
+
+
 import Layer from "../layer/Layer";
 import CustomColorSelector from "../widgets/CustomColorSelector";
 import PrintRollerSelector from "../widgets/PrintRollerSelector";
@@ -23,7 +27,6 @@ import { staticImageUrlMap } from "../../utils/AssetManager";
 import ProjectSettingsForm from "./form/ProjectSettingsForm";
 import DownloadPDFForm from "./form/DownloadPDFForm";
 import downloadPdf from "../../utils/PDFDownloader";
-import { Slider } from "@react-native-assets/slider";
 import sendEmail from "../../utils/EmailJSClient";
 
 function MyProjectDesktop(){
@@ -56,7 +59,6 @@ function MyProjectDesktop(){
   const [opacity, setOpacity] = useState(100);
   const [emailMessage, setEmailMessage] = useState('Your custom message here.');
 
-
   let preview = new CompositePlusSingleLayerViewer({ layerIdx, compositeLayers: clonedProjectLayers});
   const baseLayout = getBaseLayout();
 
@@ -87,9 +89,7 @@ function MyProjectDesktop(){
 
   const updateColorMetallic = (newValue) => {
     clonedProjectLayers[layerIdx] = {...clonedProjectLayers[layerIdx],
-      isColorMetallic: newValue,
-      patternName: newValue ? 'metallicPaint' : 'BLANK',
-      patternImageKey: newValue ? 'metallicPaint' : 'BLANK',
+      isColorMetallic: newValue
     };
     updatePreview(clonedProjectLayers);
   }
@@ -136,7 +136,7 @@ function MyProjectDesktop(){
   }
 
   const onDeleteLayer = (layerToDelete) => {
-    alert('Delete', `Deleting Layer '${layerToDelete}', Continue?`, [
+    alert('Delete', `‣ Deleting Layer '${layerToDelete}', Continue?`, [
       {
         text: 'No',
         style: 'cancel',
@@ -162,7 +162,7 @@ function MyProjectDesktop(){
   }
 
   const onResetProject = () => {
-    alert('Reset', `Clearing all Layers, Continue?`, [
+    alert('Reset', `‣ Clearing all Layers, Continue?`, [
       {
         text: 'Cancel',
         style: 'cancel',
@@ -178,7 +178,7 @@ function MyProjectDesktop(){
 
   const onSaveAsPdf = () => {
     if(!settingsValid){
-      alert('Save as PDF', `Enter valid Project Settings before Saving.`, [
+      alert('Save as PDF', `‣ Enter valid Project Info before Saving.`, [
         {
           text: 'Cancel',
           style: 'cancel',
@@ -222,7 +222,7 @@ function MyProjectDesktop(){
 
   const onSendToOCM = async () => {
     if(!settingsValid){
-      alert('Send to OCM', `Enter valid Project Settings before Sending.`, [
+      alert('Send to OCM', `‣ Enter valid Project Info before Sending.`, [
         {
           text: 'Cancel',
           style: 'cancel',
@@ -247,6 +247,7 @@ function MyProjectDesktop(){
     key: clonedProjectLayers[layerIdx].patternImageKey, // TODO replace [0] with real selected layer
     name: clonedProjectLayers[layerIdx].patternName,
   }
+
     let zIdx = 0;
     return (
     <View style={{flex: 1, justifyContent: 'flex-start', padding: 10, flexWrap: 'wrap', alignItems: 'center'}}>
@@ -289,7 +290,6 @@ function MyProjectDesktop(){
                         format: "png",
                         quality: 0.9,
                       });
-                      console.log(`SNAPSHOT OK, length: ${snapshot.length}`);
                       await sendEmail(emailMessage, projectSettings, projectLayers, snapshot);
                     } catch (err) {
                       console.log(`ERROR screencap: ${err}`);
@@ -342,7 +342,7 @@ function MyProjectDesktop(){
         </View>
       </Modal>
       {/*
-         Modal for showing Project Settings
+         Modal for showing Project Info
       */}
       <Modal
         transparent={true}
@@ -352,7 +352,7 @@ function MyProjectDesktop(){
         }}>
         <View style={{ marginLeft: width * 0.1, marginTop: 60, width: width * 0.8}}>
           <View style={styles.modalView}>
-            <Text style={{fontSize: 20, padding: 10, fontFamily: 'Futura'}}>⚙ Project Settings</Text>
+            <Text style={{fontSize: 20, padding: 10, fontFamily: 'Futura'}}>⚙ Project Info</Text>
             <View style={{marginTop: 20, marginBottom: 6, padding: 10, borderRadius: 5, borderWidth: 1}}>
               <ProjectSettingsForm  projectSettings={projectSettings} validation={onFormIsValid}/>
             </View>
@@ -386,13 +386,6 @@ function MyProjectDesktop(){
               <Text style={{padding: 2, fontSize: 18, marginTop: 4, fontWeight: 'bold'}}>Project</Text>
               <Text style={{padding: 2, fontSize: 18, marginTop: 4, fontWeight: 'bold', color: 'gray'}}>></Text>
               <Text style={{padding: 4, fontSize: 20, color:'black', fontStyle: projectSettings.projectName ? 'normal' : 'italic'}}>{projectSettings.projectName || 'Untitled'}</Text>
-              <TouchableHighlight
-                style={{width: 20, height: 40, marginLeft: 'auto'}}
-                underlayColor="#f0f4f7"
-                onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={{fontSize: 32, marginLeft: -4, color: 'black'}}>⚙</Text>
-              </TouchableHighlight>
-              <Text style={{fontSize: 20, marginTop: 8, marginLeft: -4, color: 'black'}}>{settingsValid ? '': '!'}</Text>
             </View>
             <TouchableHighlight onPress={sendProjectToPreview}>
               <ViewShot ref={viewShot} style={styles.viewShot}>
@@ -407,14 +400,16 @@ function MyProjectDesktop(){
                             top: 6,
                             width: '100%',
                             height: height * 0.6,
-                            borderRadius: 3
+                            borderRadius: 3,
+                            background: '--shine-deg: 45deg; linear-gradient(45deg, #999 5%, #fff 10%, #ccc 30%, #ddd 50%, #ccc 70%, #fff 80%, #999 95%);'
                           }}>
                             <Image style={{
                               width: '100%',
                               height: height * 0.6,
                               borderRadius: 3,
                               opacity: oneLayer.patternOpacity / 100,
-                            }} source={staticImageUrlMap["metallicPaint"]}/>
+                              tintColor: oneLayer.backgroundColor,
+                            }} source={staticImageUrlMap[oneLayer.patternImageKey]}/>
                           </View>
                           <View style={{
                             position: 'absolute',
@@ -429,8 +424,7 @@ function MyProjectDesktop(){
                               height: height * 0.6,
                               borderRadius: 3,
                               opacity: 0.3,
-                              tintColor: oneLayer.backgroundColor,
-                            }} source={staticImageUrlMap['BLANK']}/>
+                            }} source={staticImageUrlMap["metallicLayer"]}/>
                           </View>
                         </>
                       )
@@ -445,13 +439,15 @@ function MyProjectDesktop(){
                         height: height * 0.6,
                         borderRadius: 3
                       }}>
-                        <Image style={{
-                          width: '100%',
-                          height: height * 0.6,
-                          borderRadius: 3,
-                          opacity: oneLayer.patternOpacity / 100,
-                          tintColor: oneLayer.backgroundColor,
-                        }} source={staticImageUrlMap[oneLayer.patternImageKey]}/>
+                        <Image
+                          style={{
+                            width: '100%',
+                            height: height * 0.6,
+                            borderRadius: 3,
+                            tintColor: oneLayer.backgroundColor,
+                            opacity: oneLayer.patternOpacity / 100,
+                          }}
+                          source={staticImageUrlMap[oneLayer.patternImageKey]}/>
                       </View>)
                   })}
                 </View>
@@ -467,6 +463,12 @@ function MyProjectDesktop(){
             <Text style={styles.btnClr}>Reset</Text>
           </TouchableHighlight>
           <TouchableHighlight
+            style={[baseLayout.btn, {marginLeft: 8, width: 140}]}
+            underlayColor="#f0f4f7"
+            onPress={() => setModalVisible(!modalVisible)}>
+            <Text style={styles.btnClr}>Project Info...</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
             style={[baseLayout.btn, {width: 160, marginLeft: 40, backgroundColor: '#ffffff'}]}
             underlayColor="#f0f4f7"
             onPress={onSaveAsPdf}>
@@ -475,7 +477,7 @@ function MyProjectDesktop(){
                 style={{width: 24, height: 20, marginRight: 4, marginLeft: 3, tintColor: '#000000'}}
                 source={require('../../assets/PDF-48_46492.png')}
               />
-              <Text style={styles.btnClr}>Save as PDF</Text>
+              <Text style={styles.btnClr}>Save As PDF</Text>
             </View>
           </TouchableHighlight>
           <TouchableHighlight
@@ -487,7 +489,7 @@ function MyProjectDesktop(){
                 style={{width: 24, height: 20, marginRight: 4, marginLeft: 3, tintColor: '#000000'}}
                 source={require('../../assets/mail-black-envelope-symbol_icon-icons.com_56519.png')}
               />
-              <Text style={styles.btnClr}>Send to OCM</Text>
+              <Text style={styles.btnClr}>Send To OCM</Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -529,7 +531,7 @@ function MyProjectDesktop(){
           {/* Add A Layer */}
           { clonedProjectLayers.length < 4 &&
             <TouchableHighlight
-              style={[baseLayout.btn, {backgroundColor: '#ffffff', borderRadius: 2, marginTop: 0, padding: 2, width: '99%'}]}
+              style={[baseLayout.btn, {backgroundColor: '#ffffff', borderRadius: 2, marginTop: 0, marginLeft: 3, padding: 2, width: '99%'}]}
               underlayColor="#d3d3d3"
               onPress={onAddLayer}>
               <Text style={styles.btnClr}>+Add Layer</Text>

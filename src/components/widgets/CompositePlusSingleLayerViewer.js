@@ -36,14 +36,16 @@ export function CompositePlusSingleLayerViewer({layerIdx, compositeLayers}){
                     top: 6,
                     width: '100%',
                     height: 94,
-                    borderRadius: 3
+                    borderRadius: 3,
+                    background: '--shine-deg: 45deg; linear-gradient(45deg, #999 5%, #fff 10%, #ccc 30%, #ddd 50%, #ccc 70%, #fff 80%, #999 95%);'
                   }}>
                     <Image style={{
                       width: '100%',
                       height: 94,
                       borderRadius: 3,
-                      opacity: 0.3,
-                    }} source={staticImageUrlMap["metallicLayer"]}/>
+                      opacity: oneLayer.patternOpacity / 100,
+                      tintColor: oneLayer.backgroundColor,
+                    }} source={staticImageUrlMap[oneLayer.patternImageKey]}/>
                   </View>
                   <View style={{
                     position: 'absolute',
@@ -57,9 +59,8 @@ export function CompositePlusSingleLayerViewer({layerIdx, compositeLayers}){
                       width: '100%',
                       height: 94,
                       borderRadius: 3,
-                      opacity: oneLayer.patternOpacity / 100,
-                      tintColor: oneLayer.backgroundColor,
-                    }} source={staticImageUrlMap[oneLayer.patternImageKey]}/>
+                      opacity: 0.3,
+                    }} source={staticImageUrlMap["metallicLayer"]}/>
                   </View>
                 </>
               )
