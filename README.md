@@ -1,9 +1,7 @@
-# Harry Potter Dictionary
-Just a practice demo app created using React Native with Web support without Expo
+# OCM Builder Web
+A web version of the React-Native OCM Builder app.
 
 [React Native Web](https://necolas.github.io/react-native-web/) support is achieved using [this article](https://dev.to/shivams136/create-react-native-app-for-android-ios-and-web-without-expo-48lc).
-
-Here we have example of Router, State, useAuth, Button, View, Text, Touchable, FlatList, Modal, Pressable, StyleSheet.
 
 ### Step 1: Install
 1. Clone/Fork/Download the repo.
